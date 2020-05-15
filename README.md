@@ -1,5 +1,5 @@
 An Andriod app that could showcase all the app actions info from various Android
-3rd party apps
+3rd party apps https://developers.google.com/assistant/app/overview
 **This is not an officially supported Google product.**
 
 
