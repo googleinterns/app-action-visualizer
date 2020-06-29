@@ -6,11 +6,7 @@ App Actions was [announced](https://developers.google.com/assistant/app/) at Goo
 ## Project description
 This project is to build an Android app that could help showcase the all the fulfillment options/deeplinks various Android apps provide to App Actions in an organized and detailed way.
 
-## Major functionality
-For different build-in intent categories(common; finance; food and drink; health and fitness; transportation), App Actions Visualizer could present 
-1. all the Android apps that provide fulfillment app actions in this category,
-2. For each Android app, App Actions Visualizer can present the content of the deeplinks and what parameters are required to complete the deeplink
-3. After user input/select all the required parameter, App Actions Visualizer could fire the actual deeplink and trigger corresponding fulfillment in the Android app
+
 
 
 **This is not an officially supported Google product.**
