@@ -6,8 +6,6 @@
     android:name="com.example.appactionvisualizer.ui.CategoryAppFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
-    tools:context=".ui.fragment.CategoryAppFragment"
-    tools:listitem="@layout/fragment_category_app" />
+    tools:context=".ui.fragment.AppFragment"
+    tools:listitem="@layout/apptype_rv_item" />
