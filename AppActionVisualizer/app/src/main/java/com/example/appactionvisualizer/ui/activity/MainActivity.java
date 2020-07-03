@@ -3,7 +3,7 @@ package com.example.appactionvisualizer.ui.activity;
 import android.os.Bundle;
 
 import com.example.appactionvisualizer.R;
-import com.example.appactionvisualizer.databean.Actions.AppAction;
+import com.example.appactionvisualizer.databean.AppAction;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;

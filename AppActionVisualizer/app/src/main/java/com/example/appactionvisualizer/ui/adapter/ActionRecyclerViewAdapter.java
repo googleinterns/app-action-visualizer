@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appactionvisualizer.R;
-import com.example.appactionvisualizer.databean.Actions.AppAction;
+import com.example.appactionvisualizer.databean.AppAction;
 import com.example.appactionvisualizer.utils.Utils;
 
 /**

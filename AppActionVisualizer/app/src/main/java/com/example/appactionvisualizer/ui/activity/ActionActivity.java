@@ -11,7 +11,7 @@ import android.os.Bundle;
 
 import com.example.appactionvisualizer.R;
 import com.example.appactionvisualizer.constants.Constant;
-import com.example.appactionvisualizer.databean.Actions.AppAction;
+import com.example.appactionvisualizer.databean.AppAction;
 import com.example.appactionvisualizer.ui.adapter.ActionRecyclerViewAdapter;
 
 

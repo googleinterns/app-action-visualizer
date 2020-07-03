@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 
 import com.example.appactionvisualizer.R;
 import com.example.appactionvisualizer.constants.Constant;
-import com.example.appactionvisualizer.databean.Actions.ActionType;
+import com.example.appactionvisualizer.databean.ActionType;
 import com.example.appactionvisualizer.ui.adapter.AppRecyclerViewAdapter;
 
 /**

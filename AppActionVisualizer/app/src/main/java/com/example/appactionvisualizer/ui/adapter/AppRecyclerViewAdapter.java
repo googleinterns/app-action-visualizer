@@ -15,8 +15,8 @@ import android.widget.TextView;
 
 import com.example.appactionvisualizer.R;
 import com.example.appactionvisualizer.constants.Constant;
-import com.example.appactionvisualizer.databean.Actions.ActionType;
-import com.example.appactionvisualizer.databean.Actions.AppAction;
+import com.example.appactionvisualizer.databean.ActionType;
+import com.example.appactionvisualizer.databean.AppAction;
 import com.example.appactionvisualizer.ui.activity.ActionActivity;
 import com.example.appactionvisualizer.utils.Utils;
 

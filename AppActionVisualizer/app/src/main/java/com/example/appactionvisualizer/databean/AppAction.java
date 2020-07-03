@@ -1,4 +1,4 @@
-package com.example.appactionvisualizer.databean.Actions;
+package com.example.appactionvisualizer.databean;
 
 
 import java.io.Serializable;
