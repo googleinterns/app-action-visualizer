@@ -33,16 +33,14 @@ public class ActionActivity extends AppCompatActivity {
   }
 
   private void initView() {
-
     ActionBar actionBar = getSupportActionBar();
     actionBar.setDisplayHomeAsUpEnabled(true);
     actionBar.setTitle(appAction.getAppName());
-
-    RecyclerView view = (RecyclerView) findViewById(R.id.rv_list);
+    RecyclerView view = findViewById(R.id.rv_list);
     // Set the adapter
     if (view instanceof RecyclerView) {
       Context context = view.getContext();
-      RecyclerView recyclerView = (RecyclerView) view;
+      RecyclerView recyclerView = view;
       recyclerView.setLayoutManager(new LinearLayoutManager(context));
       recyclerView.setAdapter(new ActionRecyclerViewAdapter(appAction, this));
     }

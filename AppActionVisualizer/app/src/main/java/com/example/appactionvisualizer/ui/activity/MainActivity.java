@@ -22,11 +22,7 @@ import com.example.appactionvisualizer.ui.adapter.SectionsPagerAdapter;
 public class MainActivity extends AppCompatActivity {
 
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-    AppAction.parseData();
+  private void initView() {
     SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
     ViewPager viewPager = findViewById(R.id.view_pager);
     viewPager.setAdapter(sectionsPagerAdapter);
@@ -41,5 +37,13 @@ public class MainActivity extends AppCompatActivity {
             .setAction("Action", null).show();
       }
     });
+  }
+
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    AppAction.parseData();
+    initView();
   }
 }

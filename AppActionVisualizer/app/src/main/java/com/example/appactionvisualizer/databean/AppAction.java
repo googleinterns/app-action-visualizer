@@ -54,7 +54,6 @@ public class AppAction implements Serializable {
     }
   }
 
-
   /**
    * generate a new app action
    * @return a new action with with a unique id
@@ -66,7 +65,6 @@ public class AppAction implements Serializable {
 
     return newAction;
   }
-
 
   /**
    * used for test the specific app actions
@@ -81,9 +79,6 @@ public class AppAction implements Serializable {
     newAction.actions.add(Action.genTestAction2());
     return newAction;
   }
-
-
-
 
   @Override
   public String toString() {

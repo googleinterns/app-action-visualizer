@@ -45,7 +45,7 @@ public class AppRecyclerViewAdapter extends RecyclerView.Adapter<AppRecyclerView
   @Override
   public void onBindViewHolder(final ViewHolder holder, final int position) {
     final AppAction appAction = appActionArrayList.get(position);
-    Drawable icon = null;
+    Drawable icon;
     try {
       icon = context.getPackageManager().getApplicationIcon(appAction.getAppPackage());
       holder.ivAppIcon.setImageDrawable(icon);
@@ -78,9 +78,9 @@ public class AppRecyclerViewAdapter extends RecyclerView.Adapter<AppRecyclerView
     public ViewHolder(View view) {
       super(view);
       mView = view;
-      llApp = (LinearLayout) view.findViewById(R.id.ll_app);
-      ivAppIcon = (ImageView) view.findViewById(R.id.iv_app);
-      tvAppName = (TextView) view.findViewById(R.id.tv_app_name);
+      llApp =  view.findViewById(R.id.ll_app);
+      ivAppIcon =  view.findViewById(R.id.iv_app);
+      tvAppName = view.findViewById(R.id.tv_app_name);
     }
 
     @Override

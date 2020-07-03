@@ -60,8 +60,8 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<ActionRecycl
     public ViewHolder(View view) {
       super(view);
       mView = view;
-      llAction = (LinearLayout) view.findViewById(R.id.ll_action);
-      tvActionName = (TextView) view.findViewById(R.id.tv_action_name);
+      llAction =  view.findViewById(R.id.ll_action);
+      tvActionName = view.findViewById(R.id.tv_action_name);
     }
 
     @Override
