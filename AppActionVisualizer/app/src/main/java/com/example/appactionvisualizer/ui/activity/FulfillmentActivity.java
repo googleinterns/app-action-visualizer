@@ -8,18 +8,24 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.appactionvisualizer.R;
 import com.example.appactionvisualizer.constants.Constant;
+import com.example.appactionvisualizer.databean.Action;
 import com.example.appactionvisualizer.databean.AppAction;
 import com.example.appactionvisualizer.ui.adapter.ActionRecyclerViewAdapter;
+import com.example.appactionvisualizer.ui.adapter.FulfillmentRecyclerViewAdapter;
 
 
 /**
- * Displays all the actions of an app using recyclerview
+ * Displays all the fulfillment of an action using recyclerview
  */
-public class ActionActivity extends AppCompatActivity {
-  private AppAction appAction;
+public class FulfillmentActivity extends AppCompatActivity {
+
+  private static final String TAG = "FulfillmentActivity";
+  private Action action;
+  private String appName;
 
   @Override
   public boolean onSupportNavigateUp(){
@@ -29,20 +35,21 @@ public class ActionActivity extends AppCompatActivity {
 
   private void initData() {
     Intent intent = getIntent();
-    appAction = (AppAction) intent.getSerializableExtra(Constant.APP_NAME);
+    action = (Action) intent.getSerializableExtra(Constant.ACTION);
+    appName = intent.getStringExtra(Constant.APP_NAME);
   }
 
   private void initView() {
     ActionBar actionBar = getSupportActionBar();
     actionBar.setDisplayHomeAsUpEnabled(true);
-    actionBar.setTitle(appAction.getAppName());
+    actionBar.setTitle(appName + ":" + action.getIntentName().split("\\.")[2]);
     RecyclerView view = findViewById(R.id.rv_list);
     // Set the adapter
     if (view instanceof RecyclerView) {
       Context context = view.getContext();
       RecyclerView recyclerView = view;
       recyclerView.setLayoutManager(new LinearLayoutManager(context));
-      recyclerView.setAdapter(new ActionRecyclerViewAdapter(appAction, this));
+      recyclerView.setAdapter(new FulfillmentRecyclerViewAdapter(action, this));
     }
   }
 

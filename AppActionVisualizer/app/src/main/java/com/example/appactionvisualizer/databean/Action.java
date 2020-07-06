@@ -33,22 +33,32 @@ public class Action implements Serializable {
     Action newAction = new Action();
     newAction.intentName = "actions.intent.GET_ORDER";
     newAction.actionType = ActionType.COMMON;
-    newAction.fulfillmentArrayList.add(newAction.new Fulfillment("dunkin://orders/history?source=GoogleActions", "DEEPLINK"));
+    newAction.fulfillmentArrayList.add(newAction.new Fulfillment("dunkin://orders/history", "DEEPLINK"));
     return newAction;
   }
 
   public static Action genTestAction2() {
     Action newAction = new Action();
-    newAction.intentName = "actions.intent.OPEN_APP_FEATURE";
-    newAction.actionType = ActionType.COMMON;
-    newAction.fulfillmentArrayList.add(newAction.new Fulfillment("dunkin://home?source=GoogleActions", "DEEPLINK"));
+    newAction.intentName = "actions.intent.ORDER_MENU_ITEM";
+    newAction.actionType = ActionType.FOOD_AND_DRINK;
+    newAction.fulfillmentArrayList.add(newAction.new Fulfillment("dunkin://orders/item/1200701", "DEEPLINK"));
     return newAction;
   }
+
+  public static Action genTestAction3() {
+    Action newAction = new Action();
+    newAction.intentName = "actions.intent.OPEN_APP_FEATURE";
+    newAction.actionType = ActionType.COMMON;
+    newAction.fulfillmentArrayList.add(newAction.new Fulfillment("dunkin://home", "DEEPLINK"));
+    return newAction;
+  }
+
 
 
   public class Fulfillment implements Serializable{
     private String urlTemplate;
     private String fulfillmentMode;
+    private ParameterMapping parameterMapping;
 
     /**
      * @param urlTemplate Template for constructing either the deep link or a Slice URI to be opened on the device
@@ -75,9 +85,18 @@ public class Action implements Serializable {
       this.fulfillmentMode = fulfillmentMode;
     }
 
+
+    public ParameterMapping getParameterMapping() {
+      return parameterMapping;
+    }
+
+    public void setParameterMapping(ParameterMapping parameterMapping) {
+      this.parameterMapping = parameterMapping;
+    }
+
     @Override
     public String toString() {
-      return "Fulfillment{" +
+      return "FulfillmentActivity{" +
           "urlTemplate='" + urlTemplate + '\'' +
           ", fulfillmentMode='" + fulfillmentMode + '\'' +
           '}';

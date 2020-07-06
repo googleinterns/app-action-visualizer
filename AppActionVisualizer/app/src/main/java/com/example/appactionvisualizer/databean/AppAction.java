@@ -77,6 +77,7 @@ public class AppAction implements Serializable {
     newAction.appPackage = "com.dunkinbrands.otgo";
     newAction.actions.add(Action.genTestAction1());
     newAction.actions.add(Action.genTestAction2());
+    newAction.actions.add(Action.genTestAction3());
     return newAction;
   }
 

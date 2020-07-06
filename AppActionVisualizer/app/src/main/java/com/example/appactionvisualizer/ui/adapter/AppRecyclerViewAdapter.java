@@ -10,7 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.appactionvisualizer.R;
@@ -54,11 +54,12 @@ public class AppRecyclerViewAdapter extends RecyclerView.Adapter<AppRecyclerView
       e.printStackTrace();
     }
     holder.tvAppName.setText(appAction.getAppName());
-    holder.llApp.setOnClickListener(new View.OnClickListener() {
+    holder.tvActionSize.setText("total: " + appAction.getActions().size() + " actions");
+    holder.rlApp.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
         Intent intent = new Intent(context, ActionActivity.class);
-        intent.putExtra(Constant.ACTIONTYPE, appAction);
+        intent.putExtra(Constant.APP_NAME, appAction);
         context.startActivity(intent);
       }
     });
@@ -71,16 +72,18 @@ public class AppRecyclerViewAdapter extends RecyclerView.Adapter<AppRecyclerView
 
   public class ViewHolder extends RecyclerView.ViewHolder {
     public final View mView;
-    public final LinearLayout llApp;
+    public final RelativeLayout rlApp;
     public final ImageView ivAppIcon;
     public final TextView tvAppName;
+    public final TextView tvActionSize;
 
     public ViewHolder(View view) {
       super(view);
       mView = view;
-      llApp =  view.findViewById(R.id.ll_app);
+      rlApp =  view.findViewById(R.id.rl_app);
       ivAppIcon =  view.findViewById(R.id.iv_app);
       tvAppName = view.findViewById(R.id.tv_app_name);
+      tvActionSize = view.findViewById(R.id.tv_action_size);
     }
 
     @Override

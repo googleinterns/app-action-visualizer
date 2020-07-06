@@ -40,7 +40,7 @@ public class AppFragment extends Fragment {
   public static AppFragment newInstance(int pos) {
     AppFragment fragment = new AppFragment();
     Bundle args = new Bundle();
-    args.putInt(Constant.ACTIONTYPE, pos);
+    args.putInt(Constant.ACTION_TYPE, pos);
     fragment.setArguments(args);
     return fragment;
   }
@@ -50,7 +50,7 @@ public class AppFragment extends Fragment {
     super.onCreate(savedInstanceState);
 
     if (getArguments() != null) {
-      actionType = ActionType.values()[getArguments().getInt(Constant.ACTIONTYPE)];
+      actionType = ActionType.values()[getArguments().getInt(Constant.ACTION_TYPE)];
     }
   }
 

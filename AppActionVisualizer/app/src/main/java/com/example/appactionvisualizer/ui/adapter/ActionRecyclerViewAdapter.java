@@ -1,6 +1,7 @@
 package com.example.appactionvisualizer.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +11,10 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appactionvisualizer.R;
+import com.example.appactionvisualizer.constants.Constant;
+import com.example.appactionvisualizer.databean.Action;
 import com.example.appactionvisualizer.databean.AppAction;
+import com.example.appactionvisualizer.ui.activity.FulfillmentActivity;
 import com.example.appactionvisualizer.utils.Utils;
 
 /**
@@ -35,14 +39,15 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<ActionRecycl
 
   @Override
   public void onBindViewHolder(final ViewHolder holder, final int position) {
-    holder.tvActionName.setText(appAction.getActions().get(position).getIntentName());
+    final Action action = appAction.getActions().get(position);
+    holder.tvActionName.setText(action.getIntentName() + " (" + action.getFulfillmentArrayList().size() + ")" );
     holder.llAction.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        Utils.showMsg("click " + position, context);
-//                Intent intent = new Intent(context, ActionActivity.class);
-//                intent.putExtra(Constant.ACTIONTYPE, appAction);
-//                context.startActivity(intent);
+        Intent intent = new Intent(context, FulfillmentActivity.class);
+        intent.putExtra(Constant.ACTION, action);
+        intent.putExtra(Constant.APP_NAME, appAction.getAppName());
+        context.startActivity(intent);
       }
     });
   }
