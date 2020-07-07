@@ -44,10 +44,8 @@ public class FulfillmentRecyclerViewAdapter extends RecyclerView.Adapter<Fulfill
       public void onClick(View view) {
         if(fulfillment.getParameterMapping() == null) {
           //if no paramater-mapping, fulfill the user intent
-          Intent intent = new Intent(Intent.ACTION_VIEW);
-          intent.setData(Uri.parse(fulfillment.getUrlTemplate()));
+          Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(fulfillment.getUrlTemplate()));
           context.startActivity(intent);
-//          intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         }else {
           //todo: if there's any parameter-mapping, select the parameters
 

@@ -42,7 +42,7 @@ public class FulfillmentActivity extends AppCompatActivity {
   private void initView() {
     ActionBar actionBar = getSupportActionBar();
     actionBar.setDisplayHomeAsUpEnabled(true);
-    actionBar.setTitle(appName + ":" + action.getIntentName().split("\\.")[2]);
+    actionBar.setTitle(action.getIntentName().split("\\.")[2]);
     RecyclerView view = findViewById(R.id.rv_list);
     // Set the adapter
     if (view instanceof RecyclerView) {

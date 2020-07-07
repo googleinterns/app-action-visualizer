@@ -54,7 +54,10 @@ public class AppRecyclerViewAdapter extends RecyclerView.Adapter<AppRecyclerView
       e.printStackTrace();
     }
     holder.tvAppName.setText(appAction.getAppName());
-    holder.tvActionSize.setText("total: " + appAction.getActions().size() + " actions");
+    for (int i = 0; i < appAction.getActions().size(); i++) {
+      holder.tvAppTags[i].setVisibility(View.VISIBLE);
+      holder.tvAppTags[i].setText(appAction.getActions().get(i).getActionType().toString());
+    }
     holder.rlApp.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
@@ -75,7 +78,7 @@ public class AppRecyclerViewAdapter extends RecyclerView.Adapter<AppRecyclerView
     public final RelativeLayout rlApp;
     public final ImageView ivAppIcon;
     public final TextView tvAppName;
-    public final TextView tvActionSize;
+    public final TextView tvAppTags[] = new TextView[5];
 
     public ViewHolder(View view) {
       super(view);
@@ -83,7 +86,10 @@ public class AppRecyclerViewAdapter extends RecyclerView.Adapter<AppRecyclerView
       rlApp =  view.findViewById(R.id.rl_app);
       ivAppIcon =  view.findViewById(R.id.iv_app);
       tvAppName = view.findViewById(R.id.tv_app_name);
-      tvActionSize = view.findViewById(R.id.tv_action_size);
+      int[] ids= {R.id.tv_tag_1, R.id.tv_tag_2, R.id.tv_tag_3, R.id.tv_tag_4, R.id.tv_tag_5};
+      for (int i = 0; i < ids.length; i++) {
+        tvAppTags[i] = view.findViewById(ids[i]);
+      }
     }
 
     @Override
