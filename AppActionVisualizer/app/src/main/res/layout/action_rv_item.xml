@@ -6,6 +6,15 @@
     android:orientation="horizontal">
 
     <TextView
+        android:id="@+id/tv_action_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:theme="@style/TagTextStyle"
+        android:visibility="visible"
+        android:layout_marginStart="@dimen/appbar_padding_top"/>
+
+    <TextView
         android:id="@+id/tv_action_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

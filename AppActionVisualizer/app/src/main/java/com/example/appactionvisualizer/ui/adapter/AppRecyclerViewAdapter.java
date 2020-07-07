@@ -21,6 +21,7 @@ import com.example.appactionvisualizer.ui.activity.ActionActivity;
 import com.example.appactionvisualizer.utils.Utils;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  * Adapter of AppFragment Recyclerview
@@ -32,7 +33,10 @@ public class AppRecyclerViewAdapter extends RecyclerView.Adapter<AppRecyclerView
 
   public AppRecyclerViewAdapter(ActionType type, Context context) {
     this.context = context;
-    appActionArrayList = AppAction.appActionList.get(type);
+    if(type != null)
+      appActionArrayList = AppAction.appActionList.get(type);
+    else
+      appActionArrayList = AppAction.allAppActions;
   }
 
   @Override
@@ -54,9 +58,15 @@ public class AppRecyclerViewAdapter extends RecyclerView.Adapter<AppRecyclerView
       e.printStackTrace();
     }
     holder.tvAppName.setText(appAction.getAppName());
+    //Use hash set to avoid duplicate tags
+    HashSet<ActionType> uniqueSet = new HashSet<>(5);
     for (int i = 0; i < appAction.getActions().size(); i++) {
-      holder.tvAppTags[i].setVisibility(View.VISIBLE);
-      holder.tvAppTags[i].setText(appAction.getActions().get(i).getActionType().toString());
+      uniqueSet.add(appAction.getActions().get(i).getActionType());
+    }
+    int idx = 0;
+    for (ActionType actionType: uniqueSet) {
+      holder.tvAppTags[idx].setVisibility(View.VISIBLE);
+      holder.tvAppTags[idx++].setText(actionType.toString());
     }
     holder.rlApp.setOnClickListener(new View.OnClickListener() {
       @Override

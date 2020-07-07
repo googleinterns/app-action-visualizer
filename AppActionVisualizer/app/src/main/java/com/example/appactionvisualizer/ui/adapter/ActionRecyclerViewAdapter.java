@@ -41,6 +41,7 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<ActionRecycl
   public void onBindViewHolder(final ViewHolder holder, final int position) {
     final Action action = appAction.getActions().get(position);
     holder.tvActionName.setText(action.getIntentName() + " (" + action.getFulfillmentArrayList().size() + ")" );
+    holder.tvActionType.setText(action.getActionType().toString());
     holder.llAction.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
@@ -61,12 +62,14 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<ActionRecycl
     public final View mView;
     public final LinearLayout llAction;
     public final TextView tvActionName;
+    public final TextView tvActionType;
 
     public ViewHolder(View view) {
       super(view);
       mView = view;
       llAction =  view.findViewById(R.id.ll_action);
       tvActionName = view.findViewById(R.id.tv_action_name);
+      tvActionType = view.findViewById(R.id.tv_action_type);
     }
 
     @Override

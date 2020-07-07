@@ -32,21 +32,18 @@
                 android:id="@+id/tv_tag_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:theme="@style/TagTextStyle"
-                android:text="@string/tab_text_3"/>
+                android:theme="@style/TagTextStyle"/>
             <TextView
                 android:id="@+id/tv_tag_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:theme="@style/TagTextStyle"
-                android:text="@string/tab_text_4"
                 android:layout_marginStart="16dp"/>
             <TextView
                 android:id="@+id/tv_tag_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:theme="@style/TagTextStyle"
-                android:text="@string/tab_text_5"
                 android:layout_marginStart="16dp"/>
         </LinearLayout>
         <LinearLayout
@@ -59,15 +56,13 @@
                 android:id="@+id/tv_tag_4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:theme="@style/TagTextStyle"
-                android:text="@string/tab_text_4"/>
+                android:theme="@style/TagTextStyle"/>
 
             <TextView
                 android:id="@+id/tv_tag_5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:theme="@style/TagTextStyle"
-                android:text="@string/tab_text_5"
                 android:layout_marginStart="16dp"/>
         </LinearLayout>
     </RelativeLayout>

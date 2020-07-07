@@ -23,7 +23,7 @@ import com.example.appactionvisualizer.ui.adapter.AppRecyclerViewAdapter;
 public class AppFragment extends Fragment {
   private final static String TAG = "AppFragment";
 
-  private ActionType actionType;
+  private ActionType actionType = null;
 
   /**
    * Mandatory empty constructor for the fragment manager to instantiate the
@@ -39,9 +39,11 @@ public class AppFragment extends Fragment {
   @SuppressWarnings("unused")
   public static AppFragment newInstance(int pos) {
     AppFragment fragment = new AppFragment();
-    Bundle args = new Bundle();
-    args.putInt(Constant.ACTION_TYPE, pos);
-    fragment.setArguments(args);
+    if(pos != 0) {
+      Bundle args = new Bundle();
+      args.putInt(Constant.ACTION_TYPE, pos - 1);
+      fragment.setArguments(args);
+    }
     return fragment;
   }
 

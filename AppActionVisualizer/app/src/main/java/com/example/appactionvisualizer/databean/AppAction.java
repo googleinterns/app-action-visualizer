@@ -24,6 +24,7 @@ public class AppAction implements Serializable {
   private ArrayList<Action> actions = new ArrayList<>();
   //todo: add entityset
 
+  public static ArrayList<AppAction> allAppActions= new ArrayList<>();
   public static Map<ActionType, ArrayList<AppAction>> appActionList = new HashMap<>();
 
   private AppAction(){}
@@ -31,16 +32,15 @@ public class AppAction implements Serializable {
   public static void parseData() {
     //TODO: parse from file logic
     //generate some data for test use
-    List<AppAction> item = new ArrayList<AppAction>();
     for(ActionType type : ActionType.values()) {
       AppAction appAction = genTestAppAction();
       appAction.actions.get(0).setActionType(type);
-      item.add(appAction);
+      allAppActions.add(appAction);
     }
 
     //set up each fragments' data list, make sure there's no duplicate data in one action type
     Map<ActionType, Set<AppAction>> AppActionUnique = new HashMap<>();
-    for(AppAction app : item) {
+    for(AppAction app : allAppActions) {
       for(Action action : app.actions) {
         if(AppActionUnique.get((action.getActionType())) == null)
           AppActionUnique.put(action.getActionType(), new HashSet<AppAction>());
