@@ -15,12 +15,14 @@ import com.example.appactionvisualizer.R;
 import com.example.appactionvisualizer.constants.Constant;
 import com.example.appactionvisualizer.databean.Action;
 import com.example.appactionvisualizer.databean.AppAction;
-import com.example.appactionvisualizer.ui.activity.FulfillmentActivity;
+import com.example.appactionvisualizer.databean.Fulfillment;
 import com.example.appactionvisualizer.ui.activity.ParameterActivity;
-import com.example.appactionvisualizer.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -38,6 +40,13 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
   public ActionRecyclerViewAdapter(AppAction items, Context context) {
     this.context = context;
     appAction = items;
+    //make sure actions with the same type stay together
+    Collections.sort(appAction.getActions(), new Comparator<Action>() {
+      @Override
+      public int compare(Action t1, Action t2) {
+        return t1.getIntentName().compareTo(t2.getIntentName());
+      }
+    });
     //find all the action item position
     for(Action action : appAction.getActions()) {
       actionPos.add(allSize);
@@ -64,23 +73,23 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
       return new ActionViewHolder(view);
     }
     View view = LayoutInflater.from(context)
-        .inflate(R.layout.fulfillment_rv_item, parent, false);
+        .inflate(R.layout.rv_item, parent, false);
     return new FulfillViewHolder(view);
   }
 
   /**
    * @param holder two types: TYPE_ACTION, TYPE_FULFILLMENT
    * @param position search the actionPos integer list to get the corresponding data idx of each item
-   *                 eg: if three actions action0 (1 fulfillmentUrl: 0-0), action1(2 fulfillmentUrl: 1-0, 1-1), action2(2 fulfillmentUrl: 2-0, 2-1).
+   *                 eg: three actions action0 (1 fulfillmentUrl: 0-0), action1(2 fulfillmentUrl: 1-0, 1-1), action2(2 fulfillmentUrl: 2-0, 2-1).
    *                 actionPos is [0, 2, 5]
    *                 position 0 - action0
-   *                 position 1 - Fulfillment 0-0
+   *                 position 1 - fulfillment 0-0
    *                 position 2 - action1
-   *                 position 3 - Fulfillment 1-0
-   *                 position 4 - Fulfillment 1-1
+   *                 position 3 - fulfillment 1-0
+   *                 position 4 - fulfillment 1-1
    *                 position 5 - action2
-   *                 position 6 - Fulfillment 2-0
-   *                 position 7 - Fulfillment 2-1
+   *                 position 6 - fulfillment 2-0
+   *                 position 7 - fulfillment 2-1
    */
   @Override
   public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
@@ -90,25 +99,15 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
         //search the corresponding action item idx
         int idx = Arrays.binarySearch(actionPos.toArray(), position);
         final Action action = appAction.getActions().get(idx);
-        actionHolder.tvActionName.setText(action.getIntentName() + " (" + action.getFulfillmentArrayList().size() + ")" );
+        actionHolder.tvActionName.setText(action.getIntentName());
         actionHolder.tvActionType.setText(action.getActionType().toString());
-        //todo deprecate
-//        actionHolder.llAction.setOnClickListener(new View.OnClickListener() {
-//          @Override
-//          public void onClick(View view) {
-//            Intent intent = new Intent(context, FulfillmentActivity.class);
-//            intent.putExtra(Constant.ACTION, action);
-//            intent.putExtra(Constant.APP_NAME, appAction.getAppName());
-//            context.startActivity(intent);
-//          }
-//        });
         break;
       case TYPE_FULFILLMENT:
         FulfillViewHolder fulfillHolder = (FulfillViewHolder) holder;
         //search the corresponding action item idx and fulfill item idx
         int actionIdx =  (-Arrays.binarySearch(actionPos.toArray(), position)) - 2;
         int fulfillIdx =  position - actionPos.get(actionIdx) - 1;
-        final Action.Fulfillment fulfillment = appAction.getActions().get(actionIdx).getFulfillmentArrayList().get(fulfillIdx);
+        final Fulfillment fulfillment = appAction.getActions().get(actionIdx).getFulfillmentArrayList().get(fulfillIdx);
         final String url = fulfillment.getUrlTemplate();
         fulfillHolder.tvFulfillName.setText(url);
         fulfillHolder.tvFulfillName.setTextColor(context.getResources().getColor(fulfillment.getParameterMapping() == null ? R.color.colorAccent: R.color.design_default_color_error));
@@ -165,8 +164,8 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
     public FulfillViewHolder(View view) {
       super(view);
       mView = view;
-      llFulfillment =  view.findViewById(R.id.ll_fulfillment);
-      tvFulfillName = view.findViewById(R.id.tv_fulfill_name);
+      llFulfillment =  view.findViewById(R.id.ll_item);
+      tvFulfillName = view.findViewById(R.id.tv_text);
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.example.appactionvisualizer.databean;
 
-import androidx.annotation.NonNull;
 
 import java.io.Serializable;
 

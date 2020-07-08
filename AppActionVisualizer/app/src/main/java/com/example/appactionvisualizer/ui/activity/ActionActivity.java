@@ -1,7 +1,5 @@
 package com.example.appactionvisualizer.ui.activity;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,24 +16,19 @@ import com.example.appactionvisualizer.ui.adapter.ActionRecyclerViewAdapter;
 /**
  * Displays all the actions of an app using recyclerview
  */
-public class ActionActivity extends AppCompatActivity {
+public class ActionActivity extends CustomActivity {
   private AppAction appAction;
 
   @Override
-  public boolean onSupportNavigateUp(){
-    finish();
-    return true;
-  }
-
-  private void initData() {
+  void initData() {
     Intent intent = getIntent();
     appAction = (AppAction) intent.getSerializableExtra(Constant.APP_NAME);
   }
 
-  private void initView() {
-    ActionBar actionBar = getSupportActionBar();
-    actionBar.setDisplayHomeAsUpEnabled(true);
-    actionBar.setTitle(appAction.getAppName());
+  @Override
+  void initView() {
+    super.initView();
+    getSupportActionBar().setTitle(appAction.getAppName());
     RecyclerView view = findViewById(R.id.rv_list);
     // Set the adapter
     if (view instanceof RecyclerView) {
