@@ -20,6 +20,7 @@ import com.example.appactionvisualizer.ui.adapter.FulfillmentRecyclerViewAdapter
 
 /**
  * Displays all the fulfillment of an action using recyclerview
+ * todo deprecate
  */
 public class FulfillmentActivity extends AppCompatActivity {
 

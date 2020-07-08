@@ -12,11 +12,16 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appactionvisualizer.R;
+import com.example.appactionvisualizer.constants.Constant;
 import com.example.appactionvisualizer.databean.Action;
+import com.example.appactionvisualizer.databean.ParameterMapping;
+import com.example.appactionvisualizer.ui.activity.FulfillmentActivity;
+import com.example.appactionvisualizer.ui.activity.ParameterActivity;
 import com.example.appactionvisualizer.utils.Utils;
 
 /**
  * Adapter of ActionActivity Recyclerview
+ * todo deprecate
  */
 public class FulfillmentRecyclerViewAdapter extends RecyclerView.Adapter<FulfillmentRecyclerViewAdapter.ViewHolder> {
 
@@ -38,18 +43,22 @@ public class FulfillmentRecyclerViewAdapter extends RecyclerView.Adapter<Fulfill
   @Override
   public void onBindViewHolder(final ViewHolder holder, final int position) {
     final Action.Fulfillment fulfillment = action.getFulfillmentArrayList().get(position);
-    holder.tvFulfillName.setText(fulfillment.getUrlTemplate());
+    final String url = fulfillment.getUrlTemplate();
+    holder.tvFulfillName.setText(url);
+    holder.tvFulfillName.setTextColor(context.getResources().getColor(fulfillment.getParameterMapping() == null ? R.color.colorAccent: R.color.design_default_color_error));
     holder.llFulfillment.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        if(fulfillment.getParameterMapping() == null) {
-          //if no paramater-mapping, fulfill the user intent
-          Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(fulfillment.getUrlTemplate()));
-          context.startActivity(intent);
+        //use "{" to judge whether the users has selected all the parameters
+        Intent intent = new Intent();
+        if(url.contains("{")) {
+          intent = new Intent(context, ParameterActivity.class);
+          intent.putExtra(Constant.FULFILLMENT, fulfillment);
         }else {
-          //todo: if there's any parameter-mapping, select the parameters
-
+          intent.setAction(Intent.ACTION_VIEW);
+          intent.setData(Uri.parse(url));
         }
+        context.startActivity(intent);
       }
     });
   }
@@ -75,6 +84,5 @@ public class FulfillmentRecyclerViewAdapter extends RecyclerView.Adapter<Fulfill
     public String toString() {
       return super.toString() + " '" + tvFulfillName.getText() + "'";
     }
-
   }
 }

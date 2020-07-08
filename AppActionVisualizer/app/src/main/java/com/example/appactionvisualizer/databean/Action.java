@@ -2,6 +2,9 @@ package com.example.appactionvisualizer.databean;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -41,7 +44,16 @@ public class Action implements Serializable {
     Action newAction = new Action();
     newAction.intentName = "actions.intent.ORDER_MENU_ITEM";
     newAction.actionType = ActionType.FOOD_AND_DRINK;
-    newAction.fulfillmentArrayList.add(newAction.new Fulfillment("dunkin://orders/item/1200701", "DEEPLINK"));
+    ParameterMapping parameterMapping = new ParameterMapping();
+    Map<String, List<ParameterMapping.Mapping>> map = new HashMap<>();
+    String key = "menuItemName";
+    map.put(key, new ArrayList<ParameterMapping.Mapping>());
+    map.get(key).add(parameterMapping.new Mapping("1200701","Signature Latte"));
+    map.get(key).add(parameterMapping.new Mapping("1200702","Iced Signature Latte"));
+    map.get(key).add(parameterMapping.new Mapping("1000102","Latte"));
+    Fulfillment fulfillment = newAction.new Fulfillment("dunkin://orders/item/{menuItemName}", "DEEPLINK");
+    fulfillment.setParameterMapping(parameterMapping);
+    newAction.fulfillmentArrayList.add(fulfillment);
     return newAction;
   }
 
@@ -68,6 +80,7 @@ public class Action implements Serializable {
       this.urlTemplate = urlTemplate;
       this.fulfillmentMode = fulfillmentMode;
     }
+
 
     public String getUrlTemplate() {
       return urlTemplate;
