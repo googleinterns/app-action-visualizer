@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">AppActionVisualizer</string>
+    <string name="tab_text_all">All</string>
+    <string name="tab_text_1">Common</string>
+    <string name="tab_text_2">Finance</string>
+    <string name="tab_text_3">Food and Drink</string>
+    <string name="tab_text_4">Health and fitness</string>
+    <string name="tab_text_5">Transportation</string>
+</resources>
