@@ -20,7 +20,6 @@ import com.example.appactionvisualizer.ui.activity.ParameterActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -60,9 +59,11 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
    */
   @Override
   public int getItemViewType(int position) {
-    if(actionPos.contains(position))
+    if(actionPos.contains(position)) {
       return TYPE_ACTION;
-    return TYPE_FULFILLMENT;
+    }else {
+      return TYPE_FULFILLMENT;
+    }
   }
 
   @Override
@@ -73,14 +74,14 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
       return new ActionViewHolder(view);
     }
     View view = LayoutInflater.from(context)
-        .inflate(R.layout.rv_item, parent, false);
+        .inflate(R.layout.list_item, parent, false);
     return new FulfillViewHolder(view);
   }
 
   /**
    * @param holder two types: TYPE_ACTION, TYPE_FULFILLMENT
-   * @param position search the actionPos integer list to get the corresponding data idx of each item
-   *                 eg: three actions action0 (1 fulfillmentUrl: 0-0), action1(2 fulfillmentUrl: 1-0, 1-1), action2(2 fulfillmentUrl: 2-0, 2-1).
+   * @param position search the actionPos integer list to get the corresponding data index of each item
+   *                 e.g., three actions action0 (1 fulfillmentUrl: 0-0), action1(2 fulfillmentUrl: 1-0, 1-1), action2(2 fulfillmentUrl: 2-0, 2-1).
    *                 actionPos is [0, 2, 5]
    *                 position 0 - action0
    *                 position 1 - fulfillment 0-0
@@ -96,25 +97,25 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
     switch (holder.getItemViewType()) {
       case TYPE_ACTION:
         ActionViewHolder actionHolder = (ActionViewHolder) holder;
-        //search the corresponding action item idx
+        //search the corresponding action item index
         int idx = Arrays.binarySearch(actionPos.toArray(), position);
         final Action action = appAction.getActions().get(idx);
-        actionHolder.tvActionName.setText(action.getIntentName());
-        actionHolder.tvActionType.setText(action.getActionType().toString());
+        actionHolder.actionName.setText(action.getIntentName());
+        actionHolder.actionType.setText(action.getActionType().toString());
         break;
       case TYPE_FULFILLMENT:
         FulfillViewHolder fulfillHolder = (FulfillViewHolder) holder;
-        //search the corresponding action item idx and fulfill item idx
+        //search the corresponding action item index and fulfill item index
         int actionIdx =  (-Arrays.binarySearch(actionPos.toArray(), position)) - 2;
         int fulfillIdx =  position - actionPos.get(actionIdx) - 1;
         final Fulfillment fulfillment = appAction.getActions().get(actionIdx).getFulfillmentArrayList().get(fulfillIdx);
         final String url = fulfillment.getUrlTemplate();
-        fulfillHolder.tvFulfillName.setText(url);
-        fulfillHolder.tvFulfillName.setTextColor(context.getResources().getColor(fulfillment.getParameterMapping() == null ? R.color.colorAccent: R.color.design_default_color_error));
-        fulfillHolder.llFulfillment.setOnClickListener(new View.OnClickListener() {
+        fulfillHolder.textContent.setText(url);
+        fulfillHolder.textContent.setTextColor(context.getResources().getColor(fulfillment.getParameterMapping() == null ? R.color.colorAccent: R.color.design_default_color_error));
+        fulfillHolder.item.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {
-            //use "{" to judge whether the users has selected all the parameters
+            //use "{" to judge whether the user has selected all the parameters
             Intent intent = new Intent();
             if(url.contains("{")) {
               intent = new Intent(context, ParameterActivity.class);
@@ -136,41 +137,41 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
     return allSize;
   }
 
-  public class ActionViewHolder extends RecyclerView.ViewHolder {
+  private class ActionViewHolder extends RecyclerView.ViewHolder {
     public final View mView;
-    public final LinearLayout llAction;
-    public final TextView tvActionName;
-    public final TextView tvActionType;
+    public final LinearLayout actionIntent;
+    public final TextView actionName;
+    public final TextView actionType;
 
     public ActionViewHolder(View view) {
       super(view);
       mView = view;
-      llAction =  view.findViewById(R.id.ll_action);
-      tvActionName = view.findViewById(R.id.tv_action_name);
-      tvActionType = view.findViewById(R.id.tv_action_type);
+      actionIntent =  view.findViewById(R.id.action_intent);
+      actionName = view.findViewById(R.id.action_name);
+      actionType = view.findViewById(R.id.action_type);
     }
 
     @Override
     public String toString() {
-      return super.toString() + " '" + tvActionName.getText() + "'";
+      return super.toString() + " '" + actionName.getText() + "'";
     }
   }
 
-  public class FulfillViewHolder extends RecyclerView.ViewHolder {
+  private class FulfillViewHolder extends RecyclerView.ViewHolder {
     public final View mView;
-    public final LinearLayout llFulfillment;
-    public final TextView tvFulfillName;
+    public final LinearLayout item;
+    public final TextView textContent;
 
     public FulfillViewHolder(View view) {
       super(view);
       mView = view;
-      llFulfillment =  view.findViewById(R.id.ll_item);
-      tvFulfillName = view.findViewById(R.id.tv_text);
+      item =  view.findViewById(R.id.item);
+      textContent = view.findViewById(R.id.text_content);
     }
 
     @Override
     public String toString() {
-      return super.toString() + " '" + tvFulfillName.getText() + "'";
+      return super.toString() + " '" + textContent.getText() + "'";
     }
   }
 }

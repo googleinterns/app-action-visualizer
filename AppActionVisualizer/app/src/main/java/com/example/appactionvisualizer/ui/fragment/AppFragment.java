@@ -2,14 +2,13 @@ package com.example.appactionvisualizer.ui.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.example.appactionvisualizer.R;
 import com.example.appactionvisualizer.constants.Constant;
@@ -23,37 +22,32 @@ import com.example.appactionvisualizer.ui.adapter.AppRecyclerViewAdapter;
 public class AppFragment extends Fragment {
   private final static String TAG = "AppFragment";
 
-  private ActionType actionType = null;
+  private ActionType actionType;
 
   /**
    * Mandatory empty constructor for the fragment manager to instantiate the
    * fragment (e.g. upon screen orientation changes).
    */
-  public AppFragment() {
+  public AppFragment(ActionType actionType) {
+    this.actionType = actionType;
   }
 
   /**
    * @param pos create a specific type fragment instance
    * @return
    */
-  @SuppressWarnings("unused")
   public static AppFragment newInstance(int pos) {
-    AppFragment fragment = new AppFragment();
+    ActionType actionType = null;
     if(pos != 0) {
-      Bundle args = new Bundle();
-      args.putInt(Constant.ACTION_TYPE, pos - 1);
-      fragment.setArguments(args);
+      actionType = ActionType.getActionTypeValue(pos - 1);
     }
+    AppFragment fragment = new AppFragment(actionType);
     return fragment;
   }
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-
-    if (getArguments() != null) {
-      actionType = ActionType.values()[getArguments().getInt(Constant.ACTION_TYPE)];
-    }
   }
 
   @Override

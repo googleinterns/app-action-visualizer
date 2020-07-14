@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -37,7 +36,7 @@ public class SelectActivity extends CustomActivity {
   void initView() {
     super.initView();
     getSupportActionBar().setTitle(key);
-    RecyclerView view = findViewById(R.id.rv_list);
+    RecyclerView view = findViewById(R.id.list);
     // Set the adapter
     if (view instanceof RecyclerView) {
       Context context = view.getContext();

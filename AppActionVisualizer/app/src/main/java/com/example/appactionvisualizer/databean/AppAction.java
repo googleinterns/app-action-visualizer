@@ -3,8 +3,6 @@ package com.example.appactionvisualizer.databean;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -22,27 +20,28 @@ public class AppAction implements Serializable {
   private int actionId;
   private String appName;
   private String appPackage;
-  private ArrayList<Action> actions = new ArrayList<>();
+  private List<Action> actions = new ArrayList<>();
   //todo: add entityset
 
-  public static ArrayList<AppAction> allAppActions= new ArrayList<>();
+  public static List<AppAction> allAppActions= new ArrayList<>();
   public static Map<ActionType, ArrayList<AppAction>> appActionList = new HashMap<>();
 
 
   public static void parseData() {
     //TODO: parse from file logic
     //generate some data for test use
-    AppAction appAction = TestGen.getInstance().genDDAppAction();
+    allAppActions.clear();
+    AppAction appAction = TestGenerator.getInstance().generateDDAppAction();
     allAppActions.add(appAction);
 
 
     //set up each fragments' data list, make sure there's no duplicate data in one action type
-    Map<ActionType, Set<AppAction>> AppActionUnique = new HashMap<>();
+    Map<ActionType, Set<AppAction>> appActionUnique = new HashMap<>();
     for(AppAction app : allAppActions) {
       for(Action action : app.actions) {
-        if(AppActionUnique.get((action.getActionType())) == null)
-          AppActionUnique.put(action.getActionType(), new HashSet<AppAction>());
-        AppActionUnique.get(action.getActionType()).add(app);
+        if(appActionUnique.get((action.getActionType())) == null)
+          appActionUnique.put(action.getActionType(), new HashSet<AppAction>());
+        appActionUnique.get(action.getActionType()).add(app);
       }
     }
     //in case there're some types haven't been initialized
@@ -50,7 +49,7 @@ public class AppAction implements Serializable {
       if(appActionList.get(actiontype) == null)
         appActionList.put(actiontype, new ArrayList<AppAction>());
     }
-    for(Map.Entry<ActionType, Set<AppAction>> entry : AppActionUnique.entrySet()) {
+    for(Map.Entry<ActionType, Set<AppAction>> entry : appActionUnique.entrySet()) {
       appActionList.get(entry.getKey()).addAll(entry.getValue());
     }
   }
@@ -100,11 +99,11 @@ public class AppAction implements Serializable {
     this.appPackage = appPackage;
   }
 
-  public ArrayList<Action> getActions() {
+  public List<Action> getActions() {
     return actions;
   }
 
-  public void setActions(ArrayList<Action> actions) {
+  public void setActions(List<Action> actions) {
     this.actions = actions;
   }
 

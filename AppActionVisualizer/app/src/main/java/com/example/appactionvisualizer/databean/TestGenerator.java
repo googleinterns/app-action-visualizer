@@ -5,11 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TestGen {
-  private static TestGen single_instance = null;
-  public static TestGen getInstance() {
+public class TestGenerator {
+  private static TestGenerator single_instance = null;
+  public static TestGenerator getInstance() {
     if (single_instance == null)
-      single_instance = new TestGen();
+      single_instance = new TestGenerator();
     return single_instance;
   }
 
@@ -17,14 +17,14 @@ public class TestGen {
    * used for test the specific app actions
    * @return dunkin donuts app actions
    */
-  public AppAction genDDAppAction() {
+  public AppAction generateDDAppAction() {
     AppAction newAction = new AppAction();
     newAction.setAppName("Duckin donuts");
     newAction.setAppPackage("com.dunkinbrands.otgo");
-    newAction.getActions().add(TestGen.getInstance().genTestActionDD1());
-    newAction.getActions().add(TestGen.getInstance().genTestActionDD2());
-    newAction.getActions().add(TestGen.getInstance().genTestActionDD3());
-    newAction.getActions().add(TestGen.getInstance().genTestActionDD4());
+    newAction.getActions().add(TestGenerator.getInstance().genTestActionDD1());
+    newAction.getActions().add(TestGenerator.getInstance().genTestActionDD2());
+    newAction.getActions().add(TestGenerator.getInstance().genTestActionDD3());
+    newAction.getActions().add(TestGenerator.getInstance().genTestActionDD4());
     return newAction;
   }
 
@@ -64,6 +64,21 @@ public class TestGen {
     List<Fulfillment> fulfillmentArrayList = new ArrayList<>();
     fulfillmentArrayList.add(new Fulfillment("dunkin://ddcards", "DEEPLINK"));
     Action newAction = new Action("actions.intent.CREATE_MONEY_TRANSFER", ActionType.FINANCE, fulfillmentArrayList);
+    return newAction;
+  }
+
+  /**
+   * used for test the specific app actions
+   * @return dunkin donuts app actions
+   */
+  public AppAction getUberAppAction() {
+    AppAction newAction = new AppAction();
+    newAction.setAppName("Uber");
+    newAction.setAppPackage("com.ubercab");
+    newAction.getActions().add(TestGenerator.getInstance().genTestActionDD1());
+    newAction.getActions().add(TestGenerator.getInstance().genTestActionDD2());
+    newAction.getActions().add(TestGenerator.getInstance().genTestActionDD3());
+    newAction.getActions().add(TestGenerator.getInstance().genTestActionDD4());
     return newAction;
   }
 

@@ -1,8 +1,5 @@
 package com.example.appactionvisualizer.ui.activity;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
@@ -13,6 +10,9 @@ import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.example.appactionvisualizer.R;
 import com.example.appactionvisualizer.constants.Constant;
@@ -115,8 +115,8 @@ public class ParameterActivity extends CustomActivity {
   void initView() {
     super.initView();
     getSupportActionBar().setTitle(TAG);
-    tvUrlTemplate = findViewById(R.id.tv_url_template);
-    tvUrl = findViewById(R.id.tv_url);
+    tvUrlTemplate = findViewById(R.id.url_template);
+    tvUrl = findViewById(R.id.url);
     setClickableText();
   }
 

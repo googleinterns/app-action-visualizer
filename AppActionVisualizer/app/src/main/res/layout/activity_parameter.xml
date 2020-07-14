@@ -6,15 +6,14 @@
     android:orientation="vertical"
     tools:context=".ui.activity.ParameterActivity">
     <TextView
-        android:id="@+id/tv_url_template"
+        android:id="@+id/url_template"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/text_margin"
         android:textSize="20sp"
-        android:text="dunkin://orders/item/{menuItemName}{menuItemName}{menuItemName}{menuItemName}{menuItemName}{menuItemName}"
         android:textAppearance="?attr/textAppearanceListItem" />
     <TextView
-        android:id="@+id/tv_url"
+        android:id="@+id/url"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/text_margin"

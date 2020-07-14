@@ -1,11 +1,11 @@
 package com.example.appactionvisualizer.ui.activity;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appactionvisualizer.R;
 import com.example.appactionvisualizer.constants.Constant;
@@ -29,7 +29,7 @@ public class ActionActivity extends CustomActivity {
   void initView() {
     super.initView();
     getSupportActionBar().setTitle(appAction.getAppName());
-    RecyclerView view = findViewById(R.id.rv_list);
+    RecyclerView view = findViewById(R.id.list);
     // Set the adapter
     if (view instanceof RecyclerView) {
       Context context = view.getContext();
