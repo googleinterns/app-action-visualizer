@@ -85,7 +85,7 @@ public class AppRecyclerViewAdapter extends RecyclerView.Adapter<AppRecyclerView
     return appActionArrayList.size();
   }
 
-  public class ViewHolder extends RecyclerView.ViewHolder {
+  public static class ViewHolder extends RecyclerView.ViewHolder {
     public final View mView;
     public final RelativeLayout app;
     public final ImageView appIcon;

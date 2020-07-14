@@ -54,7 +54,7 @@ public class SelectRecyclerViewAdapter extends RecyclerView.Adapter<SelectRecycl
     return mappingList.size();
   }
 
-  public class ViewHolder extends RecyclerView.ViewHolder {
+  public static class ViewHolder extends RecyclerView.ViewHolder {
     public final View mView;
     public final LinearLayout item;
     public final TextView textContent;

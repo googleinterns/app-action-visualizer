@@ -137,7 +137,7 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
     return allSize;
   }
 
-  private class ActionViewHolder extends RecyclerView.ViewHolder {
+  public static class ActionViewHolder extends RecyclerView.ViewHolder {
     public final View mView;
     public final LinearLayout actionIntent;
     public final TextView actionName;
@@ -157,7 +157,7 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
     }
   }
 
-  private class FulfillViewHolder extends RecyclerView.ViewHolder {
+  public static class FulfillViewHolder extends RecyclerView.ViewHolder {
     public final View mView;
     public final LinearLayout item;
     public final TextView textContent;
