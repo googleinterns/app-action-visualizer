@@ -32,7 +32,7 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
 
   private AppAction appAction;
   private Context context;
-  private static final int TYPE_ACTION = 0, TYPE_FULFILLMENT = 1;
+  private static final int VIEW_TYPE_ACTION = 0, VIEW_TYPE_FULFILLMENT = 1;
   private List<Integer> actionPos = new ArrayList<>();
   private int allSize = 0;
 
@@ -60,15 +60,15 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
   @Override
   public int getItemViewType(int position) {
     if(actionPos.contains(position)) {
-      return TYPE_ACTION;
+      return VIEW_TYPE_ACTION;
     }else {
-      return TYPE_FULFILLMENT;
+      return VIEW_TYPE_FULFILLMENT;
     }
   }
 
   @Override
   public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-    if(viewType == TYPE_ACTION) {
+    if(viewType == VIEW_TYPE_ACTION) {
       View view = LayoutInflater.from(context)
           .inflate(R.layout.action_rv_item, parent, false);
       return new ActionViewHolder(view);
@@ -95,7 +95,7 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
   @Override
   public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
     switch (holder.getItemViewType()) {
-      case TYPE_ACTION:
+      case VIEW_TYPE_ACTION:
         ActionViewHolder actionHolder = (ActionViewHolder) holder;
         //search the corresponding action item index
         int idx = Arrays.binarySearch(actionPos.toArray(), position);
@@ -103,7 +103,7 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
         actionHolder.actionName.setText(action.getIntentName());
         actionHolder.actionType.setText(action.getActionType().toString());
         break;
-      case TYPE_FULFILLMENT:
+      case VIEW_TYPE_FULFILLMENT:
         FulfillViewHolder fulfillHolder = (FulfillViewHolder) holder;
         //search the corresponding action item index and fulfill item index
         int actionIdx =  (-Arrays.binarySearch(actionPos.toArray(), position)) - 2;

@@ -24,33 +24,31 @@ public class AppAction implements Serializable {
   //todo: add entityset
 
   public static List<AppAction> allAppActions= new ArrayList<>();
-  public static Map<ActionType, ArrayList<AppAction>> appActionList = new HashMap<>();
+  public static Map<ActionType, List<AppAction>> type2appActionList = new HashMap<>();
 
 
   public static void parseData() {
     //TODO: parse from file logic
-    //generate some data for test use
-    allAppActions.clear();
-    AppAction appAction = TestGenerator.getInstance().generateDDAppAction();
-    allAppActions.add(appAction);
-
+    allAppActions = TestGenerator.getInstance().generateFromTest();
 
     //set up each fragments' data list, make sure there's no duplicate data in one action type
     Map<ActionType, Set<AppAction>> appActionUnique = new HashMap<>();
     for(AppAction app : allAppActions) {
       for(Action action : app.actions) {
-        if(appActionUnique.get((action.getActionType())) == null)
+        if(appActionUnique.get((action.getActionType())) == null) {
           appActionUnique.put(action.getActionType(), new HashSet<AppAction>());
+        }
         appActionUnique.get(action.getActionType()).add(app);
       }
     }
     //in case there're some types haven't been initialized
     for (ActionType actiontype: ActionType.values()) {
-      if(appActionList.get(actiontype) == null)
-        appActionList.put(actiontype, new ArrayList<AppAction>());
+      if(type2appActionList.get(actiontype) == null) {
+        type2appActionList.put(actiontype, new ArrayList<AppAction>());
+      }
     }
     for(Map.Entry<ActionType, Set<AppAction>> entry : appActionUnique.entrySet()) {
-      appActionList.get(entry.getKey()).addAll(entry.getValue());
+      type2appActionList.get(entry.getKey()).addAll(entry.getValue());
     }
   }
 

@@ -34,7 +34,7 @@ public class AppRecyclerViewAdapter extends RecyclerView.Adapter<AppRecyclerView
   public AppRecyclerViewAdapter(ActionType type, Context context) {
     this.context = context;
     if(type != null) {
-      appActionArrayList = AppAction.appActionList.get(type);
+      appActionArrayList = AppAction.type2appActionList.get(type);
     }
     else {
       appActionArrayList = AppAction.allAppActions;

@@ -22,7 +22,7 @@ public class SelectRecyclerViewAdapter extends RecyclerView.Adapter<SelectRecycl
 
   private List<ParameterMapping.Mapping> mappingList;
   private Context context;
-  String key;
+  private String key;
 
   public SelectRecyclerViewAdapter(List<ParameterMapping.Mapping> mappingList, String key, Context context) {
     this.context = context;

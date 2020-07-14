@@ -14,6 +14,17 @@ public class TestGenerator {
   }
 
   /**
+   * @return list of app actions
+   */
+  public List<AppAction> generateFromTest() {
+    List<AppAction> appActions = new ArrayList<>();
+    //generate some app action data for test use
+    AppAction appAction = generateDDAppAction();
+    appActions.add(appAction);
+    return appActions;
+  }
+
+  /**
    * used for test the specific app actions
    * @return dunkin donuts app actions
    */
