@@ -1,23 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/action_intent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
-
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.activity.ParameterActivity">
     <TextView
-        android:id="@+id/action_type"
+        android:id="@+id/url_template"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:theme="@style/TagTextStyle"
-        android:visibility="visible"
-        android:layout_marginStart="@dimen/appbar_padding_top"/>
-
+        android:layout_margin="@dimen/text_margin"
+        android:textSize="20sp"
+        android:textAppearance="?attr/textAppearanceListItem" />
     <TextView
-        android:id="@+id/action_name"
+        android:id="@+id/url"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/text_margin"
         android:textAppearance="?attr/textAppearanceListItem" />
+
 </LinearLayout>

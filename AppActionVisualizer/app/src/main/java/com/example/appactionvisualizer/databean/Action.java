@@ -1,20 +1,22 @@
 package com.example.appactionvisualizer.databean;
 
+
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
  * An App Action that the app supports
  * https://developers.google.com/assistant/app/action-schema#description
- * implements Serializable to ensure pass between activities
+ * implements Serializable to pass between activities
  */
 public class Action implements Serializable {
   private static final String TAG = "Action";
   /* eg: "actions.intent.ORDER_MENU_ITEM" */
   private String intentName;
   private ActionType actionType;
-  private ArrayList<Fulfillment> fulfillmentArrayList = new ArrayList<>();
+  private List<Fulfillment> fulfillmentArrayList = new ArrayList<>();
 
   private Action(){}
 
@@ -23,84 +25,10 @@ public class Action implements Serializable {
    * @param actionType built in action type: (COMMON, FINANCE, FOODANDDRINK, HEALTHANDFITNESS, TRANSPORTATION)
    * @param fulfillmentArrayList
    */
-  public Action(String intentName, ActionType actionType, ArrayList<Fulfillment> fulfillmentArrayList) {
+  public Action(String intentName, ActionType actionType, List<Fulfillment> fulfillmentArrayList) {
     this.intentName = intentName;
     this.actionType = actionType;
     this.fulfillmentArrayList = fulfillmentArrayList;
-  }
-
-  public static Action genTestAction1() {
-    Action newAction = new Action();
-    newAction.intentName = "actions.intent.GET_ORDER";
-    newAction.actionType = ActionType.COMMON;
-    newAction.fulfillmentArrayList.add(newAction.new Fulfillment("dunkin://orders/history", "DEEPLINK"));
-    return newAction;
-  }
-
-  public static Action genTestAction2() {
-    Action newAction = new Action();
-    newAction.intentName = "actions.intent.ORDER_MENU_ITEM";
-    newAction.actionType = ActionType.FOOD_AND_DRINK;
-    newAction.fulfillmentArrayList.add(newAction.new Fulfillment("dunkin://orders/item/1200701", "DEEPLINK"));
-    return newAction;
-  }
-
-  public static Action genTestAction3() {
-    Action newAction = new Action();
-    newAction.intentName = "actions.intent.OPEN_APP_FEATURE";
-    newAction.actionType = ActionType.COMMON;
-    newAction.fulfillmentArrayList.add(newAction.new Fulfillment("dunkin://home", "DEEPLINK"));
-    return newAction;
-  }
-
-
-
-  public class Fulfillment implements Serializable{
-    private String urlTemplate;
-    private String fulfillmentMode;
-    private ParameterMapping parameterMapping;
-
-    /**
-     * @param urlTemplate Template for constructing either the deep link or a Slice URI to be opened on the device
-     * @param fulfillmentMode DEEPLINK or SLICE
-     */
-    public Fulfillment(String urlTemplate, String fulfillmentMode) {
-      this.urlTemplate = urlTemplate;
-      this.fulfillmentMode = fulfillmentMode;
-    }
-
-    public String getUrlTemplate() {
-      return urlTemplate;
-    }
-
-    public void setUrlTemplate(String urlTemplate) {
-      this.urlTemplate = urlTemplate;
-    }
-
-    public String getFulfillmentMode() {
-      return fulfillmentMode;
-    }
-
-    public void setFulfillmentMode(String fulfillmentMode) {
-      this.fulfillmentMode = fulfillmentMode;
-    }
-
-
-    public ParameterMapping getParameterMapping() {
-      return parameterMapping;
-    }
-
-    public void setParameterMapping(ParameterMapping parameterMapping) {
-      this.parameterMapping = parameterMapping;
-    }
-
-    @Override
-    public String toString() {
-      return "FulfillmentActivity{" +
-          "urlTemplate='" + urlTemplate + '\'' +
-          ", fulfillmentMode='" + fulfillmentMode + '\'' +
-          '}';
-    }
   }
 
   public String getIntentName() {
@@ -119,7 +47,7 @@ public class Action implements Serializable {
     this.actionType = actionType;
   }
 
-  public ArrayList<Fulfillment> getFulfillmentArrayList() {
+  public List<Fulfillment> getFulfillmentArrayList() {
     return fulfillmentArrayList;
   }
 

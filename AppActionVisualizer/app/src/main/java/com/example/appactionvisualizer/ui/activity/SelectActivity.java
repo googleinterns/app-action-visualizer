@@ -1,5 +1,6 @@
 package com.example.appactionvisualizer.ui.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,33 +10,39 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appactionvisualizer.R;
 import com.example.appactionvisualizer.constants.Constant;
-import com.example.appactionvisualizer.databean.AppAction;
-import com.example.appactionvisualizer.ui.adapter.ActionRecyclerViewAdapter;
+import com.example.appactionvisualizer.databean.ParameterMapping;
+import com.example.appactionvisualizer.ui.adapter.SelectRecyclerViewAdapter;
 
-
-/**
- * Displays all the actions of an app using recyclerview
- */
-public class ActionActivity extends CustomActivity {
-  private AppAction appAction;
+public class SelectActivity extends CustomActivity {
+  private ParameterMapping parameterMapping;
+  private String key;
 
   @Override
   void initData() {
     Intent intent = getIntent();
-    appAction = (AppAction) intent.getSerializableExtra(Constant.APP_NAME);
+    parameterMapping = (ParameterMapping) intent.getSerializableExtra(Constant.PARAMETER_MAPPING);
+    key = intent.getStringExtra(Constant.KEY);
+  }
+
+  public void finish(String identifier) {
+    Intent intent = new Intent();
+    intent.putExtra(Constant.KEY, key);
+    intent.putExtra(Constant.IDENTIFIER, identifier);
+    setResult(Activity.RESULT_OK, intent);
+    finish();
   }
 
   @Override
   void initView() {
     super.initView();
-    getSupportActionBar().setTitle(appAction.getAppName());
+    getSupportActionBar().setTitle(key);
     RecyclerView view = findViewById(R.id.list);
     // Set the adapter
     if (view instanceof RecyclerView) {
       Context context = view.getContext();
       RecyclerView recyclerView = view;
       recyclerView.setLayoutManager(new LinearLayoutManager(context));
-      recyclerView.setAdapter(new ActionRecyclerViewAdapter(appAction, this));
+      recyclerView.setAdapter(new SelectRecyclerViewAdapter(parameterMapping.getKey2MapList().get(key), key, this));
     }
   }
 

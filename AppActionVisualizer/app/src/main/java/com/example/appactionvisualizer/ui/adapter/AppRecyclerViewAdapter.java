@@ -1,7 +1,5 @@
 package com.example.appactionvisualizer.ui.adapter;
 
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -13,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.appactionvisualizer.R;
 import com.example.appactionvisualizer.constants.Constant;
 import com.example.appactionvisualizer.databean.ActionType;
@@ -20,23 +20,25 @@ import com.example.appactionvisualizer.databean.AppAction;
 import com.example.appactionvisualizer.ui.activity.ActionActivity;
 import com.example.appactionvisualizer.utils.Utils;
 
-import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 /**
  * Adapter of AppFragment Recyclerview
  */
 public class AppRecyclerViewAdapter extends RecyclerView.Adapter<AppRecyclerViewAdapter.ViewHolder> {
 
-  private ArrayList<AppAction> appActionArrayList;
+  private List<AppAction> appActionArrayList;
   private Context context;
 
   public AppRecyclerViewAdapter(ActionType type, Context context) {
     this.context = context;
-    if(type != null)
+    if(type != null) {
       appActionArrayList = AppAction.appActionList.get(type);
-    else
+    }
+    else {
       appActionArrayList = AppAction.allAppActions;
+    }
   }
 
   @Override
@@ -52,12 +54,12 @@ public class AppRecyclerViewAdapter extends RecyclerView.Adapter<AppRecyclerView
     Drawable icon;
     try {
       icon = context.getPackageManager().getApplicationIcon(appAction.getAppPackage());
-      holder.ivAppIcon.setImageDrawable(icon);
+      holder.appIcon.setImageDrawable(icon);
     } catch (PackageManager.NameNotFoundException e) {
       Utils.showMsg("icon not found", context);
       e.printStackTrace();
     }
-    holder.tvAppName.setText(appAction.getAppName());
+    holder.appName.setText(appAction.getAppName());
     //Use hash set to avoid duplicate tags
     HashSet<ActionType> uniqueSet = new HashSet<>(5);
     for (int i = 0; i < appAction.getActions().size(); i++) {
@@ -65,10 +67,10 @@ public class AppRecyclerViewAdapter extends RecyclerView.Adapter<AppRecyclerView
     }
     int idx = 0;
     for (ActionType actionType: uniqueSet) {
-      holder.tvAppTags[idx].setVisibility(View.VISIBLE);
-      holder.tvAppTags[idx++].setText(actionType.toString());
+      holder.appTags[idx].setVisibility(View.VISIBLE);
+      holder.appTags[idx++].setText(actionType.getName());
     }
-    holder.rlApp.setOnClickListener(new View.OnClickListener() {
+    holder.app.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
         Intent intent = new Intent(context, ActionActivity.class);
@@ -83,28 +85,28 @@ public class AppRecyclerViewAdapter extends RecyclerView.Adapter<AppRecyclerView
     return appActionArrayList.size();
   }
 
-  public class ViewHolder extends RecyclerView.ViewHolder {
+  public static class ViewHolder extends RecyclerView.ViewHolder {
     public final View mView;
-    public final RelativeLayout rlApp;
-    public final ImageView ivAppIcon;
-    public final TextView tvAppName;
-    public final TextView tvAppTags[] = new TextView[5];
+    public final RelativeLayout app;
+    public final ImageView appIcon;
+    public final TextView appName;
+    public final TextView appTags[] = new TextView[5];
 
     public ViewHolder(View view) {
       super(view);
       mView = view;
-      rlApp =  view.findViewById(R.id.rl_app);
-      ivAppIcon =  view.findViewById(R.id.iv_app);
-      tvAppName = view.findViewById(R.id.tv_app_name);
-      int[] ids= {R.id.tv_tag_1, R.id.tv_tag_2, R.id.tv_tag_3, R.id.tv_tag_4, R.id.tv_tag_5};
+      app =  view.findViewById(R.id.app);
+      appIcon =  view.findViewById(R.id.app_icon);
+      appName = view.findViewById(R.id.app_name);
+      int[] ids= {R.id.tag_1, R.id.tag_2, R.id.tag_3, R.id.tag_4, R.id.tag_5};
       for (int i = 0; i < ids.length; i++) {
-        tvAppTags[i] = view.findViewById(ids[i]);
+        appTags[i] = view.findViewById(ids[i]);
       }
     }
 
     @Override
     public String toString() {
-      return super.toString() + " '" + tvAppName.getText() + "'";
+      return super.toString() + " '" + appName.getText() + "'";
     }
 
   }

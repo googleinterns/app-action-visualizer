@@ -1,19 +1,17 @@
 package com.example.appactionvisualizer.ui.activity;
 
 import android.os.Bundle;
+import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
 import com.example.appactionvisualizer.R;
 import com.example.appactionvisualizer.databean.AppAction;
+import com.example.appactionvisualizer.ui.adapter.SectionsPagerAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
-
-import androidx.viewpager.widget.ViewPager;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.view.View;
-
-import com.example.appactionvisualizer.ui.adapter.SectionsPagerAdapter;
 
 /**
  * The launcher page of the app
