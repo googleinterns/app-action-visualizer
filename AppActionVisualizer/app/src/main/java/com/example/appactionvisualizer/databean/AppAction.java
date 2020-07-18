@@ -1,6 +1,14 @@
 package com.example.appactionvisualizer.databean;
 
 
+import android.content.Context;
+import android.util.Log;
+
+import com.example.appactionvisualizer.R;
+import com.example.appactionvisualizer.databean.protobuf.AppActionProtos;
+
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,9 +25,8 @@ import java.util.Set;
 public class AppAction implements Serializable {
   private static final String TAG = "APPACTION";
 
-  private int actionId;
   private String appName;
-  private String appPackage;
+  private String packageName;
   private List<Action> actions = new ArrayList<>();
   //todo: add entityset
 
@@ -56,29 +63,27 @@ public class AppAction implements Serializable {
    * generate a new app action
    * @return a new action with with a unique id
    */
-  public static AppAction genActions() {
-    AppAction newAction = new AppAction();
+  public static AppAction genActions(Context context) {
     //TODO: need parse from file logic
-
+    AppAction newAction = new AppAction();
+    InputStream is = context.getResources().openRawResource(R.raw.protobufbinary);
+    try {
+      AppActionProtos.AppActions appActions = AppActionProtos.AppActions.parseFrom(is);
+      Log.d(TAG, appActions.getAppActionsCount() + ": size");
+    } catch (IOException e) {
+      Log.d(TAG, "error");
+      e.printStackTrace();
+    }
     return newAction;
   }
 
   @Override
   public String toString() {
     return "AppAction{" +
-        "actionId=" + actionId +
         ", appName='" + appName + '\'' +
-        ", appPackage='" + appPackage + '\'' +
+        ", appPackage='" + packageName + '\'' +
         ", actions=" + actions.toString() +
         '}';
-  }
-
-  public int getActionId() {
-    return actionId;
-  }
-
-  public void setActionId(int actionId) {
-    this.actionId = actionId;
   }
 
   public String getAppName() {
@@ -89,12 +94,12 @@ public class AppAction implements Serializable {
     this.appName = appName;
   }
 
-  public String getAppPackage() {
-    return appPackage;
+  public String getPackageName() {
+    return packageName;
   }
 
-  public void setAppPackage(String appPackage) {
-    this.appPackage = appPackage;
+  public void setPackageName(String packageName) {
+    this.packageName = packageName;
   }
 
   public List<Action> getActions() {

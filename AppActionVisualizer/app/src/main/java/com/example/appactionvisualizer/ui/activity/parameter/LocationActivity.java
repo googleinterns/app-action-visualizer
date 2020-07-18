@@ -32,14 +32,14 @@ import java.util.Objects;
 
 import static com.example.appactionvisualizer.constants.Constant.ERROR_NO_PLACE;
 
-public class SelectLocationActivity extends CustomActivity {
+public class LocationActivity extends CustomActivity {
   private static final String TAG = "SelectLocation";
   private final static int SELECT_PICK_UP = 0, SELECT_DROP_OFF = 1, UPDATE = 2, ERROR = 3;
   Handler mHandlerThread;
   private RecyclerView addressListView;
   private TextInputEditText pickUpInput, dropOffInput;
   private List<Address> addressList = new ArrayList<>();
-  private AddressListRecyclerViewAdapter adapter = new AddressListRecyclerViewAdapter(addressList, SelectLocationActivity.this);
+  private AddressListRecyclerViewAdapter adapter = new AddressListRecyclerViewAdapter(addressList, LocationActivity.this);
   private int inputSelect = 0;
   private String input;
   View.OnClickListener clickListener = new View.OnClickListener() {
@@ -85,7 +85,7 @@ public class SelectLocationActivity extends CustomActivity {
     getSupportActionBar().setTitle(TAG);
     addressListView = findViewById(R.id.address_list);
     DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(addressListView.getContext(),
-        new LinearLayoutManager(SelectLocationActivity.this).getOrientation());
+        new LinearLayoutManager(LocationActivity.this).getOrientation());
     addressListView.addItemDecoration(dividerItemDecoration);
 
     addressListView.setAdapter(adapter);
@@ -108,7 +108,7 @@ public class SelectLocationActivity extends CustomActivity {
   }
 
   private void errorHint() {
-    Utils.showMsg(ERROR_NO_PLACE, SelectLocationActivity.this);
+    Utils.showMsg(ERROR_NO_PLACE, LocationActivity.this);
   }
 
   @Override
@@ -158,7 +158,7 @@ public class SelectLocationActivity extends CustomActivity {
 
   private void getAddressList(final String address) {
     addressListView.setVisibility(View.VISIBLE);
-    final Geocoder geocoder = new Geocoder(SelectLocationActivity.this, Locale.US);
+    final Geocoder geocoder = new Geocoder(LocationActivity.this, Locale.US);
     new Thread(new Runnable() {
       @Override
       public void run() {

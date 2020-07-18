@@ -6,4 +6,11 @@
     <string name="tab_text_3">Food and Drink</string>
     <string name="tab_text_4">Health and fitness</string>
     <string name="tab_text_5">Transportation</string>
+    <string name="pick_up_location">Enter pick up location</string>
+    <string name="drop_off_location">Enter drop off location</string>
+    <string name="menu_save">Save</string>
+    <string name="location">%1$s, %2$s</string>
+    <string name="coordinates_pick_up">Coordinates: %1$s,  %2$s</string>
+    <string name="search">Search</string>
+    <string name="input_hint">%1$s not input yet</string>
 </resources>

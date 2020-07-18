@@ -3,6 +3,7 @@ package com.example.appactionvisualizer.ui.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,7 @@ import java.util.List;
  */
 public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+  private static final String TAG = "ActionRecycler";
   private AppAction appAction;
   private Context context;
   private static final int VIEW_TYPE_ACTION = 0, VIEW_TYPE_FULFILLMENT = 1;
@@ -111,12 +113,13 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
         final Fulfillment fulfillment = appAction.getActions().get(actionIdx).getFulfillmentArrayList().get(fulfillIdx);
         final String url = fulfillment.getUrlTemplate();
         fulfillHolder.textContent.setText(url);
-        fulfillHolder.textContent.setTextColor(context.getResources().getColor(fulfillment.getParameterMapping() == null ? R.color.colorAccent: R.color.design_default_color_error));
+        fulfillHolder.textContent.setTextColor(context.getResources().getColor(url.contains("{") ? R.color.design_default_color_error: R.color.colorAccent));
         fulfillHolder.item.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {
             //use "{" to judge whether the user has selected all the parameters
             Intent intent = new Intent();
+            Log.d(TAG, url);
             if(url.contains("{")) {
               intent = new Intent(context, ParameterActivity.class);
               intent.putExtra(Constant.FULFILLMENT, fulfillment);

@@ -20,18 +20,18 @@ public class ActionActivity extends CustomActivity {
   private AppAction appAction;
 
   @Override
-  void initData() {
+  protected void initData() {
     Intent intent = getIntent();
     appAction = (AppAction) intent.getSerializableExtra(Constant.APP_NAME);
   }
 
   @Override
-  void initView() {
+  protected void initView() {
     super.initView();
     getSupportActionBar().setTitle(appAction.getAppName());
     RecyclerView view = findViewById(R.id.list);
     // Set the adapter
-    if (view instanceof RecyclerView) {
+    if (view != null) {
       Context context = view.getContext();
       RecyclerView recyclerView = view;
       recyclerView.setLayoutManager(new LinearLayoutManager(context));
@@ -42,7 +42,7 @@ public class ActionActivity extends CustomActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_rv);
+    setContentView(R.layout.recycler_view);
     initData();
     initView();
   }

@@ -15,7 +15,7 @@ import com.example.appactionvisualizer.databean.ParameterMapping;
 import com.example.appactionvisualizer.ui.activity.CustomActivity;
 import com.example.appactionvisualizer.ui.adapter.SelectRecyclerViewAdapter;
 
-public class SelectActivity extends CustomActivity {
+public class ListItemActivity extends CustomActivity {
   private ParameterMapping parameterMapping;
   private String key;
 
@@ -46,7 +46,7 @@ public class SelectActivity extends CustomActivity {
       recyclerView.setLayoutManager(new LinearLayoutManager(context));
       recyclerView.setAdapter(new SelectRecyclerViewAdapter(parameterMapping.getKey2MapList().get(key), key, this));
       DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
-          new LinearLayoutManager(SelectActivity.this).getOrientation());
+          new LinearLayoutManager(ListItemActivity.this).getOrientation());
       recyclerView.addItemDecoration(dividerItemDecoration);
     }
   }
@@ -54,7 +54,7 @@ public class SelectActivity extends CustomActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_rv);
+    setContentView(R.layout.recycler_view);
     initData();
     initView();
   }
