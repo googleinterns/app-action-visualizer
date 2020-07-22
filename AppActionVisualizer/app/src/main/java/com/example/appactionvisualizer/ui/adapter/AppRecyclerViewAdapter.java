@@ -63,8 +63,6 @@ public class AppRecyclerViewAdapter extends RecyclerView.Adapter<AppRecyclerView
       holder.appIcon.setImageDrawable(icon);
       applicationInfo = packageManager.getApplicationInfo(appAction.getPackageName(), 0);
     } catch (PackageManager.NameNotFoundException e) {
-//      Utils.showMsg("icon not found", context);
-//      e.printStackTrace();
       Log.d(TAG, appAction.getPackageName() + " not install");
     }
     holder.appName.setText(applicationInfo != null? packageManager.getApplicationLabel(applicationInfo) : "unknown");

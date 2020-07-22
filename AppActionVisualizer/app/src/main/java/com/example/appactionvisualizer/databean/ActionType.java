@@ -2,7 +2,6 @@ package com.example.appactionvisualizer.databean;
 
 
 import java.io.Serializable;
-import java.util.HashMap;
 
 public enum ActionType implements Serializable {
   COMMON("Common"),

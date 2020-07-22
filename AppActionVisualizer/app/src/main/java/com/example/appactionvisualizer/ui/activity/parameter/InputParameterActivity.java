@@ -1,7 +1,5 @@
 package com.example.appactionvisualizer.ui.activity.parameter;
 
-import androidx.annotation.NonNull;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,12 +7,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
+
+import androidx.annotation.NonNull;
 
 import com.example.appactionvisualizer.R;
 import com.example.appactionvisualizer.constants.Constant;
@@ -77,7 +73,6 @@ public class InputParameterActivity extends CustomActivity {
     for(Map.Entry<String, TextInputEditText> entry: key2textInputEditTexts.entrySet()) {
       String key = entry.getKey();
       if(entry.getValue() == null) {
-        Log.d(TAG, "NULL:" + key);
         continue;
       }
       String value = Objects.requireNonNull(entry.getValue().getText()).toString();
@@ -85,7 +80,6 @@ public class InputParameterActivity extends CustomActivity {
         Utils.showMsg(getString(R.string.input_hint, key), this);
         return;
       }
-      Log.d(TAG, key + ":" + value);
       intent.putExtra(key, value);
     }
     setResult(Activity.RESULT_OK, intent);
@@ -114,22 +108,5 @@ public class InputParameterActivity extends CustomActivity {
     linearLayout.addView(textInputLayout);
     linearLayout.updateViewLayout(textInputLayout, params);
   }
-
-  //todo: add some spinner
-//  private void addSelectKeyLayout(final String key) {
-//
-//    String[] test = new String[]{"haha", "hoho"};
-//
-//    Spinner spinner = (Spinner) findViewById(R.id.spinner);
-//    ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, test);
-//    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//    spinner.setAdapter(adapter);
-//    spinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//      @Override
-//      public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//
-//      }
-//    });
-//  }
 
 }

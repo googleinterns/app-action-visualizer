@@ -16,8 +16,8 @@ import com.example.appactionvisualizer.ui.activity.CustomActivity;
 import com.example.appactionvisualizer.ui.adapter.SelectRecyclerViewAdapter;
 
 public class ListItemActivity extends CustomActivity {
-  private String key;
   EntitySet entitySet;
+  private String key;
 
   @Override
   protected void initData() {
@@ -44,7 +44,7 @@ public class ListItemActivity extends CustomActivity {
       Context context = view.getContext();
       RecyclerView recyclerView = view;
       recyclerView.setLayoutManager(new LinearLayoutManager(context));
-      recyclerView.setAdapter(new SelectRecyclerViewAdapter(entitySet.getItemList().getFieldsOrThrow(Constant.ENTITY_ITEM_LIST).getListValue(), key, this));
+      recyclerView.setAdapter(new SelectRecyclerViewAdapter(entitySet.getItemList().getFieldsOrThrow(Constant.ENTITY_ITEM_LIST).getListValue(), this));
       DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
           new LinearLayoutManager(ListItemActivity.this).getOrientation());
       recyclerView.addItemDecoration(dividerItemDecoration);

@@ -14,8 +14,6 @@ import com.example.appactionvisualizer.ui.activity.parameter.ListItemActivity;
 import com.google.protobuf.ListValue;
 import com.google.protobuf.Value;
 
-import java.util.List;
-
 /**
  * Adapter of ListItemActivity Recyclerview
  */
@@ -23,12 +21,10 @@ public class SelectRecyclerViewAdapter extends RecyclerView.Adapter<SelectRecycl
 
   private ListValue mappingList;
   private Context context;
-  private String key;
 
-  public SelectRecyclerViewAdapter(ListValue mappingList, String key, Context context) {
+  public SelectRecyclerViewAdapter(ListValue mappingList, Context context) {
     this.context = context;
     this.mappingList = mappingList;
-    this.key = key;
   }
 
   @Override

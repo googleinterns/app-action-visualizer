@@ -1,11 +1,6 @@
 package com.example.appactionvisualizer.constants;
 
 
-import com.example.appactionvisualizer.databean.AppActionProtos;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class Constant {
   public final static String ACTION_TYPE = "ACTION_TYPE";
   public final static String APP_ACTION = "APP_NAME";

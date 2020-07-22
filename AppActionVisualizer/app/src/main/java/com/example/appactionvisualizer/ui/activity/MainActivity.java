@@ -1,7 +1,5 @@
 package com.example.appactionvisualizer.ui.activity;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
@@ -32,11 +30,6 @@ public class MainActivity extends AppCompatActivity {
     fab.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        String url = "mytaxi://de.mytaxi.passenger/order?token=GOOGLE_MAPS&af_deeplink=true&af_reengagement_window=1h&campaign=global_120319_my_pa_in_0_gl_gl_-_an_mx_co_pr_af_-_ge_-_-_-_-_-&is_retargeting=true&media_source=google-maps&pickup_establishment=UCI&destination_establishment=COSTCO";
-        Intent intent = new Intent();
-        intent.setAction(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse(url));
-        MainActivity.this.startActivity(intent);
       }
     });
   }

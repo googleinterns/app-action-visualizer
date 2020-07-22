@@ -32,10 +32,10 @@ import java.util.List;
 public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
   private static final String TAG = "ActionRecycler";
+  private static final int VIEW_TYPE_ACTION = 0, VIEW_TYPE_FULFILLMENT = 1;
   private AppAction appAction;
   private List<Action> actionList = new ArrayList<>();
   private Context context;
-  private static final int VIEW_TYPE_ACTION = 0, VIEW_TYPE_FULFILLMENT = 1;
   private List<Integer> actionPos = new ArrayList<>();
   private int allSize = 0;
 
@@ -51,7 +51,7 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
       }
     });
     //find all the action item position
-    for(Action action : actionList) {
+    for (Action action : actionList) {
       actionPos.add(allSize);
       allSize += action.getFulfillmentOptionCount() + 1;
     }
@@ -63,16 +63,16 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
    */
   @Override
   public int getItemViewType(int position) {
-    if(actionPos.contains(position)) {
+    if (actionPos.contains(position)) {
       return VIEW_TYPE_ACTION;
-    }else {
+    } else {
       return VIEW_TYPE_FULFILLMENT;
     }
   }
 
   @Override
   public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-    if(viewType == VIEW_TYPE_ACTION) {
+    if (viewType == VIEW_TYPE_ACTION) {
       View view = LayoutInflater.from(context)
           .inflate(R.layout.action_rv_item, parent, false);
       return new ActionViewHolder(view);
@@ -83,7 +83,7 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
   }
 
   /**
-   * @param holder two types: TYPE_ACTION, TYPE_FULFILLMENT
+   * @param holder   two types: TYPE_ACTION, TYPE_FULFILLMENT
    * @param position search the actionPos integer list to get the corresponding data index of each item
    *                 e.g., three actions action0 (1 fulfillmentUrl: 0-0), action1(2 fulfillmentUrl: 1-0, 1-1), action2(2 fulfillmentUrl: 2-0, 2-1).
    *                 actionPos is [0, 2, 5]
@@ -111,13 +111,13 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
       case VIEW_TYPE_FULFILLMENT:
         FulfillViewHolder fulfillHolder = (FulfillViewHolder) holder;
         //search the corresponding action item index and fulfill item index
-        int actionIdx =  (-Arrays.binarySearch(actionPos.toArray(), position)) - 2;
-        int fulfillIdx =  position - actionPos.get(actionIdx) - 1;
+        int actionIdx = (-Arrays.binarySearch(actionPos.toArray(), position)) - 2;
+        int fulfillIdx = position - actionPos.get(actionIdx) - 1;
         action = actionList.get(actionIdx);
         final FulfillmentOption fulfillment = action.getFulfillmentOption(fulfillIdx);
         final String url = fulfillment.getUrlTemplate().getTemplate();
         fulfillHolder.textContent.setText(url);
-        fulfillHolder.textContent.setTextColor(context.getResources().getColor(url.contains("{") ? R.color.design_default_color_error: R.color.colorAccent));
+        fulfillHolder.textContent.setTextColor(context.getResources().getColor(url.contains("{") ? R.color.design_default_color_error : R.color.colorAccent));
         fulfillHolder.item.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {
@@ -128,20 +128,19 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
   }
 
   void jumpToApp(final Action action, final FulfillmentOption fulfillmentOption) {
-    //use "{" to judge whether the user has selected all the parameters
     Intent intent = new Intent();
-    if(fulfillmentOption.getUrlTemplate().getParameterMapCount() > 0) {
+    if (fulfillmentOption.getUrlTemplate().getParameterMapCount() > 0) {
       intent = new Intent(context, ParameterActivity.class);
       intent.putExtra(Constant.FULFILLMENT_OPTION, fulfillmentOption);
       intent.putExtra(Constant.ACTION, action);
       intent.putExtra(Constant.APP_ACTION, appAction);
-    }else {
+    } else {
       intent.setAction(Intent.ACTION_VIEW);
       intent.setData(Uri.parse(fulfillmentOption.getUrlTemplate().getTemplate()));
     }
     try {
       context.startActivity(intent);
-    }catch (Exception e) {
+    } catch (Exception e) {
       e.printStackTrace();
     }
   }
@@ -160,7 +159,7 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
     public ActionViewHolder(View view) {
       super(view);
       mView = view;
-      actionIntent =  view.findViewById(R.id.action_intent);
+      actionIntent = view.findViewById(R.id.action_intent);
       actionName = view.findViewById(R.id.action_name);
       actionType = view.findViewById(R.id.action_type);
     }
@@ -179,7 +178,7 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
     public FulfillViewHolder(View view) {
       super(view);
       mView = view;
-      item =  view.findViewById(R.id.item);
+      item = view.findViewById(R.id.item);
       textContent = view.findViewById(R.id.text_content);
     }
 

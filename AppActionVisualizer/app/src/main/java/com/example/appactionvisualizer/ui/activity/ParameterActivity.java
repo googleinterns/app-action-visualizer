@@ -9,7 +9,6 @@ import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -18,12 +17,10 @@ import androidx.annotation.Nullable;
 
 import com.example.appactionvisualizer.R;
 import com.example.appactionvisualizer.constants.Constant;
-import com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption;
 import com.example.appactionvisualizer.databean.AppActionProtos.Action;
-import com.example.appactionvisualizer.databean.AppActionProtos.EntitySet;
 import com.example.appactionvisualizer.databean.AppActionProtos.AppAction;
-
-
+import com.example.appactionvisualizer.databean.AppActionProtos.EntitySet;
+import com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption;
 import com.example.appactionvisualizer.ui.activity.parameter.InputParameterActivity;
 import com.example.appactionvisualizer.ui.activity.parameter.ListItemActivity;
 import com.example.appactionvisualizer.ui.activity.parameter.LocationActivity;
@@ -50,9 +47,6 @@ public class ParameterActivity extends CustomActivity {
   private AppAction appAction;
   private String urlTemplate;
   private TextView tvUrlTemplate, tvUrl;
-
-  //curMap saves the mapping that user have selected
-//  private Map<String, String> curMap = new HashMap<>();
 
   @Override
   protected void initData() {
@@ -84,7 +78,7 @@ public class ParameterActivity extends CustomActivity {
   @Override
   protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
-    if(resultCode == Activity.RESULT_CANCELED) {
+    if (resultCode == Activity.RESULT_CANCELED) {
       return;
     }
     switch (requestCode) {
@@ -109,17 +103,17 @@ public class ParameterActivity extends CustomActivity {
    * 3. user input arbitrary text
    */
   private void setClickableText() {
-    if(urlTemplate.isEmpty())
+    if (urlTemplate.isEmpty())
       return;
-    if(fulfillmentOption.getFulfillmentMode() != DEEPLINK) {
+    if (fulfillmentOption.getFulfillmentMode() != DEEPLINK) {
       Utils.showMsg("non-Deeplink detected", this);
       tvUrlTemplate.setText(urlTemplate);
       return;
     }
     SpannableString ss = new SpannableString(urlTemplate);
-    if(action.getIntentName().equals("actions.intent.CREATE_TAXI_RESERVATION")) {
+    if (action.getIntentName().equals("actions.intent.CREATE_TAXI_RESERVATION")) {
       setLocationParameter(ss);
-    }else {
+    } else {
       setMappingParameter(ss);
     }
     tvUrlTemplate.setText(ss);
@@ -127,7 +121,7 @@ public class ParameterActivity extends CustomActivity {
   }
 
   private void setLocationParameter(SpannableString ss) {
-    ClickableSpan clickable =  new ClickableSpan() {
+    ClickableSpan clickable = new ClickableSpan() {
       @Override
       public void onClick(@NonNull View view) {
         Intent intent = new Intent(ParameterActivity.this, LocationActivity.class);
@@ -136,26 +130,25 @@ public class ParameterActivity extends CustomActivity {
     };
     int start = urlTemplate.indexOf("{");
     int end = urlTemplate.length();
-    if(start == -1)
+    if (start == -1)
       return;
     ss.setSpan(clickable, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
   }
 
   private void setMappingParameter(SpannableString ss) {
     final Map<String, String> parameterMapMap = fulfillmentOption.getUrlTemplate().getParameterMapMap();
-    for(final Map.Entry<String, String> entry: parameterMapMap.entrySet()) {
+    for (final Map.Entry<String, String> entry : parameterMapMap.entrySet()) {
       final String key = entry.getKey();
-      ClickableSpan clickable =  new ClickableSpan() {
+      ClickableSpan clickable = new ClickableSpan() {
         @Override
         public void onClick(@NonNull View view) {
           EntitySet entitySet = checkEntitySet(entry.getValue());
-          Log.d(TAG, "entity set: "+ key + "="+ (entitySet == null));
-          if(entitySet != null && fulfillmentOption.getUrlTemplate().getParameterMapCount() == 1) {
+          if (entitySet != null && fulfillmentOption.getUrlTemplate().getParameterMapCount() == 1) {
             Intent intent = new Intent(ParameterActivity.this, ListItemActivity.class);
             intent.putExtra(Constant.ENTITY_SET, entitySet);
             intent.putExtra(Constant.KEY, key);
             startActivityForResult(intent, Constant.SELECT_SINGLE_PARAMETER);
-          }else {
+          } else {
             //if no provided list for the key, jump to the input text activity
             Intent intent = new Intent(ParameterActivity.this, InputParameterActivity.class);
             intent.putExtra(Constant.FULFILLMENT_OPTION, fulfillmentOption);
@@ -171,11 +164,11 @@ public class ParameterActivity extends CustomActivity {
 
   //check if entity set has provided corresponding list items
   private EntitySet checkEntitySet(String key) {
-    for(Action.Parameter parameter : action.getParametersList()) {
-      if(parameter.getName().equals(key)) {
+    for (Action.Parameter parameter : action.getParametersList()) {
+      if (parameter.getName().equals(key)) {
         String reference = parameter.getEntitySetReference(0).getEntitySetId();
-        for(EntitySet set: appAction.getEntitySetsList()) {
-          if(set.getItemList().getFieldsOrThrow(Constant.ENTITY_FIELD_IDENTIFIER).getStringValue().equals(reference)) {
+        for (EntitySet set : appAction.getEntitySetsList()) {
+          if (set.getItemList().getFieldsOrThrow(Constant.ENTITY_FIELD_IDENTIFIER).getStringValue().equals(reference)) {
             return set;
           }
         }
@@ -187,20 +180,20 @@ public class ParameterActivity extends CustomActivity {
 
   /**
    * @param data intent data received from selectActivity
-   * construct the url
+   *             construct the url
    */
-  void replaceSingleParameter(Intent data){
+  void replaceSingleParameter(Intent data) {
     String key = data.getStringExtra(Constant.KEY);
     String identifier = data.getStringExtra(Constant.IDENTIFIER);
-    if(key == null)
+    if (key == null)
       return;
     int idx = urlTemplate.indexOf("{");
     String curUrl = urlTemplate.substring(0, idx);
     //https://example.com/test?utm_campaign=appactions{#foo}	"foo": "123"	https://example.com/test?utm_campaign=appactions#foo=123
     //myapp://example/{foo}	"foo": "123"	myapp://example/123
-    if(Character.isAlphabetic(urlTemplate.charAt(idx + 1))) {
+    if (Character.isAlphabetic(urlTemplate.charAt(idx + 1))) {
       curUrl += identifier;
-    }else {
+    } else {
       curUrl += urlTemplate.charAt(idx + 1) + getString(R.string.url_parameter, key, identifier);
     }
     setFulfillUrl(curUrl);
@@ -209,7 +202,7 @@ public class ParameterActivity extends CustomActivity {
 
   /**
    * @param curUrl the constructed url
-   * set the constructed url which can be used to open corresponding application
+   *               set the constructed url which can be used to open corresponding application
    */
   private void setFulfillUrl(final String curUrl) {
     tvUrl.setText(curUrl);
@@ -226,13 +219,13 @@ public class ParameterActivity extends CustomActivity {
 
   /**
    * @param data intent data received from LocationActivity
-   * construct the url
+   *             construct the url
    */
-  void replaceAddressParameter(Intent data){
+  void replaceAddressParameter(Intent data) {
     int idx = urlTemplate.indexOf("{");
     String curUrl = urlTemplate.substring(0, idx) + urlTemplate.charAt(idx + 1);
     List<String> parameters = new ArrayList<>();
-    for (Map.Entry<String,String> entry : fulfillmentOption.getUrlTemplate().getParameterMapMap().entrySet()) {
+    for (Map.Entry<String, String> entry : fulfillmentOption.getUrlTemplate().getParameterMapMap().entrySet()) {
       addLocationParameters(data, entry, parameters);
     }
     curUrl += TextUtils.join("&", parameters);
@@ -240,13 +233,13 @@ public class ParameterActivity extends CustomActivity {
   }
 
   private void addLocationParameters(Intent data, Map.Entry<String, String> entry, List<String> parameters) {
-    if(entry.getValue().equals(PICK_UP_LATITUDE_FIELD)) {
+    if (entry.getValue().equals(PICK_UP_LATITUDE_FIELD)) {
       parameters.add(getString(R.string.url_parameter, entry.getKey(), data.getStringExtra(Constant.PICK_UP_LATITUDE)));
-    }else if(entry.getValue().equals(PICK_UP_LONGITUDE_FIELD)) {
+    } else if (entry.getValue().equals(PICK_UP_LONGITUDE_FIELD)) {
       parameters.add(getString(R.string.url_parameter, entry.getKey(), data.getStringExtra(Constant.PICK_UP_LONGITUDE)));
-    }else if(entry.getValue().equals(DROP_OFF_LATITUDE_FIELD)) {
+    } else if (entry.getValue().equals(DROP_OFF_LATITUDE_FIELD)) {
       parameters.add(getString(R.string.url_parameter, entry.getKey(), data.getStringExtra(Constant.DROP_OFF_LATITUDE)));
-    }else if(entry.getValue().equals(DROP_OFF_LONGITUDE_FIELD)) {
+    } else if (entry.getValue().equals(DROP_OFF_LONGITUDE_FIELD)) {
       parameters.add(getString(R.string.url_parameter, entry.getKey(), data.getStringExtra(Constant.DROP_OFF_LONGITUDE)));
     }
   }
@@ -255,7 +248,7 @@ public class ParameterActivity extends CustomActivity {
     int idx = urlTemplate.indexOf("{");
     String curUrl = urlTemplate.substring(0, idx) + urlTemplate.charAt(idx + 1);
     List<String> parameters = new ArrayList<>();
-    for(final String key : fulfillmentOption.getUrlTemplate().getParameterMapMap().keySet()) {
+    for (final String key : fulfillmentOption.getUrlTemplate().getParameterMapMap().keySet()) {
       String value = data.getStringExtra(key);
       parameters.add(getString(R.string.url_parameter, key, value));
     }
