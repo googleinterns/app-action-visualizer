@@ -13,4 +13,5 @@
     <string name="coordinates_pick_up">Coordinates: %1$s,  %2$s</string>
     <string name="search">Search</string>
     <string name="input_hint">%1$s not input yet</string>
+    <string name="url_parameter">%1$s=%2$s</string>
 </resources>

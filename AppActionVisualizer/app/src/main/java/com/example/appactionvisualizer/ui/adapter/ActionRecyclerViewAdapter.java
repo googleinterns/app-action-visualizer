@@ -3,7 +3,6 @@ package com.example.appactionvisualizer.ui.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appactionvisualizer.R;
 import com.example.appactionvisualizer.constants.Constant;
-import com.example.appactionvisualizer.databean.Action;
-import com.example.appactionvisualizer.databean.AppAction;
-import com.example.appactionvisualizer.databean.Fulfillment;
+import com.example.appactionvisualizer.databean.ActionType;
+import com.example.appactionvisualizer.databean.AppActionProtos.Action;
+import com.example.appactionvisualizer.databean.AppActionProtos.AppAction;
+import com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption;
 import com.example.appactionvisualizer.ui.activity.ParameterActivity;
 
 import java.util.ArrayList;
@@ -33,6 +33,7 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
 
   private static final String TAG = "ActionRecycler";
   private AppAction appAction;
+  private List<Action> actionList = new ArrayList<>();
   private Context context;
   private static final int VIEW_TYPE_ACTION = 0, VIEW_TYPE_FULFILLMENT = 1;
   private List<Integer> actionPos = new ArrayList<>();
@@ -41,17 +42,18 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
   public ActionRecyclerViewAdapter(AppAction items, Context context) {
     this.context = context;
     appAction = items;
+    actionList.addAll(appAction.getActionsList());
     //make sure actions with the same type stay together
-    Collections.sort(appAction.getActions(), new Comparator<Action>() {
+    Collections.sort(actionList, new Comparator<Action>() {
       @Override
       public int compare(Action t1, Action t2) {
-        return t1.getIntentName().compareTo(t2.getIntentName());
+        return ActionType.getActionTypeByName(t1.getIntentName()).compareTo(ActionType.getActionTypeByName(t2.getIntentName()));
       }
     });
     //find all the action item position
-    for(Action action : appAction.getActions()) {
+    for(Action action : actionList) {
       actionPos.add(allSize);
-      allSize += action.getFulfillmentArrayList().size() + 1;
+      allSize += action.getFulfillmentOptionCount() + 1;
     }
   }
 
@@ -96,43 +98,52 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
    */
   @Override
   public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
+    final Action action;
     switch (holder.getItemViewType()) {
       case VIEW_TYPE_ACTION:
         ActionViewHolder actionHolder = (ActionViewHolder) holder;
         //search the corresponding action item index
         int idx = Arrays.binarySearch(actionPos.toArray(), position);
-        final Action action = appAction.getActions().get(idx);
+        action = actionList.get(idx);
         actionHolder.actionName.setText(action.getIntentName());
-        actionHolder.actionType.setText(action.getActionType().toString());
+        actionHolder.actionType.setText(ActionType.getActionTypeByName(action.getIntentName()).getName());
         break;
       case VIEW_TYPE_FULFILLMENT:
         FulfillViewHolder fulfillHolder = (FulfillViewHolder) holder;
         //search the corresponding action item index and fulfill item index
         int actionIdx =  (-Arrays.binarySearch(actionPos.toArray(), position)) - 2;
         int fulfillIdx =  position - actionPos.get(actionIdx) - 1;
-        final Fulfillment fulfillment = appAction.getActions().get(actionIdx).getFulfillmentArrayList().get(fulfillIdx);
-        final String url = fulfillment.getUrlTemplate();
+        action = actionList.get(actionIdx);
+        final FulfillmentOption fulfillment = action.getFulfillmentOption(fulfillIdx);
+        final String url = fulfillment.getUrlTemplate().getTemplate();
         fulfillHolder.textContent.setText(url);
         fulfillHolder.textContent.setTextColor(context.getResources().getColor(url.contains("{") ? R.color.design_default_color_error: R.color.colorAccent));
         fulfillHolder.item.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {
-            //use "{" to judge whether the user has selected all the parameters
-            Intent intent = new Intent();
-            Log.d(TAG, url);
-            if(url.contains("{")) {
-              intent = new Intent(context, ParameterActivity.class);
-              intent.putExtra(Constant.FULFILLMENT, fulfillment);
-            }else {
-              intent.setAction(Intent.ACTION_VIEW);
-              intent.setData(Uri.parse(url));
-            }
-            context.startActivity(intent);
+            jumpToApp(action, fulfillment);
           }
         });
-
     }
+  }
 
+  void jumpToApp(final Action action, final FulfillmentOption fulfillmentOption) {
+    //use "{" to judge whether the user has selected all the parameters
+    Intent intent = new Intent();
+    if(fulfillmentOption.getUrlTemplate().getParameterMapCount() > 0) {
+      intent = new Intent(context, ParameterActivity.class);
+      intent.putExtra(Constant.FULFILLMENT_OPTION, fulfillmentOption);
+      intent.putExtra(Constant.ACTION, action);
+      intent.putExtra(Constant.APP_ACTION, appAction);
+    }else {
+      intent.setAction(Intent.ACTION_VIEW);
+      intent.setData(Uri.parse(fulfillmentOption.getUrlTemplate().getTemplate()));
+    }
+    try {
+      context.startActivity(intent);
+    }catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 
   @Override

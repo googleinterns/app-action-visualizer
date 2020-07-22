@@ -11,19 +11,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appactionvisualizer.R;
 import com.example.appactionvisualizer.constants.Constant;
-import com.example.appactionvisualizer.databean.ParameterMapping;
+import com.example.appactionvisualizer.databean.AppActionProtos.EntitySet;
 import com.example.appactionvisualizer.ui.activity.CustomActivity;
 import com.example.appactionvisualizer.ui.adapter.SelectRecyclerViewAdapter;
 
 public class ListItemActivity extends CustomActivity {
-  private ParameterMapping parameterMapping;
   private String key;
+  EntitySet entitySet;
 
   @Override
   protected void initData() {
     Intent intent = getIntent();
-    parameterMapping = (ParameterMapping) intent.getSerializableExtra(Constant.PARAMETER_MAPPING);
     key = intent.getStringExtra(Constant.KEY);
+    entitySet = (EntitySet) intent.getSerializableExtra(Constant.ENTITY_SET);
   }
 
   public void finish(String identifier) {
@@ -44,7 +44,7 @@ public class ListItemActivity extends CustomActivity {
       Context context = view.getContext();
       RecyclerView recyclerView = view;
       recyclerView.setLayoutManager(new LinearLayoutManager(context));
-      recyclerView.setAdapter(new SelectRecyclerViewAdapter(parameterMapping.getKey2MapList().get(key), key, this));
+      recyclerView.setAdapter(new SelectRecyclerViewAdapter(entitySet.getItemList().getFieldsOrThrow(Constant.ENTITY_ITEM_LIST).getListValue(), key, this));
       DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
           new LinearLayoutManager(ListItemActivity.this).getOrientation());
       recyclerView.addItemDecoration(dividerItemDecoration);

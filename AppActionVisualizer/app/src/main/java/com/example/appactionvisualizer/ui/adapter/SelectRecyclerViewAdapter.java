@@ -9,8 +9,10 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appactionvisualizer.R;
-import com.example.appactionvisualizer.databean.ParameterMapping;
+import com.example.appactionvisualizer.constants.Constant;
 import com.example.appactionvisualizer.ui.activity.parameter.ListItemActivity;
+import com.google.protobuf.ListValue;
+import com.google.protobuf.Value;
 
 import java.util.List;
 
@@ -19,11 +21,11 @@ import java.util.List;
  */
 public class SelectRecyclerViewAdapter extends RecyclerView.Adapter<SelectRecyclerViewAdapter.ViewHolder> {
 
-  private List<ParameterMapping.Mapping> mappingList;
+  private ListValue mappingList;
   private Context context;
   private String key;
 
-  public SelectRecyclerViewAdapter(List<ParameterMapping.Mapping> mappingList, String key, Context context) {
+  public SelectRecyclerViewAdapter(ListValue mappingList, String key, Context context) {
     this.context = context;
     this.mappingList = mappingList;
     this.key = key;
@@ -38,19 +40,19 @@ public class SelectRecyclerViewAdapter extends RecyclerView.Adapter<SelectRecycl
 
   @Override
   public void onBindViewHolder(final ViewHolder holder, final int position) {
-    final ParameterMapping.Mapping mapping = mappingList.get(position);
-    holder.textContent.setText(mapping.getName());
+    final Value entityValue = mappingList.getValues(position);
+    holder.textContent.setText(entityValue.getStructValue().getFieldsOrThrow(Constant.ENTITY_FIELD_NAME).getStringValue());
     holder.mView.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        ((ListItemActivity)(context)).finish(mapping.getIdentifier());
+        ((ListItemActivity)(context)).finish(entityValue.getStructValue().getFieldsOrThrow(Constant.ENTITY_FIELD_IDENTIFIER).getStringValue());
       }
     });
   }
 
   @Override
   public int getItemCount() {
-    return mappingList.size();
+    return mappingList.getValuesCount();
   }
 
   public static class ViewHolder extends RecyclerView.ViewHolder {

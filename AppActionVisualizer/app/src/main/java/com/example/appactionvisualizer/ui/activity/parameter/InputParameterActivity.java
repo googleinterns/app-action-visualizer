@@ -6,7 +6,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,13 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 import com.example.appactionvisualizer.R;
 import com.example.appactionvisualizer.constants.Constant;
-import com.example.appactionvisualizer.databean.ParameterMapping;
+import com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption;
 import com.example.appactionvisualizer.ui.activity.CustomActivity;
 import com.example.appactionvisualizer.utils.Utils;
 import com.google.android.material.textfield.TextInputEditText;
@@ -34,7 +32,7 @@ import java.util.Objects;
 
 public class InputParameterActivity extends CustomActivity {
   private static final String TAG = "InputParameterActivity" ;
-  private ParameterMapping parameterMapping;
+  private FulfillmentOption fulfillmentOption;
   List<String> keys = new ArrayList<>();
   Map<String, TextInputEditText> key2textInputEditTexts = new HashMap<>();
 
@@ -48,13 +46,9 @@ public class InputParameterActivity extends CustomActivity {
 
   @Override
   protected void initData() {
-    parameterMapping = (ParameterMapping) getIntent().getSerializableExtra(Constant.PARAMETER_MAPPING);
+    fulfillmentOption = (FulfillmentOption) getIntent().getSerializableExtra(Constant.FULFILLMENT_OPTION);
     //for those who doesn't have a parameter mapping, we require the user input
-    for(final Map.Entry<String, List<ParameterMapping.Mapping>> entry: parameterMapping.getKey2MapList().entrySet()) {
-      if(entry.getValue()== null) {
-        keys.add(entry.getKey());
-      }
-    }
+    keys.addAll(fulfillmentOption.getUrlTemplate().getParameterMapMap().keySet());
   }
 
   @Override
@@ -121,20 +115,21 @@ public class InputParameterActivity extends CustomActivity {
     linearLayout.updateViewLayout(textInputLayout, params);
   }
 
-  private void addSelectKeyLayout(final String key) {
-
-    String[] test = new String[]{"haha", "hoho"};
-
-    Spinner spinner = (Spinner) findViewById(R.id.spinner);
-    ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, test);
-    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-    spinner.setAdapter(adapter);
-    spinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-      @Override
-      public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-      }
-    });
-  }
+  //todo: add some spinner
+//  private void addSelectKeyLayout(final String key) {
+//
+//    String[] test = new String[]{"haha", "hoho"};
+//
+//    Spinner spinner = (Spinner) findViewById(R.id.spinner);
+//    ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, test);
+//    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//    spinner.setAdapter(adapter);
+//    spinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//      @Override
+//      public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//
+//      }
+//    });
+//  }
 
 }

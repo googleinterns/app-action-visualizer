@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appactionvisualizer.R;
 import com.example.appactionvisualizer.constants.Constant;
-import com.example.appactionvisualizer.databean.AppAction;
+import com.example.appactionvisualizer.databean.AppActionProtos.AppAction;
 import com.example.appactionvisualizer.ui.adapter.ActionRecyclerViewAdapter;
 
 
@@ -22,13 +22,13 @@ public class ActionActivity extends CustomActivity {
   @Override
   protected void initData() {
     Intent intent = getIntent();
-    appAction = (AppAction) intent.getSerializableExtra(Constant.APP_NAME);
+    appAction = (AppAction) intent.getSerializableExtra(Constant.APP_ACTION);
   }
 
   @Override
   protected void initView() {
     super.initView();
-    getSupportActionBar().setTitle(appAction.getAppName());
+    getSupportActionBar().setTitle(appAction.getPackageName());
     RecyclerView view = findViewById(R.id.list);
     // Set the adapter
     if (view != null) {
