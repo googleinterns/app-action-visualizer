@@ -9,6 +9,7 @@ import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -17,6 +18,7 @@ import androidx.annotation.Nullable;
 
 import com.example.appactionvisualizer.R;
 import com.example.appactionvisualizer.constants.Constant;
+import com.example.appactionvisualizer.databean.ActionType;
 import com.example.appactionvisualizer.databean.AppActionProtos.Action;
 import com.example.appactionvisualizer.databean.AppActionProtos.AppAction;
 import com.example.appactionvisualizer.databean.AppActionProtos.EntitySet;
@@ -46,7 +48,7 @@ public class ParameterActivity extends CustomActivity {
   private Action action;
   private AppAction appAction;
   private String urlTemplate;
-  private TextView tvUrlTemplate, tvUrl;
+  private TextView tvUrlTemplate, tvUrl, link;
 
   @Override
   protected void initData() {
@@ -64,6 +66,8 @@ public class ParameterActivity extends CustomActivity {
     getSupportActionBar().setTitle(TAG);
     tvUrlTemplate = findViewById(R.id.url_template);
     tvUrl = findViewById(R.id.url);
+    link = findViewById(R.id.link);
+    setReferenceLink();
     setClickableText();
   }
 
@@ -83,15 +87,21 @@ public class ParameterActivity extends CustomActivity {
     }
     switch (requestCode) {
       case Constant.SELECT_SINGLE_PARAMETER:
-        replaceSingleParameter(data);
+      case Constant.SELECT_MULTIPLE_PARAMETER:
+        replaceParameter(data);
         break;
       case Constant.SELECT_ADDRESS:
         replaceAddressParameter(data);
         break;
-      case Constant.SELECT_MULTIPLE_PARAMETER:
-        replaceMultiParameter(data);
-        break;
     }
+  }
+
+
+  private void setReferenceLink() {
+    String intentName = action.getIntentName();
+    String intentUrl = intentName.substring(intentName.lastIndexOf('.') + 1).toLowerCase().replaceAll("_", "-");
+    String linkString = getString(R.string.url_action_prefix, ActionType.getActionTypeByName(intentName).getUrl(), intentUrl);
+    setClickableText(link, linkString);
   }
 
 
@@ -178,33 +188,12 @@ public class ParameterActivity extends CustomActivity {
   }
 
 
-  /**
-   * @param data intent data received from selectActivity
-   *             construct the url
-   */
-  void replaceSingleParameter(Intent data) {
-    String key = data.getStringExtra(Constant.KEY);
-    String identifier = data.getStringExtra(Constant.IDENTIFIER);
-    if (key == null)
-      return;
-    int idx = urlTemplate.indexOf("{");
-    String curUrl = urlTemplate.substring(0, idx);
-    //https://example.com/test?utm_campaign=appactions{#foo}	"foo": "123"	https://example.com/test?utm_campaign=appactions#foo=123
-    //myapp://example/{foo}	"foo": "123"	myapp://example/123
-    if (Character.isAlphabetic(urlTemplate.charAt(idx + 1))) {
-      curUrl += identifier;
-    } else {
-      curUrl += urlTemplate.charAt(idx + 1) + getString(R.string.url_parameter, key, identifier);
-    }
-    setFulfillUrl(curUrl);
-  }
-
 
   /**
    * @param curUrl the constructed url
    *               set the constructed url which can be used to open corresponding application
    */
-  private void setFulfillUrl(final String curUrl) {
+  private void setClickableText(final TextView tvUrl, final String curUrl) {
     tvUrl.setText(curUrl);
     tvUrl.setTextColor(getResources().getColor(R.color.colorAccent));
     tvUrl.setOnClickListener(new View.OnClickListener() {
@@ -229,7 +218,7 @@ public class ParameterActivity extends CustomActivity {
       addLocationParameters(data, entry, parameters);
     }
     curUrl += TextUtils.join("&", parameters);
-    setFulfillUrl(curUrl);
+    setClickableText(tvUrl, curUrl);
   }
 
   private void addLocationParameters(Intent data, Map.Entry<String, String> entry, List<String> parameters) {
@@ -244,15 +233,46 @@ public class ParameterActivity extends CustomActivity {
     }
   }
 
-  private void replaceMultiParameter(Intent data) {
-    int idx = urlTemplate.indexOf("{");
-    String curUrl = urlTemplate.substring(0, idx) + urlTemplate.charAt(idx + 1);
+
+
+  /**
+   * @param data intent data received from selectActivity
+   *             construct the url
+   */
+  void replaceSingleParameter(String key, Intent data) {
+    String identifier = data.getStringExtra(key);
+    if (key == null)
+      return;
+    int firstPartIdx = urlTemplate.indexOf("{");
+    int secondPartIdx = urlTemplate.indexOf("}");
+    String curUrl = urlTemplate.substring(0, firstPartIdx);
+    //https://example.com/test?utm_campaign=appactions{#foo}	"foo": "123"	https://example.com/test?utm_campaign=appactions#foo=123
+    //myapp://example/{foo}	"foo": "123"	myapp://example/123
+    Log.d(TAG, "{ after is:" + urlTemplate.charAt(firstPartIdx + 1));
+    if (Character.isAlphabetic(urlTemplate.charAt(firstPartIdx + 1))) {
+      curUrl += identifier;
+    } else {
+      curUrl += urlTemplate.charAt(firstPartIdx + 1) + getString(R.string.url_parameter, key, identifier);
+    }
+    curUrl += urlTemplate.substring(secondPartIdx + 1);
+    setClickableText(tvUrl, curUrl);
+  }
+
+  private void replaceParameter(Intent data) {
+    if(fulfillmentOption.getUrlTemplate().getParameterMapCount() == 1) {
+      replaceSingleParameter(fulfillmentOption.getUrlTemplate().getParameterMapMap().keySet().iterator().next(), data);
+      return;
+    }
+    int firstPartIdx = urlTemplate.indexOf("{");
+    int secondPartIdx = urlTemplate.indexOf("}");
+    String curUrl = urlTemplate.substring(0, firstPartIdx) + urlTemplate.charAt(firstPartIdx + 1);
     List<String> parameters = new ArrayList<>();
     for (final String key : fulfillmentOption.getUrlTemplate().getParameterMapMap().keySet()) {
       String value = data.getStringExtra(key);
       parameters.add(getString(R.string.url_parameter, key, value));
     }
     curUrl += TextUtils.join("&", parameters);
-    setFulfillUrl(curUrl);
+    curUrl += urlTemplate.substring(secondPartIdx + 1);
+    setClickableText(tvUrl, curUrl);
   }
 }

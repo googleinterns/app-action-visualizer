@@ -1,13 +1,17 @@
 package com.example.appactionvisualizer.databean;
 
 import android.content.Context;
+import android.os.Environment;
 import android.util.Log;
 
 import com.example.appactionvisualizer.R;
 import com.example.appactionvisualizer.databean.AppActionProtos.AppAction;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -42,11 +46,13 @@ public class TestGenerator {
         for(int j = i + 1; j < sz; ++j) {
           if(appActions.get(j).getPackageName().equals(appActions.get(i).getPackageName())) {
             isUnique = false;
+//            Log.d(TAG, appActions.get(i).getPackageName());
             duplicate++;
           }
         }
-        if(isUnique)
+        if(isUnique) {
           appActionsUnique.add(appActions.get(i));
+        }
       }
       int allFulfillmentSize = 0;
       int zeroParameter = 0, singleParameter = 0, multiParameter = 0;
@@ -90,7 +96,6 @@ public class TestGenerator {
     }
     parseDataToEachType(appActionsUnique);
   }
-
 
 
   private void parseDataToEachType(List<AppActionProtos.AppAction> appActions) {

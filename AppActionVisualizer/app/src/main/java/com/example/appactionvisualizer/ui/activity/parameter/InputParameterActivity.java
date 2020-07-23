@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 
 import com.example.appactionvisualizer.R;
 import com.example.appactionvisualizer.constants.Constant;
+import com.example.appactionvisualizer.databean.AppActionProtos;
 import com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption;
 import com.example.appactionvisualizer.ui.activity.CustomActivity;
 import com.example.appactionvisualizer.utils.Utils;
@@ -30,6 +31,7 @@ public class InputParameterActivity extends CustomActivity {
   private static final String TAG = "InputParameterActivity" ;
   private FulfillmentOption fulfillmentOption;
   List<String> keys = new ArrayList<>();
+  Map<String, String> map = new HashMap<>();
   Map<String, TextInputEditText> key2textInputEditTexts = new HashMap<>();
 
   @Override
@@ -44,7 +46,10 @@ public class InputParameterActivity extends CustomActivity {
   protected void initData() {
     fulfillmentOption = (FulfillmentOption) getIntent().getSerializableExtra(Constant.FULFILLMENT_OPTION);
     //for those who doesn't have a parameter mapping, we require the user input
-    keys.addAll(fulfillmentOption.getUrlTemplate().getParameterMapMap().keySet());
+    if (fulfillmentOption != null) {
+      keys.addAll(fulfillmentOption.getUrlTemplate().getParameterMapMap().keySet());
+      map = fulfillmentOption.getUrlTemplate().getParameterMapMap();
+    }
   }
 
   @Override
@@ -100,7 +105,8 @@ public class InputParameterActivity extends CustomActivity {
   private void addInputKeyLayout(final String key) {
     final LinearLayout linearLayout = findViewById(R.id.parameter_list);
     TextInputLayout textInputLayout = (TextInputLayout) LayoutInflater.from(InputParameterActivity.this).inflate(R.layout.text_input, null);
-    textInputLayout.setHint(key);
+    //todo: use string value
+    textInputLayout.setHint(key + "(" + map.get(key) +")");
     key2textInputEditTexts.put(key, (TextInputEditText) textInputLayout.findViewById(R.id.text_input));
     LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,  ViewGroup.LayoutParams.WRAP_CONTENT);
     params.setMargins(10, 10,10, 0);

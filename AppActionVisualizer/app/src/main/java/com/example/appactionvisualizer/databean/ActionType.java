@@ -4,16 +4,18 @@ package com.example.appactionvisualizer.databean;
 import java.io.Serializable;
 
 public enum ActionType implements Serializable {
-  COMMON("Common"),
-  FINANCE("Finance"),
-  FOOD_AND_DRINK("Food And drink"),
-  HEALTH_AND_FITNESS ("Health and fitness"),
-  TRANSPORTATION("Transportation");
+  COMMON("Common", "common"),
+  FINANCE("Finance", "finance"),
+  FOOD_AND_DRINK("Food And drink", "food-and-drink"),
+  HEALTH_AND_FITNESS ("Health and fitness", "health-and-fitness"),
+  TRANSPORTATION("Transportation", "transportation");
 
   private String name;
+  private String url;
 
-  ActionType(String name) {
+  ActionType(String name, String url) {
     this.name = name;
+    this.url= url;
   }
 
   public static ActionType getActionTypeValue(int idx) {
@@ -21,7 +23,7 @@ public enum ActionType implements Serializable {
   }
 
   public static ActionType getActionTypeByName(String intentName) {
-    if(intentName.equals("actions.intent.OPEN_APP_FEATURE") || intentName.equals("actions.intent.GET_ACCOUNT") || intentName.equals("actions.intent.GET_ORDER")) {
+    if(intentName.equals("actions.intent.OPEN_APP_FEATURE") || intentName.equals("actions.intent.GET_ACCOUNT") || intentName.equals("actions.intent.GET_ORDER") || intentName.equals("actions.intent.GET_THING")) {
       return COMMON;
     }
     if(intentName.contains("INVOICE") || intentName.equals("actions.intent.CREATE_MONEY_TRANSFER") || intentName.equals("actions.intent.CREATE_TRADE_ORDER") || intentName.equals("actions.intent.GET_FINANCIAL_POSITION") || intentName.equals("actions.intent.GET_STOCK_QUOTE")) {
@@ -38,5 +40,9 @@ public enum ActionType implements Serializable {
 
   public String getName() {
     return name;
+  }
+
+  public String getUrl() {
+    return url;
   }
 }

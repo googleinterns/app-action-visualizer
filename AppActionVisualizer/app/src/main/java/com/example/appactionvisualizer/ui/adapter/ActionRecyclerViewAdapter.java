@@ -129,6 +129,8 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
 
   void jumpToApp(final Action action, final FulfillmentOption fulfillmentOption) {
     Intent intent = new Intent();
+    if(fulfillmentOption.getUrlTemplate().getTemplate().contains("@url"))
+      return;
     if (fulfillmentOption.getUrlTemplate().getParameterMapCount() > 0) {
       intent = new Intent(context, ParameterActivity.class);
       intent.putExtra(Constant.FULFILLMENT_OPTION, fulfillmentOption);

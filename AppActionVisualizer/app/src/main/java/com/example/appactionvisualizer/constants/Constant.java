@@ -33,7 +33,4 @@ public class Constant {
   public final static int SELECT_MULTIPLE_PARAMETER = 0xC00;
 
 
-
-
-
 }

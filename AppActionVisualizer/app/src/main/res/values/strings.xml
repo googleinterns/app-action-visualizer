@@ -14,4 +14,5 @@
     <string name="search">Search</string>
     <string name="input_hint">%1$s not input yet</string>
     <string name="url_parameter">%1$s=%2$s</string>
+    <string name="url_action_prefix">https://developers.google.com/assistant/app/reference/built-in-intents/%1$s/%2$s</string>
 </resources>
