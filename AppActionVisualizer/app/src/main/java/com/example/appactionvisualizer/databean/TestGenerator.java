@@ -67,6 +67,9 @@ public class TestGenerator {
           continue;
         }
         for (AppActionProtos.Action action : appAction.getActionsList()) {
+          if(action.getParametersCount() > 1) {
+            Log.d(TAG, "more than 1 param list:" + appAction.getPackageName());
+          }
           allFulfillmentSize += action.getFulfillmentOptionCount();
           for (AppActionProtos.FulfillmentOption fulfillmentOption : action.getFulfillmentOptionList()) {
             AppActionProtos.UrlTemplate urlTemplate = fulfillmentOption.getUrlTemplate();

@@ -1,12 +1,15 @@
 package com.example.appactionvisualizer.ui.activity.parameter;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.speech.tts.UtteranceProgressListener;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
@@ -14,12 +17,18 @@ import androidx.annotation.NonNull;
 
 import com.example.appactionvisualizer.R;
 import com.example.appactionvisualizer.constants.Constant;
-import com.example.appactionvisualizer.databean.AppActionProtos;
 import com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption;
+import com.example.appactionvisualizer.databean.AppActionProtos.Action;
+import com.example.appactionvisualizer.databean.AppActionProtos.AppAction;
+import com.example.appactionvisualizer.databean.AppActionProtos.EntitySet;
 import com.example.appactionvisualizer.ui.activity.CustomActivity;
 import com.example.appactionvisualizer.utils.Utils;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.protobuf.ListValue;
+import com.google.protobuf.Struct;
+import com.google.protobuf.Value;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,6 +39,9 @@ import java.util.Objects;
 public class InputParameterActivity extends CustomActivity {
   private static final String TAG = "InputParameterActivity" ;
   private FulfillmentOption fulfillmentOption;
+  private Action action;
+  private AppAction appAction;
+
   List<String> keys = new ArrayList<>();
   Map<String, String> map = new HashMap<>();
   Map<String, TextInputEditText> key2textInputEditTexts = new HashMap<>();
@@ -50,6 +62,8 @@ public class InputParameterActivity extends CustomActivity {
       keys.addAll(fulfillmentOption.getUrlTemplate().getParameterMapMap().keySet());
       map = fulfillmentOption.getUrlTemplate().getParameterMapMap();
     }
+    action = (Action) getIntent().getSerializableExtra(Constant.ACTION);
+    appAction = (AppAction) getIntent().getSerializableExtra(Constant.APP_ACTION);
   }
 
   @Override
@@ -85,6 +99,10 @@ public class InputParameterActivity extends CustomActivity {
         Utils.showMsg(getString(R.string.input_hint, key), this);
         return;
       }
+      //convert to identifier
+      if(value.contains("(")) {
+        value = value.substring(value.lastIndexOf("(") + 1, value.length() - 1);
+      }
       intent.putExtra(key, value);
     }
     setResult(Activity.RESULT_OK, intent);
@@ -93,7 +111,6 @@ public class InputParameterActivity extends CustomActivity {
 
   private void addParameterViews() {
     for(String key : keys) {
-      key2textInputEditTexts.put(key, new TextInputEditText(this));
       addInputKeyLayout(key);
     }
   }
@@ -106,13 +123,66 @@ public class InputParameterActivity extends CustomActivity {
     final LinearLayout linearLayout = findViewById(R.id.parameter_list);
     TextInputLayout textInputLayout = (TextInputLayout) LayoutInflater.from(InputParameterActivity.this).inflate(R.layout.text_input, null);
     //todo: use string value
-    textInputLayout.setHint(key + "(" + map.get(key) +")");
-    key2textInputEditTexts.put(key, (TextInputEditText) textInputLayout.findViewById(R.id.text_input));
+    textInputLayout.setHint(key);
+    textInputLayout.setHelperText(map.get(key));
+    final TextInputEditText textInput = textInputLayout.findViewById(R.id.text_input);
+    key2textInputEditTexts.put(key, textInput);
     LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,  ViewGroup.LayoutParams.WRAP_CONTENT);
     params.setMargins(10, 10,10, 0);
     textInputLayout.setLayoutParams(params);
+    final EntitySet entitySet = checkEntitySet(key);
+    if(entitySet != null) {
+      textInput.setFocusable(false);
+      textInput.setClickable(true);
+      textInput.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View view) {
+            popUpDialog(textInput, entitySet);
+          }
+        });
+    }
+
     linearLayout.addView(textInputLayout);
-    linearLayout.updateViewLayout(textInputLayout, params);
   }
 
+  private void popUpDialog(final TextInputEditText textInput, final EntitySet entitySet) {
+    try {
+      final ListValue listValue = entitySet.getItemList().getFieldsOrThrow(Constant.ENTITY_ITEM_LIST).getListValue();
+      MaterialAlertDialogBuilder materialAlertDialogBuilder = new MaterialAlertDialogBuilder(this);
+      materialAlertDialogBuilder.setTitle(entitySet.getItemList().getFieldsOrThrow(Constant.ENTITY_FIELD_IDENTIFIER).getStringValue());
+      List<CharSequence> list = new ArrayList<>();
+      for(Value entity : listValue.getValuesList()) {
+        list.add(entity.getStructValue().getFieldsOrThrow(Constant.ENTITY_FIELD_NAME).getStringValue());
+      }
+      CharSequence[] keys = new CharSequence[list.size()];
+      materialAlertDialogBuilder.setItems(list.toArray(keys), new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialogInterface, int i) {
+          Struct item = listValue.getValues(i).getStructValue();
+          textInput.setText(getString(R.string.addition_text, item.getFieldsOrThrow(Constant.ENTITY_FIELD_NAME).getStringValue(), item.getFieldsOrThrow(Constant.ENTITY_FIELD_IDENTIFIER).getStringValue()));
+        }
+      }).show();
+    }catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+
+  //check if entity set has provided corresponding list items
+  private EntitySet checkEntitySet(String key) {
+    String parameterValue = fulfillmentOption.getUrlTemplate().getParameterMapMap().get(key);
+    for (Action.Parameter parameter : action.getParametersList()) {
+      if (parameter.getName().equals(parameterValue)) {
+        if(parameter.getEntitySetReferenceCount() == 0)
+          continue;
+        String reference = parameter.getEntitySetReference(0).getEntitySetId();
+        for (EntitySet set : appAction.getEntitySetsList()) {
+          if (set.getItemList().getFieldsOrThrow(Constant.ENTITY_FIELD_IDENTIFIER).getStringValue().equals(reference)) {
+            return set;
+          }
+        }
+      }
+    }
+    return null;
+  }
 }

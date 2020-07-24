@@ -15,7 +15,7 @@ import com.example.appactionvisualizer.ui.activity.parameter.LocationActivity;
 import java.util.List;
 
 /**
- * Adapter of ListItemActivity Recyclerview
+ * Adapter of LocationActivity Recyclerview
  */
 public class AddressListRecyclerViewAdapter extends RecyclerView.Adapter<AddressListRecyclerViewAdapter.ViewHolder> {
 

@@ -9,7 +9,6 @@ import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -21,13 +20,12 @@ import com.example.appactionvisualizer.constants.Constant;
 import com.example.appactionvisualizer.databean.ActionType;
 import com.example.appactionvisualizer.databean.AppActionProtos.Action;
 import com.example.appactionvisualizer.databean.AppActionProtos.AppAction;
-import com.example.appactionvisualizer.databean.AppActionProtos.EntitySet;
 import com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption;
 import com.example.appactionvisualizer.ui.activity.parameter.InputParameterActivity;
-import com.example.appactionvisualizer.ui.activity.parameter.ListItemActivity;
 import com.example.appactionvisualizer.ui.activity.parameter.LocationActivity;
 import com.example.appactionvisualizer.utils.Utils;
 
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -63,7 +61,6 @@ public class ParameterActivity extends CustomActivity {
   @Override
   protected void initView() {
     super.initView();
-    getSupportActionBar().setTitle(TAG);
     tvUrlTemplate = findViewById(R.id.url_template);
     tvUrl = findViewById(R.id.url);
     link = findViewById(R.id.link);
@@ -99,7 +96,9 @@ public class ParameterActivity extends CustomActivity {
 
   private void setReferenceLink() {
     String intentName = action.getIntentName();
-    String intentUrl = intentName.substring(intentName.lastIndexOf('.') + 1).toLowerCase().replaceAll("_", "-");
+    intentName = intentName.substring(intentName.lastIndexOf('.') + 1);
+    getSupportActionBar().setTitle(intentName);
+    String intentUrl = intentName.toLowerCase().replaceAll("_", "-");
     String linkString = getString(R.string.url_action_prefix, ActionType.getActionTypeByName(intentName).getUrl(), intentUrl);
     setClickableText(link, linkString);
   }
@@ -152,41 +151,18 @@ public class ParameterActivity extends CustomActivity {
       ClickableSpan clickable = new ClickableSpan() {
         @Override
         public void onClick(@NonNull View view) {
-          EntitySet entitySet = checkEntitySet(entry.getValue());
-          if (entitySet != null && fulfillmentOption.getUrlTemplate().getParameterMapCount() == 1) {
-            Intent intent = new Intent(ParameterActivity.this, ListItemActivity.class);
-            intent.putExtra(Constant.ENTITY_SET, entitySet);
-            intent.putExtra(Constant.KEY, key);
-            startActivityForResult(intent, Constant.SELECT_SINGLE_PARAMETER);
-          } else {
-            //if no provided list for the key, jump to the input text activity
-            Intent intent = new Intent(ParameterActivity.this, InputParameterActivity.class);
-            intent.putExtra(Constant.FULFILLMENT_OPTION, fulfillmentOption);
-            startActivityForResult(intent, Constant.SELECT_MULTIPLE_PARAMETER);
-          }
+          Intent intent = new Intent(ParameterActivity.this, InputParameterActivity.class);
+          intent.putExtra(Constant.FULFILLMENT_OPTION, fulfillmentOption);
+          intent.putExtra(Constant.ACTION, action);
+          intent.putExtra(Constant.APP_ACTION, appAction);
+          startActivityForResult(intent, Constant.SELECT_MULTIPLE_PARAMETER);
         }
       };
-      int start = urlTemplate.indexOf(key);
+      int start = urlTemplate.indexOf(key, urlTemplate.indexOf("{"));
       int end = start + key.length();
       ss.setSpan(clickable, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
     }
   }
-
-  //check if entity set has provided corresponding list items
-  private EntitySet checkEntitySet(String key) {
-    for (Action.Parameter parameter : action.getParametersList()) {
-      if (parameter.getName().equals(key)) {
-        String reference = parameter.getEntitySetReference(0).getEntitySetId();
-        for (EntitySet set : appAction.getEntitySetsList()) {
-          if (set.getItemList().getFieldsOrThrow(Constant.ENTITY_FIELD_IDENTIFIER).getStringValue().equals(reference)) {
-            return set;
-          }
-        }
-      }
-    }
-    return null;
-  }
-
 
 
   /**
@@ -199,8 +175,14 @@ public class ParameterActivity extends CustomActivity {
     tvUrl.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(curUrl));
-        startActivity(intent);
+        Intent intent = new Intent();
+        try {
+          intent = Intent.parseUri(curUrl, 0);
+          startActivity(intent);
+        } catch (Exception e) {
+          Utils.showMsg(getString(R.string.error_parsing), ParameterActivity.this);
+//          e.printStackTrace();
+        }
       }
     });
   }
@@ -248,7 +230,6 @@ public class ParameterActivity extends CustomActivity {
     String curUrl = urlTemplate.substring(0, firstPartIdx);
     //https://example.com/test?utm_campaign=appactions{#foo}	"foo": "123"	https://example.com/test?utm_campaign=appactions#foo=123
     //myapp://example/{foo}	"foo": "123"	myapp://example/123
-    Log.d(TAG, "{ after is:" + urlTemplate.charAt(firstPartIdx + 1));
     if (Character.isAlphabetic(urlTemplate.charAt(firstPartIdx + 1))) {
       curUrl += identifier;
     } else {

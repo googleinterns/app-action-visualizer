@@ -14,7 +14,6 @@
         <activity android:name=".ui.activity.parameter.LocationActivity" />
         <activity android:name=".ui.activity.ParameterActivity" />
         <activity android:name=".ui.activity.ActionActivity" />
-        <activity android:name=".ui.activity.parameter.ListItemActivity" />
         <activity
             android:name=".ui.activity.MainActivity"
             android:label="@string/app_name"

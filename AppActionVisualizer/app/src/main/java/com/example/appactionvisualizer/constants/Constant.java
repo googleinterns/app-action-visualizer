@@ -8,7 +8,6 @@ public class Constant {
   public final static String FULFILLMENT_OPTION = "FULFILLMENT";
   public final static String ENTITY_SET = "PARAMETER_MAPPING";
   public final static String KEY = "KEY";
-  public final static String IDENTIFIER = "IDENTIFIER";
   public final static String ERROR_FILL_PARAMETER = "Please select all parameters";
   public final static String ERROR_NO_PLACE = "Could not find address";
   public final static String PICK_UP_LATITUDE = "PICK_UP_LATITUDE";

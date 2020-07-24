@@ -18,7 +18,9 @@ import com.example.appactionvisualizer.databean.AppActionProtos.Action;
 import com.example.appactionvisualizer.databean.AppActionProtos.AppAction;
 import com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption;
 import com.example.appactionvisualizer.ui.activity.ParameterActivity;
+import com.example.appactionvisualizer.utils.Utils;
 
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -136,14 +138,15 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
       intent.putExtra(Constant.FULFILLMENT_OPTION, fulfillmentOption);
       intent.putExtra(Constant.ACTION, action);
       intent.putExtra(Constant.APP_ACTION, appAction);
-    } else {
-      intent.setAction(Intent.ACTION_VIEW);
-      intent.setData(Uri.parse(fulfillmentOption.getUrlTemplate().getTemplate()));
-    }
-    try {
       context.startActivity(intent);
-    } catch (Exception e) {
-      e.printStackTrace();
+    } else{
+      try {
+        intent = Intent.parseUri(fulfillmentOption.getUrlTemplate().getTemplate(), 0);
+        context.startActivity(intent);
+      } catch (Exception e) {
+        Utils.showMsg(context.getString(R.string.error_parsing), context);
+//        e.printStackTrace();
+      }
     }
   }
 

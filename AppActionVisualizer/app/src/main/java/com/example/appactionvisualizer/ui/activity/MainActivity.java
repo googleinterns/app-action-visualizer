@@ -14,6 +14,8 @@ import com.example.appactionvisualizer.ui.adapter.SectionsPagerAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
+import java.net.URISyntaxException;
+
 /**
  * The launcher page of the app
  * Use viewPager + fragment to display every type's apps list
@@ -32,10 +34,6 @@ public class MainActivity extends AppCompatActivity {
     fab.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        Intent intent = new Intent();
-        intent.setAction(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse("https://bemyeyes.com/call?featureName=google"));
-        startActivity(intent);
       }
     });
   }
