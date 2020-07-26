@@ -27,9 +27,8 @@ public class Constant {
   public final static int MAX_RESULTS = 5;
 
   //Activity result code
-  public final static int SELECT_SINGLE_PARAMETER = 0xA;
-  public final static int SELECT_ADDRESS = 0xB0;
-  public final static int SELECT_MULTIPLE_PARAMETER = 0xC00;
+  public final static int SELECT_ADDRESS = 0x1;
+  public final static int INPUT_PARAMETER = 0x10;
 
 
 }

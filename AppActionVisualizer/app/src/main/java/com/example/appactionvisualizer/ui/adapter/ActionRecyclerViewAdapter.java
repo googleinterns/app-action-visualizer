@@ -2,7 +2,6 @@ package com.example.appactionvisualizer.ui.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +19,6 @@ import com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOptio
 import com.example.appactionvisualizer.ui.activity.ParameterActivity;
 import com.example.appactionvisualizer.utils.Utils;
 
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -130,22 +128,22 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
   }
 
   void jumpToApp(final Action action, final FulfillmentOption fulfillmentOption) {
-    Intent intent = new Intent();
-    if(fulfillmentOption.getUrlTemplate().getTemplate().contains("@url"))
+    if (fulfillmentOption.getUrlTemplate().getTemplate().contains("@url")) {
+      Utils.showMsg(context.getString(R.string.error_parsing), context);
       return;
+    }
     if (fulfillmentOption.getUrlTemplate().getParameterMapCount() > 0) {
-      intent = new Intent(context, ParameterActivity.class);
+      Intent intent = new Intent(context, ParameterActivity.class);
       intent.putExtra(Constant.FULFILLMENT_OPTION, fulfillmentOption);
       intent.putExtra(Constant.ACTION, action);
       intent.putExtra(Constant.APP_ACTION, appAction);
       context.startActivity(intent);
-    } else{
+    } else {
       try {
-        intent = Intent.parseUri(fulfillmentOption.getUrlTemplate().getTemplate(), 0);
+        Intent intent = Intent.parseUri(fulfillmentOption.getUrlTemplate().getTemplate(), 0);
         context.startActivity(intent);
       } catch (Exception e) {
         Utils.showMsg(context.getString(R.string.error_parsing), context);
-//        e.printStackTrace();
       }
     }
   }

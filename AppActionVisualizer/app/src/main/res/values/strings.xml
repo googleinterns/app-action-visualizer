@@ -18,4 +18,5 @@
     <string name="reference_link">reference link:</string>
     <string name="addition_text">%1$s(%2$s)</string>
     <string name="error_parsing">An error occurred when parsing the intent url!</string>
+    <string name="create_taxi">actions.intent.CREATE_TAXI_RESERVATION</string>
 </resources>

@@ -1,7 +1,5 @@
 package com.example.appactionvisualizer.ui.activity;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
@@ -13,8 +11,6 @@ import com.example.appactionvisualizer.databean.TestGenerator;
 import com.example.appactionvisualizer.ui.adapter.SectionsPagerAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
-
-import java.net.URISyntaxException;
 
 /**
  * The launcher page of the app

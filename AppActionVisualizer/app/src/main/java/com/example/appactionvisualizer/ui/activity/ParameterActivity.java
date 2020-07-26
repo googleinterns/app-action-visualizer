@@ -2,7 +2,6 @@ package com.example.appactionvisualizer.ui.activity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -25,7 +24,6 @@ import com.example.appactionvisualizer.ui.activity.parameter.InputParameterActiv
 import com.example.appactionvisualizer.ui.activity.parameter.LocationActivity;
 import com.example.appactionvisualizer.utils.Utils;
 
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -83,8 +81,7 @@ public class ParameterActivity extends CustomActivity {
       return;
     }
     switch (requestCode) {
-      case Constant.SELECT_SINGLE_PARAMETER:
-      case Constant.SELECT_MULTIPLE_PARAMETER:
+      case Constant.INPUT_PARAMETER:
         replaceParameter(data);
         break;
       case Constant.SELECT_ADDRESS:
@@ -93,7 +90,7 @@ public class ParameterActivity extends CustomActivity {
     }
   }
 
-
+  //set a reference to corresponding official page
   private void setReferenceLink() {
     String intentName = action.getIntentName();
     intentName = intentName.substring(intentName.lastIndexOf('.') + 1);
@@ -106,10 +103,9 @@ public class ParameterActivity extends CustomActivity {
 
   /**
    * set the ways of selecting parameter
-   * currently 3 ways:
-   * 1. select from list
+   * currently 2 ways:
+   * 1. user inputs arbitrary text/select from list
    * 2. select two addresses(for transportation action intent)
-   * 3. user input arbitrary text
    */
   private void setClickableText() {
     if (urlTemplate.isEmpty())
@@ -120,7 +116,7 @@ public class ParameterActivity extends CustomActivity {
       return;
     }
     SpannableString ss = new SpannableString(urlTemplate);
-    if (action.getIntentName().equals("actions.intent.CREATE_TAXI_RESERVATION")) {
+    if (action.getIntentName().equals(getString(R.string.create_taxi))) {
       setLocationParameter(ss);
     } else {
       setMappingParameter(ss);
@@ -155,7 +151,7 @@ public class ParameterActivity extends CustomActivity {
           intent.putExtra(Constant.FULFILLMENT_OPTION, fulfillmentOption);
           intent.putExtra(Constant.ACTION, action);
           intent.putExtra(Constant.APP_ACTION, appAction);
-          startActivityForResult(intent, Constant.SELECT_MULTIPLE_PARAMETER);
+          startActivityForResult(intent, Constant.INPUT_PARAMETER);
         }
       };
       int start = urlTemplate.indexOf(key, urlTemplate.indexOf("{"));
@@ -181,7 +177,6 @@ public class ParameterActivity extends CustomActivity {
           startActivity(intent);
         } catch (Exception e) {
           Utils.showMsg(getString(R.string.error_parsing), ParameterActivity.this);
-//          e.printStackTrace();
         }
       }
     });
@@ -216,7 +211,6 @@ public class ParameterActivity extends CustomActivity {
   }
 
 
-
   /**
    * @param data intent data received from selectActivity
    *             construct the url
@@ -240,7 +234,7 @@ public class ParameterActivity extends CustomActivity {
   }
 
   private void replaceParameter(Intent data) {
-    if(fulfillmentOption.getUrlTemplate().getParameterMapCount() == 1) {
+    if (fulfillmentOption.getUrlTemplate().getParameterMapCount() == 1) {
       replaceSingleParameter(fulfillmentOption.getUrlTemplate().getParameterMapMap().keySet().iterator().next(), data);
       return;
     }

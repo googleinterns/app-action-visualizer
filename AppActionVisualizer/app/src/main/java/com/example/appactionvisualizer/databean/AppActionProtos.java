@@ -4,7 +4,156 @@
 package com.example.appactionvisualizer.databean;
 
 public final class AppActionProtos {
-  private AppActionProtos() {}
+  private static final com.google.protobuf.Descriptors.Descriptor
+      internal_static_com_example_appactionvisualizer_databean_AppActions_descriptor;
+  private static final
+  com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_com_example_appactionvisualizer_databean_AppActions_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+      internal_static_com_example_appactionvisualizer_databean_AppAction_descriptor;
+  private static final
+  com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_com_example_appactionvisualizer_databean_AppAction_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+      internal_static_com_example_appactionvisualizer_databean_Action_descriptor;
+  private static final
+  com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_com_example_appactionvisualizer_databean_Action_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+      internal_static_com_example_appactionvisualizer_databean_Action_Parameter_descriptor;
+  private static final
+  com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_com_example_appactionvisualizer_databean_Action_Parameter_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+      internal_static_com_example_appactionvisualizer_databean_EntitySetReference_descriptor;
+  private static final
+  com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_com_example_appactionvisualizer_databean_EntitySetReference_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+      internal_static_com_example_appactionvisualizer_databean_FulfillmentOption_descriptor;
+  private static final
+  com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_com_example_appactionvisualizer_databean_FulfillmentOption_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+      internal_static_com_example_appactionvisualizer_databean_UrlTemplate_descriptor;
+  private static final
+  com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_com_example_appactionvisualizer_databean_UrlTemplate_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+      internal_static_com_example_appactionvisualizer_databean_UrlTemplate_ParameterMapEntry_descriptor;
+  private static final
+  com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_com_example_appactionvisualizer_databean_UrlTemplate_ParameterMapEntry_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+      internal_static_com_example_appactionvisualizer_databean_EntitySet_descriptor;
+  private static final
+  com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_com_example_appactionvisualizer_databean_EntitySet_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.FileDescriptor
+      descriptor;
+
+  static {
+    java.lang.String[] descriptorData = {
+        "\n\013protobuftxt\022(com.example.appactionvisu" +
+            "alizer.databean\032\034google/protobuf/struct." +
+            "proto\"V\n\nAppActions\022H\n\013app_actions\030\001 \003(\013" +
+            "23.com.example.appactionvisualizer.datab" +
+            "ean.AppAction\"\256\001\n\tAppAction\022\024\n\014package_n" +
+            "ame\030\001 \001(\t\022A\n\007actions\030\002 \003(\01320.com.example" +
+            ".appactionvisualizer.databean.Action\022H\n\013" +
+            "entity_sets\030\003 \003(\01323.com.example.appactio" +
+            "nvisualizer.databean.EntitySet\"\275\002\n\006Actio" +
+            "n\022\023\n\013intent_name\030\001 \001(\t\022N\n\nparameters\030\002 \003" +
+            "(\0132:.com.example.appactionvisualizer.dat" +
+            "abean.Action.Parameter\022W\n\022fulfillment_op" +
+            "tion\030\003 \003(\0132;.com.example.appactionvisual" +
+            "izer.databean.FulfillmentOption\032u\n\tParam" +
+            "eter\022\014\n\004name\030\001 \001(\t\022Z\n\024entity_set_referen" +
+            "ce\030\002 \003(\0132<.com.example.appactionvisualiz" +
+            "er.databean.EntitySetReference\"?\n\022Entity" +
+            "SetReference\022\025\n\rentity_set_id\030\001 \001(\t\022\022\n\nu" +
+            "rl_filter\030\002 \001(\t\"\204\002\n\021FulfillmentOption\022e\n" +
+            "\020fulfillment_mode\030\001 \001(\0162K.com.example.ap" +
+            "pactionvisualizer.databean.FulfillmentOp" +
+            "tion.FulfillmentMode\022K\n\014url_template\030\002 \001" +
+            "(\01325.com.example.appactionvisualizer.dat" +
+            "abean.UrlTemplate\";\n\017FulfillmentMode\022\017\n\013" +
+            "UNSPECIFIED\020\000\022\014\n\010DEEPLINK\020\001\022\t\n\005SLICE\020\002\"\357" +
+            "\001\n\013UrlTemplate\022\020\n\010template\030\001 \001(\t\022^\n\rpara" +
+            "meter_map\030\002 \003(\0132G.com.example.appactionv" +
+            "isualizer.databean.UrlTemplate.Parameter" +
+            "MapEntry\022\025\n\rrequired_keys\030\003 \003(\t\022\"\n\032entit" +
+            "y_match_required_keys\030\004 \003(\t\0323\n\021Parameter" +
+            "MapEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001" +
+            "\"7\n\tEntitySet\022*\n\titem_list\030\001 \001(\0132\027.googl" +
+            "e.protobuf.StructB;\n(com.example.appacti" +
+            "onvisualizer.databeanB\017AppActionProtos"
+    };
+    descriptor = com.google.protobuf.Descriptors.FileDescriptor
+        .internalBuildGeneratedFileFrom(descriptorData,
+            new com.google.protobuf.Descriptors.FileDescriptor[]{
+                com.google.protobuf.StructProto.getDescriptor(),
+            });
+    internal_static_com_example_appactionvisualizer_databean_AppActions_descriptor =
+        getDescriptor().getMessageTypes().get(0);
+    internal_static_com_example_appactionvisualizer_databean_AppActions_fieldAccessorTable = new
+        com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_com_example_appactionvisualizer_databean_AppActions_descriptor,
+        new java.lang.String[]{"AppActions",});
+    internal_static_com_example_appactionvisualizer_databean_AppAction_descriptor =
+        getDescriptor().getMessageTypes().get(1);
+    internal_static_com_example_appactionvisualizer_databean_AppAction_fieldAccessorTable = new
+        com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_com_example_appactionvisualizer_databean_AppAction_descriptor,
+        new java.lang.String[]{"PackageName", "Actions", "EntitySets",});
+    internal_static_com_example_appactionvisualizer_databean_Action_descriptor =
+        getDescriptor().getMessageTypes().get(2);
+    internal_static_com_example_appactionvisualizer_databean_Action_fieldAccessorTable = new
+        com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_com_example_appactionvisualizer_databean_Action_descriptor,
+        new java.lang.String[]{"IntentName", "Parameters", "FulfillmentOption",});
+    internal_static_com_example_appactionvisualizer_databean_Action_Parameter_descriptor =
+        internal_static_com_example_appactionvisualizer_databean_Action_descriptor.getNestedTypes().get(0);
+    internal_static_com_example_appactionvisualizer_databean_Action_Parameter_fieldAccessorTable = new
+        com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_com_example_appactionvisualizer_databean_Action_Parameter_descriptor,
+        new java.lang.String[]{"Name", "EntitySetReference",});
+    internal_static_com_example_appactionvisualizer_databean_EntitySetReference_descriptor =
+        getDescriptor().getMessageTypes().get(3);
+    internal_static_com_example_appactionvisualizer_databean_EntitySetReference_fieldAccessorTable = new
+        com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_com_example_appactionvisualizer_databean_EntitySetReference_descriptor,
+        new java.lang.String[]{"EntitySetId", "UrlFilter",});
+    internal_static_com_example_appactionvisualizer_databean_FulfillmentOption_descriptor =
+        getDescriptor().getMessageTypes().get(4);
+    internal_static_com_example_appactionvisualizer_databean_FulfillmentOption_fieldAccessorTable = new
+        com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_com_example_appactionvisualizer_databean_FulfillmentOption_descriptor,
+        new java.lang.String[]{"FulfillmentMode", "UrlTemplate",});
+    internal_static_com_example_appactionvisualizer_databean_UrlTemplate_descriptor =
+        getDescriptor().getMessageTypes().get(5);
+    internal_static_com_example_appactionvisualizer_databean_UrlTemplate_fieldAccessorTable = new
+        com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_com_example_appactionvisualizer_databean_UrlTemplate_descriptor,
+        new java.lang.String[]{"Template", "ParameterMap", "RequiredKeys", "EntityMatchRequiredKeys",});
+    internal_static_com_example_appactionvisualizer_databean_UrlTemplate_ParameterMapEntry_descriptor =
+        internal_static_com_example_appactionvisualizer_databean_UrlTemplate_descriptor.getNestedTypes().get(0);
+    internal_static_com_example_appactionvisualizer_databean_UrlTemplate_ParameterMapEntry_fieldAccessorTable = new
+        com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_com_example_appactionvisualizer_databean_UrlTemplate_ParameterMapEntry_descriptor,
+        new java.lang.String[]{"Key", "Value",});
+    internal_static_com_example_appactionvisualizer_databean_EntitySet_descriptor =
+        getDescriptor().getMessageTypes().get(6);
+    internal_static_com_example_appactionvisualizer_databean_EntitySet_fieldAccessorTable = new
+        com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_com_example_appactionvisualizer_databean_EntitySet_descriptor,
+        new java.lang.String[]{"ItemList",});
+    com.google.protobuf.StructProto.getDescriptor();
+  }
+
+  private AppActionProtos() {
+  }
+
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistryLite registry) {
   }
@@ -14,6 +163,12 @@ public final class AppActionProtos {
     registerAllExtensions(
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
+
+  public static com.google.protobuf.Descriptors.FileDescriptor
+  getDescriptor() {
+    return descriptor;
+  }
+
   public interface AppActionsOrBuilder extends
       // @@protoc_insertion_point(interface_extends:com.example.appactionvisualizer.databean.AppActions)
       com.google.protobuf.MessageOrBuilder {
@@ -21,27 +176,1093 @@ public final class AppActionProtos {
     /**
      * <code>repeated .com.example.appactionvisualizer.databean.AppAction app_actions = 1;</code>
      */
-    java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.AppAction> 
-        getAppActionsList();
+    java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.AppAction>
+    getAppActionsList();
+
     /**
      * <code>repeated .com.example.appactionvisualizer.databean.AppAction app_actions = 1;</code>
      */
     com.example.appactionvisualizer.databean.AppActionProtos.AppAction getAppActions(int index);
+
     /**
      * <code>repeated .com.example.appactionvisualizer.databean.AppAction app_actions = 1;</code>
      */
     int getAppActionsCount();
+
     /**
      * <code>repeated .com.example.appactionvisualizer.databean.AppAction app_actions = 1;</code>
      */
-    java.util.List<? extends com.example.appactionvisualizer.databean.AppActionProtos.AppActionOrBuilder> 
-        getAppActionsOrBuilderList();
+    java.util.List<? extends com.example.appactionvisualizer.databean.AppActionProtos.AppActionOrBuilder>
+    getAppActionsOrBuilderList();
+
     /**
      * <code>repeated .com.example.appactionvisualizer.databean.AppAction app_actions = 1;</code>
      */
     com.example.appactionvisualizer.databean.AppActionProtos.AppActionOrBuilder getAppActionsOrBuilder(
         int index);
   }
+
+  public interface AppActionOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.example.appactionvisualizer.databean.AppAction)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <pre>
+     * The android app's package name.
+     * </pre>
+     *
+     * <code>optional string package_name = 1;</code>
+     *
+     * @return Whether the packageName field is set.
+     */
+    boolean hasPackageName();
+
+    /**
+     * <pre>
+     * The android app's package name.
+     * </pre>
+     *
+     * <code>optional string package_name = 1;</code>
+     *
+     * @return The packageName.
+     */
+    java.lang.String getPackageName();
+
+    /**
+     * <pre>
+     * The android app's package name.
+     * </pre>
+     *
+     * <code>optional string package_name = 1;</code>
+     *
+     * @return The bytes for packageName.
+     */
+    com.google.protobuf.ByteString
+    getPackageNameBytes();
+
+    /**
+     * <pre>
+     * Represents all actions declared in the app's actions.xml.
+     * </pre>
+     *
+     * <code>repeated .com.example.appactionvisualizer.databean.Action actions = 2;</code>
+     */
+    java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.Action>
+    getActionsList();
+
+    /**
+     * <pre>
+     * Represents all actions declared in the app's actions.xml.
+     * </pre>
+     *
+     * <code>repeated .com.example.appactionvisualizer.databean.Action actions = 2;</code>
+     */
+    com.example.appactionvisualizer.databean.AppActionProtos.Action getActions(int index);
+
+    /**
+     * <pre>
+     * Represents all actions declared in the app's actions.xml.
+     * </pre>
+     *
+     * <code>repeated .com.example.appactionvisualizer.databean.Action actions = 2;</code>
+     */
+    int getActionsCount();
+
+    /**
+     * <pre>
+     * Represents all actions declared in the app's actions.xml.
+     * </pre>
+     *
+     * <code>repeated .com.example.appactionvisualizer.databean.Action actions = 2;</code>
+     */
+    java.util.List<? extends com.example.appactionvisualizer.databean.AppActionProtos.ActionOrBuilder>
+    getActionsOrBuilderList();
+
+    /**
+     * <pre>
+     * Represents all actions declared in the app's actions.xml.
+     * </pre>
+     *
+     * <code>repeated .com.example.appactionvisualizer.databean.Action actions = 2;</code>
+     */
+    com.example.appactionvisualizer.databean.AppActionProtos.ActionOrBuilder getActionsOrBuilder(
+        int index);
+
+    /**
+     * <pre>
+     * Structured data entities used as a catalog for action parameters. Declared
+     * in actions.xml.
+     * </pre>
+     *
+     * <code>repeated .com.example.appactionvisualizer.databean.EntitySet entity_sets = 3;</code>
+     */
+    java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.EntitySet>
+    getEntitySetsList();
+
+    /**
+     * <pre>
+     * Structured data entities used as a catalog for action parameters. Declared
+     * in actions.xml.
+     * </pre>
+     *
+     * <code>repeated .com.example.appactionvisualizer.databean.EntitySet entity_sets = 3;</code>
+     */
+    com.example.appactionvisualizer.databean.AppActionProtos.EntitySet getEntitySets(int index);
+
+    /**
+     * <pre>
+     * Structured data entities used as a catalog for action parameters. Declared
+     * in actions.xml.
+     * </pre>
+     *
+     * <code>repeated .com.example.appactionvisualizer.databean.EntitySet entity_sets = 3;</code>
+     */
+    int getEntitySetsCount();
+
+    /**
+     * <pre>
+     * Structured data entities used as a catalog for action parameters. Declared
+     * in actions.xml.
+     * </pre>
+     *
+     * <code>repeated .com.example.appactionvisualizer.databean.EntitySet entity_sets = 3;</code>
+     */
+    java.util.List<? extends com.example.appactionvisualizer.databean.AppActionProtos.EntitySetOrBuilder>
+    getEntitySetsOrBuilderList();
+
+    /**
+     * <pre>
+     * Structured data entities used as a catalog for action parameters. Declared
+     * in actions.xml.
+     * </pre>
+     *
+     * <code>repeated .com.example.appactionvisualizer.databean.EntitySet entity_sets = 3;</code>
+     */
+    com.example.appactionvisualizer.databean.AppActionProtos.EntitySetOrBuilder getEntitySetsOrBuilder(
+        int index);
+  }
+
+  public interface ActionOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.example.appactionvisualizer.databean.Action)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <pre>
+     * Indicates the name of this semantic intent, e.g.
+     * "actions.intent.ORDER_MENU_ITEM"
+     * </pre>
+     *
+     * <code>optional string intent_name = 1;</code>
+     *
+     * @return Whether the intentName field is set.
+     */
+    boolean hasIntentName();
+
+    /**
+     * <pre>
+     * Indicates the name of this semantic intent, e.g.
+     * "actions.intent.ORDER_MENU_ITEM"
+     * </pre>
+     *
+     * <code>optional string intent_name = 1;</code>
+     *
+     * @return The intentName.
+     */
+    java.lang.String getIntentName();
+
+    /**
+     * <pre>
+     * Indicates the name of this semantic intent, e.g.
+     * "actions.intent.ORDER_MENU_ITEM"
+     * </pre>
+     *
+     * <code>optional string intent_name = 1;</code>
+     *
+     * @return The bytes for intentName.
+     */
+    com.google.protobuf.ByteString
+    getIntentNameBytes();
+
+    /**
+     * <pre>
+     * The list of parameters within the query_patterns. All of the parameters
+     * within query_patterns must be given.
+     * </pre>
+     *
+     * <code>repeated .com.example.appactionvisualizer.databean.Action.Parameter parameters = 2;</code>
+     */
+    java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter>
+    getParametersList();
+
+    /**
+     * <pre>
+     * The list of parameters within the query_patterns. All of the parameters
+     * within query_patterns must be given.
+     * </pre>
+     *
+     * <code>repeated .com.example.appactionvisualizer.databean.Action.Parameter parameters = 2;</code>
+     */
+    com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter getParameters(int index);
+
+    /**
+     * <pre>
+     * The list of parameters within the query_patterns. All of the parameters
+     * within query_patterns must be given.
+     * </pre>
+     *
+     * <code>repeated .com.example.appactionvisualizer.databean.Action.Parameter parameters = 2;</code>
+     */
+    int getParametersCount();
+
+    /**
+     * <pre>
+     * The list of parameters within the query_patterns. All of the parameters
+     * within query_patterns must be given.
+     * </pre>
+     *
+     * <code>repeated .com.example.appactionvisualizer.databean.Action.Parameter parameters = 2;</code>
+     */
+    java.util.List<? extends com.example.appactionvisualizer.databean.AppActionProtos.Action.ParameterOrBuilder>
+    getParametersOrBuilderList();
+
+    /**
+     * <pre>
+     * The list of parameters within the query_patterns. All of the parameters
+     * within query_patterns must be given.
+     * </pre>
+     *
+     * <code>repeated .com.example.appactionvisualizer.databean.Action.Parameter parameters = 2;</code>
+     */
+    com.example.appactionvisualizer.databean.AppActionProtos.Action.ParameterOrBuilder getParametersOrBuilder(
+        int index);
+
+    /**
+     * <pre>
+     * Multiple fulfillments with different URL templates and fulfillment modes.
+     * </pre>
+     *
+     * <code>repeated .com.example.appactionvisualizer.databean.FulfillmentOption fulfillment_option = 3;</code>
+     */
+    java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption>
+    getFulfillmentOptionList();
+
+    /**
+     * <pre>
+     * Multiple fulfillments with different URL templates and fulfillment modes.
+     * </pre>
+     *
+     * <code>repeated .com.example.appactionvisualizer.databean.FulfillmentOption fulfillment_option = 3;</code>
+     */
+    com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption getFulfillmentOption(int index);
+
+    /**
+     * <pre>
+     * Multiple fulfillments with different URL templates and fulfillment modes.
+     * </pre>
+     *
+     * <code>repeated .com.example.appactionvisualizer.databean.FulfillmentOption fulfillment_option = 3;</code>
+     */
+    int getFulfillmentOptionCount();
+
+    /**
+     * <pre>
+     * Multiple fulfillments with different URL templates and fulfillment modes.
+     * </pre>
+     *
+     * <code>repeated .com.example.appactionvisualizer.databean.FulfillmentOption fulfillment_option = 3;</code>
+     */
+    java.util.List<? extends com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOptionOrBuilder>
+    getFulfillmentOptionOrBuilderList();
+
+    /**
+     * <pre>
+     * Multiple fulfillments with different URL templates and fulfillment modes.
+     * </pre>
+     *
+     * <code>repeated .com.example.appactionvisualizer.databean.FulfillmentOption fulfillment_option = 3;</code>
+     */
+    com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOptionOrBuilder getFulfillmentOptionOrBuilder(
+        int index);
+  }
+
+  public interface EntitySetReferenceOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.example.appactionvisualizer.databean.EntitySetReference)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <pre>
+     * A reference to a specific collection of entities.
+     * </pre>
+     *
+     * <code>optional string entity_set_id = 1;</code>
+     *
+     * @return Whether the entitySetId field is set.
+     */
+    boolean hasEntitySetId();
+
+    /**
+     * <pre>
+     * A reference to a specific collection of entities.
+     * </pre>
+     *
+     * <code>optional string entity_set_id = 1;</code>
+     *
+     * @return The entitySetId.
+     */
+    java.lang.String getEntitySetId();
+
+    /**
+     * <pre>
+     * A reference to a specific collection of entities.
+     * </pre>
+     *
+     * <code>optional string entity_set_id = 1;</code>
+     *
+     * @return The bytes for entitySetId.
+     */
+    com.google.protobuf.ByteString
+    getEntitySetIdBytes();
+
+    /**
+     * <pre>
+     * Include all entities that match the specified filtering criteria.
+     * </pre>
+     *
+     * <code>optional string url_filter = 2;</code>
+     *
+     * @return Whether the urlFilter field is set.
+     */
+    boolean hasUrlFilter();
+
+    /**
+     * <pre>
+     * Include all entities that match the specified filtering criteria.
+     * </pre>
+     *
+     * <code>optional string url_filter = 2;</code>
+     *
+     * @return The urlFilter.
+     */
+    java.lang.String getUrlFilter();
+
+    /**
+     * <pre>
+     * Include all entities that match the specified filtering criteria.
+     * </pre>
+     *
+     * <code>optional string url_filter = 2;</code>
+     *
+     * @return The bytes for urlFilter.
+     */
+    com.google.protobuf.ByteString
+    getUrlFilterBytes();
+  }
+
+  public interface FulfillmentOptionOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.example.appactionvisualizer.databean.FulfillmentOption)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <pre>
+     * Fulfillment mode used for serving.
+     * </pre>
+     *
+     * <code>optional .com.example.appactionvisualizer.databean.FulfillmentOption.FulfillmentMode fulfillment_mode = 1;</code>
+     *
+     * @return Whether the fulfillmentMode field is set.
+     */
+    boolean hasFulfillmentMode();
+
+    /**
+     * <pre>
+     * Fulfillment mode used for serving.
+     * </pre>
+     *
+     * <code>optional .com.example.appactionvisualizer.databean.FulfillmentOption.FulfillmentMode fulfillment_mode = 1;</code>
+     *
+     * @return The fulfillmentMode.
+     */
+    com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption.FulfillmentMode getFulfillmentMode();
+
+    /**
+     * <pre>
+     * Template for constructing either the deep link or a Slice URI to be
+     * opened on the device. The template may be expanded with the parameters
+     * of the user intent if all required parameters for the template are
+     * available.
+     * The URL may be an app-linked "http://" URL or a device-specific URL,
+     * such as an "intent://" URL, "content://" URI or a URL in a custom
+     * scheme. For examples of the Intent URL, see:
+     * https://developer.chrome.com/multidevice/android/intents
+     * For examples of the URL template, see:
+     * https://tools.ietf.org/html/rfc6570
+     * </pre>
+     *
+     * <code>optional .com.example.appactionvisualizer.databean.UrlTemplate url_template = 2;</code>
+     *
+     * @return Whether the urlTemplate field is set.
+     */
+    boolean hasUrlTemplate();
+
+    /**
+     * <pre>
+     * Template for constructing either the deep link or a Slice URI to be
+     * opened on the device. The template may be expanded with the parameters
+     * of the user intent if all required parameters for the template are
+     * available.
+     * The URL may be an app-linked "http://" URL or a device-specific URL,
+     * such as an "intent://" URL, "content://" URI or a URL in a custom
+     * scheme. For examples of the Intent URL, see:
+     * https://developer.chrome.com/multidevice/android/intents
+     * For examples of the URL template, see:
+     * https://tools.ietf.org/html/rfc6570
+     * </pre>
+     *
+     * <code>optional .com.example.appactionvisualizer.databean.UrlTemplate url_template = 2;</code>
+     *
+     * @return The urlTemplate.
+     */
+    com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate getUrlTemplate();
+
+    /**
+     * <pre>
+     * Template for constructing either the deep link or a Slice URI to be
+     * opened on the device. The template may be expanded with the parameters
+     * of the user intent if all required parameters for the template are
+     * available.
+     * The URL may be an app-linked "http://" URL or a device-specific URL,
+     * such as an "intent://" URL, "content://" URI or a URL in a custom
+     * scheme. For examples of the Intent URL, see:
+     * https://developer.chrome.com/multidevice/android/intents
+     * For examples of the URL template, see:
+     * https://tools.ietf.org/html/rfc6570
+     * </pre>
+     *
+     * <code>optional .com.example.appactionvisualizer.databean.UrlTemplate url_template = 2;</code>
+     */
+    com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplateOrBuilder getUrlTemplateOrBuilder();
+  }
+
+  public interface UrlTemplateOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.example.appactionvisualizer.databean.UrlTemplate)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <pre>
+     * A template for a URL to be opened on the device.
+     * </pre>
+     *
+     * <code>optional string template = 1;</code>
+     *
+     * @return Whether the template field is set.
+     */
+    boolean hasTemplate();
+
+    /**
+     * <pre>
+     * A template for a URL to be opened on the device.
+     * </pre>
+     *
+     * <code>optional string template = 1;</code>
+     *
+     * @return The template.
+     */
+    java.lang.String getTemplate();
+
+    /**
+     * <pre>
+     * A template for a URL to be opened on the device.
+     * </pre>
+     *
+     * <code>optional string template = 1;</code>
+     *
+     * @return The bytes for template.
+     */
+    com.google.protobuf.ByteString
+    getTemplateBytes();
+
+    /**
+     * <pre>
+     * Maps variables in the URL template to intent parameters.
+     * Keys in this map represent URL template parameters, or "variables" as
+     * described in RFC 6570. Every variable mentioned in the template must have a
+     * corresponding key. For example, if the URL template is
+     * "http://spysatellite.com/show{?lat,long}", there must be a key in
+     * this map for parameters "lat" and "long".
+     * Values refer to intent parameters. If the intent parameter is of a
+     * structured type, use dot.notation to refer to a specific field. For
+     * example, if there is an parameter "reservationDate" of type DateTime, you
+     * can use "reservationDate.time.hour" to refer to the hour value.
+     * If a parameter is not included in the intent, the corresponding variable
+     * will be left undefined at the time of URL template expansion. See
+     * [RFC 6570, Section 3.2.1]
+     * (https://tools.ietf.org/html/rfc6570#section-3.2.1) for a description of
+     * how undefined variables are treated.
+     * Full example:
+     *   AppRequest.inputs.arguments[0].name: "location"
+     *   AppRequest.inputs.arguments[0].value.placeValue: {
+     *     coordinates {
+     *       latitude: 37.4184786
+     *       longitude: -122.0981801
+     *     }
+     *     ...
+     *   }
+     *   parameterMap: {
+     *     "lat" : "location.coordinates.latitude",
+     *     "long" : "location.coordinates.longitude"
+     *   }
+     *   urlTemplate: "http://spysatellite.com/show{?lat,long}"
+     * Resulting URL:
+     *   "http://spysatellite.com/show?lat=37.4184786&amp;long=-122.0981801"
+     * </pre>
+     *
+     * <code>map&lt;string, string&gt; parameter_map = 2;</code>
+     */
+    int getParameterMapCount();
+
+    /**
+     * <pre>
+     * Maps variables in the URL template to intent parameters.
+     * Keys in this map represent URL template parameters, or "variables" as
+     * described in RFC 6570. Every variable mentioned in the template must have a
+     * corresponding key. For example, if the URL template is
+     * "http://spysatellite.com/show{?lat,long}", there must be a key in
+     * this map for parameters "lat" and "long".
+     * Values refer to intent parameters. If the intent parameter is of a
+     * structured type, use dot.notation to refer to a specific field. For
+     * example, if there is an parameter "reservationDate" of type DateTime, you
+     * can use "reservationDate.time.hour" to refer to the hour value.
+     * If a parameter is not included in the intent, the corresponding variable
+     * will be left undefined at the time of URL template expansion. See
+     * [RFC 6570, Section 3.2.1]
+     * (https://tools.ietf.org/html/rfc6570#section-3.2.1) for a description of
+     * how undefined variables are treated.
+     * Full example:
+     *   AppRequest.inputs.arguments[0].name: "location"
+     *   AppRequest.inputs.arguments[0].value.placeValue: {
+     *     coordinates {
+     *       latitude: 37.4184786
+     *       longitude: -122.0981801
+     *     }
+     *     ...
+     *   }
+     *   parameterMap: {
+     *     "lat" : "location.coordinates.latitude",
+     *     "long" : "location.coordinates.longitude"
+     *   }
+     *   urlTemplate: "http://spysatellite.com/show{?lat,long}"
+     * Resulting URL:
+     *   "http://spysatellite.com/show?lat=37.4184786&amp;long=-122.0981801"
+     * </pre>
+     *
+     * <code>map&lt;string, string&gt; parameter_map = 2;</code>
+     */
+    boolean containsParameterMap(
+        java.lang.String key);
+
+    /**
+     * Use {@link #getParameterMapMap()} instead.
+     */
+    @java.lang.Deprecated
+    java.util.Map<java.lang.String, java.lang.String>
+    getParameterMap();
+
+    /**
+     * <pre>
+     * Maps variables in the URL template to intent parameters.
+     * Keys in this map represent URL template parameters, or "variables" as
+     * described in RFC 6570. Every variable mentioned in the template must have a
+     * corresponding key. For example, if the URL template is
+     * "http://spysatellite.com/show{?lat,long}", there must be a key in
+     * this map for parameters "lat" and "long".
+     * Values refer to intent parameters. If the intent parameter is of a
+     * structured type, use dot.notation to refer to a specific field. For
+     * example, if there is an parameter "reservationDate" of type DateTime, you
+     * can use "reservationDate.time.hour" to refer to the hour value.
+     * If a parameter is not included in the intent, the corresponding variable
+     * will be left undefined at the time of URL template expansion. See
+     * [RFC 6570, Section 3.2.1]
+     * (https://tools.ietf.org/html/rfc6570#section-3.2.1) for a description of
+     * how undefined variables are treated.
+     * Full example:
+     *   AppRequest.inputs.arguments[0].name: "location"
+     *   AppRequest.inputs.arguments[0].value.placeValue: {
+     *     coordinates {
+     *       latitude: 37.4184786
+     *       longitude: -122.0981801
+     *     }
+     *     ...
+     *   }
+     *   parameterMap: {
+     *     "lat" : "location.coordinates.latitude",
+     *     "long" : "location.coordinates.longitude"
+     *   }
+     *   urlTemplate: "http://spysatellite.com/show{?lat,long}"
+     * Resulting URL:
+     *   "http://spysatellite.com/show?lat=37.4184786&amp;long=-122.0981801"
+     * </pre>
+     *
+     * <code>map&lt;string, string&gt; parameter_map = 2;</code>
+     */
+    java.util.Map<java.lang.String, java.lang.String>
+    getParameterMapMap();
+
+    /**
+     * <pre>
+     * Maps variables in the URL template to intent parameters.
+     * Keys in this map represent URL template parameters, or "variables" as
+     * described in RFC 6570. Every variable mentioned in the template must have a
+     * corresponding key. For example, if the URL template is
+     * "http://spysatellite.com/show{?lat,long}", there must be a key in
+     * this map for parameters "lat" and "long".
+     * Values refer to intent parameters. If the intent parameter is of a
+     * structured type, use dot.notation to refer to a specific field. For
+     * example, if there is an parameter "reservationDate" of type DateTime, you
+     * can use "reservationDate.time.hour" to refer to the hour value.
+     * If a parameter is not included in the intent, the corresponding variable
+     * will be left undefined at the time of URL template expansion. See
+     * [RFC 6570, Section 3.2.1]
+     * (https://tools.ietf.org/html/rfc6570#section-3.2.1) for a description of
+     * how undefined variables are treated.
+     * Full example:
+     *   AppRequest.inputs.arguments[0].name: "location"
+     *   AppRequest.inputs.arguments[0].value.placeValue: {
+     *     coordinates {
+     *       latitude: 37.4184786
+     *       longitude: -122.0981801
+     *     }
+     *     ...
+     *   }
+     *   parameterMap: {
+     *     "lat" : "location.coordinates.latitude",
+     *     "long" : "location.coordinates.longitude"
+     *   }
+     *   urlTemplate: "http://spysatellite.com/show{?lat,long}"
+     * Resulting URL:
+     *   "http://spysatellite.com/show?lat=37.4184786&amp;long=-122.0981801"
+     * </pre>
+     *
+     * <code>map&lt;string, string&gt; parameter_map = 2;</code>
+     */
+
+    java.lang.String getParameterMapOrDefault(
+        java.lang.String key,
+        java.lang.String defaultValue);
+
+    /**
+     * <pre>
+     * Maps variables in the URL template to intent parameters.
+     * Keys in this map represent URL template parameters, or "variables" as
+     * described in RFC 6570. Every variable mentioned in the template must have a
+     * corresponding key. For example, if the URL template is
+     * "http://spysatellite.com/show{?lat,long}", there must be a key in
+     * this map for parameters "lat" and "long".
+     * Values refer to intent parameters. If the intent parameter is of a
+     * structured type, use dot.notation to refer to a specific field. For
+     * example, if there is an parameter "reservationDate" of type DateTime, you
+     * can use "reservationDate.time.hour" to refer to the hour value.
+     * If a parameter is not included in the intent, the corresponding variable
+     * will be left undefined at the time of URL template expansion. See
+     * [RFC 6570, Section 3.2.1]
+     * (https://tools.ietf.org/html/rfc6570#section-3.2.1) for a description of
+     * how undefined variables are treated.
+     * Full example:
+     *   AppRequest.inputs.arguments[0].name: "location"
+     *   AppRequest.inputs.arguments[0].value.placeValue: {
+     *     coordinates {
+     *       latitude: 37.4184786
+     *       longitude: -122.0981801
+     *     }
+     *     ...
+     *   }
+     *   parameterMap: {
+     *     "lat" : "location.coordinates.latitude",
+     *     "long" : "location.coordinates.longitude"
+     *   }
+     *   urlTemplate: "http://spysatellite.com/show{?lat,long}"
+     * Resulting URL:
+     *   "http://spysatellite.com/show?lat=37.4184786&amp;long=-122.0981801"
+     * </pre>
+     *
+     * <code>map&lt;string, string&gt; parameter_map = 2;</code>
+     */
+
+    java.lang.String getParameterMapOrThrow(
+        java.lang.String key);
+
+    /**
+     * <pre>
+     * List of all the keys from the parameter_map that are required to be present
+     * for this URL template to be valid.
+     * Example:
+     * parameterMap: {
+     *   "lat" : "location.coordinates.latitude",
+     *   "long" : "location.coordinates.longitude",
+     *   "address" : "location.formattedAddress"
+     * }
+     * template: "http://spysatellite.com/show{?lat,long,address}"
+     * requiredKeys: { "lat", "long" }
+     * This is a valid template if the values of required keys are available, i.e
+     * "lat" and "long" cannot be null.
+     * </pre>
+     *
+     * <code>repeated string required_keys = 3;</code>
+     *
+     * @return A list containing the requiredKeys.
+     */
+    java.util.List<java.lang.String>
+    getRequiredKeysList();
+
+    /**
+     * <pre>
+     * List of all the keys from the parameter_map that are required to be present
+     * for this URL template to be valid.
+     * Example:
+     * parameterMap: {
+     *   "lat" : "location.coordinates.latitude",
+     *   "long" : "location.coordinates.longitude",
+     *   "address" : "location.formattedAddress"
+     * }
+     * template: "http://spysatellite.com/show{?lat,long,address}"
+     * requiredKeys: { "lat", "long" }
+     * This is a valid template if the values of required keys are available, i.e
+     * "lat" and "long" cannot be null.
+     * </pre>
+     *
+     * <code>repeated string required_keys = 3;</code>
+     *
+     * @return The count of requiredKeys.
+     */
+    int getRequiredKeysCount();
+
+    /**
+     * <pre>
+     * List of all the keys from the parameter_map that are required to be present
+     * for this URL template to be valid.
+     * Example:
+     * parameterMap: {
+     *   "lat" : "location.coordinates.latitude",
+     *   "long" : "location.coordinates.longitude",
+     *   "address" : "location.formattedAddress"
+     * }
+     * template: "http://spysatellite.com/show{?lat,long,address}"
+     * requiredKeys: { "lat", "long" }
+     * This is a valid template if the values of required keys are available, i.e
+     * "lat" and "long" cannot be null.
+     * </pre>
+     *
+     * <code>repeated string required_keys = 3;</code>
+     *
+     * @param index The index of the element to return.
+     * @return The requiredKeys at the given index.
+     */
+    java.lang.String getRequiredKeys(int index);
+
+    /**
+     * <pre>
+     * List of all the keys from the parameter_map that are required to be present
+     * for this URL template to be valid.
+     * Example:
+     * parameterMap: {
+     *   "lat" : "location.coordinates.latitude",
+     *   "long" : "location.coordinates.longitude",
+     *   "address" : "location.formattedAddress"
+     * }
+     * template: "http://spysatellite.com/show{?lat,long,address}"
+     * requiredKeys: { "lat", "long" }
+     * This is a valid template if the values of required keys are available, i.e
+     * "lat" and "long" cannot be null.
+     * </pre>
+     *
+     * <code>repeated string required_keys = 3;</code>
+     *
+     * @param index The index of the value to return.
+     * @return The bytes of the requiredKeys at the given index.
+     */
+    com.google.protobuf.ByteString
+    getRequiredKeysBytes(int index);
+
+    /**
+     * <pre>
+     * List of all the keys from the parameter_map that are required to match an
+     * entity from an entity set for this URL template to be valid. Entity sets
+     * can come from inline inventory other other inventory sources.
+     * Example:
+     * parameterMap: {
+     *   "lat" : "location.coordinates.latitude",
+     *   "long" : "location.coordinates.longitude",
+     *   "address" : "location.formattedAddress"
+     * }
+     * template: "http://spysatellite.com/show{?lat,long,address}"
+     * entityMatchRequiredKeys: { "address" }
+     * This is a valid template if the values of entity_match_required_keys match
+     * entities from inventory. Also, this is a valid template if the values are
+     * not provided at all.
+     * </pre>
+     *
+     * <code>repeated string entity_match_required_keys = 4;</code>
+     *
+     * @return A list containing the entityMatchRequiredKeys.
+     */
+    java.util.List<java.lang.String>
+    getEntityMatchRequiredKeysList();
+
+    /**
+     * <pre>
+     * List of all the keys from the parameter_map that are required to match an
+     * entity from an entity set for this URL template to be valid. Entity sets
+     * can come from inline inventory other other inventory sources.
+     * Example:
+     * parameterMap: {
+     *   "lat" : "location.coordinates.latitude",
+     *   "long" : "location.coordinates.longitude",
+     *   "address" : "location.formattedAddress"
+     * }
+     * template: "http://spysatellite.com/show{?lat,long,address}"
+     * entityMatchRequiredKeys: { "address" }
+     * This is a valid template if the values of entity_match_required_keys match
+     * entities from inventory. Also, this is a valid template if the values are
+     * not provided at all.
+     * </pre>
+     *
+     * <code>repeated string entity_match_required_keys = 4;</code>
+     *
+     * @return The count of entityMatchRequiredKeys.
+     */
+    int getEntityMatchRequiredKeysCount();
+
+    /**
+     * <pre>
+     * List of all the keys from the parameter_map that are required to match an
+     * entity from an entity set for this URL template to be valid. Entity sets
+     * can come from inline inventory other other inventory sources.
+     * Example:
+     * parameterMap: {
+     *   "lat" : "location.coordinates.latitude",
+     *   "long" : "location.coordinates.longitude",
+     *   "address" : "location.formattedAddress"
+     * }
+     * template: "http://spysatellite.com/show{?lat,long,address}"
+     * entityMatchRequiredKeys: { "address" }
+     * This is a valid template if the values of entity_match_required_keys match
+     * entities from inventory. Also, this is a valid template if the values are
+     * not provided at all.
+     * </pre>
+     *
+     * <code>repeated string entity_match_required_keys = 4;</code>
+     *
+     * @param index The index of the element to return.
+     * @return The entityMatchRequiredKeys at the given index.
+     */
+    java.lang.String getEntityMatchRequiredKeys(int index);
+
+    /**
+     * <pre>
+     * List of all the keys from the parameter_map that are required to match an
+     * entity from an entity set for this URL template to be valid. Entity sets
+     * can come from inline inventory other other inventory sources.
+     * Example:
+     * parameterMap: {
+     *   "lat" : "location.coordinates.latitude",
+     *   "long" : "location.coordinates.longitude",
+     *   "address" : "location.formattedAddress"
+     * }
+     * template: "http://spysatellite.com/show{?lat,long,address}"
+     * entityMatchRequiredKeys: { "address" }
+     * This is a valid template if the values of entity_match_required_keys match
+     * entities from inventory. Also, this is a valid template if the values are
+     * not provided at all.
+     * </pre>
+     *
+     * <code>repeated string entity_match_required_keys = 4;</code>
+     *
+     * @param index The index of the value to return.
+     * @return The bytes of the entityMatchRequiredKeys at the given index.
+     */
+    com.google.protobuf.ByteString
+    getEntityMatchRequiredKeysBytes(int index);
+  }
+
+  public interface EntitySetOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.example.appactionvisualizer.databean.EntitySet)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <pre>
+     * JSON-LD structure of type `schema.org/ItemList`. Each `itemListElement`
+     * represents a single catalog entity. Simple enumerations can be specified
+     * using string elements (`schema.org/Text`) or `schema.org/ListItem` entities
+     * with the `&#64;id`, `name` and (optionally) `alternateName` properties
+     * populated. All entities in the list should be of the same schema.org type.
+     * If multiple inline `ItemLists` contain the same entity type (e.g.
+     * `schema.org/Text`), they can be disambiguated using the `&#64;id` property of
+     * the `ItemList`.
+     * Example 1:
+     * ```json
+     * {
+     *   "&#64;context": "http://schema.org/",
+     *   "&#64;type": "ItemList",
+     *   "&#64;id": "http://example.com/Colors",
+     *   "itemListElement": [
+     *     "Crimson",
+     *     "Emerald",
+     *     "Azure"
+     *   ]
+     * }
+     * ```
+     * Example 2:
+     * ```json
+     * {
+     *   "&#64;context": "http://schema.org/",
+     *   "&#64;type": "ItemList",
+     *   "&#64;id": "http://example.com/Colors",
+     *   "itemListElement": [
+     *     {
+     *       "&#64;type": "ListItem",
+     *       "&#64;id": "http://example.com/Red",
+     *       "name": "Red" ,
+     *       "alternateName": [ "Crimson", "Scarlet", "Ruby" ],
+     *     },
+     *     {
+     *       "&#64;type": "ListItem",
+     *       "&#64;id": "http://example.com/Green",
+     *       "name": "Green",
+     *       "alternateName": ["Emerald", "Olive", "Jade" ]
+     *     },
+     *     {
+     *       "&#64;type": "ListItem",
+     *       "&#64;id": "http://example.com/Blue",
+     *       "name": "Blue",
+     *       "alternateName": [ "Azure", "Cobalt", "Sapphire" ]
+     *     }
+     *   ]
+     * }
+     * ```
+     * </pre>
+     *
+     * <code>optional .google.protobuf.Struct item_list = 1;</code>
+     *
+     * @return Whether the itemList field is set.
+     */
+    boolean hasItemList();
+
+    /**
+     * <pre>
+     * JSON-LD structure of type `schema.org/ItemList`. Each `itemListElement`
+     * represents a single catalog entity. Simple enumerations can be specified
+     * using string elements (`schema.org/Text`) or `schema.org/ListItem` entities
+     * with the `&#64;id`, `name` and (optionally) `alternateName` properties
+     * populated. All entities in the list should be of the same schema.org type.
+     * If multiple inline `ItemLists` contain the same entity type (e.g.
+     * `schema.org/Text`), they can be disambiguated using the `&#64;id` property of
+     * the `ItemList`.
+     * Example 1:
+     * ```json
+     * {
+     *   "&#64;context": "http://schema.org/",
+     *   "&#64;type": "ItemList",
+     *   "&#64;id": "http://example.com/Colors",
+     *   "itemListElement": [
+     *     "Crimson",
+     *     "Emerald",
+     *     "Azure"
+     *   ]
+     * }
+     * ```
+     * Example 2:
+     * ```json
+     * {
+     *   "&#64;context": "http://schema.org/",
+     *   "&#64;type": "ItemList",
+     *   "&#64;id": "http://example.com/Colors",
+     *   "itemListElement": [
+     *     {
+     *       "&#64;type": "ListItem",
+     *       "&#64;id": "http://example.com/Red",
+     *       "name": "Red" ,
+     *       "alternateName": [ "Crimson", "Scarlet", "Ruby" ],
+     *     },
+     *     {
+     *       "&#64;type": "ListItem",
+     *       "&#64;id": "http://example.com/Green",
+     *       "name": "Green",
+     *       "alternateName": ["Emerald", "Olive", "Jade" ]
+     *     },
+     *     {
+     *       "&#64;type": "ListItem",
+     *       "&#64;id": "http://example.com/Blue",
+     *       "name": "Blue",
+     *       "alternateName": [ "Azure", "Cobalt", "Sapphire" ]
+     *     }
+     *   ]
+     * }
+     * ```
+     * </pre>
+     *
+     * <code>optional .google.protobuf.Struct item_list = 1;</code>
+     *
+     * @return The itemList.
+     */
+    com.google.protobuf.Struct getItemList();
+
+    /**
+     * <pre>
+     * JSON-LD structure of type `schema.org/ItemList`. Each `itemListElement`
+     * represents a single catalog entity. Simple enumerations can be specified
+     * using string elements (`schema.org/Text`) or `schema.org/ListItem` entities
+     * with the `&#64;id`, `name` and (optionally) `alternateName` properties
+     * populated. All entities in the list should be of the same schema.org type.
+     * If multiple inline `ItemLists` contain the same entity type (e.g.
+     * `schema.org/Text`), they can be disambiguated using the `&#64;id` property of
+     * the `ItemList`.
+     * Example 1:
+     * ```json
+     * {
+     *   "&#64;context": "http://schema.org/",
+     *   "&#64;type": "ItemList",
+     *   "&#64;id": "http://example.com/Colors",
+     *   "itemListElement": [
+     *     "Crimson",
+     *     "Emerald",
+     *     "Azure"
+     *   ]
+     * }
+     * ```
+     * Example 2:
+     * ```json
+     * {
+     *   "&#64;context": "http://schema.org/",
+     *   "&#64;type": "ItemList",
+     *   "&#64;id": "http://example.com/Colors",
+     *   "itemListElement": [
+     *     {
+     *       "&#64;type": "ListItem",
+     *       "&#64;id": "http://example.com/Red",
+     *       "name": "Red" ,
+     *       "alternateName": [ "Crimson", "Scarlet", "Ruby" ],
+     *     },
+     *     {
+     *       "&#64;type": "ListItem",
+     *       "&#64;id": "http://example.com/Green",
+     *       "name": "Green",
+     *       "alternateName": ["Emerald", "Olive", "Jade" ]
+     *     },
+     *     {
+     *       "&#64;type": "ListItem",
+     *       "&#64;id": "http://example.com/Blue",
+     *       "name": "Blue",
+     *       "alternateName": [ "Azure", "Cobalt", "Sapphire" ]
+     *     }
+     *   ]
+     * }
+     * ```
+     * </pre>
+     *
+     * <code>optional .google.protobuf.Struct item_list = 1;</code>
+     */
+    com.google.protobuf.StructOrBuilder getItemListOrBuilder();
+  }
+
   /**
    * Protobuf type {@code com.example.appactionvisualizer.databean.AppActions}
    */
@@ -49,27 +1270,38 @@ public final class AppActionProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:com.example.appactionvisualizer.databean.AppActions)
       AppActionsOrBuilder {
-  private static final long serialVersionUID = 0L;
+    public static final int APP_ACTIONS_FIELD_NUMBER = 1;
+    @java.lang.Deprecated
+    public static final com.google.protobuf.Parser<AppActions>
+        PARSER = new com.google.protobuf.AbstractParser<AppActions>() {
+      @java.lang.Override
+      public AppActions parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new AppActions(input, extensionRegistry);
+      }
+    };
+    private static final long serialVersionUID = 0L;
+    // @@protoc_insertion_point(class_scope:com.example.appactionvisualizer.databean.AppActions)
+    private static final com.example.appactionvisualizer.databean.AppActionProtos.AppActions DEFAULT_INSTANCE;
+
+    static {
+      DEFAULT_INSTANCE = new com.example.appactionvisualizer.databean.AppActionProtos.AppActions();
+    }
+
+    private java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.AppAction> appActions_;
+    private byte memoizedIsInitialized = -1;
+
     // Use AppActions.newBuilder() to construct.
     private AppActions(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
+
     private AppActions() {
       appActions_ = java.util.Collections.emptyList();
     }
 
-    @java.lang.Override
-    @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
-        UnusedPrivateParameter unused) {
-      return new AppActions();
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
     private AppActions(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -120,21 +1352,130 @@ public final class AppActionProtos {
         makeExtensionsImmutable();
       }
     }
+
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
+    getDescriptor() {
       return com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_AppActions_descriptor;
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.AppActions parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.AppActions parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.AppActions parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.AppActions parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.AppActions parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.AppActions parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.AppActions parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.AppActions parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.AppActions parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.AppActions parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.AppActions parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.AppActions parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+
+    public static Builder newBuilder(com.example.appactionvisualizer.databean.AppActionProtos.AppActions prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.AppActions getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    public static com.google.protobuf.Parser<AppActions> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new AppActions();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
+    internalGetFieldAccessorTable() {
       return com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_AppActions_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.example.appactionvisualizer.databean.AppActionProtos.AppActions.class, com.example.appactionvisualizer.databean.AppActionProtos.AppActions.Builder.class);
     }
 
-    public static final int APP_ACTIONS_FIELD_NUMBER = 1;
-    private java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.AppAction> appActions_;
     /**
      * <code>repeated .com.example.appactionvisualizer.databean.AppAction app_actions = 1;</code>
      */
@@ -142,14 +1483,16 @@ public final class AppActionProtos {
     public java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.AppAction> getAppActionsList() {
       return appActions_;
     }
+
     /**
      * <code>repeated .com.example.appactionvisualizer.databean.AppAction app_actions = 1;</code>
      */
     @java.lang.Override
-    public java.util.List<? extends com.example.appactionvisualizer.databean.AppActionProtos.AppActionOrBuilder> 
-        getAppActionsOrBuilderList() {
+    public java.util.List<? extends com.example.appactionvisualizer.databean.AppActionProtos.AppActionOrBuilder>
+    getAppActionsOrBuilderList() {
       return appActions_;
     }
+
     /**
      * <code>repeated .com.example.appactionvisualizer.databean.AppAction app_actions = 1;</code>
      */
@@ -157,6 +1500,7 @@ public final class AppActionProtos {
     public int getAppActionsCount() {
       return appActions_.size();
     }
+
     /**
      * <code>repeated .com.example.appactionvisualizer.databean.AppAction app_actions = 1;</code>
      */
@@ -164,6 +1508,7 @@ public final class AppActionProtos {
     public com.example.appactionvisualizer.databean.AppActionProtos.AppAction getAppActions(int index) {
       return appActions_.get(index);
     }
+
     /**
      * <code>repeated .com.example.appactionvisualizer.databean.AppAction app_actions = 1;</code>
      */
@@ -173,7 +1518,6 @@ public final class AppActionProtos {
       return appActions_.get(index);
     }
 
-    private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -186,7 +1530,7 @@ public final class AppActionProtos {
 
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+        throws java.io.IOException {
       for (int i = 0; i < appActions_.size(); i++) {
         output.writeMessage(1, appActions_.get(i));
       }
@@ -201,7 +1545,7 @@ public final class AppActionProtos {
       size = 0;
       for (int i = 0; i < appActions_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, appActions_.get(i));
+            .computeMessageSize(1, appActions_.get(i));
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -211,7 +1555,7 @@ public final class AppActionProtos {
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
-       return true;
+        return true;
       }
       if (!(obj instanceof com.example.appactionvisualizer.databean.AppActionProtos.AppActions)) {
         return super.equals(obj);
@@ -240,84 +1584,11 @@ public final class AppActionProtos {
       return hash;
     }
 
-    public static com.example.appactionvisualizer.databean.AppActionProtos.AppActions parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.AppActions parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.AppActions parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.AppActions parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.AppActions parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.AppActions parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.AppActions parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.AppActions parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.AppActions parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.AppActions parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.AppActions parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.AppActions parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+    @java.lang.Override
+    public Builder newBuilderForType() {
+      return newBuilder();
     }
 
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(com.example.appactionvisualizer.databean.AppActionProtos.AppActions prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
     @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
@@ -330,6 +1601,17 @@ public final class AppActionProtos {
       Builder builder = new Builder(parent);
       return builder;
     }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<AppActions> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.example.appactionvisualizer.databean.AppActionProtos.AppActions getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
     /**
      * Protobuf type {@code com.example.appactionvisualizer.databean.AppActions}
      */
@@ -337,18 +1619,11 @@ public final class AppActionProtos {
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:com.example.appactionvisualizer.databean.AppActions)
         com.example.appactionvisualizer.databean.AppActionProtos.AppActionsOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_AppActions_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_AppActions_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.example.appactionvisualizer.databean.AppActionProtos.AppActions.class, com.example.appactionvisualizer.databean.AppActionProtos.AppActions.Builder.class);
-      }
+      private int bitField0_;
+      private java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.AppAction> appActions_ =
+          java.util.Collections.emptyList();
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.example.appactionvisualizer.databean.AppActionProtos.AppAction, com.example.appactionvisualizer.databean.AppActionProtos.AppAction.Builder, com.example.appactionvisualizer.databean.AppActionProtos.AppActionOrBuilder> appActionsBuilder_;
 
       // Construct using com.example.appactionvisualizer.databean.AppActionProtos.AppActions.newBuilder()
       private Builder() {
@@ -360,12 +1635,27 @@ public final class AppActionProtos {
         super(parent);
         maybeForceBuilderInitialization();
       }
+
+      public static final com.google.protobuf.Descriptors.Descriptor
+      getDescriptor() {
+        return com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_AppActions_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internalGetFieldAccessorTable() {
+        return com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_AppActions_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.example.appactionvisualizer.databean.AppActionProtos.AppActions.class, com.example.appactionvisualizer.databean.AppActionProtos.AppActions.Builder.class);
+      }
+
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
+            .alwaysUseFieldBuilders) {
           getAppActionsFieldBuilder();
         }
       }
+
       @java.lang.Override
       public Builder clear() {
         super.clear();
@@ -380,7 +1670,7 @@ public final class AppActionProtos {
 
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
+      getDescriptorForType() {
         return com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_AppActions_descriptor;
       }
 
@@ -419,38 +1709,44 @@ public final class AppActionProtos {
       public Builder clone() {
         return super.clone();
       }
+
       @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return super.setField(field, value);
       }
+
       @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return super.clearField(field);
       }
+
       @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return super.clearOneof(oneof);
       }
+
       @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
         return super.setRepeatedField(field, index, value);
       }
+
       @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return super.addRepeatedField(field, value);
       }
+
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.example.appactionvisualizer.databean.AppActionProtos.AppActions) {
-          return mergeFrom((com.example.appactionvisualizer.databean.AppActionProtos.AppActions)other);
+          return mergeFrom((com.example.appactionvisualizer.databean.AppActionProtos.AppActions) other);
         } else {
           super.mergeFrom(other);
           return this;
@@ -458,7 +1754,8 @@ public final class AppActionProtos {
       }
 
       public Builder mergeFrom(com.example.appactionvisualizer.databean.AppActionProtos.AppActions other) {
-        if (other == com.example.appactionvisualizer.databean.AppActionProtos.AppActions.getDefaultInstance()) return this;
+        if (other == com.example.appactionvisualizer.databean.AppActionProtos.AppActions.getDefaultInstance())
+          return this;
         if (appActionsBuilder_ == null) {
           if (!other.appActions_.isEmpty()) {
             if (appActions_.isEmpty()) {
@@ -477,9 +1774,9 @@ public final class AppActionProtos {
               appActionsBuilder_ = null;
               appActions_ = other.appActions_;
               bitField0_ = (bitField0_ & ~0x00000001);
-              appActionsBuilder_ = 
-                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                   getAppActionsFieldBuilder() : null;
+              appActionsBuilder_ =
+                  com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                      getAppActionsFieldBuilder() : null;
             } else {
               appActionsBuilder_.addAllMessages(other.appActions_);
             }
@@ -513,19 +1810,13 @@ public final class AppActionProtos {
         }
         return this;
       }
-      private int bitField0_;
 
-      private java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.AppAction> appActions_ =
-        java.util.Collections.emptyList();
       private void ensureAppActionsIsMutable() {
         if (!((bitField0_ & 0x00000001) != 0)) {
           appActions_ = new java.util.ArrayList<com.example.appactionvisualizer.databean.AppActionProtos.AppAction>(appActions_);
           bitField0_ |= 0x00000001;
-         }
+        }
       }
-
-      private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.example.appactionvisualizer.databean.AppActionProtos.AppAction, com.example.appactionvisualizer.databean.AppActionProtos.AppAction.Builder, com.example.appactionvisualizer.databean.AppActionProtos.AppActionOrBuilder> appActionsBuilder_;
 
       /**
        * <code>repeated .com.example.appactionvisualizer.databean.AppAction app_actions = 1;</code>
@@ -537,6 +1828,7 @@ public final class AppActionProtos {
           return appActionsBuilder_.getMessageList();
         }
       }
+
       /**
        * <code>repeated .com.example.appactionvisualizer.databean.AppAction app_actions = 1;</code>
        */
@@ -547,6 +1839,7 @@ public final class AppActionProtos {
           return appActionsBuilder_.getCount();
         }
       }
+
       /**
        * <code>repeated .com.example.appactionvisualizer.databean.AppAction app_actions = 1;</code>
        */
@@ -557,6 +1850,7 @@ public final class AppActionProtos {
           return appActionsBuilder_.getMessage(index);
         }
       }
+
       /**
        * <code>repeated .com.example.appactionvisualizer.databean.AppAction app_actions = 1;</code>
        */
@@ -574,6 +1868,7 @@ public final class AppActionProtos {
         }
         return this;
       }
+
       /**
        * <code>repeated .com.example.appactionvisualizer.databean.AppAction app_actions = 1;</code>
        */
@@ -588,6 +1883,7 @@ public final class AppActionProtos {
         }
         return this;
       }
+
       /**
        * <code>repeated .com.example.appactionvisualizer.databean.AppAction app_actions = 1;</code>
        */
@@ -604,6 +1900,7 @@ public final class AppActionProtos {
         }
         return this;
       }
+
       /**
        * <code>repeated .com.example.appactionvisualizer.databean.AppAction app_actions = 1;</code>
        */
@@ -621,6 +1918,7 @@ public final class AppActionProtos {
         }
         return this;
       }
+
       /**
        * <code>repeated .com.example.appactionvisualizer.databean.AppAction app_actions = 1;</code>
        */
@@ -635,6 +1933,7 @@ public final class AppActionProtos {
         }
         return this;
       }
+
       /**
        * <code>repeated .com.example.appactionvisualizer.databean.AppAction app_actions = 1;</code>
        */
@@ -649,6 +1948,7 @@ public final class AppActionProtos {
         }
         return this;
       }
+
       /**
        * <code>repeated .com.example.appactionvisualizer.databean.AppAction app_actions = 1;</code>
        */
@@ -664,6 +1964,7 @@ public final class AppActionProtos {
         }
         return this;
       }
+
       /**
        * <code>repeated .com.example.appactionvisualizer.databean.AppAction app_actions = 1;</code>
        */
@@ -677,6 +1978,7 @@ public final class AppActionProtos {
         }
         return this;
       }
+
       /**
        * <code>repeated .com.example.appactionvisualizer.databean.AppAction app_actions = 1;</code>
        */
@@ -690,6 +1992,7 @@ public final class AppActionProtos {
         }
         return this;
       }
+
       /**
        * <code>repeated .com.example.appactionvisualizer.databean.AppAction app_actions = 1;</code>
        */
@@ -697,27 +2000,31 @@ public final class AppActionProtos {
           int index) {
         return getAppActionsFieldBuilder().getBuilder(index);
       }
+
       /**
        * <code>repeated .com.example.appactionvisualizer.databean.AppAction app_actions = 1;</code>
        */
       public com.example.appactionvisualizer.databean.AppActionProtos.AppActionOrBuilder getAppActionsOrBuilder(
           int index) {
         if (appActionsBuilder_ == null) {
-          return appActions_.get(index);  } else {
+          return appActions_.get(index);
+        } else {
           return appActionsBuilder_.getMessageOrBuilder(index);
         }
       }
+
       /**
        * <code>repeated .com.example.appactionvisualizer.databean.AppAction app_actions = 1;</code>
        */
-      public java.util.List<? extends com.example.appactionvisualizer.databean.AppActionProtos.AppActionOrBuilder> 
-           getAppActionsOrBuilderList() {
+      public java.util.List<? extends com.example.appactionvisualizer.databean.AppActionProtos.AppActionOrBuilder>
+      getAppActionsOrBuilderList() {
         if (appActionsBuilder_ != null) {
           return appActionsBuilder_.getMessageOrBuilderList();
         } else {
           return java.util.Collections.unmodifiableList(appActions_);
         }
       }
+
       /**
        * <code>repeated .com.example.appactionvisualizer.databean.AppAction app_actions = 1;</code>
        */
@@ -725,6 +2032,7 @@ public final class AppActionProtos {
         return getAppActionsFieldBuilder().addBuilder(
             com.example.appactionvisualizer.databean.AppActionProtos.AppAction.getDefaultInstance());
       }
+
       /**
        * <code>repeated .com.example.appactionvisualizer.databean.AppAction app_actions = 1;</code>
        */
@@ -733,27 +2041,30 @@ public final class AppActionProtos {
         return getAppActionsFieldBuilder().addBuilder(
             index, com.example.appactionvisualizer.databean.AppActionProtos.AppAction.getDefaultInstance());
       }
+
       /**
        * <code>repeated .com.example.appactionvisualizer.databean.AppAction app_actions = 1;</code>
        */
-      public java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.AppAction.Builder> 
-           getAppActionsBuilderList() {
+      public java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.AppAction.Builder>
+      getAppActionsBuilderList() {
         return getAppActionsFieldBuilder().getBuilderList();
       }
+
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.example.appactionvisualizer.databean.AppActionProtos.AppAction, com.example.appactionvisualizer.databean.AppActionProtos.AppAction.Builder, com.example.appactionvisualizer.databean.AppActionProtos.AppActionOrBuilder> 
-          getAppActionsFieldBuilder() {
+          com.example.appactionvisualizer.databean.AppActionProtos.AppAction, com.example.appactionvisualizer.databean.AppActionProtos.AppAction.Builder, com.example.appactionvisualizer.databean.AppActionProtos.AppActionOrBuilder>
+      getAppActionsFieldBuilder() {
         if (appActionsBuilder_ == null) {
           appActionsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.example.appactionvisualizer.databean.AppActionProtos.AppAction, com.example.appactionvisualizer.databean.AppActionProtos.AppAction.Builder, com.example.appactionvisualizer.databean.AppActionProtos.AppActionOrBuilder>(
-                  appActions_,
-                  ((bitField0_ & 0x00000001) != 0),
-                  getParentForChildren(),
-                  isClean());
+              appActions_,
+              ((bitField0_ & 0x00000001) != 0),
+              getParentForChildren(),
+              isClean());
           appActions_ = null;
         }
         return appActionsBuilder_;
       }
+
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -770,204 +2081,59 @@ public final class AppActionProtos {
       // @@protoc_insertion_point(builder_scope:com.example.appactionvisualizer.databean.AppActions)
     }
 
-    // @@protoc_insertion_point(class_scope:com.example.appactionvisualizer.databean.AppActions)
-    private static final com.example.appactionvisualizer.databean.AppActionProtos.AppActions DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new com.example.appactionvisualizer.databean.AppActionProtos.AppActions();
-    }
-
-    public static com.example.appactionvisualizer.databean.AppActionProtos.AppActions getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<AppActions>
-        PARSER = new com.google.protobuf.AbstractParser<AppActions>() {
-      @java.lang.Override
-      public AppActions parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new AppActions(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<AppActions> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<AppActions> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.example.appactionvisualizer.databean.AppActionProtos.AppActions getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
   }
 
-  public interface AppActionOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.example.appactionvisualizer.databean.AppAction)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <pre>
-     * The android app's package name.
-     * </pre>
-     *
-     * <code>optional string package_name = 1;</code>
-     * @return Whether the packageName field is set.
-     */
-    boolean hasPackageName();
-    /**
-     * <pre>
-     * The android app's package name.
-     * </pre>
-     *
-     * <code>optional string package_name = 1;</code>
-     * @return The packageName.
-     */
-    java.lang.String getPackageName();
-    /**
-     * <pre>
-     * The android app's package name.
-     * </pre>
-     *
-     * <code>optional string package_name = 1;</code>
-     * @return The bytes for packageName.
-     */
-    com.google.protobuf.ByteString
-        getPackageNameBytes();
-
-    /**
-     * <pre>
-     * Represents all actions declared in the app's actions.xml.
-     * </pre>
-     *
-     * <code>repeated .com.example.appactionvisualizer.databean.Action actions = 2;</code>
-     */
-    java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.Action> 
-        getActionsList();
-    /**
-     * <pre>
-     * Represents all actions declared in the app's actions.xml.
-     * </pre>
-     *
-     * <code>repeated .com.example.appactionvisualizer.databean.Action actions = 2;</code>
-     */
-    com.example.appactionvisualizer.databean.AppActionProtos.Action getActions(int index);
-    /**
-     * <pre>
-     * Represents all actions declared in the app's actions.xml.
-     * </pre>
-     *
-     * <code>repeated .com.example.appactionvisualizer.databean.Action actions = 2;</code>
-     */
-    int getActionsCount();
-    /**
-     * <pre>
-     * Represents all actions declared in the app's actions.xml.
-     * </pre>
-     *
-     * <code>repeated .com.example.appactionvisualizer.databean.Action actions = 2;</code>
-     */
-    java.util.List<? extends com.example.appactionvisualizer.databean.AppActionProtos.ActionOrBuilder> 
-        getActionsOrBuilderList();
-    /**
-     * <pre>
-     * Represents all actions declared in the app's actions.xml.
-     * </pre>
-     *
-     * <code>repeated .com.example.appactionvisualizer.databean.Action actions = 2;</code>
-     */
-    com.example.appactionvisualizer.databean.AppActionProtos.ActionOrBuilder getActionsOrBuilder(
-        int index);
-
-    /**
-     * <pre>
-     * Structured data entities used as a catalog for action parameters. Declared
-     * in actions.xml.
-     * </pre>
-     *
-     * <code>repeated .com.example.appactionvisualizer.databean.EntitySet entity_sets = 3;</code>
-     */
-    java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.EntitySet> 
-        getEntitySetsList();
-    /**
-     * <pre>
-     * Structured data entities used as a catalog for action parameters. Declared
-     * in actions.xml.
-     * </pre>
-     *
-     * <code>repeated .com.example.appactionvisualizer.databean.EntitySet entity_sets = 3;</code>
-     */
-    com.example.appactionvisualizer.databean.AppActionProtos.EntitySet getEntitySets(int index);
-    /**
-     * <pre>
-     * Structured data entities used as a catalog for action parameters. Declared
-     * in actions.xml.
-     * </pre>
-     *
-     * <code>repeated .com.example.appactionvisualizer.databean.EntitySet entity_sets = 3;</code>
-     */
-    int getEntitySetsCount();
-    /**
-     * <pre>
-     * Structured data entities used as a catalog for action parameters. Declared
-     * in actions.xml.
-     * </pre>
-     *
-     * <code>repeated .com.example.appactionvisualizer.databean.EntitySet entity_sets = 3;</code>
-     */
-    java.util.List<? extends com.example.appactionvisualizer.databean.AppActionProtos.EntitySetOrBuilder> 
-        getEntitySetsOrBuilderList();
-    /**
-     * <pre>
-     * Structured data entities used as a catalog for action parameters. Declared
-     * in actions.xml.
-     * </pre>
-     *
-     * <code>repeated .com.example.appactionvisualizer.databean.EntitySet entity_sets = 3;</code>
-     */
-    com.example.appactionvisualizer.databean.AppActionProtos.EntitySetOrBuilder getEntitySetsOrBuilder(
-        int index);
-  }
   /**
    * <pre>
    * Represents all the app actions declared in an apk of an Android app in its
    * actions.xml.
    * </pre>
-   *
+   * <p>
    * Protobuf type {@code com.example.appactionvisualizer.databean.AppAction}
    */
   public static final class AppAction extends
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:com.example.appactionvisualizer.databean.AppAction)
       AppActionOrBuilder {
-  private static final long serialVersionUID = 0L;
+    public static final int PACKAGE_NAME_FIELD_NUMBER = 1;
+    public static final int ACTIONS_FIELD_NUMBER = 2;
+    public static final int ENTITY_SETS_FIELD_NUMBER = 3;
+    @java.lang.Deprecated
+    public static final com.google.protobuf.Parser<AppAction>
+        PARSER = new com.google.protobuf.AbstractParser<AppAction>() {
+      @java.lang.Override
+      public AppAction parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new AppAction(input, extensionRegistry);
+      }
+    };
+    private static final long serialVersionUID = 0L;
+    // @@protoc_insertion_point(class_scope:com.example.appactionvisualizer.databean.AppAction)
+    private static final com.example.appactionvisualizer.databean.AppActionProtos.AppAction DEFAULT_INSTANCE;
+
+    static {
+      DEFAULT_INSTANCE = new com.example.appactionvisualizer.databean.AppActionProtos.AppAction();
+    }
+
+    private int bitField0_;
+    private volatile java.lang.Object packageName_;
+    private java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.Action> actions_;
+    private java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.EntitySet> entitySets_;
+    private byte memoizedIsInitialized = -1;
+
     // Use AppAction.newBuilder() to construct.
     private AppAction(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
+
     private AppAction() {
       packageName_ = "";
       actions_ = java.util.Collections.emptyList();
       entitySets_ = java.util.Collections.emptyList();
     }
 
-    @java.lang.Override
-    @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
-        UnusedPrivateParameter unused) {
-      return new AppAction();
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
     private AppAction(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -1036,40 +2202,151 @@ public final class AppActionProtos {
         makeExtensionsImmutable();
       }
     }
+
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
+    getDescriptor() {
       return com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_AppAction_descriptor;
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.AppAction parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.AppAction parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.AppAction parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.AppAction parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.AppAction parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.AppAction parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.AppAction parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.AppAction parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.AppAction parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.AppAction parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.AppAction parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.AppAction parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+
+    public static Builder newBuilder(com.example.appactionvisualizer.databean.AppActionProtos.AppAction prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.AppAction getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    public static com.google.protobuf.Parser<AppAction> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new AppAction();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
+    internalGetFieldAccessorTable() {
       return com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_AppAction_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.example.appactionvisualizer.databean.AppActionProtos.AppAction.class, com.example.appactionvisualizer.databean.AppActionProtos.AppAction.Builder.class);
     }
 
-    private int bitField0_;
-    public static final int PACKAGE_NAME_FIELD_NUMBER = 1;
-    private volatile java.lang.Object packageName_;
     /**
      * <pre>
      * The android app's package name.
      * </pre>
      *
      * <code>optional string package_name = 1;</code>
+     *
      * @return Whether the packageName field is set.
      */
     @java.lang.Override
     public boolean hasPackageName() {
       return ((bitField0_ & 0x00000001) != 0);
     }
+
     /**
      * <pre>
      * The android app's package name.
      * </pre>
      *
      * <code>optional string package_name = 1;</code>
+     *
      * @return The packageName.
      */
     @java.lang.Override
@@ -1078,7 +2355,7 @@ public final class AppActionProtos {
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
+        com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
@@ -1087,20 +2364,22 @@ public final class AppActionProtos {
         return s;
       }
     }
+
     /**
      * <pre>
      * The android app's package name.
      * </pre>
      *
      * <code>optional string package_name = 1;</code>
+     *
      * @return The bytes for packageName.
      */
     @java.lang.Override
     public com.google.protobuf.ByteString
-        getPackageNameBytes() {
+    getPackageNameBytes() {
       java.lang.Object ref = packageName_;
       if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
+        com.google.protobuf.ByteString b =
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
         packageName_ = b;
@@ -1110,8 +2389,6 @@ public final class AppActionProtos {
       }
     }
 
-    public static final int ACTIONS_FIELD_NUMBER = 2;
-    private java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.Action> actions_;
     /**
      * <pre>
      * Represents all actions declared in the app's actions.xml.
@@ -1123,6 +2400,7 @@ public final class AppActionProtos {
     public java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.Action> getActionsList() {
       return actions_;
     }
+
     /**
      * <pre>
      * Represents all actions declared in the app's actions.xml.
@@ -1131,10 +2409,11 @@ public final class AppActionProtos {
      * <code>repeated .com.example.appactionvisualizer.databean.Action actions = 2;</code>
      */
     @java.lang.Override
-    public java.util.List<? extends com.example.appactionvisualizer.databean.AppActionProtos.ActionOrBuilder> 
-        getActionsOrBuilderList() {
+    public java.util.List<? extends com.example.appactionvisualizer.databean.AppActionProtos.ActionOrBuilder>
+    getActionsOrBuilderList() {
       return actions_;
     }
+
     /**
      * <pre>
      * Represents all actions declared in the app's actions.xml.
@@ -1146,6 +2425,7 @@ public final class AppActionProtos {
     public int getActionsCount() {
       return actions_.size();
     }
+
     /**
      * <pre>
      * Represents all actions declared in the app's actions.xml.
@@ -1157,6 +2437,7 @@ public final class AppActionProtos {
     public com.example.appactionvisualizer.databean.AppActionProtos.Action getActions(int index) {
       return actions_.get(index);
     }
+
     /**
      * <pre>
      * Represents all actions declared in the app's actions.xml.
@@ -1170,8 +2451,6 @@ public final class AppActionProtos {
       return actions_.get(index);
     }
 
-    public static final int ENTITY_SETS_FIELD_NUMBER = 3;
-    private java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.EntitySet> entitySets_;
     /**
      * <pre>
      * Structured data entities used as a catalog for action parameters. Declared
@@ -1184,6 +2463,7 @@ public final class AppActionProtos {
     public java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.EntitySet> getEntitySetsList() {
       return entitySets_;
     }
+
     /**
      * <pre>
      * Structured data entities used as a catalog for action parameters. Declared
@@ -1193,10 +2473,11 @@ public final class AppActionProtos {
      * <code>repeated .com.example.appactionvisualizer.databean.EntitySet entity_sets = 3;</code>
      */
     @java.lang.Override
-    public java.util.List<? extends com.example.appactionvisualizer.databean.AppActionProtos.EntitySetOrBuilder> 
-        getEntitySetsOrBuilderList() {
+    public java.util.List<? extends com.example.appactionvisualizer.databean.AppActionProtos.EntitySetOrBuilder>
+    getEntitySetsOrBuilderList() {
       return entitySets_;
     }
+
     /**
      * <pre>
      * Structured data entities used as a catalog for action parameters. Declared
@@ -1209,6 +2490,7 @@ public final class AppActionProtos {
     public int getEntitySetsCount() {
       return entitySets_.size();
     }
+
     /**
      * <pre>
      * Structured data entities used as a catalog for action parameters. Declared
@@ -1221,6 +2503,7 @@ public final class AppActionProtos {
     public com.example.appactionvisualizer.databean.AppActionProtos.EntitySet getEntitySets(int index) {
       return entitySets_.get(index);
     }
+
     /**
      * <pre>
      * Structured data entities used as a catalog for action parameters. Declared
@@ -1235,7 +2518,6 @@ public final class AppActionProtos {
       return entitySets_.get(index);
     }
 
-    private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -1248,7 +2530,7 @@ public final class AppActionProtos {
 
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+        throws java.io.IOException {
       if (((bitField0_ & 0x00000001) != 0)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, packageName_);
       }
@@ -1272,11 +2554,11 @@ public final class AppActionProtos {
       }
       for (int i = 0; i < actions_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, actions_.get(i));
+            .computeMessageSize(2, actions_.get(i));
       }
       for (int i = 0; i < entitySets_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, entitySets_.get(i));
+            .computeMessageSize(3, entitySets_.get(i));
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -1286,7 +2568,7 @@ public final class AppActionProtos {
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
-       return true;
+        return true;
       }
       if (!(obj instanceof com.example.appactionvisualizer.databean.AppActionProtos.AppAction)) {
         return super.equals(obj);
@@ -1330,84 +2612,11 @@ public final class AppActionProtos {
       return hash;
     }
 
-    public static com.example.appactionvisualizer.databean.AppActionProtos.AppAction parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.AppAction parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.AppAction parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.AppAction parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.AppAction parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.AppAction parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.AppAction parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.AppAction parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.AppAction parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.AppAction parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.AppAction parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.AppAction parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+    @java.lang.Override
+    public Builder newBuilderForType() {
+      return newBuilder();
     }
 
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(com.example.appactionvisualizer.databean.AppActionProtos.AppAction prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
     @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
@@ -1420,30 +2629,39 @@ public final class AppActionProtos {
       Builder builder = new Builder(parent);
       return builder;
     }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<AppAction> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.example.appactionvisualizer.databean.AppActionProtos.AppAction getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
     /**
      * <pre>
      * Represents all the app actions declared in an apk of an Android app in its
      * actions.xml.
      * </pre>
-     *
+     * <p>
      * Protobuf type {@code com.example.appactionvisualizer.databean.AppAction}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:com.example.appactionvisualizer.databean.AppAction)
         com.example.appactionvisualizer.databean.AppActionProtos.AppActionOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_AppAction_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_AppAction_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.example.appactionvisualizer.databean.AppActionProtos.AppAction.class, com.example.appactionvisualizer.databean.AppActionProtos.AppAction.Builder.class);
-      }
+      private int bitField0_;
+      private java.lang.Object packageName_ = "";
+      private java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.Action> actions_ =
+          java.util.Collections.emptyList();
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.example.appactionvisualizer.databean.AppActionProtos.Action, com.example.appactionvisualizer.databean.AppActionProtos.Action.Builder, com.example.appactionvisualizer.databean.AppActionProtos.ActionOrBuilder> actionsBuilder_;
+      private java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.EntitySet> entitySets_ =
+          java.util.Collections.emptyList();
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.example.appactionvisualizer.databean.AppActionProtos.EntitySet, com.example.appactionvisualizer.databean.AppActionProtos.EntitySet.Builder, com.example.appactionvisualizer.databean.AppActionProtos.EntitySetOrBuilder> entitySetsBuilder_;
 
       // Construct using com.example.appactionvisualizer.databean.AppActionProtos.AppAction.newBuilder()
       private Builder() {
@@ -1455,13 +2673,28 @@ public final class AppActionProtos {
         super(parent);
         maybeForceBuilderInitialization();
       }
+
+      public static final com.google.protobuf.Descriptors.Descriptor
+      getDescriptor() {
+        return com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_AppAction_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internalGetFieldAccessorTable() {
+        return com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_AppAction_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.example.appactionvisualizer.databean.AppActionProtos.AppAction.class, com.example.appactionvisualizer.databean.AppActionProtos.AppAction.Builder.class);
+      }
+
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
+            .alwaysUseFieldBuilders) {
           getActionsFieldBuilder();
           getEntitySetsFieldBuilder();
         }
       }
+
       @java.lang.Override
       public Builder clear() {
         super.clear();
@@ -1484,7 +2717,7 @@ public final class AppActionProtos {
 
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
+      getDescriptorForType() {
         return com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_AppAction_descriptor;
       }
 
@@ -1538,38 +2771,44 @@ public final class AppActionProtos {
       public Builder clone() {
         return super.clone();
       }
+
       @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return super.setField(field, value);
       }
+
       @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return super.clearField(field);
       }
+
       @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return super.clearOneof(oneof);
       }
+
       @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
         return super.setRepeatedField(field, index, value);
       }
+
       @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return super.addRepeatedField(field, value);
       }
+
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.example.appactionvisualizer.databean.AppActionProtos.AppAction) {
-          return mergeFrom((com.example.appactionvisualizer.databean.AppActionProtos.AppAction)other);
+          return mergeFrom((com.example.appactionvisualizer.databean.AppActionProtos.AppAction) other);
         } else {
           super.mergeFrom(other);
           return this;
@@ -1577,7 +2816,8 @@ public final class AppActionProtos {
       }
 
       public Builder mergeFrom(com.example.appactionvisualizer.databean.AppActionProtos.AppAction other) {
-        if (other == com.example.appactionvisualizer.databean.AppActionProtos.AppAction.getDefaultInstance()) return this;
+        if (other == com.example.appactionvisualizer.databean.AppActionProtos.AppAction.getDefaultInstance())
+          return this;
         if (other.hasPackageName()) {
           bitField0_ |= 0x00000001;
           packageName_ = other.packageName_;
@@ -1601,9 +2841,9 @@ public final class AppActionProtos {
               actionsBuilder_ = null;
               actions_ = other.actions_;
               bitField0_ = (bitField0_ & ~0x00000002);
-              actionsBuilder_ = 
-                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                   getActionsFieldBuilder() : null;
+              actionsBuilder_ =
+                  com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                      getActionsFieldBuilder() : null;
             } else {
               actionsBuilder_.addAllMessages(other.actions_);
             }
@@ -1627,9 +2867,9 @@ public final class AppActionProtos {
               entitySetsBuilder_ = null;
               entitySets_ = other.entitySets_;
               bitField0_ = (bitField0_ & ~0x00000004);
-              entitySetsBuilder_ = 
-                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                   getEntitySetsFieldBuilder() : null;
+              entitySetsBuilder_ =
+                  com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                      getEntitySetsFieldBuilder() : null;
             } else {
               entitySetsBuilder_.addAllMessages(other.entitySets_);
             }
@@ -1663,26 +2903,27 @@ public final class AppActionProtos {
         }
         return this;
       }
-      private int bitField0_;
 
-      private java.lang.Object packageName_ = "";
       /**
        * <pre>
        * The android app's package name.
        * </pre>
        *
        * <code>optional string package_name = 1;</code>
+       *
        * @return Whether the packageName field is set.
        */
       public boolean hasPackageName() {
         return ((bitField0_ & 0x00000001) != 0);
       }
+
       /**
        * <pre>
        * The android app's package name.
        * </pre>
        *
        * <code>optional string package_name = 1;</code>
+       *
        * @return The packageName.
        */
       public java.lang.String getPackageName() {
@@ -1699,19 +2940,42 @@ public final class AppActionProtos {
           return (java.lang.String) ref;
         }
       }
+
       /**
        * <pre>
        * The android app's package name.
        * </pre>
        *
        * <code>optional string package_name = 1;</code>
+       *
+       * @param value The packageName to set.
+       * @return This builder for chaining.
+       */
+      public Builder setPackageName(
+          java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000001;
+        packageName_ = value;
+        onChanged();
+        return this;
+      }
+
+      /**
+       * <pre>
+       * The android app's package name.
+       * </pre>
+       *
+       * <code>optional string package_name = 1;</code>
+       *
        * @return The bytes for packageName.
        */
       public com.google.protobuf.ByteString
-          getPackageNameBytes() {
+      getPackageNameBytes() {
         java.lang.Object ref = packageName_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString b =
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
           packageName_ = b;
@@ -1720,31 +2984,35 @@ public final class AppActionProtos {
           return (com.google.protobuf.ByteString) ref;
         }
       }
+
       /**
        * <pre>
        * The android app's package name.
        * </pre>
        *
        * <code>optional string package_name = 1;</code>
-       * @param value The packageName to set.
+       *
+       * @param value The bytes for packageName to set.
        * @return This builder for chaining.
        */
-      public Builder setPackageName(
-          java.lang.String value) {
+      public Builder setPackageNameBytes(
+          com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000001;
         packageName_ = value;
         onChanged();
         return this;
       }
+
       /**
        * <pre>
        * The android app's package name.
        * </pre>
        *
        * <code>optional string package_name = 1;</code>
+       *
        * @return This builder for chaining.
        */
       public Builder clearPackageName() {
@@ -1753,37 +3021,13 @@ public final class AppActionProtos {
         onChanged();
         return this;
       }
-      /**
-       * <pre>
-       * The android app's package name.
-       * </pre>
-       *
-       * <code>optional string package_name = 1;</code>
-       * @param value The bytes for packageName to set.
-       * @return This builder for chaining.
-       */
-      public Builder setPackageNameBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-        packageName_ = value;
-        onChanged();
-        return this;
-      }
 
-      private java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.Action> actions_ =
-        java.util.Collections.emptyList();
       private void ensureActionsIsMutable() {
         if (!((bitField0_ & 0x00000002) != 0)) {
           actions_ = new java.util.ArrayList<com.example.appactionvisualizer.databean.AppActionProtos.Action>(actions_);
           bitField0_ |= 0x00000002;
-         }
+        }
       }
-
-      private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.example.appactionvisualizer.databean.AppActionProtos.Action, com.example.appactionvisualizer.databean.AppActionProtos.Action.Builder, com.example.appactionvisualizer.databean.AppActionProtos.ActionOrBuilder> actionsBuilder_;
 
       /**
        * <pre>
@@ -1799,6 +3043,7 @@ public final class AppActionProtos {
           return actionsBuilder_.getMessageList();
         }
       }
+
       /**
        * <pre>
        * Represents all actions declared in the app's actions.xml.
@@ -1813,6 +3058,7 @@ public final class AppActionProtos {
           return actionsBuilder_.getCount();
         }
       }
+
       /**
        * <pre>
        * Represents all actions declared in the app's actions.xml.
@@ -1827,6 +3073,7 @@ public final class AppActionProtos {
           return actionsBuilder_.getMessage(index);
         }
       }
+
       /**
        * <pre>
        * Represents all actions declared in the app's actions.xml.
@@ -1848,6 +3095,7 @@ public final class AppActionProtos {
         }
         return this;
       }
+
       /**
        * <pre>
        * Represents all actions declared in the app's actions.xml.
@@ -1866,6 +3114,7 @@ public final class AppActionProtos {
         }
         return this;
       }
+
       /**
        * <pre>
        * Represents all actions declared in the app's actions.xml.
@@ -1886,6 +3135,7 @@ public final class AppActionProtos {
         }
         return this;
       }
+
       /**
        * <pre>
        * Represents all actions declared in the app's actions.xml.
@@ -1907,6 +3157,7 @@ public final class AppActionProtos {
         }
         return this;
       }
+
       /**
        * <pre>
        * Represents all actions declared in the app's actions.xml.
@@ -1925,6 +3176,7 @@ public final class AppActionProtos {
         }
         return this;
       }
+
       /**
        * <pre>
        * Represents all actions declared in the app's actions.xml.
@@ -1943,6 +3195,7 @@ public final class AppActionProtos {
         }
         return this;
       }
+
       /**
        * <pre>
        * Represents all actions declared in the app's actions.xml.
@@ -1962,6 +3215,7 @@ public final class AppActionProtos {
         }
         return this;
       }
+
       /**
        * <pre>
        * Represents all actions declared in the app's actions.xml.
@@ -1979,6 +3233,7 @@ public final class AppActionProtos {
         }
         return this;
       }
+
       /**
        * <pre>
        * Represents all actions declared in the app's actions.xml.
@@ -1996,6 +3251,7 @@ public final class AppActionProtos {
         }
         return this;
       }
+
       /**
        * <pre>
        * Represents all actions declared in the app's actions.xml.
@@ -2007,6 +3263,7 @@ public final class AppActionProtos {
           int index) {
         return getActionsFieldBuilder().getBuilder(index);
       }
+
       /**
        * <pre>
        * Represents all actions declared in the app's actions.xml.
@@ -2017,10 +3274,12 @@ public final class AppActionProtos {
       public com.example.appactionvisualizer.databean.AppActionProtos.ActionOrBuilder getActionsOrBuilder(
           int index) {
         if (actionsBuilder_ == null) {
-          return actions_.get(index);  } else {
+          return actions_.get(index);
+        } else {
           return actionsBuilder_.getMessageOrBuilder(index);
         }
       }
+
       /**
        * <pre>
        * Represents all actions declared in the app's actions.xml.
@@ -2028,14 +3287,15 @@ public final class AppActionProtos {
        *
        * <code>repeated .com.example.appactionvisualizer.databean.Action actions = 2;</code>
        */
-      public java.util.List<? extends com.example.appactionvisualizer.databean.AppActionProtos.ActionOrBuilder> 
-           getActionsOrBuilderList() {
+      public java.util.List<? extends com.example.appactionvisualizer.databean.AppActionProtos.ActionOrBuilder>
+      getActionsOrBuilderList() {
         if (actionsBuilder_ != null) {
           return actionsBuilder_.getMessageOrBuilderList();
         } else {
           return java.util.Collections.unmodifiableList(actions_);
         }
       }
+
       /**
        * <pre>
        * Represents all actions declared in the app's actions.xml.
@@ -2047,6 +3307,7 @@ public final class AppActionProtos {
         return getActionsFieldBuilder().addBuilder(
             com.example.appactionvisualizer.databean.AppActionProtos.Action.getDefaultInstance());
       }
+
       /**
        * <pre>
        * Represents all actions declared in the app's actions.xml.
@@ -2059,6 +3320,7 @@ public final class AppActionProtos {
         return getActionsFieldBuilder().addBuilder(
             index, com.example.appactionvisualizer.databean.AppActionProtos.Action.getDefaultInstance());
       }
+
       /**
        * <pre>
        * Represents all actions declared in the app's actions.xml.
@@ -2066,36 +3328,32 @@ public final class AppActionProtos {
        *
        * <code>repeated .com.example.appactionvisualizer.databean.Action actions = 2;</code>
        */
-      public java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.Action.Builder> 
-           getActionsBuilderList() {
+      public java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.Action.Builder>
+      getActionsBuilderList() {
         return getActionsFieldBuilder().getBuilderList();
       }
+
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.example.appactionvisualizer.databean.AppActionProtos.Action, com.example.appactionvisualizer.databean.AppActionProtos.Action.Builder, com.example.appactionvisualizer.databean.AppActionProtos.ActionOrBuilder> 
-          getActionsFieldBuilder() {
+          com.example.appactionvisualizer.databean.AppActionProtos.Action, com.example.appactionvisualizer.databean.AppActionProtos.Action.Builder, com.example.appactionvisualizer.databean.AppActionProtos.ActionOrBuilder>
+      getActionsFieldBuilder() {
         if (actionsBuilder_ == null) {
           actionsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.example.appactionvisualizer.databean.AppActionProtos.Action, com.example.appactionvisualizer.databean.AppActionProtos.Action.Builder, com.example.appactionvisualizer.databean.AppActionProtos.ActionOrBuilder>(
-                  actions_,
-                  ((bitField0_ & 0x00000002) != 0),
-                  getParentForChildren(),
-                  isClean());
+              actions_,
+              ((bitField0_ & 0x00000002) != 0),
+              getParentForChildren(),
+              isClean());
           actions_ = null;
         }
         return actionsBuilder_;
       }
 
-      private java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.EntitySet> entitySets_ =
-        java.util.Collections.emptyList();
       private void ensureEntitySetsIsMutable() {
         if (!((bitField0_ & 0x00000004) != 0)) {
           entitySets_ = new java.util.ArrayList<com.example.appactionvisualizer.databean.AppActionProtos.EntitySet>(entitySets_);
           bitField0_ |= 0x00000004;
-         }
+        }
       }
-
-      private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.example.appactionvisualizer.databean.AppActionProtos.EntitySet, com.example.appactionvisualizer.databean.AppActionProtos.EntitySet.Builder, com.example.appactionvisualizer.databean.AppActionProtos.EntitySetOrBuilder> entitySetsBuilder_;
 
       /**
        * <pre>
@@ -2112,6 +3370,7 @@ public final class AppActionProtos {
           return entitySetsBuilder_.getMessageList();
         }
       }
+
       /**
        * <pre>
        * Structured data entities used as a catalog for action parameters. Declared
@@ -2127,6 +3386,7 @@ public final class AppActionProtos {
           return entitySetsBuilder_.getCount();
         }
       }
+
       /**
        * <pre>
        * Structured data entities used as a catalog for action parameters. Declared
@@ -2142,6 +3402,7 @@ public final class AppActionProtos {
           return entitySetsBuilder_.getMessage(index);
         }
       }
+
       /**
        * <pre>
        * Structured data entities used as a catalog for action parameters. Declared
@@ -2164,6 +3425,7 @@ public final class AppActionProtos {
         }
         return this;
       }
+
       /**
        * <pre>
        * Structured data entities used as a catalog for action parameters. Declared
@@ -2183,6 +3445,7 @@ public final class AppActionProtos {
         }
         return this;
       }
+
       /**
        * <pre>
        * Structured data entities used as a catalog for action parameters. Declared
@@ -2204,6 +3467,7 @@ public final class AppActionProtos {
         }
         return this;
       }
+
       /**
        * <pre>
        * Structured data entities used as a catalog for action parameters. Declared
@@ -2226,6 +3490,7 @@ public final class AppActionProtos {
         }
         return this;
       }
+
       /**
        * <pre>
        * Structured data entities used as a catalog for action parameters. Declared
@@ -2245,6 +3510,7 @@ public final class AppActionProtos {
         }
         return this;
       }
+
       /**
        * <pre>
        * Structured data entities used as a catalog for action parameters. Declared
@@ -2264,6 +3530,7 @@ public final class AppActionProtos {
         }
         return this;
       }
+
       /**
        * <pre>
        * Structured data entities used as a catalog for action parameters. Declared
@@ -2284,6 +3551,7 @@ public final class AppActionProtos {
         }
         return this;
       }
+
       /**
        * <pre>
        * Structured data entities used as a catalog for action parameters. Declared
@@ -2302,6 +3570,7 @@ public final class AppActionProtos {
         }
         return this;
       }
+
       /**
        * <pre>
        * Structured data entities used as a catalog for action parameters. Declared
@@ -2320,6 +3589,7 @@ public final class AppActionProtos {
         }
         return this;
       }
+
       /**
        * <pre>
        * Structured data entities used as a catalog for action parameters. Declared
@@ -2332,6 +3602,7 @@ public final class AppActionProtos {
           int index) {
         return getEntitySetsFieldBuilder().getBuilder(index);
       }
+
       /**
        * <pre>
        * Structured data entities used as a catalog for action parameters. Declared
@@ -2343,10 +3614,12 @@ public final class AppActionProtos {
       public com.example.appactionvisualizer.databean.AppActionProtos.EntitySetOrBuilder getEntitySetsOrBuilder(
           int index) {
         if (entitySetsBuilder_ == null) {
-          return entitySets_.get(index);  } else {
+          return entitySets_.get(index);
+        } else {
           return entitySetsBuilder_.getMessageOrBuilder(index);
         }
       }
+
       /**
        * <pre>
        * Structured data entities used as a catalog for action parameters. Declared
@@ -2355,14 +3628,15 @@ public final class AppActionProtos {
        *
        * <code>repeated .com.example.appactionvisualizer.databean.EntitySet entity_sets = 3;</code>
        */
-      public java.util.List<? extends com.example.appactionvisualizer.databean.AppActionProtos.EntitySetOrBuilder> 
-           getEntitySetsOrBuilderList() {
+      public java.util.List<? extends com.example.appactionvisualizer.databean.AppActionProtos.EntitySetOrBuilder>
+      getEntitySetsOrBuilderList() {
         if (entitySetsBuilder_ != null) {
           return entitySetsBuilder_.getMessageOrBuilderList();
         } else {
           return java.util.Collections.unmodifiableList(entitySets_);
         }
       }
+
       /**
        * <pre>
        * Structured data entities used as a catalog for action parameters. Declared
@@ -2375,6 +3649,7 @@ public final class AppActionProtos {
         return getEntitySetsFieldBuilder().addBuilder(
             com.example.appactionvisualizer.databean.AppActionProtos.EntitySet.getDefaultInstance());
       }
+
       /**
        * <pre>
        * Structured data entities used as a catalog for action parameters. Declared
@@ -2388,6 +3663,7 @@ public final class AppActionProtos {
         return getEntitySetsFieldBuilder().addBuilder(
             index, com.example.appactionvisualizer.databean.AppActionProtos.EntitySet.getDefaultInstance());
       }
+
       /**
        * <pre>
        * Structured data entities used as a catalog for action parameters. Declared
@@ -2396,24 +3672,26 @@ public final class AppActionProtos {
        *
        * <code>repeated .com.example.appactionvisualizer.databean.EntitySet entity_sets = 3;</code>
        */
-      public java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.EntitySet.Builder> 
-           getEntitySetsBuilderList() {
+      public java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.EntitySet.Builder>
+      getEntitySetsBuilderList() {
         return getEntitySetsFieldBuilder().getBuilderList();
       }
+
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.example.appactionvisualizer.databean.AppActionProtos.EntitySet, com.example.appactionvisualizer.databean.AppActionProtos.EntitySet.Builder, com.example.appactionvisualizer.databean.AppActionProtos.EntitySetOrBuilder> 
-          getEntitySetsFieldBuilder() {
+          com.example.appactionvisualizer.databean.AppActionProtos.EntitySet, com.example.appactionvisualizer.databean.AppActionProtos.EntitySet.Builder, com.example.appactionvisualizer.databean.AppActionProtos.EntitySetOrBuilder>
+      getEntitySetsFieldBuilder() {
         if (entitySetsBuilder_ == null) {
           entitySetsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.example.appactionvisualizer.databean.AppActionProtos.EntitySet, com.example.appactionvisualizer.databean.AppActionProtos.EntitySet.Builder, com.example.appactionvisualizer.databean.AppActionProtos.EntitySetOrBuilder>(
-                  entitySets_,
-                  ((bitField0_ & 0x00000004) != 0),
-                  getParentForChildren(),
-                  isClean());
+              entitySets_,
+              ((bitField0_ & 0x00000004) != 0),
+              getParentForChildren(),
+              isClean());
           entitySets_ = null;
         }
         return entitySetsBuilder_;
       }
+
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -2430,206 +3708,58 @@ public final class AppActionProtos {
       // @@protoc_insertion_point(builder_scope:com.example.appactionvisualizer.databean.AppAction)
     }
 
-    // @@protoc_insertion_point(class_scope:com.example.appactionvisualizer.databean.AppAction)
-    private static final com.example.appactionvisualizer.databean.AppActionProtos.AppAction DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new com.example.appactionvisualizer.databean.AppActionProtos.AppAction();
-    }
-
-    public static com.example.appactionvisualizer.databean.AppActionProtos.AppAction getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<AppAction>
-        PARSER = new com.google.protobuf.AbstractParser<AppAction>() {
-      @java.lang.Override
-      public AppAction parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new AppAction(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<AppAction> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<AppAction> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.example.appactionvisualizer.databean.AppActionProtos.AppAction getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
   }
 
-  public interface ActionOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.example.appactionvisualizer.databean.Action)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <pre>
-     * Indicates the name of this semantic intent, e.g.
-     * "actions.intent.ORDER_MENU_ITEM"
-     * </pre>
-     *
-     * <code>optional string intent_name = 1;</code>
-     * @return Whether the intentName field is set.
-     */
-    boolean hasIntentName();
-    /**
-     * <pre>
-     * Indicates the name of this semantic intent, e.g.
-     * "actions.intent.ORDER_MENU_ITEM"
-     * </pre>
-     *
-     * <code>optional string intent_name = 1;</code>
-     * @return The intentName.
-     */
-    java.lang.String getIntentName();
-    /**
-     * <pre>
-     * Indicates the name of this semantic intent, e.g.
-     * "actions.intent.ORDER_MENU_ITEM"
-     * </pre>
-     *
-     * <code>optional string intent_name = 1;</code>
-     * @return The bytes for intentName.
-     */
-    com.google.protobuf.ByteString
-        getIntentNameBytes();
-
-    /**
-     * <pre>
-     * The list of parameters within the query_patterns. All of the parameters
-     * within query_patterns must be given.
-     * </pre>
-     *
-     * <code>repeated .com.example.appactionvisualizer.databean.Action.Parameter parameters = 2;</code>
-     */
-    java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter> 
-        getParametersList();
-    /**
-     * <pre>
-     * The list of parameters within the query_patterns. All of the parameters
-     * within query_patterns must be given.
-     * </pre>
-     *
-     * <code>repeated .com.example.appactionvisualizer.databean.Action.Parameter parameters = 2;</code>
-     */
-    com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter getParameters(int index);
-    /**
-     * <pre>
-     * The list of parameters within the query_patterns. All of the parameters
-     * within query_patterns must be given.
-     * </pre>
-     *
-     * <code>repeated .com.example.appactionvisualizer.databean.Action.Parameter parameters = 2;</code>
-     */
-    int getParametersCount();
-    /**
-     * <pre>
-     * The list of parameters within the query_patterns. All of the parameters
-     * within query_patterns must be given.
-     * </pre>
-     *
-     * <code>repeated .com.example.appactionvisualizer.databean.Action.Parameter parameters = 2;</code>
-     */
-    java.util.List<? extends com.example.appactionvisualizer.databean.AppActionProtos.Action.ParameterOrBuilder> 
-        getParametersOrBuilderList();
-    /**
-     * <pre>
-     * The list of parameters within the query_patterns. All of the parameters
-     * within query_patterns must be given.
-     * </pre>
-     *
-     * <code>repeated .com.example.appactionvisualizer.databean.Action.Parameter parameters = 2;</code>
-     */
-    com.example.appactionvisualizer.databean.AppActionProtos.Action.ParameterOrBuilder getParametersOrBuilder(
-        int index);
-
-    /**
-     * <pre>
-     * Multiple fulfillments with different URL templates and fulfillment modes.
-     * </pre>
-     *
-     * <code>repeated .com.example.appactionvisualizer.databean.FulfillmentOption fulfillment_option = 3;</code>
-     */
-    java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption> 
-        getFulfillmentOptionList();
-    /**
-     * <pre>
-     * Multiple fulfillments with different URL templates and fulfillment modes.
-     * </pre>
-     *
-     * <code>repeated .com.example.appactionvisualizer.databean.FulfillmentOption fulfillment_option = 3;</code>
-     */
-    com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption getFulfillmentOption(int index);
-    /**
-     * <pre>
-     * Multiple fulfillments with different URL templates and fulfillment modes.
-     * </pre>
-     *
-     * <code>repeated .com.example.appactionvisualizer.databean.FulfillmentOption fulfillment_option = 3;</code>
-     */
-    int getFulfillmentOptionCount();
-    /**
-     * <pre>
-     * Multiple fulfillments with different URL templates and fulfillment modes.
-     * </pre>
-     *
-     * <code>repeated .com.example.appactionvisualizer.databean.FulfillmentOption fulfillment_option = 3;</code>
-     */
-    java.util.List<? extends com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOptionOrBuilder> 
-        getFulfillmentOptionOrBuilderList();
-    /**
-     * <pre>
-     * Multiple fulfillments with different URL templates and fulfillment modes.
-     * </pre>
-     *
-     * <code>repeated .com.example.appactionvisualizer.databean.FulfillmentOption fulfillment_option = 3;</code>
-     */
-    com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOptionOrBuilder getFulfillmentOptionOrBuilder(
-        int index);
-  }
   /**
    * <pre>
    * Represents an action declared in an apk of an Android app, as actions.xml.
    * </pre>
-   *
+   * <p>
    * Protobuf type {@code com.example.appactionvisualizer.databean.Action}
    */
   public static final class Action extends
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:com.example.appactionvisualizer.databean.Action)
       ActionOrBuilder {
-  private static final long serialVersionUID = 0L;
+    public static final int INTENT_NAME_FIELD_NUMBER = 1;
+    public static final int PARAMETERS_FIELD_NUMBER = 2;
+    public static final int FULFILLMENT_OPTION_FIELD_NUMBER = 3;
+    @java.lang.Deprecated
+    public static final com.google.protobuf.Parser<Action>
+        PARSER = new com.google.protobuf.AbstractParser<Action>() {
+      @java.lang.Override
+      public Action parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new Action(input, extensionRegistry);
+      }
+    };
+    private static final long serialVersionUID = 0L;
+    // @@protoc_insertion_point(class_scope:com.example.appactionvisualizer.databean.Action)
+    private static final com.example.appactionvisualizer.databean.AppActionProtos.Action DEFAULT_INSTANCE;
+
+    static {
+      DEFAULT_INSTANCE = new com.example.appactionvisualizer.databean.AppActionProtos.Action();
+    }
+
+    private int bitField0_;
+    private volatile java.lang.Object intentName_;
+    private java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter> parameters_;
+    private java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption> fulfillmentOption_;
+    private byte memoizedIsInitialized = -1;
+
     // Use Action.newBuilder() to construct.
     private Action(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
+
     private Action() {
       intentName_ = "";
       parameters_ = java.util.Collections.emptyList();
       fulfillmentOption_ = java.util.Collections.emptyList();
     }
 
-    @java.lang.Override
-    @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
-        UnusedPrivateParameter unused) {
-      return new Action();
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
     private Action(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -2698,17 +3828,445 @@ public final class AppActionProtos {
         makeExtensionsImmutable();
       }
     }
+
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
+    getDescriptor() {
       return com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_Action_descriptor;
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.Action parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.Action parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.Action parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.Action parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.Action parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.Action parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.Action parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.Action parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.Action parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.Action parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.Action parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.Action parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+
+    public static Builder newBuilder(com.example.appactionvisualizer.databean.AppActionProtos.Action prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.Action getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    public static com.google.protobuf.Parser<Action> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new Action();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
+    internalGetFieldAccessorTable() {
       return com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_Action_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.example.appactionvisualizer.databean.AppActionProtos.Action.class, com.example.appactionvisualizer.databean.AppActionProtos.Action.Builder.class);
+    }
+
+    /**
+     * <pre>
+     * Indicates the name of this semantic intent, e.g.
+     * "actions.intent.ORDER_MENU_ITEM"
+     * </pre>
+     *
+     * <code>optional string intent_name = 1;</code>
+     *
+     * @return Whether the intentName field is set.
+     */
+    @java.lang.Override
+    public boolean hasIntentName() {
+      return ((bitField0_ & 0x00000001) != 0);
+    }
+
+    /**
+     * <pre>
+     * Indicates the name of this semantic intent, e.g.
+     * "actions.intent.ORDER_MENU_ITEM"
+     * </pre>
+     *
+     * <code>optional string intent_name = 1;</code>
+     *
+     * @return The intentName.
+     */
+    @java.lang.Override
+    public java.lang.String getIntentName() {
+      java.lang.Object ref = intentName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          intentName_ = s;
+        }
+        return s;
+      }
+    }
+
+    /**
+     * <pre>
+     * Indicates the name of this semantic intent, e.g.
+     * "actions.intent.ORDER_MENU_ITEM"
+     * </pre>
+     *
+     * <code>optional string intent_name = 1;</code>
+     *
+     * @return The bytes for intentName.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+    getIntentNameBytes() {
+      java.lang.Object ref = intentName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        intentName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    /**
+     * <pre>
+     * The list of parameters within the query_patterns. All of the parameters
+     * within query_patterns must be given.
+     * </pre>
+     *
+     * <code>repeated .com.example.appactionvisualizer.databean.Action.Parameter parameters = 2;</code>
+     */
+    @java.lang.Override
+    public java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter> getParametersList() {
+      return parameters_;
+    }
+
+    /**
+     * <pre>
+     * The list of parameters within the query_patterns. All of the parameters
+     * within query_patterns must be given.
+     * </pre>
+     *
+     * <code>repeated .com.example.appactionvisualizer.databean.Action.Parameter parameters = 2;</code>
+     */
+    @java.lang.Override
+    public java.util.List<? extends com.example.appactionvisualizer.databean.AppActionProtos.Action.ParameterOrBuilder>
+    getParametersOrBuilderList() {
+      return parameters_;
+    }
+
+    /**
+     * <pre>
+     * The list of parameters within the query_patterns. All of the parameters
+     * within query_patterns must be given.
+     * </pre>
+     *
+     * <code>repeated .com.example.appactionvisualizer.databean.Action.Parameter parameters = 2;</code>
+     */
+    @java.lang.Override
+    public int getParametersCount() {
+      return parameters_.size();
+    }
+
+    /**
+     * <pre>
+     * The list of parameters within the query_patterns. All of the parameters
+     * within query_patterns must be given.
+     * </pre>
+     *
+     * <code>repeated .com.example.appactionvisualizer.databean.Action.Parameter parameters = 2;</code>
+     */
+    @java.lang.Override
+    public com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter getParameters(int index) {
+      return parameters_.get(index);
+    }
+
+    /**
+     * <pre>
+     * The list of parameters within the query_patterns. All of the parameters
+     * within query_patterns must be given.
+     * </pre>
+     *
+     * <code>repeated .com.example.appactionvisualizer.databean.Action.Parameter parameters = 2;</code>
+     */
+    @java.lang.Override
+    public com.example.appactionvisualizer.databean.AppActionProtos.Action.ParameterOrBuilder getParametersOrBuilder(
+        int index) {
+      return parameters_.get(index);
+    }
+
+    /**
+     * <pre>
+     * Multiple fulfillments with different URL templates and fulfillment modes.
+     * </pre>
+     *
+     * <code>repeated .com.example.appactionvisualizer.databean.FulfillmentOption fulfillment_option = 3;</code>
+     */
+    @java.lang.Override
+    public java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption> getFulfillmentOptionList() {
+      return fulfillmentOption_;
+    }
+
+    /**
+     * <pre>
+     * Multiple fulfillments with different URL templates and fulfillment modes.
+     * </pre>
+     *
+     * <code>repeated .com.example.appactionvisualizer.databean.FulfillmentOption fulfillment_option = 3;</code>
+     */
+    @java.lang.Override
+    public java.util.List<? extends com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOptionOrBuilder>
+    getFulfillmentOptionOrBuilderList() {
+      return fulfillmentOption_;
+    }
+
+    /**
+     * <pre>
+     * Multiple fulfillments with different URL templates and fulfillment modes.
+     * </pre>
+     *
+     * <code>repeated .com.example.appactionvisualizer.databean.FulfillmentOption fulfillment_option = 3;</code>
+     */
+    @java.lang.Override
+    public int getFulfillmentOptionCount() {
+      return fulfillmentOption_.size();
+    }
+
+    /**
+     * <pre>
+     * Multiple fulfillments with different URL templates and fulfillment modes.
+     * </pre>
+     *
+     * <code>repeated .com.example.appactionvisualizer.databean.FulfillmentOption fulfillment_option = 3;</code>
+     */
+    @java.lang.Override
+    public com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption getFulfillmentOption(int index) {
+      return fulfillmentOption_.get(index);
+    }
+
+    /**
+     * <pre>
+     * Multiple fulfillments with different URL templates and fulfillment modes.
+     * </pre>
+     *
+     * <code>repeated .com.example.appactionvisualizer.databean.FulfillmentOption fulfillment_option = 3;</code>
+     */
+    @java.lang.Override
+    public com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOptionOrBuilder getFulfillmentOptionOrBuilder(
+        int index) {
+      return fulfillmentOption_.get(index);
+    }
+
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+        throws java.io.IOException {
+      if (((bitField0_ & 0x00000001) != 0)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, intentName_);
+      }
+      for (int i = 0; i < parameters_.size(); i++) {
+        output.writeMessage(2, parameters_.get(i));
+      }
+      for (int i = 0; i < fulfillmentOption_.size(); i++) {
+        output.writeMessage(3, fulfillmentOption_.get(i));
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) != 0)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, intentName_);
+      }
+      for (int i = 0; i < parameters_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(2, parameters_.get(i));
+      }
+      for (int i = 0; i < fulfillmentOption_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(3, fulfillmentOption_.get(i));
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+        return true;
+      }
+      if (!(obj instanceof com.example.appactionvisualizer.databean.AppActionProtos.Action)) {
+        return super.equals(obj);
+      }
+      com.example.appactionvisualizer.databean.AppActionProtos.Action other = (com.example.appactionvisualizer.databean.AppActionProtos.Action) obj;
+
+      if (hasIntentName() != other.hasIntentName()) return false;
+      if (hasIntentName()) {
+        if (!getIntentName()
+            .equals(other.getIntentName())) return false;
+      }
+      if (!getParametersList()
+          .equals(other.getParametersList())) return false;
+      if (!getFulfillmentOptionList()
+          .equals(other.getFulfillmentOptionList())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasIntentName()) {
+        hash = (37 * hash) + INTENT_NAME_FIELD_NUMBER;
+        hash = (53 * hash) + getIntentName().hashCode();
+      }
+      if (getParametersCount() > 0) {
+        hash = (37 * hash) + PARAMETERS_FIELD_NUMBER;
+        hash = (53 * hash) + getParametersList().hashCode();
+      }
+      if (getFulfillmentOptionCount() > 0) {
+        hash = (37 * hash) + FULFILLMENT_OPTION_FIELD_NUMBER;
+        hash = (53 * hash) + getFulfillmentOptionList().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() {
+      return newBuilder();
+    }
+
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<Action> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.example.appactionvisualizer.databean.AppActionProtos.Action getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
     }
 
     public interface ParameterOrBuilder extends
@@ -2721,28 +4279,33 @@ public final class AppActionProtos {
        * </pre>
        *
        * <code>optional string name = 1;</code>
+       *
        * @return Whether the name field is set.
        */
       boolean hasName();
+
       /**
        * <pre>
        * Name of the parameter, e.g. "menuItem.name"
        * </pre>
        *
        * <code>optional string name = 1;</code>
+       *
        * @return The name.
        */
       java.lang.String getName();
+
       /**
        * <pre>
        * Name of the parameter, e.g. "menuItem.name"
        * </pre>
        *
        * <code>optional string name = 1;</code>
+       *
        * @return The bytes for name.
        */
       com.google.protobuf.ByteString
-          getNameBytes();
+      getNameBytes();
 
       /**
        * <pre>
@@ -2755,8 +4318,9 @@ public final class AppActionProtos {
        *
        * <code>repeated .com.example.appactionvisualizer.databean.EntitySetReference entity_set_reference = 2;</code>
        */
-      java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference> 
-          getEntitySetReferenceList();
+      java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference>
+      getEntitySetReferenceList();
+
       /**
        * <pre>
        * Optional pointers to developer-supplied structured data that contains
@@ -2769,6 +4333,7 @@ public final class AppActionProtos {
        * <code>repeated .com.example.appactionvisualizer.databean.EntitySetReference entity_set_reference = 2;</code>
        */
       com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference getEntitySetReference(int index);
+
       /**
        * <pre>
        * Optional pointers to developer-supplied structured data that contains
@@ -2781,6 +4346,7 @@ public final class AppActionProtos {
        * <code>repeated .com.example.appactionvisualizer.databean.EntitySetReference entity_set_reference = 2;</code>
        */
       int getEntitySetReferenceCount();
+
       /**
        * <pre>
        * Optional pointers to developer-supplied structured data that contains
@@ -2792,8 +4358,9 @@ public final class AppActionProtos {
        *
        * <code>repeated .com.example.appactionvisualizer.databean.EntitySetReference entity_set_reference = 2;</code>
        */
-      java.util.List<? extends com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReferenceOrBuilder> 
-          getEntitySetReferenceOrBuilderList();
+      java.util.List<? extends com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReferenceOrBuilder>
+      getEntitySetReferenceOrBuilderList();
+
       /**
        * <pre>
        * Optional pointers to developer-supplied structured data that contains
@@ -2808,6 +4375,7 @@ public final class AppActionProtos {
       com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReferenceOrBuilder getEntitySetReferenceOrBuilder(
           int index);
     }
+
     /**
      * Protobuf type {@code com.example.appactionvisualizer.databean.Action.Parameter}
      */
@@ -2815,28 +4383,42 @@ public final class AppActionProtos {
         com.google.protobuf.GeneratedMessageV3 implements
         // @@protoc_insertion_point(message_implements:com.example.appactionvisualizer.databean.Action.Parameter)
         ParameterOrBuilder {
-    private static final long serialVersionUID = 0L;
+      public static final int NAME_FIELD_NUMBER = 1;
+      public static final int ENTITY_SET_REFERENCE_FIELD_NUMBER = 2;
+      @java.lang.Deprecated
+      public static final com.google.protobuf.Parser<Parameter>
+          PARSER = new com.google.protobuf.AbstractParser<Parameter>() {
+        @java.lang.Override
+        public Parameter parsePartialFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return new Parameter(input, extensionRegistry);
+        }
+      };
+      private static final long serialVersionUID = 0L;
+      // @@protoc_insertion_point(class_scope:com.example.appactionvisualizer.databean.Action.Parameter)
+      private static final com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter DEFAULT_INSTANCE;
+
+      static {
+        DEFAULT_INSTANCE = new com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter();
+      }
+
+      private int bitField0_;
+      private volatile java.lang.Object name_;
+      private java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference> entitySetReference_;
+      private byte memoizedIsInitialized = -1;
+
       // Use Parameter.newBuilder() to construct.
       private Parameter(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
         super(builder);
       }
+
       private Parameter() {
         name_ = "";
         entitySetReference_ = java.util.Collections.emptyList();
       }
 
-      @java.lang.Override
-      @SuppressWarnings({"unused"})
-      protected java.lang.Object newInstance(
-          UnusedPrivateParameter unused) {
-        return new Parameter();
-      }
-
-      @java.lang.Override
-      public final com.google.protobuf.UnknownFieldSet
-      getUnknownFields() {
-        return this.unknownFields;
-      }
       private Parameter(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -2893,40 +4475,151 @@ public final class AppActionProtos {
           makeExtensionsImmutable();
         }
       }
+
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
+      getDescriptor() {
         return com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_Action_Parameter_descriptor;
+      }
+
+      public static com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter parseFrom(
+          java.nio.ByteBuffer data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+
+      public static com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter parseFrom(
+          java.nio.ByteBuffer data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+
+      public static com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter parseFrom(
+          com.google.protobuf.ByteString data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+
+      public static com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter parseFrom(
+          com.google.protobuf.ByteString data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+
+      public static com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter parseFrom(byte[] data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+
+      public static com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter parseFrom(
+          byte[] data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+
+      public static com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter parseFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input);
+      }
+
+      public static com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter parseFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input, extensionRegistry);
+      }
+
+      public static com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter parseDelimitedFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseDelimitedWithIOException(PARSER, input);
+      }
+
+      public static com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter parseDelimitedFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+      }
+
+      public static com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter parseFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input);
+      }
+
+      public static com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter parseFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input, extensionRegistry);
+      }
+
+      public static Builder newBuilder() {
+        return DEFAULT_INSTANCE.toBuilder();
+      }
+
+      public static Builder newBuilder(com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter prototype) {
+        return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+      }
+
+      public static com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter getDefaultInstance() {
+        return DEFAULT_INSTANCE;
+      }
+
+      public static com.google.protobuf.Parser<Parameter> parser() {
+        return PARSER;
+      }
+
+      @java.lang.Override
+      @SuppressWarnings({"unused"})
+      protected java.lang.Object newInstance(
+          UnusedPrivateParameter unused) {
+        return new Parameter();
+      }
+
+      @java.lang.Override
+      public final com.google.protobuf.UnknownFieldSet
+      getUnknownFields() {
+        return this.unknownFields;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
+      internalGetFieldAccessorTable() {
         return com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_Action_Parameter_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter.class, com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter.Builder.class);
       }
 
-      private int bitField0_;
-      public static final int NAME_FIELD_NUMBER = 1;
-      private volatile java.lang.Object name_;
       /**
        * <pre>
        * Name of the parameter, e.g. "menuItem.name"
        * </pre>
        *
        * <code>optional string name = 1;</code>
+       *
        * @return Whether the name field is set.
        */
       @java.lang.Override
       public boolean hasName() {
         return ((bitField0_ & 0x00000001) != 0);
       }
+
       /**
        * <pre>
        * Name of the parameter, e.g. "menuItem.name"
        * </pre>
        *
        * <code>optional string name = 1;</code>
+       *
        * @return The name.
        */
       @java.lang.Override
@@ -2935,7 +4628,7 @@ public final class AppActionProtos {
         if (ref instanceof java.lang.String) {
           return (java.lang.String) ref;
         } else {
-          com.google.protobuf.ByteString bs = 
+          com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
@@ -2944,20 +4637,22 @@ public final class AppActionProtos {
           return s;
         }
       }
+
       /**
        * <pre>
        * Name of the parameter, e.g. "menuItem.name"
        * </pre>
        *
        * <code>optional string name = 1;</code>
+       *
        * @return The bytes for name.
        */
       @java.lang.Override
       public com.google.protobuf.ByteString
-          getNameBytes() {
+      getNameBytes() {
         java.lang.Object ref = name_;
         if (ref instanceof java.lang.String) {
-          com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString b =
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
           name_ = b;
@@ -2967,8 +4662,6 @@ public final class AppActionProtos {
         }
       }
 
-      public static final int ENTITY_SET_REFERENCE_FIELD_NUMBER = 2;
-      private java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference> entitySetReference_;
       /**
        * <pre>
        * Optional pointers to developer-supplied structured data that contains
@@ -2984,6 +4677,7 @@ public final class AppActionProtos {
       public java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference> getEntitySetReferenceList() {
         return entitySetReference_;
       }
+
       /**
        * <pre>
        * Optional pointers to developer-supplied structured data that contains
@@ -2996,10 +4690,11 @@ public final class AppActionProtos {
        * <code>repeated .com.example.appactionvisualizer.databean.EntitySetReference entity_set_reference = 2;</code>
        */
       @java.lang.Override
-      public java.util.List<? extends com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReferenceOrBuilder> 
-          getEntitySetReferenceOrBuilderList() {
+      public java.util.List<? extends com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReferenceOrBuilder>
+      getEntitySetReferenceOrBuilderList() {
         return entitySetReference_;
       }
+
       /**
        * <pre>
        * Optional pointers to developer-supplied structured data that contains
@@ -3015,6 +4710,7 @@ public final class AppActionProtos {
       public int getEntitySetReferenceCount() {
         return entitySetReference_.size();
       }
+
       /**
        * <pre>
        * Optional pointers to developer-supplied structured data that contains
@@ -3030,6 +4726,7 @@ public final class AppActionProtos {
       public com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference getEntitySetReference(int index) {
         return entitySetReference_.get(index);
       }
+
       /**
        * <pre>
        * Optional pointers to developer-supplied structured data that contains
@@ -3047,7 +4744,6 @@ public final class AppActionProtos {
         return entitySetReference_.get(index);
       }
 
-      private byte memoizedIsInitialized = -1;
       @java.lang.Override
       public final boolean isInitialized() {
         byte isInitialized = memoizedIsInitialized;
@@ -3060,7 +4756,7 @@ public final class AppActionProtos {
 
       @java.lang.Override
       public void writeTo(com.google.protobuf.CodedOutputStream output)
-                          throws java.io.IOException {
+          throws java.io.IOException {
         if (((bitField0_ & 0x00000001) != 0)) {
           com.google.protobuf.GeneratedMessageV3.writeString(output, 1, name_);
         }
@@ -3081,7 +4777,7 @@ public final class AppActionProtos {
         }
         for (int i = 0; i < entitySetReference_.size(); i++) {
           size += com.google.protobuf.CodedOutputStream
-            .computeMessageSize(2, entitySetReference_.get(i));
+              .computeMessageSize(2, entitySetReference_.get(i));
         }
         size += unknownFields.getSerializedSize();
         memoizedSize = size;
@@ -3091,7 +4787,7 @@ public final class AppActionProtos {
       @java.lang.Override
       public boolean equals(final java.lang.Object obj) {
         if (obj == this) {
-         return true;
+          return true;
         }
         if (!(obj instanceof com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter)) {
           return super.equals(obj);
@@ -3129,84 +4825,11 @@ public final class AppActionProtos {
         return hash;
       }
 
-      public static com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter parseFrom(
-          java.nio.ByteBuffer data)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return PARSER.parseFrom(data);
-      }
-      public static com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter parseFrom(
-          java.nio.ByteBuffer data,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return PARSER.parseFrom(data, extensionRegistry);
-      }
-      public static com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter parseFrom(
-          com.google.protobuf.ByteString data)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return PARSER.parseFrom(data);
-      }
-      public static com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter parseFrom(
-          com.google.protobuf.ByteString data,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return PARSER.parseFrom(data, extensionRegistry);
-      }
-      public static com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter parseFrom(byte[] data)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return PARSER.parseFrom(data);
-      }
-      public static com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter parseFrom(
-          byte[] data,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return PARSER.parseFrom(data, extensionRegistry);
-      }
-      public static com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter parseFrom(java.io.InputStream input)
-          throws java.io.IOException {
-        return com.google.protobuf.GeneratedMessageV3
-            .parseWithIOException(PARSER, input);
-      }
-      public static com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter parseFrom(
-          java.io.InputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        return com.google.protobuf.GeneratedMessageV3
-            .parseWithIOException(PARSER, input, extensionRegistry);
-      }
-      public static com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter parseDelimitedFrom(java.io.InputStream input)
-          throws java.io.IOException {
-        return com.google.protobuf.GeneratedMessageV3
-            .parseDelimitedWithIOException(PARSER, input);
-      }
-      public static com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter parseDelimitedFrom(
-          java.io.InputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        return com.google.protobuf.GeneratedMessageV3
-            .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-      }
-      public static com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter parseFrom(
-          com.google.protobuf.CodedInputStream input)
-          throws java.io.IOException {
-        return com.google.protobuf.GeneratedMessageV3
-            .parseWithIOException(PARSER, input);
-      }
-      public static com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter parseFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        return com.google.protobuf.GeneratedMessageV3
-            .parseWithIOException(PARSER, input, extensionRegistry);
+      @java.lang.Override
+      public Builder newBuilderForType() {
+        return newBuilder();
       }
 
-      @java.lang.Override
-      public Builder newBuilderForType() { return newBuilder(); }
-      public static Builder newBuilder() {
-        return DEFAULT_INSTANCE.toBuilder();
-      }
-      public static Builder newBuilder(com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter prototype) {
-        return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-      }
       @java.lang.Override
       public Builder toBuilder() {
         return this == DEFAULT_INSTANCE
@@ -3219,6 +4842,17 @@ public final class AppActionProtos {
         Builder builder = new Builder(parent);
         return builder;
       }
+
+      @java.lang.Override
+      public com.google.protobuf.Parser<Parameter> getParserForType() {
+        return PARSER;
+      }
+
+      @java.lang.Override
+      public com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter getDefaultInstanceForType() {
+        return DEFAULT_INSTANCE;
+      }
+
       /**
        * Protobuf type {@code com.example.appactionvisualizer.databean.Action.Parameter}
        */
@@ -3226,18 +4860,12 @@ public final class AppActionProtos {
           com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
           // @@protoc_insertion_point(builder_implements:com.example.appactionvisualizer.databean.Action.Parameter)
           com.example.appactionvisualizer.databean.AppActionProtos.Action.ParameterOrBuilder {
-        public static final com.google.protobuf.Descriptors.Descriptor
-            getDescriptor() {
-          return com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_Action_Parameter_descriptor;
-        }
-
-        @java.lang.Override
-        protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-            internalGetFieldAccessorTable() {
-          return com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_Action_Parameter_fieldAccessorTable
-              .ensureFieldAccessorsInitialized(
-                  com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter.class, com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter.Builder.class);
-        }
+        private int bitField0_;
+        private java.lang.Object name_ = "";
+        private java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference> entitySetReference_ =
+            java.util.Collections.emptyList();
+        private com.google.protobuf.RepeatedFieldBuilderV3<
+            com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference, com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference.Builder, com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReferenceOrBuilder> entitySetReferenceBuilder_;
 
         // Construct using com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter.newBuilder()
         private Builder() {
@@ -3249,12 +4877,27 @@ public final class AppActionProtos {
           super(parent);
           maybeForceBuilderInitialization();
         }
+
+        public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+          return com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_Action_Parameter_descriptor;
+        }
+
+        @java.lang.Override
+        protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+          return com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_Action_Parameter_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                  com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter.class, com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter.Builder.class);
+        }
+
         private void maybeForceBuilderInitialization() {
           if (com.google.protobuf.GeneratedMessageV3
-                  .alwaysUseFieldBuilders) {
+              .alwaysUseFieldBuilders) {
             getEntitySetReferenceFieldBuilder();
           }
         }
+
         @java.lang.Override
         public Builder clear() {
           super.clear();
@@ -3271,7 +4914,7 @@ public final class AppActionProtos {
 
         @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
-            getDescriptorForType() {
+        getDescriptorForType() {
           return com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_Action_Parameter_descriptor;
         }
 
@@ -3316,38 +4959,44 @@ public final class AppActionProtos {
         public Builder clone() {
           return super.clone();
         }
+
         @java.lang.Override
         public Builder setField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
             java.lang.Object value) {
           return super.setField(field, value);
         }
+
         @java.lang.Override
         public Builder clearField(
             com.google.protobuf.Descriptors.FieldDescriptor field) {
           return super.clearField(field);
         }
+
         @java.lang.Override
         public Builder clearOneof(
             com.google.protobuf.Descriptors.OneofDescriptor oneof) {
           return super.clearOneof(oneof);
         }
+
         @java.lang.Override
         public Builder setRepeatedField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
             int index, java.lang.Object value) {
           return super.setRepeatedField(field, index, value);
         }
+
         @java.lang.Override
         public Builder addRepeatedField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
             java.lang.Object value) {
           return super.addRepeatedField(field, value);
         }
+
         @java.lang.Override
         public Builder mergeFrom(com.google.protobuf.Message other) {
           if (other instanceof com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter) {
-            return mergeFrom((com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter)other);
+            return mergeFrom((com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter) other);
           } else {
             super.mergeFrom(other);
             return this;
@@ -3355,7 +5004,8 @@ public final class AppActionProtos {
         }
 
         public Builder mergeFrom(com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter other) {
-          if (other == com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter.getDefaultInstance()) return this;
+          if (other == com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter.getDefaultInstance())
+            return this;
           if (other.hasName()) {
             bitField0_ |= 0x00000001;
             name_ = other.name_;
@@ -3379,9 +5029,9 @@ public final class AppActionProtos {
                 entitySetReferenceBuilder_ = null;
                 entitySetReference_ = other.entitySetReference_;
                 bitField0_ = (bitField0_ & ~0x00000002);
-                entitySetReferenceBuilder_ = 
-                  com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                     getEntitySetReferenceFieldBuilder() : null;
+                entitySetReferenceBuilder_ =
+                    com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                        getEntitySetReferenceFieldBuilder() : null;
               } else {
                 entitySetReferenceBuilder_.addAllMessages(other.entitySetReference_);
               }
@@ -3415,26 +5065,27 @@ public final class AppActionProtos {
           }
           return this;
         }
-        private int bitField0_;
 
-        private java.lang.Object name_ = "";
         /**
          * <pre>
          * Name of the parameter, e.g. "menuItem.name"
          * </pre>
          *
          * <code>optional string name = 1;</code>
+         *
          * @return Whether the name field is set.
          */
         public boolean hasName() {
           return ((bitField0_ & 0x00000001) != 0);
         }
+
         /**
          * <pre>
          * Name of the parameter, e.g. "menuItem.name"
          * </pre>
          *
          * <code>optional string name = 1;</code>
+         *
          * @return The name.
          */
         public java.lang.String getName() {
@@ -3451,19 +5102,42 @@ public final class AppActionProtos {
             return (java.lang.String) ref;
           }
         }
+
         /**
          * <pre>
          * Name of the parameter, e.g. "menuItem.name"
          * </pre>
          *
          * <code>optional string name = 1;</code>
+         *
+         * @param value The name to set.
+         * @return This builder for chaining.
+         */
+        public Builder setName(
+            java.lang.String value) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          bitField0_ |= 0x00000001;
+          name_ = value;
+          onChanged();
+          return this;
+        }
+
+        /**
+         * <pre>
+         * Name of the parameter, e.g. "menuItem.name"
+         * </pre>
+         *
+         * <code>optional string name = 1;</code>
+         *
          * @return The bytes for name.
          */
         public com.google.protobuf.ByteString
-            getNameBytes() {
+        getNameBytes() {
           java.lang.Object ref = name_;
           if (ref instanceof String) {
-            com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString b =
                 com.google.protobuf.ByteString.copyFromUtf8(
                     (java.lang.String) ref);
             name_ = b;
@@ -3472,31 +5146,35 @@ public final class AppActionProtos {
             return (com.google.protobuf.ByteString) ref;
           }
         }
+
         /**
          * <pre>
          * Name of the parameter, e.g. "menuItem.name"
          * </pre>
          *
          * <code>optional string name = 1;</code>
-         * @param value The name to set.
+         *
+         * @param value The bytes for name to set.
          * @return This builder for chaining.
          */
-        public Builder setName(
-            java.lang.String value) {
+        public Builder setNameBytes(
+            com.google.protobuf.ByteString value) {
           if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
+            throw new NullPointerException();
+          }
+          bitField0_ |= 0x00000001;
           name_ = value;
           onChanged();
           return this;
         }
+
         /**
          * <pre>
          * Name of the parameter, e.g. "menuItem.name"
          * </pre>
          *
          * <code>optional string name = 1;</code>
+         *
          * @return This builder for chaining.
          */
         public Builder clearName() {
@@ -3505,37 +5183,13 @@ public final class AppActionProtos {
           onChanged();
           return this;
         }
-        /**
-         * <pre>
-         * Name of the parameter, e.g. "menuItem.name"
-         * </pre>
-         *
-         * <code>optional string name = 1;</code>
-         * @param value The bytes for name to set.
-         * @return This builder for chaining.
-         */
-        public Builder setNameBytes(
-            com.google.protobuf.ByteString value) {
-          if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-          name_ = value;
-          onChanged();
-          return this;
-        }
 
-        private java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference> entitySetReference_ =
-          java.util.Collections.emptyList();
         private void ensureEntitySetReferenceIsMutable() {
           if (!((bitField0_ & 0x00000002) != 0)) {
             entitySetReference_ = new java.util.ArrayList<com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference>(entitySetReference_);
             bitField0_ |= 0x00000002;
-           }
+          }
         }
-
-        private com.google.protobuf.RepeatedFieldBuilderV3<
-            com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference, com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference.Builder, com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReferenceOrBuilder> entitySetReferenceBuilder_;
 
         /**
          * <pre>
@@ -3555,6 +5209,7 @@ public final class AppActionProtos {
             return entitySetReferenceBuilder_.getMessageList();
           }
         }
+
         /**
          * <pre>
          * Optional pointers to developer-supplied structured data that contains
@@ -3573,6 +5228,7 @@ public final class AppActionProtos {
             return entitySetReferenceBuilder_.getCount();
           }
         }
+
         /**
          * <pre>
          * Optional pointers to developer-supplied structured data that contains
@@ -3591,6 +5247,7 @@ public final class AppActionProtos {
             return entitySetReferenceBuilder_.getMessage(index);
           }
         }
+
         /**
          * <pre>
          * Optional pointers to developer-supplied structured data that contains
@@ -3616,6 +5273,7 @@ public final class AppActionProtos {
           }
           return this;
         }
+
         /**
          * <pre>
          * Optional pointers to developer-supplied structured data that contains
@@ -3638,6 +5296,7 @@ public final class AppActionProtos {
           }
           return this;
         }
+
         /**
          * <pre>
          * Optional pointers to developer-supplied structured data that contains
@@ -3662,6 +5321,7 @@ public final class AppActionProtos {
           }
           return this;
         }
+
         /**
          * <pre>
          * Optional pointers to developer-supplied structured data that contains
@@ -3687,6 +5347,7 @@ public final class AppActionProtos {
           }
           return this;
         }
+
         /**
          * <pre>
          * Optional pointers to developer-supplied structured data that contains
@@ -3709,6 +5370,7 @@ public final class AppActionProtos {
           }
           return this;
         }
+
         /**
          * <pre>
          * Optional pointers to developer-supplied structured data that contains
@@ -3731,6 +5393,7 @@ public final class AppActionProtos {
           }
           return this;
         }
+
         /**
          * <pre>
          * Optional pointers to developer-supplied structured data that contains
@@ -3754,6 +5417,7 @@ public final class AppActionProtos {
           }
           return this;
         }
+
         /**
          * <pre>
          * Optional pointers to developer-supplied structured data that contains
@@ -3775,6 +5439,7 @@ public final class AppActionProtos {
           }
           return this;
         }
+
         /**
          * <pre>
          * Optional pointers to developer-supplied structured data that contains
@@ -3796,6 +5461,7 @@ public final class AppActionProtos {
           }
           return this;
         }
+
         /**
          * <pre>
          * Optional pointers to developer-supplied structured data that contains
@@ -3811,6 +5477,7 @@ public final class AppActionProtos {
             int index) {
           return getEntitySetReferenceFieldBuilder().getBuilder(index);
         }
+
         /**
          * <pre>
          * Optional pointers to developer-supplied structured data that contains
@@ -3825,10 +5492,12 @@ public final class AppActionProtos {
         public com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReferenceOrBuilder getEntitySetReferenceOrBuilder(
             int index) {
           if (entitySetReferenceBuilder_ == null) {
-            return entitySetReference_.get(index);  } else {
+            return entitySetReference_.get(index);
+          } else {
             return entitySetReferenceBuilder_.getMessageOrBuilder(index);
           }
         }
+
         /**
          * <pre>
          * Optional pointers to developer-supplied structured data that contains
@@ -3840,14 +5509,15 @@ public final class AppActionProtos {
          *
          * <code>repeated .com.example.appactionvisualizer.databean.EntitySetReference entity_set_reference = 2;</code>
          */
-        public java.util.List<? extends com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReferenceOrBuilder> 
-             getEntitySetReferenceOrBuilderList() {
+        public java.util.List<? extends com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReferenceOrBuilder>
+        getEntitySetReferenceOrBuilderList() {
           if (entitySetReferenceBuilder_ != null) {
             return entitySetReferenceBuilder_.getMessageOrBuilderList();
           } else {
             return java.util.Collections.unmodifiableList(entitySetReference_);
           }
         }
+
         /**
          * <pre>
          * Optional pointers to developer-supplied structured data that contains
@@ -3863,6 +5533,7 @@ public final class AppActionProtos {
           return getEntitySetReferenceFieldBuilder().addBuilder(
               com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference.getDefaultInstance());
         }
+
         /**
          * <pre>
          * Optional pointers to developer-supplied structured data that contains
@@ -3879,6 +5550,7 @@ public final class AppActionProtos {
           return getEntitySetReferenceFieldBuilder().addBuilder(
               index, com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference.getDefaultInstance());
         }
+
         /**
          * <pre>
          * Optional pointers to developer-supplied structured data that contains
@@ -3890,24 +5562,26 @@ public final class AppActionProtos {
          *
          * <code>repeated .com.example.appactionvisualizer.databean.EntitySetReference entity_set_reference = 2;</code>
          */
-        public java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference.Builder> 
-             getEntitySetReferenceBuilderList() {
+        public java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference.Builder>
+        getEntitySetReferenceBuilderList() {
           return getEntitySetReferenceFieldBuilder().getBuilderList();
         }
+
         private com.google.protobuf.RepeatedFieldBuilderV3<
-            com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference, com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference.Builder, com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReferenceOrBuilder> 
-            getEntitySetReferenceFieldBuilder() {
+            com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference, com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference.Builder, com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReferenceOrBuilder>
+        getEntitySetReferenceFieldBuilder() {
           if (entitySetReferenceBuilder_ == null) {
             entitySetReferenceBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
                 com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference, com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference.Builder, com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReferenceOrBuilder>(
-                    entitySetReference_,
-                    ((bitField0_ & 0x00000002) != 0),
-                    getParentForChildren(),
-                    isClean());
+                entitySetReference_,
+                ((bitField0_ & 0x00000002) != 0),
+                getParentForChildren(),
+                isClean());
             entitySetReference_ = null;
           }
           return entitySetReferenceBuilder_;
         }
+
         @java.lang.Override
         public final Builder setUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -3924,440 +5598,29 @@ public final class AppActionProtos {
         // @@protoc_insertion_point(builder_scope:com.example.appactionvisualizer.databean.Action.Parameter)
       }
 
-      // @@protoc_insertion_point(class_scope:com.example.appactionvisualizer.databean.Action.Parameter)
-      private static final com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter DEFAULT_INSTANCE;
-      static {
-        DEFAULT_INSTANCE = new com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter();
-      }
-
-      public static com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter getDefaultInstance() {
-        return DEFAULT_INSTANCE;
-      }
-
-      @java.lang.Deprecated public static final com.google.protobuf.Parser<Parameter>
-          PARSER = new com.google.protobuf.AbstractParser<Parameter>() {
-        @java.lang.Override
-        public Parameter parsePartialFrom(
-            com.google.protobuf.CodedInputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Parameter(input, extensionRegistry);
-        }
-      };
-
-      public static com.google.protobuf.Parser<Parameter> parser() {
-        return PARSER;
-      }
-
-      @java.lang.Override
-      public com.google.protobuf.Parser<Parameter> getParserForType() {
-        return PARSER;
-      }
-
-      @java.lang.Override
-      public com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter getDefaultInstanceForType() {
-        return DEFAULT_INSTANCE;
-      }
-
     }
 
-    private int bitField0_;
-    public static final int INTENT_NAME_FIELD_NUMBER = 1;
-    private volatile java.lang.Object intentName_;
-    /**
-     * <pre>
-     * Indicates the name of this semantic intent, e.g.
-     * "actions.intent.ORDER_MENU_ITEM"
-     * </pre>
-     *
-     * <code>optional string intent_name = 1;</code>
-     * @return Whether the intentName field is set.
-     */
-    @java.lang.Override
-    public boolean hasIntentName() {
-      return ((bitField0_ & 0x00000001) != 0);
-    }
-    /**
-     * <pre>
-     * Indicates the name of this semantic intent, e.g.
-     * "actions.intent.ORDER_MENU_ITEM"
-     * </pre>
-     *
-     * <code>optional string intent_name = 1;</code>
-     * @return The intentName.
-     */
-    @java.lang.Override
-    public java.lang.String getIntentName() {
-      java.lang.Object ref = intentName_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          intentName_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <pre>
-     * Indicates the name of this semantic intent, e.g.
-     * "actions.intent.ORDER_MENU_ITEM"
-     * </pre>
-     *
-     * <code>optional string intent_name = 1;</code>
-     * @return The bytes for intentName.
-     */
-    @java.lang.Override
-    public com.google.protobuf.ByteString
-        getIntentNameBytes() {
-      java.lang.Object ref = intentName_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        intentName_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int PARAMETERS_FIELD_NUMBER = 2;
-    private java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter> parameters_;
-    /**
-     * <pre>
-     * The list of parameters within the query_patterns. All of the parameters
-     * within query_patterns must be given.
-     * </pre>
-     *
-     * <code>repeated .com.example.appactionvisualizer.databean.Action.Parameter parameters = 2;</code>
-     */
-    @java.lang.Override
-    public java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter> getParametersList() {
-      return parameters_;
-    }
-    /**
-     * <pre>
-     * The list of parameters within the query_patterns. All of the parameters
-     * within query_patterns must be given.
-     * </pre>
-     *
-     * <code>repeated .com.example.appactionvisualizer.databean.Action.Parameter parameters = 2;</code>
-     */
-    @java.lang.Override
-    public java.util.List<? extends com.example.appactionvisualizer.databean.AppActionProtos.Action.ParameterOrBuilder> 
-        getParametersOrBuilderList() {
-      return parameters_;
-    }
-    /**
-     * <pre>
-     * The list of parameters within the query_patterns. All of the parameters
-     * within query_patterns must be given.
-     * </pre>
-     *
-     * <code>repeated .com.example.appactionvisualizer.databean.Action.Parameter parameters = 2;</code>
-     */
-    @java.lang.Override
-    public int getParametersCount() {
-      return parameters_.size();
-    }
-    /**
-     * <pre>
-     * The list of parameters within the query_patterns. All of the parameters
-     * within query_patterns must be given.
-     * </pre>
-     *
-     * <code>repeated .com.example.appactionvisualizer.databean.Action.Parameter parameters = 2;</code>
-     */
-    @java.lang.Override
-    public com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter getParameters(int index) {
-      return parameters_.get(index);
-    }
-    /**
-     * <pre>
-     * The list of parameters within the query_patterns. All of the parameters
-     * within query_patterns must be given.
-     * </pre>
-     *
-     * <code>repeated .com.example.appactionvisualizer.databean.Action.Parameter parameters = 2;</code>
-     */
-    @java.lang.Override
-    public com.example.appactionvisualizer.databean.AppActionProtos.Action.ParameterOrBuilder getParametersOrBuilder(
-        int index) {
-      return parameters_.get(index);
-    }
-
-    public static final int FULFILLMENT_OPTION_FIELD_NUMBER = 3;
-    private java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption> fulfillmentOption_;
-    /**
-     * <pre>
-     * Multiple fulfillments with different URL templates and fulfillment modes.
-     * </pre>
-     *
-     * <code>repeated .com.example.appactionvisualizer.databean.FulfillmentOption fulfillment_option = 3;</code>
-     */
-    @java.lang.Override
-    public java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption> getFulfillmentOptionList() {
-      return fulfillmentOption_;
-    }
-    /**
-     * <pre>
-     * Multiple fulfillments with different URL templates and fulfillment modes.
-     * </pre>
-     *
-     * <code>repeated .com.example.appactionvisualizer.databean.FulfillmentOption fulfillment_option = 3;</code>
-     */
-    @java.lang.Override
-    public java.util.List<? extends com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOptionOrBuilder> 
-        getFulfillmentOptionOrBuilderList() {
-      return fulfillmentOption_;
-    }
-    /**
-     * <pre>
-     * Multiple fulfillments with different URL templates and fulfillment modes.
-     * </pre>
-     *
-     * <code>repeated .com.example.appactionvisualizer.databean.FulfillmentOption fulfillment_option = 3;</code>
-     */
-    @java.lang.Override
-    public int getFulfillmentOptionCount() {
-      return fulfillmentOption_.size();
-    }
-    /**
-     * <pre>
-     * Multiple fulfillments with different URL templates and fulfillment modes.
-     * </pre>
-     *
-     * <code>repeated .com.example.appactionvisualizer.databean.FulfillmentOption fulfillment_option = 3;</code>
-     */
-    @java.lang.Override
-    public com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption getFulfillmentOption(int index) {
-      return fulfillmentOption_.get(index);
-    }
-    /**
-     * <pre>
-     * Multiple fulfillments with different URL templates and fulfillment modes.
-     * </pre>
-     *
-     * <code>repeated .com.example.appactionvisualizer.databean.FulfillmentOption fulfillment_option = 3;</code>
-     */
-    @java.lang.Override
-    public com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOptionOrBuilder getFulfillmentOptionOrBuilder(
-        int index) {
-      return fulfillmentOption_.get(index);
-    }
-
-    private byte memoizedIsInitialized = -1;
-    @java.lang.Override
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    @java.lang.Override
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (((bitField0_ & 0x00000001) != 0)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, intentName_);
-      }
-      for (int i = 0; i < parameters_.size(); i++) {
-        output.writeMessage(2, parameters_.get(i));
-      }
-      for (int i = 0; i < fulfillmentOption_.size(); i++) {
-        output.writeMessage(3, fulfillmentOption_.get(i));
-      }
-      unknownFields.writeTo(output);
-    }
-
-    @java.lang.Override
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) != 0)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, intentName_);
-      }
-      for (int i = 0; i < parameters_.size(); i++) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, parameters_.get(i));
-      }
-      for (int i = 0; i < fulfillmentOption_.size(); i++) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, fulfillmentOption_.get(i));
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof com.example.appactionvisualizer.databean.AppActionProtos.Action)) {
-        return super.equals(obj);
-      }
-      com.example.appactionvisualizer.databean.AppActionProtos.Action other = (com.example.appactionvisualizer.databean.AppActionProtos.Action) obj;
-
-      if (hasIntentName() != other.hasIntentName()) return false;
-      if (hasIntentName()) {
-        if (!getIntentName()
-            .equals(other.getIntentName())) return false;
-      }
-      if (!getParametersList()
-          .equals(other.getParametersList())) return false;
-      if (!getFulfillmentOptionList()
-          .equals(other.getFulfillmentOptionList())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
-      return true;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      if (hasIntentName()) {
-        hash = (37 * hash) + INTENT_NAME_FIELD_NUMBER;
-        hash = (53 * hash) + getIntentName().hashCode();
-      }
-      if (getParametersCount() > 0) {
-        hash = (37 * hash) + PARAMETERS_FIELD_NUMBER;
-        hash = (53 * hash) + getParametersList().hashCode();
-      }
-      if (getFulfillmentOptionCount() > 0) {
-        hash = (37 * hash) + FULFILLMENT_OPTION_FIELD_NUMBER;
-        hash = (53 * hash) + getFulfillmentOptionList().hashCode();
-      }
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static com.example.appactionvisualizer.databean.AppActionProtos.Action parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.Action parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.Action parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.Action parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.Action parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.Action parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.Action parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.Action parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.Action parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.Action parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.Action parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.Action parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(com.example.appactionvisualizer.databean.AppActionProtos.Action prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    @java.lang.Override
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
     /**
      * <pre>
      * Represents an action declared in an apk of an Android app, as actions.xml.
      * </pre>
-     *
+     * <p>
      * Protobuf type {@code com.example.appactionvisualizer.databean.Action}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:com.example.appactionvisualizer.databean.Action)
         com.example.appactionvisualizer.databean.AppActionProtos.ActionOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_Action_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_Action_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.example.appactionvisualizer.databean.AppActionProtos.Action.class, com.example.appactionvisualizer.databean.AppActionProtos.Action.Builder.class);
-      }
+      private int bitField0_;
+      private java.lang.Object intentName_ = "";
+      private java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter> parameters_ =
+          java.util.Collections.emptyList();
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter, com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter.Builder, com.example.appactionvisualizer.databean.AppActionProtos.Action.ParameterOrBuilder> parametersBuilder_;
+      private java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption> fulfillmentOption_ =
+          java.util.Collections.emptyList();
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption, com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption.Builder, com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOptionOrBuilder> fulfillmentOptionBuilder_;
 
       // Construct using com.example.appactionvisualizer.databean.AppActionProtos.Action.newBuilder()
       private Builder() {
@@ -4369,13 +5632,28 @@ public final class AppActionProtos {
         super(parent);
         maybeForceBuilderInitialization();
       }
+
+      public static final com.google.protobuf.Descriptors.Descriptor
+      getDescriptor() {
+        return com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_Action_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internalGetFieldAccessorTable() {
+        return com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_Action_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.example.appactionvisualizer.databean.AppActionProtos.Action.class, com.example.appactionvisualizer.databean.AppActionProtos.Action.Builder.class);
+      }
+
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
+            .alwaysUseFieldBuilders) {
           getParametersFieldBuilder();
           getFulfillmentOptionFieldBuilder();
         }
       }
+
       @java.lang.Override
       public Builder clear() {
         super.clear();
@@ -4398,7 +5676,7 @@ public final class AppActionProtos {
 
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
+      getDescriptorForType() {
         return com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_Action_descriptor;
       }
 
@@ -4452,38 +5730,44 @@ public final class AppActionProtos {
       public Builder clone() {
         return super.clone();
       }
+
       @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return super.setField(field, value);
       }
+
       @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return super.clearField(field);
       }
+
       @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return super.clearOneof(oneof);
       }
+
       @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
         return super.setRepeatedField(field, index, value);
       }
+
       @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return super.addRepeatedField(field, value);
       }
+
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.example.appactionvisualizer.databean.AppActionProtos.Action) {
-          return mergeFrom((com.example.appactionvisualizer.databean.AppActionProtos.Action)other);
+          return mergeFrom((com.example.appactionvisualizer.databean.AppActionProtos.Action) other);
         } else {
           super.mergeFrom(other);
           return this;
@@ -4491,7 +5775,8 @@ public final class AppActionProtos {
       }
 
       public Builder mergeFrom(com.example.appactionvisualizer.databean.AppActionProtos.Action other) {
-        if (other == com.example.appactionvisualizer.databean.AppActionProtos.Action.getDefaultInstance()) return this;
+        if (other == com.example.appactionvisualizer.databean.AppActionProtos.Action.getDefaultInstance())
+          return this;
         if (other.hasIntentName()) {
           bitField0_ |= 0x00000001;
           intentName_ = other.intentName_;
@@ -4515,9 +5800,9 @@ public final class AppActionProtos {
               parametersBuilder_ = null;
               parameters_ = other.parameters_;
               bitField0_ = (bitField0_ & ~0x00000002);
-              parametersBuilder_ = 
-                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                   getParametersFieldBuilder() : null;
+              parametersBuilder_ =
+                  com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                      getParametersFieldBuilder() : null;
             } else {
               parametersBuilder_.addAllMessages(other.parameters_);
             }
@@ -4541,9 +5826,9 @@ public final class AppActionProtos {
               fulfillmentOptionBuilder_ = null;
               fulfillmentOption_ = other.fulfillmentOption_;
               bitField0_ = (bitField0_ & ~0x00000004);
-              fulfillmentOptionBuilder_ = 
-                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                   getFulfillmentOptionFieldBuilder() : null;
+              fulfillmentOptionBuilder_ =
+                  com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                      getFulfillmentOptionFieldBuilder() : null;
             } else {
               fulfillmentOptionBuilder_.addAllMessages(other.fulfillmentOption_);
             }
@@ -4577,9 +5862,7 @@ public final class AppActionProtos {
         }
         return this;
       }
-      private int bitField0_;
 
-      private java.lang.Object intentName_ = "";
       /**
        * <pre>
        * Indicates the name of this semantic intent, e.g.
@@ -4587,11 +5870,13 @@ public final class AppActionProtos {
        * </pre>
        *
        * <code>optional string intent_name = 1;</code>
+       *
        * @return Whether the intentName field is set.
        */
       public boolean hasIntentName() {
         return ((bitField0_ & 0x00000001) != 0);
       }
+
       /**
        * <pre>
        * Indicates the name of this semantic intent, e.g.
@@ -4599,6 +5884,7 @@ public final class AppActionProtos {
        * </pre>
        *
        * <code>optional string intent_name = 1;</code>
+       *
        * @return The intentName.
        */
       public java.lang.String getIntentName() {
@@ -4615,6 +5901,7 @@ public final class AppActionProtos {
           return (java.lang.String) ref;
         }
       }
+
       /**
        * <pre>
        * Indicates the name of this semantic intent, e.g.
@@ -4622,13 +5909,36 @@ public final class AppActionProtos {
        * </pre>
        *
        * <code>optional string intent_name = 1;</code>
+       *
+       * @param value The intentName to set.
+       * @return This builder for chaining.
+       */
+      public Builder setIntentName(
+          java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000001;
+        intentName_ = value;
+        onChanged();
+        return this;
+      }
+
+      /**
+       * <pre>
+       * Indicates the name of this semantic intent, e.g.
+       * "actions.intent.ORDER_MENU_ITEM"
+       * </pre>
+       *
+       * <code>optional string intent_name = 1;</code>
+       *
        * @return The bytes for intentName.
        */
       public com.google.protobuf.ByteString
-          getIntentNameBytes() {
+      getIntentNameBytes() {
         java.lang.Object ref = intentName_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString b =
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
           intentName_ = b;
@@ -4637,6 +5947,7 @@ public final class AppActionProtos {
           return (com.google.protobuf.ByteString) ref;
         }
       }
+
       /**
        * <pre>
        * Indicates the name of this semantic intent, e.g.
@@ -4644,19 +5955,21 @@ public final class AppActionProtos {
        * </pre>
        *
        * <code>optional string intent_name = 1;</code>
-       * @param value The intentName to set.
+       *
+       * @param value The bytes for intentName to set.
        * @return This builder for chaining.
        */
-      public Builder setIntentName(
-          java.lang.String value) {
+      public Builder setIntentNameBytes(
+          com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000001;
         intentName_ = value;
         onChanged();
         return this;
       }
+
       /**
        * <pre>
        * Indicates the name of this semantic intent, e.g.
@@ -4664,6 +5977,7 @@ public final class AppActionProtos {
        * </pre>
        *
        * <code>optional string intent_name = 1;</code>
+       *
        * @return This builder for chaining.
        */
       public Builder clearIntentName() {
@@ -4672,38 +5986,13 @@ public final class AppActionProtos {
         onChanged();
         return this;
       }
-      /**
-       * <pre>
-       * Indicates the name of this semantic intent, e.g.
-       * "actions.intent.ORDER_MENU_ITEM"
-       * </pre>
-       *
-       * <code>optional string intent_name = 1;</code>
-       * @param value The bytes for intentName to set.
-       * @return This builder for chaining.
-       */
-      public Builder setIntentNameBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-        intentName_ = value;
-        onChanged();
-        return this;
-      }
 
-      private java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter> parameters_ =
-        java.util.Collections.emptyList();
       private void ensureParametersIsMutable() {
         if (!((bitField0_ & 0x00000002) != 0)) {
           parameters_ = new java.util.ArrayList<com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter>(parameters_);
           bitField0_ |= 0x00000002;
-         }
+        }
       }
-
-      private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter, com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter.Builder, com.example.appactionvisualizer.databean.AppActionProtos.Action.ParameterOrBuilder> parametersBuilder_;
 
       /**
        * <pre>
@@ -4720,6 +6009,7 @@ public final class AppActionProtos {
           return parametersBuilder_.getMessageList();
         }
       }
+
       /**
        * <pre>
        * The list of parameters within the query_patterns. All of the parameters
@@ -4735,6 +6025,7 @@ public final class AppActionProtos {
           return parametersBuilder_.getCount();
         }
       }
+
       /**
        * <pre>
        * The list of parameters within the query_patterns. All of the parameters
@@ -4750,6 +6041,7 @@ public final class AppActionProtos {
           return parametersBuilder_.getMessage(index);
         }
       }
+
       /**
        * <pre>
        * The list of parameters within the query_patterns. All of the parameters
@@ -4772,6 +6064,7 @@ public final class AppActionProtos {
         }
         return this;
       }
+
       /**
        * <pre>
        * The list of parameters within the query_patterns. All of the parameters
@@ -4791,6 +6084,7 @@ public final class AppActionProtos {
         }
         return this;
       }
+
       /**
        * <pre>
        * The list of parameters within the query_patterns. All of the parameters
@@ -4812,6 +6106,7 @@ public final class AppActionProtos {
         }
         return this;
       }
+
       /**
        * <pre>
        * The list of parameters within the query_patterns. All of the parameters
@@ -4834,6 +6129,7 @@ public final class AppActionProtos {
         }
         return this;
       }
+
       /**
        * <pre>
        * The list of parameters within the query_patterns. All of the parameters
@@ -4853,6 +6149,7 @@ public final class AppActionProtos {
         }
         return this;
       }
+
       /**
        * <pre>
        * The list of parameters within the query_patterns. All of the parameters
@@ -4872,6 +6169,7 @@ public final class AppActionProtos {
         }
         return this;
       }
+
       /**
        * <pre>
        * The list of parameters within the query_patterns. All of the parameters
@@ -4892,6 +6190,7 @@ public final class AppActionProtos {
         }
         return this;
       }
+
       /**
        * <pre>
        * The list of parameters within the query_patterns. All of the parameters
@@ -4910,6 +6209,7 @@ public final class AppActionProtos {
         }
         return this;
       }
+
       /**
        * <pre>
        * The list of parameters within the query_patterns. All of the parameters
@@ -4928,6 +6228,7 @@ public final class AppActionProtos {
         }
         return this;
       }
+
       /**
        * <pre>
        * The list of parameters within the query_patterns. All of the parameters
@@ -4940,6 +6241,7 @@ public final class AppActionProtos {
           int index) {
         return getParametersFieldBuilder().getBuilder(index);
       }
+
       /**
        * <pre>
        * The list of parameters within the query_patterns. All of the parameters
@@ -4951,10 +6253,12 @@ public final class AppActionProtos {
       public com.example.appactionvisualizer.databean.AppActionProtos.Action.ParameterOrBuilder getParametersOrBuilder(
           int index) {
         if (parametersBuilder_ == null) {
-          return parameters_.get(index);  } else {
+          return parameters_.get(index);
+        } else {
           return parametersBuilder_.getMessageOrBuilder(index);
         }
       }
+
       /**
        * <pre>
        * The list of parameters within the query_patterns. All of the parameters
@@ -4963,14 +6267,15 @@ public final class AppActionProtos {
        *
        * <code>repeated .com.example.appactionvisualizer.databean.Action.Parameter parameters = 2;</code>
        */
-      public java.util.List<? extends com.example.appactionvisualizer.databean.AppActionProtos.Action.ParameterOrBuilder> 
-           getParametersOrBuilderList() {
+      public java.util.List<? extends com.example.appactionvisualizer.databean.AppActionProtos.Action.ParameterOrBuilder>
+      getParametersOrBuilderList() {
         if (parametersBuilder_ != null) {
           return parametersBuilder_.getMessageOrBuilderList();
         } else {
           return java.util.Collections.unmodifiableList(parameters_);
         }
       }
+
       /**
        * <pre>
        * The list of parameters within the query_patterns. All of the parameters
@@ -4983,6 +6288,7 @@ public final class AppActionProtos {
         return getParametersFieldBuilder().addBuilder(
             com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter.getDefaultInstance());
       }
+
       /**
        * <pre>
        * The list of parameters within the query_patterns. All of the parameters
@@ -4996,6 +6302,7 @@ public final class AppActionProtos {
         return getParametersFieldBuilder().addBuilder(
             index, com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter.getDefaultInstance());
       }
+
       /**
        * <pre>
        * The list of parameters within the query_patterns. All of the parameters
@@ -5004,36 +6311,32 @@ public final class AppActionProtos {
        *
        * <code>repeated .com.example.appactionvisualizer.databean.Action.Parameter parameters = 2;</code>
        */
-      public java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter.Builder> 
-           getParametersBuilderList() {
+      public java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter.Builder>
+      getParametersBuilderList() {
         return getParametersFieldBuilder().getBuilderList();
       }
+
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter, com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter.Builder, com.example.appactionvisualizer.databean.AppActionProtos.Action.ParameterOrBuilder> 
-          getParametersFieldBuilder() {
+          com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter, com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter.Builder, com.example.appactionvisualizer.databean.AppActionProtos.Action.ParameterOrBuilder>
+      getParametersFieldBuilder() {
         if (parametersBuilder_ == null) {
           parametersBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter, com.example.appactionvisualizer.databean.AppActionProtos.Action.Parameter.Builder, com.example.appactionvisualizer.databean.AppActionProtos.Action.ParameterOrBuilder>(
-                  parameters_,
-                  ((bitField0_ & 0x00000002) != 0),
-                  getParentForChildren(),
-                  isClean());
+              parameters_,
+              ((bitField0_ & 0x00000002) != 0),
+              getParentForChildren(),
+              isClean());
           parameters_ = null;
         }
         return parametersBuilder_;
       }
 
-      private java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption> fulfillmentOption_ =
-        java.util.Collections.emptyList();
       private void ensureFulfillmentOptionIsMutable() {
         if (!((bitField0_ & 0x00000004) != 0)) {
           fulfillmentOption_ = new java.util.ArrayList<com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption>(fulfillmentOption_);
           bitField0_ |= 0x00000004;
-         }
+        }
       }
-
-      private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption, com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption.Builder, com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOptionOrBuilder> fulfillmentOptionBuilder_;
 
       /**
        * <pre>
@@ -5049,6 +6352,7 @@ public final class AppActionProtos {
           return fulfillmentOptionBuilder_.getMessageList();
         }
       }
+
       /**
        * <pre>
        * Multiple fulfillments with different URL templates and fulfillment modes.
@@ -5063,6 +6367,7 @@ public final class AppActionProtos {
           return fulfillmentOptionBuilder_.getCount();
         }
       }
+
       /**
        * <pre>
        * Multiple fulfillments with different URL templates and fulfillment modes.
@@ -5077,6 +6382,7 @@ public final class AppActionProtos {
           return fulfillmentOptionBuilder_.getMessage(index);
         }
       }
+
       /**
        * <pre>
        * Multiple fulfillments with different URL templates and fulfillment modes.
@@ -5098,6 +6404,7 @@ public final class AppActionProtos {
         }
         return this;
       }
+
       /**
        * <pre>
        * Multiple fulfillments with different URL templates and fulfillment modes.
@@ -5116,6 +6423,7 @@ public final class AppActionProtos {
         }
         return this;
       }
+
       /**
        * <pre>
        * Multiple fulfillments with different URL templates and fulfillment modes.
@@ -5136,6 +6444,7 @@ public final class AppActionProtos {
         }
         return this;
       }
+
       /**
        * <pre>
        * Multiple fulfillments with different URL templates and fulfillment modes.
@@ -5157,6 +6466,7 @@ public final class AppActionProtos {
         }
         return this;
       }
+
       /**
        * <pre>
        * Multiple fulfillments with different URL templates and fulfillment modes.
@@ -5175,6 +6485,7 @@ public final class AppActionProtos {
         }
         return this;
       }
+
       /**
        * <pre>
        * Multiple fulfillments with different URL templates and fulfillment modes.
@@ -5193,6 +6504,7 @@ public final class AppActionProtos {
         }
         return this;
       }
+
       /**
        * <pre>
        * Multiple fulfillments with different URL templates and fulfillment modes.
@@ -5212,6 +6524,7 @@ public final class AppActionProtos {
         }
         return this;
       }
+
       /**
        * <pre>
        * Multiple fulfillments with different URL templates and fulfillment modes.
@@ -5229,6 +6542,7 @@ public final class AppActionProtos {
         }
         return this;
       }
+
       /**
        * <pre>
        * Multiple fulfillments with different URL templates and fulfillment modes.
@@ -5246,6 +6560,7 @@ public final class AppActionProtos {
         }
         return this;
       }
+
       /**
        * <pre>
        * Multiple fulfillments with different URL templates and fulfillment modes.
@@ -5257,6 +6572,7 @@ public final class AppActionProtos {
           int index) {
         return getFulfillmentOptionFieldBuilder().getBuilder(index);
       }
+
       /**
        * <pre>
        * Multiple fulfillments with different URL templates and fulfillment modes.
@@ -5267,10 +6583,12 @@ public final class AppActionProtos {
       public com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOptionOrBuilder getFulfillmentOptionOrBuilder(
           int index) {
         if (fulfillmentOptionBuilder_ == null) {
-          return fulfillmentOption_.get(index);  } else {
+          return fulfillmentOption_.get(index);
+        } else {
           return fulfillmentOptionBuilder_.getMessageOrBuilder(index);
         }
       }
+
       /**
        * <pre>
        * Multiple fulfillments with different URL templates and fulfillment modes.
@@ -5278,14 +6596,15 @@ public final class AppActionProtos {
        *
        * <code>repeated .com.example.appactionvisualizer.databean.FulfillmentOption fulfillment_option = 3;</code>
        */
-      public java.util.List<? extends com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOptionOrBuilder> 
-           getFulfillmentOptionOrBuilderList() {
+      public java.util.List<? extends com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOptionOrBuilder>
+      getFulfillmentOptionOrBuilderList() {
         if (fulfillmentOptionBuilder_ != null) {
           return fulfillmentOptionBuilder_.getMessageOrBuilderList();
         } else {
           return java.util.Collections.unmodifiableList(fulfillmentOption_);
         }
       }
+
       /**
        * <pre>
        * Multiple fulfillments with different URL templates and fulfillment modes.
@@ -5297,6 +6616,7 @@ public final class AppActionProtos {
         return getFulfillmentOptionFieldBuilder().addBuilder(
             com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption.getDefaultInstance());
       }
+
       /**
        * <pre>
        * Multiple fulfillments with different URL templates and fulfillment modes.
@@ -5309,6 +6629,7 @@ public final class AppActionProtos {
         return getFulfillmentOptionFieldBuilder().addBuilder(
             index, com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption.getDefaultInstance());
       }
+
       /**
        * <pre>
        * Multiple fulfillments with different URL templates and fulfillment modes.
@@ -5316,24 +6637,26 @@ public final class AppActionProtos {
        *
        * <code>repeated .com.example.appactionvisualizer.databean.FulfillmentOption fulfillment_option = 3;</code>
        */
-      public java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption.Builder> 
-           getFulfillmentOptionBuilderList() {
+      public java.util.List<com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption.Builder>
+      getFulfillmentOptionBuilderList() {
         return getFulfillmentOptionFieldBuilder().getBuilderList();
       }
+
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption, com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption.Builder, com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOptionOrBuilder> 
-          getFulfillmentOptionFieldBuilder() {
+          com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption, com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption.Builder, com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOptionOrBuilder>
+      getFulfillmentOptionFieldBuilder() {
         if (fulfillmentOptionBuilder_ == null) {
           fulfillmentOptionBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption, com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption.Builder, com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOptionOrBuilder>(
-                  fulfillmentOption_,
-                  ((bitField0_ & 0x00000004) != 0),
-                  getParentForChildren(),
-                  isClean());
+              fulfillmentOption_,
+              ((bitField0_ & 0x00000004) != 0),
+              getParentForChildren(),
+              isClean());
           fulfillmentOption_ = null;
         }
         return fulfillmentOptionBuilder_;
       }
+
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -5350,105 +6673,8 @@ public final class AppActionProtos {
       // @@protoc_insertion_point(builder_scope:com.example.appactionvisualizer.databean.Action)
     }
 
-    // @@protoc_insertion_point(class_scope:com.example.appactionvisualizer.databean.Action)
-    private static final com.example.appactionvisualizer.databean.AppActionProtos.Action DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new com.example.appactionvisualizer.databean.AppActionProtos.Action();
-    }
-
-    public static com.example.appactionvisualizer.databean.AppActionProtos.Action getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<Action>
-        PARSER = new com.google.protobuf.AbstractParser<Action>() {
-      @java.lang.Override
-      public Action parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new Action(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<Action> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<Action> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.example.appactionvisualizer.databean.AppActionProtos.Action getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
   }
 
-  public interface EntitySetReferenceOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.example.appactionvisualizer.databean.EntitySetReference)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <pre>
-     * A reference to a specific collection of entities.
-     * </pre>
-     *
-     * <code>optional string entity_set_id = 1;</code>
-     * @return Whether the entitySetId field is set.
-     */
-    boolean hasEntitySetId();
-    /**
-     * <pre>
-     * A reference to a specific collection of entities.
-     * </pre>
-     *
-     * <code>optional string entity_set_id = 1;</code>
-     * @return The entitySetId.
-     */
-    java.lang.String getEntitySetId();
-    /**
-     * <pre>
-     * A reference to a specific collection of entities.
-     * </pre>
-     *
-     * <code>optional string entity_set_id = 1;</code>
-     * @return The bytes for entitySetId.
-     */
-    com.google.protobuf.ByteString
-        getEntitySetIdBytes();
-
-    /**
-     * <pre>
-     * Include all entities that match the specified filtering criteria.
-     * </pre>
-     *
-     * <code>optional string url_filter = 2;</code>
-     * @return Whether the urlFilter field is set.
-     */
-    boolean hasUrlFilter();
-    /**
-     * <pre>
-     * Include all entities that match the specified filtering criteria.
-     * </pre>
-     *
-     * <code>optional string url_filter = 2;</code>
-     * @return The urlFilter.
-     */
-    java.lang.String getUrlFilter();
-    /**
-     * <pre>
-     * Include all entities that match the specified filtering criteria.
-     * </pre>
-     *
-     * <code>optional string url_filter = 2;</code>
-     * @return The bytes for urlFilter.
-     */
-    com.google.protobuf.ByteString
-        getUrlFilterBytes();
-  }
   /**
    * Protobuf type {@code com.example.appactionvisualizer.databean.EntitySetReference}
    */
@@ -5456,28 +6682,42 @@ public final class AppActionProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:com.example.appactionvisualizer.databean.EntitySetReference)
       EntitySetReferenceOrBuilder {
-  private static final long serialVersionUID = 0L;
+    public static final int ENTITY_SET_ID_FIELD_NUMBER = 1;
+    public static final int URL_FILTER_FIELD_NUMBER = 2;
+    @java.lang.Deprecated
+    public static final com.google.protobuf.Parser<EntitySetReference>
+        PARSER = new com.google.protobuf.AbstractParser<EntitySetReference>() {
+      @java.lang.Override
+      public EntitySetReference parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new EntitySetReference(input, extensionRegistry);
+      }
+    };
+    private static final long serialVersionUID = 0L;
+    // @@protoc_insertion_point(class_scope:com.example.appactionvisualizer.databean.EntitySetReference)
+    private static final com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference DEFAULT_INSTANCE;
+
+    static {
+      DEFAULT_INSTANCE = new com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference();
+    }
+
+    private int bitField0_;
+    private volatile java.lang.Object entitySetId_;
+    private volatile java.lang.Object urlFilter_;
+    private byte memoizedIsInitialized = -1;
+
     // Use EntitySetReference.newBuilder() to construct.
     private EntitySetReference(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
+
     private EntitySetReference() {
       entitySetId_ = "";
       urlFilter_ = "";
     }
 
-    @java.lang.Override
-    @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
-        UnusedPrivateParameter unused) {
-      return new EntitySetReference();
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
     private EntitySetReference(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -5528,40 +6768,151 @@ public final class AppActionProtos {
         makeExtensionsImmutable();
       }
     }
+
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
+    getDescriptor() {
       return com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_EntitySetReference_descriptor;
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+
+    public static Builder newBuilder(com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    public static com.google.protobuf.Parser<EntitySetReference> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new EntitySetReference();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
+    internalGetFieldAccessorTable() {
       return com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_EntitySetReference_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference.class, com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference.Builder.class);
     }
 
-    private int bitField0_;
-    public static final int ENTITY_SET_ID_FIELD_NUMBER = 1;
-    private volatile java.lang.Object entitySetId_;
     /**
      * <pre>
      * A reference to a specific collection of entities.
      * </pre>
      *
      * <code>optional string entity_set_id = 1;</code>
+     *
      * @return Whether the entitySetId field is set.
      */
     @java.lang.Override
     public boolean hasEntitySetId() {
       return ((bitField0_ & 0x00000001) != 0);
     }
+
     /**
      * <pre>
      * A reference to a specific collection of entities.
      * </pre>
      *
      * <code>optional string entity_set_id = 1;</code>
+     *
      * @return The entitySetId.
      */
     @java.lang.Override
@@ -5570,7 +6921,7 @@ public final class AppActionProtos {
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
+        com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
@@ -5579,20 +6930,22 @@ public final class AppActionProtos {
         return s;
       }
     }
+
     /**
      * <pre>
      * A reference to a specific collection of entities.
      * </pre>
      *
      * <code>optional string entity_set_id = 1;</code>
+     *
      * @return The bytes for entitySetId.
      */
     @java.lang.Override
     public com.google.protobuf.ByteString
-        getEntitySetIdBytes() {
+    getEntitySetIdBytes() {
       java.lang.Object ref = entitySetId_;
       if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
+        com.google.protobuf.ByteString b =
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
         entitySetId_ = b;
@@ -5602,26 +6955,27 @@ public final class AppActionProtos {
       }
     }
 
-    public static final int URL_FILTER_FIELD_NUMBER = 2;
-    private volatile java.lang.Object urlFilter_;
     /**
      * <pre>
      * Include all entities that match the specified filtering criteria.
      * </pre>
      *
      * <code>optional string url_filter = 2;</code>
+     *
      * @return Whether the urlFilter field is set.
      */
     @java.lang.Override
     public boolean hasUrlFilter() {
       return ((bitField0_ & 0x00000002) != 0);
     }
+
     /**
      * <pre>
      * Include all entities that match the specified filtering criteria.
      * </pre>
      *
      * <code>optional string url_filter = 2;</code>
+     *
      * @return The urlFilter.
      */
     @java.lang.Override
@@ -5630,7 +6984,7 @@ public final class AppActionProtos {
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
+        com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
@@ -5639,20 +6993,22 @@ public final class AppActionProtos {
         return s;
       }
     }
+
     /**
      * <pre>
      * Include all entities that match the specified filtering criteria.
      * </pre>
      *
      * <code>optional string url_filter = 2;</code>
+     *
      * @return The bytes for urlFilter.
      */
     @java.lang.Override
     public com.google.protobuf.ByteString
-        getUrlFilterBytes() {
+    getUrlFilterBytes() {
       java.lang.Object ref = urlFilter_;
       if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
+        com.google.protobuf.ByteString b =
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
         urlFilter_ = b;
@@ -5662,7 +7018,6 @@ public final class AppActionProtos {
       }
     }
 
-    private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -5675,7 +7030,7 @@ public final class AppActionProtos {
 
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+        throws java.io.IOException {
       if (((bitField0_ & 0x00000001) != 0)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, entitySetId_);
       }
@@ -5705,7 +7060,7 @@ public final class AppActionProtos {
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
-       return true;
+        return true;
       }
       if (!(obj instanceof com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference)) {
         return super.equals(obj);
@@ -5746,84 +7101,11 @@ public final class AppActionProtos {
       return hash;
     }
 
-    public static com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+    @java.lang.Override
+    public Builder newBuilderForType() {
+      return newBuilder();
     }
 
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
     @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
@@ -5836,6 +7118,17 @@ public final class AppActionProtos {
       Builder builder = new Builder(parent);
       return builder;
     }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<EntitySetReference> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
     /**
      * Protobuf type {@code com.example.appactionvisualizer.databean.EntitySetReference}
      */
@@ -5843,18 +7136,9 @@ public final class AppActionProtos {
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:com.example.appactionvisualizer.databean.EntitySetReference)
         com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReferenceOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_EntitySetReference_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_EntitySetReference_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference.class, com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference.Builder.class);
-      }
+      private int bitField0_;
+      private java.lang.Object entitySetId_ = "";
+      private java.lang.Object urlFilter_ = "";
 
       // Construct using com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference.newBuilder()
       private Builder() {
@@ -5866,11 +7150,26 @@ public final class AppActionProtos {
         super(parent);
         maybeForceBuilderInitialization();
       }
+
+      public static final com.google.protobuf.Descriptors.Descriptor
+      getDescriptor() {
+        return com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_EntitySetReference_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internalGetFieldAccessorTable() {
+        return com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_EntitySetReference_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference.class, com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference.Builder.class);
+      }
+
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
+            .alwaysUseFieldBuilders) {
         }
       }
+
       @java.lang.Override
       public Builder clear() {
         super.clear();
@@ -5883,7 +7182,7 @@ public final class AppActionProtos {
 
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
+      getDescriptorForType() {
         return com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_EntitySetReference_descriptor;
       }
 
@@ -5923,38 +7222,44 @@ public final class AppActionProtos {
       public Builder clone() {
         return super.clone();
       }
+
       @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return super.setField(field, value);
       }
+
       @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return super.clearField(field);
       }
+
       @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return super.clearOneof(oneof);
       }
+
       @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
         return super.setRepeatedField(field, index, value);
       }
+
       @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return super.addRepeatedField(field, value);
       }
+
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference) {
-          return mergeFrom((com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference)other);
+          return mergeFrom((com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference) other);
         } else {
           super.mergeFrom(other);
           return this;
@@ -5962,7 +7267,8 @@ public final class AppActionProtos {
       }
 
       public Builder mergeFrom(com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference other) {
-        if (other == com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference.getDefaultInstance()) return this;
+        if (other == com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference.getDefaultInstance())
+          return this;
         if (other.hasEntitySetId()) {
           bitField0_ |= 0x00000001;
           entitySetId_ = other.entitySetId_;
@@ -6001,26 +7307,27 @@ public final class AppActionProtos {
         }
         return this;
       }
-      private int bitField0_;
 
-      private java.lang.Object entitySetId_ = "";
       /**
        * <pre>
        * A reference to a specific collection of entities.
        * </pre>
        *
        * <code>optional string entity_set_id = 1;</code>
+       *
        * @return Whether the entitySetId field is set.
        */
       public boolean hasEntitySetId() {
         return ((bitField0_ & 0x00000001) != 0);
       }
+
       /**
        * <pre>
        * A reference to a specific collection of entities.
        * </pre>
        *
        * <code>optional string entity_set_id = 1;</code>
+       *
        * @return The entitySetId.
        */
       public java.lang.String getEntitySetId() {
@@ -6037,19 +7344,42 @@ public final class AppActionProtos {
           return (java.lang.String) ref;
         }
       }
+
       /**
        * <pre>
        * A reference to a specific collection of entities.
        * </pre>
        *
        * <code>optional string entity_set_id = 1;</code>
+       *
+       * @param value The entitySetId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setEntitySetId(
+          java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000001;
+        entitySetId_ = value;
+        onChanged();
+        return this;
+      }
+
+      /**
+       * <pre>
+       * A reference to a specific collection of entities.
+       * </pre>
+       *
+       * <code>optional string entity_set_id = 1;</code>
+       *
        * @return The bytes for entitySetId.
        */
       public com.google.protobuf.ByteString
-          getEntitySetIdBytes() {
+      getEntitySetIdBytes() {
         java.lang.Object ref = entitySetId_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString b =
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
           entitySetId_ = b;
@@ -6058,31 +7388,35 @@ public final class AppActionProtos {
           return (com.google.protobuf.ByteString) ref;
         }
       }
+
       /**
        * <pre>
        * A reference to a specific collection of entities.
        * </pre>
        *
        * <code>optional string entity_set_id = 1;</code>
-       * @param value The entitySetId to set.
+       *
+       * @param value The bytes for entitySetId to set.
        * @return This builder for chaining.
        */
-      public Builder setEntitySetId(
-          java.lang.String value) {
+      public Builder setEntitySetIdBytes(
+          com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000001;
         entitySetId_ = value;
         onChanged();
         return this;
       }
+
       /**
        * <pre>
        * A reference to a specific collection of entities.
        * </pre>
        *
        * <code>optional string entity_set_id = 1;</code>
+       *
        * @return This builder for chaining.
        */
       public Builder clearEntitySetId() {
@@ -6091,44 +7425,27 @@ public final class AppActionProtos {
         onChanged();
         return this;
       }
-      /**
-       * <pre>
-       * A reference to a specific collection of entities.
-       * </pre>
-       *
-       * <code>optional string entity_set_id = 1;</code>
-       * @param value The bytes for entitySetId to set.
-       * @return This builder for chaining.
-       */
-      public Builder setEntitySetIdBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-        entitySetId_ = value;
-        onChanged();
-        return this;
-      }
 
-      private java.lang.Object urlFilter_ = "";
       /**
        * <pre>
        * Include all entities that match the specified filtering criteria.
        * </pre>
        *
        * <code>optional string url_filter = 2;</code>
+       *
        * @return Whether the urlFilter field is set.
        */
       public boolean hasUrlFilter() {
         return ((bitField0_ & 0x00000002) != 0);
       }
+
       /**
        * <pre>
        * Include all entities that match the specified filtering criteria.
        * </pre>
        *
        * <code>optional string url_filter = 2;</code>
+       *
        * @return The urlFilter.
        */
       public java.lang.String getUrlFilter() {
@@ -6145,19 +7462,42 @@ public final class AppActionProtos {
           return (java.lang.String) ref;
         }
       }
+
       /**
        * <pre>
        * Include all entities that match the specified filtering criteria.
        * </pre>
        *
        * <code>optional string url_filter = 2;</code>
+       *
+       * @param value The urlFilter to set.
+       * @return This builder for chaining.
+       */
+      public Builder setUrlFilter(
+          java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000002;
+        urlFilter_ = value;
+        onChanged();
+        return this;
+      }
+
+      /**
+       * <pre>
+       * Include all entities that match the specified filtering criteria.
+       * </pre>
+       *
+       * <code>optional string url_filter = 2;</code>
+       *
        * @return The bytes for urlFilter.
        */
       public com.google.protobuf.ByteString
-          getUrlFilterBytes() {
+      getUrlFilterBytes() {
         java.lang.Object ref = urlFilter_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString b =
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
           urlFilter_ = b;
@@ -6166,31 +7506,35 @@ public final class AppActionProtos {
           return (com.google.protobuf.ByteString) ref;
         }
       }
+
       /**
        * <pre>
        * Include all entities that match the specified filtering criteria.
        * </pre>
        *
        * <code>optional string url_filter = 2;</code>
-       * @param value The urlFilter to set.
+       *
+       * @param value The bytes for urlFilter to set.
        * @return This builder for chaining.
        */
-      public Builder setUrlFilter(
-          java.lang.String value) {
+      public Builder setUrlFilterBytes(
+          com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000002;
         urlFilter_ = value;
         onChanged();
         return this;
       }
+
       /**
        * <pre>
        * Include all entities that match the specified filtering criteria.
        * </pre>
        *
        * <code>optional string url_filter = 2;</code>
+       *
        * @return This builder for chaining.
        */
       public Builder clearUrlFilter() {
@@ -6199,25 +7543,7 @@ public final class AppActionProtos {
         onChanged();
         return this;
       }
-      /**
-       * <pre>
-       * Include all entities that match the specified filtering criteria.
-       * </pre>
-       *
-       * <code>optional string url_filter = 2;</code>
-       * @param value The bytes for urlFilter to set.
-       * @return This builder for chaining.
-       */
-      public Builder setUrlFilterBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
-        urlFilter_ = value;
-        onChanged();
-        return this;
-      }
+
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -6234,153 +7560,55 @@ public final class AppActionProtos {
       // @@protoc_insertion_point(builder_scope:com.example.appactionvisualizer.databean.EntitySetReference)
     }
 
-    // @@protoc_insertion_point(class_scope:com.example.appactionvisualizer.databean.EntitySetReference)
-    private static final com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference();
-    }
-
-    public static com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<EntitySetReference>
-        PARSER = new com.google.protobuf.AbstractParser<EntitySetReference>() {
-      @java.lang.Override
-      public EntitySetReference parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new EntitySetReference(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<EntitySetReference> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<EntitySetReference> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.example.appactionvisualizer.databean.AppActionProtos.EntitySetReference getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
   }
 
-  public interface FulfillmentOptionOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.example.appactionvisualizer.databean.FulfillmentOption)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <pre>
-     * Fulfillment mode used for serving.
-     * </pre>
-     *
-     * <code>optional .com.example.appactionvisualizer.databean.FulfillmentOption.FulfillmentMode fulfillment_mode = 1;</code>
-     * @return Whether the fulfillmentMode field is set.
-     */
-    boolean hasFulfillmentMode();
-    /**
-     * <pre>
-     * Fulfillment mode used for serving.
-     * </pre>
-     *
-     * <code>optional .com.example.appactionvisualizer.databean.FulfillmentOption.FulfillmentMode fulfillment_mode = 1;</code>
-     * @return The fulfillmentMode.
-     */
-    com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption.FulfillmentMode getFulfillmentMode();
-
-    /**
-     * <pre>
-     * Template for constructing either the deep link or a Slice URI to be
-     * opened on the device. The template may be expanded with the parameters
-     * of the user intent if all required parameters for the template are
-     * available.
-     * The URL may be an app-linked "http://" URL or a device-specific URL,
-     * such as an "intent://" URL, "content://" URI or a URL in a custom
-     * scheme. For examples of the Intent URL, see:
-     * https://developer.chrome.com/multidevice/android/intents
-     * For examples of the URL template, see:
-     * https://tools.ietf.org/html/rfc6570
-     * </pre>
-     *
-     * <code>optional .com.example.appactionvisualizer.databean.UrlTemplate url_template = 2;</code>
-     * @return Whether the urlTemplate field is set.
-     */
-    boolean hasUrlTemplate();
-    /**
-     * <pre>
-     * Template for constructing either the deep link or a Slice URI to be
-     * opened on the device. The template may be expanded with the parameters
-     * of the user intent if all required parameters for the template are
-     * available.
-     * The URL may be an app-linked "http://" URL or a device-specific URL,
-     * such as an "intent://" URL, "content://" URI or a URL in a custom
-     * scheme. For examples of the Intent URL, see:
-     * https://developer.chrome.com/multidevice/android/intents
-     * For examples of the URL template, see:
-     * https://tools.ietf.org/html/rfc6570
-     * </pre>
-     *
-     * <code>optional .com.example.appactionvisualizer.databean.UrlTemplate url_template = 2;</code>
-     * @return The urlTemplate.
-     */
-    com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate getUrlTemplate();
-    /**
-     * <pre>
-     * Template for constructing either the deep link or a Slice URI to be
-     * opened on the device. The template may be expanded with the parameters
-     * of the user intent if all required parameters for the template are
-     * available.
-     * The URL may be an app-linked "http://" URL or a device-specific URL,
-     * such as an "intent://" URL, "content://" URI or a URL in a custom
-     * scheme. For examples of the Intent URL, see:
-     * https://developer.chrome.com/multidevice/android/intents
-     * For examples of the URL template, see:
-     * https://tools.ietf.org/html/rfc6570
-     * </pre>
-     *
-     * <code>optional .com.example.appactionvisualizer.databean.UrlTemplate url_template = 2;</code>
-     */
-    com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplateOrBuilder getUrlTemplateOrBuilder();
-  }
   /**
    * <pre>
    * Information about fulfilling user intent using Android app.
    * Developer may provide multiple fulfillment options in actions.xml
    * </pre>
-   *
+   * <p>
    * Protobuf type {@code com.example.appactionvisualizer.databean.FulfillmentOption}
    */
   public static final class FulfillmentOption extends
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:com.example.appactionvisualizer.databean.FulfillmentOption)
       FulfillmentOptionOrBuilder {
-  private static final long serialVersionUID = 0L;
+    public static final int FULFILLMENT_MODE_FIELD_NUMBER = 1;
+    public static final int URL_TEMPLATE_FIELD_NUMBER = 2;
+    @java.lang.Deprecated
+    public static final com.google.protobuf.Parser<FulfillmentOption>
+        PARSER = new com.google.protobuf.AbstractParser<FulfillmentOption>() {
+      @java.lang.Override
+      public FulfillmentOption parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new FulfillmentOption(input, extensionRegistry);
+      }
+    };
+    private static final long serialVersionUID = 0L;
+    // @@protoc_insertion_point(class_scope:com.example.appactionvisualizer.databean.FulfillmentOption)
+    private static final com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption DEFAULT_INSTANCE;
+
+    static {
+      DEFAULT_INSTANCE = new com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption();
+    }
+
+    private int bitField0_;
+    private int fulfillmentMode_;
+    private com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate urlTemplate_;
+    private byte memoizedIsInitialized = -1;
+
     // Use FulfillmentOption.newBuilder() to construct.
     private FulfillmentOption(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
+
     private FulfillmentOption() {
       fulfillmentMode_ = 0;
     }
 
-    @java.lang.Override
-    @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
-        UnusedPrivateParameter unused) {
-      return new FulfillmentOption();
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
     private FulfillmentOption(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -6402,7 +7630,7 @@ public final class AppActionProtos {
               break;
             case 8: {
               int rawValue = input.readEnum();
-                @SuppressWarnings("deprecation")
+              @SuppressWarnings("deprecation")
               com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption.FulfillmentMode value = com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption.FulfillmentMode.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(1, rawValue);
@@ -6444,154 +7672,160 @@ public final class AppActionProtos {
         makeExtensionsImmutable();
       }
     }
+
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
+    getDescriptor() {
       return com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_FulfillmentOption_descriptor;
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+
+    public static Builder newBuilder(com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    public static com.google.protobuf.Parser<FulfillmentOption> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new FulfillmentOption();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
+    internalGetFieldAccessorTable() {
       return com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_FulfillmentOption_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption.class, com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption.Builder.class);
     }
 
     /**
-     * Protobuf enum {@code com.example.appactionvisualizer.databean.FulfillmentOption.FulfillmentMode}
-     */
-    public enum FulfillmentMode
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>UNSPECIFIED = 0;</code>
-       */
-      UNSPECIFIED(0),
-      /**
-       * <code>DEEPLINK = 1;</code>
-       */
-      DEEPLINK(1),
-      /**
-       * <code>SLICE = 2;</code>
-       */
-      SLICE(2),
-      ;
-
-      /**
-       * <code>UNSPECIFIED = 0;</code>
-       */
-      public static final int UNSPECIFIED_VALUE = 0;
-      /**
-       * <code>DEEPLINK = 1;</code>
-       */
-      public static final int DEEPLINK_VALUE = 1;
-      /**
-       * <code>SLICE = 2;</code>
-       */
-      public static final int SLICE_VALUE = 2;
-
-
-      public final int getNumber() {
-        return value;
-      }
-
-      /**
-       * @param value The numeric wire value of the corresponding enum entry.
-       * @return The enum associated with the given numeric wire value.
-       * @deprecated Use {@link #forNumber(int)} instead.
-       */
-      @java.lang.Deprecated
-      public static FulfillmentMode valueOf(int value) {
-        return forNumber(value);
-      }
-
-      /**
-       * @param value The numeric wire value of the corresponding enum entry.
-       * @return The enum associated with the given numeric wire value.
-       */
-      public static FulfillmentMode forNumber(int value) {
-        switch (value) {
-          case 0: return UNSPECIFIED;
-          case 1: return DEEPLINK;
-          case 2: return SLICE;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<FulfillmentMode>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static final com.google.protobuf.Internal.EnumLiteMap<
-          FulfillmentMode> internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<FulfillmentMode>() {
-              public FulfillmentMode findValueByNumber(int number) {
-                return FulfillmentMode.forNumber(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(ordinal());
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final FulfillmentMode[] VALUES = values();
-
-      public static FulfillmentMode valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int value;
-
-      private FulfillmentMode(int value) {
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.example.appactionvisualizer.databean.FulfillmentOption.FulfillmentMode)
-    }
-
-    private int bitField0_;
-    public static final int FULFILLMENT_MODE_FIELD_NUMBER = 1;
-    private int fulfillmentMode_;
-    /**
      * <pre>
      * Fulfillment mode used for serving.
      * </pre>
      *
      * <code>optional .com.example.appactionvisualizer.databean.FulfillmentOption.FulfillmentMode fulfillment_mode = 1;</code>
+     *
      * @return Whether the fulfillmentMode field is set.
      */
-    @java.lang.Override public boolean hasFulfillmentMode() {
+    @java.lang.Override
+    public boolean hasFulfillmentMode() {
       return ((bitField0_ & 0x00000001) != 0);
     }
+
     /**
      * <pre>
      * Fulfillment mode used for serving.
      * </pre>
      *
      * <code>optional .com.example.appactionvisualizer.databean.FulfillmentOption.FulfillmentMode fulfillment_mode = 1;</code>
+     *
      * @return The fulfillmentMode.
      */
-    @java.lang.Override public com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption.FulfillmentMode getFulfillmentMode() {
+    @java.lang.Override
+    public com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption.FulfillmentMode getFulfillmentMode() {
       @SuppressWarnings("deprecation")
       com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption.FulfillmentMode result = com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption.FulfillmentMode.valueOf(fulfillmentMode_);
       return result == null ? com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption.FulfillmentMode.UNSPECIFIED : result;
     }
 
-    public static final int URL_TEMPLATE_FIELD_NUMBER = 2;
-    private com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate urlTemplate_;
     /**
      * <pre>
      * Template for constructing either the deep link or a Slice URI to be
@@ -6607,12 +7841,14 @@ public final class AppActionProtos {
      * </pre>
      *
      * <code>optional .com.example.appactionvisualizer.databean.UrlTemplate url_template = 2;</code>
+     *
      * @return Whether the urlTemplate field is set.
      */
     @java.lang.Override
     public boolean hasUrlTemplate() {
       return ((bitField0_ & 0x00000002) != 0);
     }
+
     /**
      * <pre>
      * Template for constructing either the deep link or a Slice URI to be
@@ -6628,12 +7864,14 @@ public final class AppActionProtos {
      * </pre>
      *
      * <code>optional .com.example.appactionvisualizer.databean.UrlTemplate url_template = 2;</code>
+     *
      * @return The urlTemplate.
      */
     @java.lang.Override
     public com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate getUrlTemplate() {
       return urlTemplate_ == null ? com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate.getDefaultInstance() : urlTemplate_;
     }
+
     /**
      * <pre>
      * Template for constructing either the deep link or a Slice URI to be
@@ -6655,7 +7893,6 @@ public final class AppActionProtos {
       return urlTemplate_ == null ? com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate.getDefaultInstance() : urlTemplate_;
     }
 
-    private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -6668,7 +7905,7 @@ public final class AppActionProtos {
 
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+        throws java.io.IOException {
       if (((bitField0_ & 0x00000001) != 0)) {
         output.writeEnum(1, fulfillmentMode_);
       }
@@ -6686,11 +7923,11 @@ public final class AppActionProtos {
       size = 0;
       if (((bitField0_ & 0x00000001) != 0)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(1, fulfillmentMode_);
+            .computeEnumSize(1, fulfillmentMode_);
       }
       if (((bitField0_ & 0x00000002) != 0)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, getUrlTemplate());
+            .computeMessageSize(2, getUrlTemplate());
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -6700,7 +7937,7 @@ public final class AppActionProtos {
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
-       return true;
+        return true;
       }
       if (!(obj instanceof com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption)) {
         return super.equals(obj);
@@ -6740,84 +7977,11 @@ public final class AppActionProtos {
       return hash;
     }
 
-    public static com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+    @java.lang.Override
+    public Builder newBuilderForType() {
+      return newBuilder();
     }
 
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
     @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
@@ -6830,30 +7994,142 @@ public final class AppActionProtos {
       Builder builder = new Builder(parent);
       return builder;
     }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<FulfillmentOption> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+    /**
+     * Protobuf enum {@code com.example.appactionvisualizer.databean.FulfillmentOption.FulfillmentMode}
+     */
+    public enum FulfillmentMode
+        implements com.google.protobuf.ProtocolMessageEnum {
+      /**
+       * <code>UNSPECIFIED = 0;</code>
+       */
+      UNSPECIFIED(0),
+      /**
+       * <code>DEEPLINK = 1;</code>
+       */
+      DEEPLINK(1),
+      /**
+       * <code>SLICE = 2;</code>
+       */
+      SLICE(2),
+      ;
+
+      /**
+       * <code>UNSPECIFIED = 0;</code>
+       */
+      public static final int UNSPECIFIED_VALUE = 0;
+      /**
+       * <code>DEEPLINK = 1;</code>
+       */
+      public static final int DEEPLINK_VALUE = 1;
+      /**
+       * <code>SLICE = 2;</code>
+       */
+      public static final int SLICE_VALUE = 2;
+      private static final com.google.protobuf.Internal.EnumLiteMap<
+          FulfillmentMode> internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<FulfillmentMode>() {
+            public FulfillmentMode findValueByNumber(int number) {
+              return FulfillmentMode.forNumber(number);
+            }
+          };
+      private static final FulfillmentMode[] VALUES = values();
+      private final int value;
+
+      private FulfillmentMode(int value) {
+        this.value = value;
+      }
+
+      /**
+       * @param value The numeric wire value of the corresponding enum entry.
+       * @return The enum associated with the given numeric wire value.
+       * @deprecated Use {@link #forNumber(int)} instead.
+       */
+      @java.lang.Deprecated
+      public static FulfillmentMode valueOf(int value) {
+        return forNumber(value);
+      }
+
+      /**
+       * @param value The numeric wire value of the corresponding enum entry.
+       * @return The enum associated with the given numeric wire value.
+       */
+      public static FulfillmentMode forNumber(int value) {
+        switch (value) {
+          case 0:
+            return UNSPECIFIED;
+          case 1:
+            return DEEPLINK;
+          case 2:
+            return SLICE;
+          default:
+            return null;
+        }
+      }
+
+      public static com.google.protobuf.Internal.EnumLiteMap<FulfillmentMode>
+      internalGetValueMap() {
+        return internalValueMap;
+      }
+
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+      getDescriptor() {
+        return com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption.getDescriptor().getEnumTypes().get(0);
+      }
+
+      public static FulfillmentMode valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+              "EnumValueDescriptor is not for this type.");
+        }
+        return VALUES[desc.getIndex()];
+      }
+
+      public final int getNumber() {
+        return value;
+      }
+
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+      getValueDescriptor() {
+        return getDescriptor().getValues().get(ordinal());
+      }
+
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+      getDescriptorForType() {
+        return getDescriptor();
+      }
+
+      // @@protoc_insertion_point(enum_scope:com.example.appactionvisualizer.databean.FulfillmentOption.FulfillmentMode)
+    }
+
     /**
      * <pre>
      * Information about fulfilling user intent using Android app.
      * Developer may provide multiple fulfillment options in actions.xml
      * </pre>
-     *
+     * <p>
      * Protobuf type {@code com.example.appactionvisualizer.databean.FulfillmentOption}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:com.example.appactionvisualizer.databean.FulfillmentOption)
         com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOptionOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_FulfillmentOption_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_FulfillmentOption_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption.class, com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption.Builder.class);
-      }
+      private int bitField0_;
+      private int fulfillmentMode_ = 0;
+      private com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate urlTemplate_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate, com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate.Builder, com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplateOrBuilder> urlTemplateBuilder_;
 
       // Construct using com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption.newBuilder()
       private Builder() {
@@ -6865,12 +8141,27 @@ public final class AppActionProtos {
         super(parent);
         maybeForceBuilderInitialization();
       }
+
+      public static final com.google.protobuf.Descriptors.Descriptor
+      getDescriptor() {
+        return com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_FulfillmentOption_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internalGetFieldAccessorTable() {
+        return com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_FulfillmentOption_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption.class, com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption.Builder.class);
+      }
+
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
+            .alwaysUseFieldBuilders) {
           getUrlTemplateFieldBuilder();
         }
       }
+
       @java.lang.Override
       public Builder clear() {
         super.clear();
@@ -6887,7 +8178,7 @@ public final class AppActionProtos {
 
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
+      getDescriptorForType() {
         return com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_FulfillmentOption_descriptor;
       }
 
@@ -6931,38 +8222,44 @@ public final class AppActionProtos {
       public Builder clone() {
         return super.clone();
       }
+
       @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return super.setField(field, value);
       }
+
       @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return super.clearField(field);
       }
+
       @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return super.clearOneof(oneof);
       }
+
       @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
         return super.setRepeatedField(field, index, value);
       }
+
       @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return super.addRepeatedField(field, value);
       }
+
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption) {
-          return mergeFrom((com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption)other);
+          return mergeFrom((com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption) other);
         } else {
           super.mergeFrom(other);
           return this;
@@ -6970,7 +8267,8 @@ public final class AppActionProtos {
       }
 
       public Builder mergeFrom(com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption other) {
-        if (other == com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption.getDefaultInstance()) return this;
+        if (other == com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption.getDefaultInstance())
+          return this;
         if (other.hasFulfillmentMode()) {
           setFulfillmentMode(other.getFulfillmentMode());
         }
@@ -7005,26 +8303,28 @@ public final class AppActionProtos {
         }
         return this;
       }
-      private int bitField0_;
 
-      private int fulfillmentMode_ = 0;
       /**
        * <pre>
        * Fulfillment mode used for serving.
        * </pre>
        *
        * <code>optional .com.example.appactionvisualizer.databean.FulfillmentOption.FulfillmentMode fulfillment_mode = 1;</code>
+       *
        * @return Whether the fulfillmentMode field is set.
        */
-      @java.lang.Override public boolean hasFulfillmentMode() {
+      @java.lang.Override
+      public boolean hasFulfillmentMode() {
         return ((bitField0_ & 0x00000001) != 0);
       }
+
       /**
        * <pre>
        * Fulfillment mode used for serving.
        * </pre>
        *
        * <code>optional .com.example.appactionvisualizer.databean.FulfillmentOption.FulfillmentMode fulfillment_mode = 1;</code>
+       *
        * @return The fulfillmentMode.
        */
       @java.lang.Override
@@ -7033,12 +8333,14 @@ public final class AppActionProtos {
         com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption.FulfillmentMode result = com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption.FulfillmentMode.valueOf(fulfillmentMode_);
         return result == null ? com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption.FulfillmentMode.UNSPECIFIED : result;
       }
+
       /**
        * <pre>
        * Fulfillment mode used for serving.
        * </pre>
        *
        * <code>optional .com.example.appactionvisualizer.databean.FulfillmentOption.FulfillmentMode fulfillment_mode = 1;</code>
+       *
        * @param value The fulfillmentMode to set.
        * @return This builder for chaining.
        */
@@ -7051,12 +8353,14 @@ public final class AppActionProtos {
         onChanged();
         return this;
       }
+
       /**
        * <pre>
        * Fulfillment mode used for serving.
        * </pre>
        *
        * <code>optional .com.example.appactionvisualizer.databean.FulfillmentOption.FulfillmentMode fulfillment_mode = 1;</code>
+       *
        * @return This builder for chaining.
        */
       public Builder clearFulfillmentMode() {
@@ -7066,9 +8370,6 @@ public final class AppActionProtos {
         return this;
       }
 
-      private com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate urlTemplate_;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate, com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate.Builder, com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplateOrBuilder> urlTemplateBuilder_;
       /**
        * <pre>
        * Template for constructing either the deep link or a Slice URI to be
@@ -7084,11 +8385,13 @@ public final class AppActionProtos {
        * </pre>
        *
        * <code>optional .com.example.appactionvisualizer.databean.UrlTemplate url_template = 2;</code>
+       *
        * @return Whether the urlTemplate field is set.
        */
       public boolean hasUrlTemplate() {
         return ((bitField0_ & 0x00000002) != 0);
       }
+
       /**
        * <pre>
        * Template for constructing either the deep link or a Slice URI to be
@@ -7104,6 +8407,7 @@ public final class AppActionProtos {
        * </pre>
        *
        * <code>optional .com.example.appactionvisualizer.databean.UrlTemplate url_template = 2;</code>
+       *
        * @return The urlTemplate.
        */
       public com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate getUrlTemplate() {
@@ -7113,6 +8417,7 @@ public final class AppActionProtos {
           return urlTemplateBuilder_.getMessage();
         }
       }
+
       /**
        * <pre>
        * Template for constructing either the deep link or a Slice URI to be
@@ -7142,6 +8447,7 @@ public final class AppActionProtos {
         bitField0_ |= 0x00000002;
         return this;
       }
+
       /**
        * <pre>
        * Template for constructing either the deep link or a Slice URI to be
@@ -7169,6 +8475,7 @@ public final class AppActionProtos {
         bitField0_ |= 0x00000002;
         return this;
       }
+
       /**
        * <pre>
        * Template for constructing either the deep link or a Slice URI to be
@@ -7191,7 +8498,7 @@ public final class AppActionProtos {
               urlTemplate_ != null &&
               urlTemplate_ != com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate.getDefaultInstance()) {
             urlTemplate_ =
-              com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate.newBuilder(urlTemplate_).mergeFrom(value).buildPartial();
+                com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate.newBuilder(urlTemplate_).mergeFrom(value).buildPartial();
           } else {
             urlTemplate_ = value;
           }
@@ -7202,6 +8509,7 @@ public final class AppActionProtos {
         bitField0_ |= 0x00000002;
         return this;
       }
+
       /**
        * <pre>
        * Template for constructing either the deep link or a Slice URI to be
@@ -7228,6 +8536,7 @@ public final class AppActionProtos {
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
+
       /**
        * <pre>
        * Template for constructing either the deep link or a Slice URI to be
@@ -7249,6 +8558,7 @@ public final class AppActionProtos {
         onChanged();
         return getUrlTemplateFieldBuilder().getBuilder();
       }
+
       /**
        * <pre>
        * Template for constructing either the deep link or a Slice URI to be
@@ -7273,6 +8583,7 @@ public final class AppActionProtos {
               com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate.getDefaultInstance() : urlTemplate_;
         }
       }
+
       /**
        * <pre>
        * Template for constructing either the deep link or a Slice URI to be
@@ -7290,18 +8601,19 @@ public final class AppActionProtos {
        * <code>optional .com.example.appactionvisualizer.databean.UrlTemplate url_template = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate, com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate.Builder, com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplateOrBuilder> 
-          getUrlTemplateFieldBuilder() {
+          com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate, com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate.Builder, com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplateOrBuilder>
+      getUrlTemplateFieldBuilder() {
         if (urlTemplateBuilder_ == null) {
           urlTemplateBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
               com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate, com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate.Builder, com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplateOrBuilder>(
-                  getUrlTemplate(),
-                  getParentForChildren(),
-                  isClean());
+              getUrlTemplate(),
+              getParentForChildren(),
+              isClean());
           urlTemplate_ = null;
         }
         return urlTemplateBuilder_;
       }
+
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -7318,493 +8630,62 @@ public final class AppActionProtos {
       // @@protoc_insertion_point(builder_scope:com.example.appactionvisualizer.databean.FulfillmentOption)
     }
 
-    // @@protoc_insertion_point(class_scope:com.example.appactionvisualizer.databean.FulfillmentOption)
-    private static final com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption();
-    }
-
-    public static com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<FulfillmentOption>
-        PARSER = new com.google.protobuf.AbstractParser<FulfillmentOption>() {
-      @java.lang.Override
-      public FulfillmentOption parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new FulfillmentOption(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<FulfillmentOption> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<FulfillmentOption> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
   }
 
-  public interface UrlTemplateOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.example.appactionvisualizer.databean.UrlTemplate)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <pre>
-     * A template for a URL to be opened on the device.
-     * </pre>
-     *
-     * <code>optional string template = 1;</code>
-     * @return Whether the template field is set.
-     */
-    boolean hasTemplate();
-    /**
-     * <pre>
-     * A template for a URL to be opened on the device.
-     * </pre>
-     *
-     * <code>optional string template = 1;</code>
-     * @return The template.
-     */
-    java.lang.String getTemplate();
-    /**
-     * <pre>
-     * A template for a URL to be opened on the device.
-     * </pre>
-     *
-     * <code>optional string template = 1;</code>
-     * @return The bytes for template.
-     */
-    com.google.protobuf.ByteString
-        getTemplateBytes();
-
-    /**
-     * <pre>
-     * Maps variables in the URL template to intent parameters.
-     * Keys in this map represent URL template parameters, or "variables" as
-     * described in RFC 6570. Every variable mentioned in the template must have a
-     * corresponding key. For example, if the URL template is
-     * "http://spysatellite.com/show{?lat,long}", there must be a key in
-     * this map for parameters "lat" and "long".
-     * Values refer to intent parameters. If the intent parameter is of a
-     * structured type, use dot.notation to refer to a specific field. For
-     * example, if there is an parameter "reservationDate" of type DateTime, you
-     * can use "reservationDate.time.hour" to refer to the hour value.
-     * If a parameter is not included in the intent, the corresponding variable
-     * will be left undefined at the time of URL template expansion. See
-     * [RFC 6570, Section 3.2.1]
-     * (https://tools.ietf.org/html/rfc6570#section-3.2.1) for a description of
-     * how undefined variables are treated.
-     * Full example:
-     *   AppRequest.inputs.arguments[0].name: "location"
-     *   AppRequest.inputs.arguments[0].value.placeValue: {
-     *     coordinates {
-     *       latitude: 37.4184786
-     *       longitude: -122.0981801
-     *     }
-     *     ...
-     *   }
-     *   parameterMap: {
-     *     "lat" : "location.coordinates.latitude",
-     *     "long" : "location.coordinates.longitude"
-     *   }
-     *   urlTemplate: "http://spysatellite.com/show{?lat,long}"
-     * Resulting URL:
-     *   "http://spysatellite.com/show?lat=37.4184786&amp;long=-122.0981801"
-     * </pre>
-     *
-     * <code>map&lt;string, string&gt; parameter_map = 2;</code>
-     */
-    int getParameterMapCount();
-    /**
-     * <pre>
-     * Maps variables in the URL template to intent parameters.
-     * Keys in this map represent URL template parameters, or "variables" as
-     * described in RFC 6570. Every variable mentioned in the template must have a
-     * corresponding key. For example, if the URL template is
-     * "http://spysatellite.com/show{?lat,long}", there must be a key in
-     * this map for parameters "lat" and "long".
-     * Values refer to intent parameters. If the intent parameter is of a
-     * structured type, use dot.notation to refer to a specific field. For
-     * example, if there is an parameter "reservationDate" of type DateTime, you
-     * can use "reservationDate.time.hour" to refer to the hour value.
-     * If a parameter is not included in the intent, the corresponding variable
-     * will be left undefined at the time of URL template expansion. See
-     * [RFC 6570, Section 3.2.1]
-     * (https://tools.ietf.org/html/rfc6570#section-3.2.1) for a description of
-     * how undefined variables are treated.
-     * Full example:
-     *   AppRequest.inputs.arguments[0].name: "location"
-     *   AppRequest.inputs.arguments[0].value.placeValue: {
-     *     coordinates {
-     *       latitude: 37.4184786
-     *       longitude: -122.0981801
-     *     }
-     *     ...
-     *   }
-     *   parameterMap: {
-     *     "lat" : "location.coordinates.latitude",
-     *     "long" : "location.coordinates.longitude"
-     *   }
-     *   urlTemplate: "http://spysatellite.com/show{?lat,long}"
-     * Resulting URL:
-     *   "http://spysatellite.com/show?lat=37.4184786&amp;long=-122.0981801"
-     * </pre>
-     *
-     * <code>map&lt;string, string&gt; parameter_map = 2;</code>
-     */
-    boolean containsParameterMap(
-        java.lang.String key);
-    /**
-     * Use {@link #getParameterMapMap()} instead.
-     */
-    @java.lang.Deprecated
-    java.util.Map<java.lang.String, java.lang.String>
-    getParameterMap();
-    /**
-     * <pre>
-     * Maps variables in the URL template to intent parameters.
-     * Keys in this map represent URL template parameters, or "variables" as
-     * described in RFC 6570. Every variable mentioned in the template must have a
-     * corresponding key. For example, if the URL template is
-     * "http://spysatellite.com/show{?lat,long}", there must be a key in
-     * this map for parameters "lat" and "long".
-     * Values refer to intent parameters. If the intent parameter is of a
-     * structured type, use dot.notation to refer to a specific field. For
-     * example, if there is an parameter "reservationDate" of type DateTime, you
-     * can use "reservationDate.time.hour" to refer to the hour value.
-     * If a parameter is not included in the intent, the corresponding variable
-     * will be left undefined at the time of URL template expansion. See
-     * [RFC 6570, Section 3.2.1]
-     * (https://tools.ietf.org/html/rfc6570#section-3.2.1) for a description of
-     * how undefined variables are treated.
-     * Full example:
-     *   AppRequest.inputs.arguments[0].name: "location"
-     *   AppRequest.inputs.arguments[0].value.placeValue: {
-     *     coordinates {
-     *       latitude: 37.4184786
-     *       longitude: -122.0981801
-     *     }
-     *     ...
-     *   }
-     *   parameterMap: {
-     *     "lat" : "location.coordinates.latitude",
-     *     "long" : "location.coordinates.longitude"
-     *   }
-     *   urlTemplate: "http://spysatellite.com/show{?lat,long}"
-     * Resulting URL:
-     *   "http://spysatellite.com/show?lat=37.4184786&amp;long=-122.0981801"
-     * </pre>
-     *
-     * <code>map&lt;string, string&gt; parameter_map = 2;</code>
-     */
-    java.util.Map<java.lang.String, java.lang.String>
-    getParameterMapMap();
-    /**
-     * <pre>
-     * Maps variables in the URL template to intent parameters.
-     * Keys in this map represent URL template parameters, or "variables" as
-     * described in RFC 6570. Every variable mentioned in the template must have a
-     * corresponding key. For example, if the URL template is
-     * "http://spysatellite.com/show{?lat,long}", there must be a key in
-     * this map for parameters "lat" and "long".
-     * Values refer to intent parameters. If the intent parameter is of a
-     * structured type, use dot.notation to refer to a specific field. For
-     * example, if there is an parameter "reservationDate" of type DateTime, you
-     * can use "reservationDate.time.hour" to refer to the hour value.
-     * If a parameter is not included in the intent, the corresponding variable
-     * will be left undefined at the time of URL template expansion. See
-     * [RFC 6570, Section 3.2.1]
-     * (https://tools.ietf.org/html/rfc6570#section-3.2.1) for a description of
-     * how undefined variables are treated.
-     * Full example:
-     *   AppRequest.inputs.arguments[0].name: "location"
-     *   AppRequest.inputs.arguments[0].value.placeValue: {
-     *     coordinates {
-     *       latitude: 37.4184786
-     *       longitude: -122.0981801
-     *     }
-     *     ...
-     *   }
-     *   parameterMap: {
-     *     "lat" : "location.coordinates.latitude",
-     *     "long" : "location.coordinates.longitude"
-     *   }
-     *   urlTemplate: "http://spysatellite.com/show{?lat,long}"
-     * Resulting URL:
-     *   "http://spysatellite.com/show?lat=37.4184786&amp;long=-122.0981801"
-     * </pre>
-     *
-     * <code>map&lt;string, string&gt; parameter_map = 2;</code>
-     */
-
-    java.lang.String getParameterMapOrDefault(
-        java.lang.String key,
-        java.lang.String defaultValue);
-    /**
-     * <pre>
-     * Maps variables in the URL template to intent parameters.
-     * Keys in this map represent URL template parameters, or "variables" as
-     * described in RFC 6570. Every variable mentioned in the template must have a
-     * corresponding key. For example, if the URL template is
-     * "http://spysatellite.com/show{?lat,long}", there must be a key in
-     * this map for parameters "lat" and "long".
-     * Values refer to intent parameters. If the intent parameter is of a
-     * structured type, use dot.notation to refer to a specific field. For
-     * example, if there is an parameter "reservationDate" of type DateTime, you
-     * can use "reservationDate.time.hour" to refer to the hour value.
-     * If a parameter is not included in the intent, the corresponding variable
-     * will be left undefined at the time of URL template expansion. See
-     * [RFC 6570, Section 3.2.1]
-     * (https://tools.ietf.org/html/rfc6570#section-3.2.1) for a description of
-     * how undefined variables are treated.
-     * Full example:
-     *   AppRequest.inputs.arguments[0].name: "location"
-     *   AppRequest.inputs.arguments[0].value.placeValue: {
-     *     coordinates {
-     *       latitude: 37.4184786
-     *       longitude: -122.0981801
-     *     }
-     *     ...
-     *   }
-     *   parameterMap: {
-     *     "lat" : "location.coordinates.latitude",
-     *     "long" : "location.coordinates.longitude"
-     *   }
-     *   urlTemplate: "http://spysatellite.com/show{?lat,long}"
-     * Resulting URL:
-     *   "http://spysatellite.com/show?lat=37.4184786&amp;long=-122.0981801"
-     * </pre>
-     *
-     * <code>map&lt;string, string&gt; parameter_map = 2;</code>
-     */
-
-    java.lang.String getParameterMapOrThrow(
-        java.lang.String key);
-
-    /**
-     * <pre>
-     * List of all the keys from the parameter_map that are required to be present
-     * for this URL template to be valid.
-     * Example:
-     * parameterMap: {
-     *   "lat" : "location.coordinates.latitude",
-     *   "long" : "location.coordinates.longitude",
-     *   "address" : "location.formattedAddress"
-     * }
-     * template: "http://spysatellite.com/show{?lat,long,address}"
-     * requiredKeys: { "lat", "long" }
-     * This is a valid template if the values of required keys are available, i.e
-     * "lat" and "long" cannot be null.
-     * </pre>
-     *
-     * <code>repeated string required_keys = 3;</code>
-     * @return A list containing the requiredKeys.
-     */
-    java.util.List<java.lang.String>
-        getRequiredKeysList();
-    /**
-     * <pre>
-     * List of all the keys from the parameter_map that are required to be present
-     * for this URL template to be valid.
-     * Example:
-     * parameterMap: {
-     *   "lat" : "location.coordinates.latitude",
-     *   "long" : "location.coordinates.longitude",
-     *   "address" : "location.formattedAddress"
-     * }
-     * template: "http://spysatellite.com/show{?lat,long,address}"
-     * requiredKeys: { "lat", "long" }
-     * This is a valid template if the values of required keys are available, i.e
-     * "lat" and "long" cannot be null.
-     * </pre>
-     *
-     * <code>repeated string required_keys = 3;</code>
-     * @return The count of requiredKeys.
-     */
-    int getRequiredKeysCount();
-    /**
-     * <pre>
-     * List of all the keys from the parameter_map that are required to be present
-     * for this URL template to be valid.
-     * Example:
-     * parameterMap: {
-     *   "lat" : "location.coordinates.latitude",
-     *   "long" : "location.coordinates.longitude",
-     *   "address" : "location.formattedAddress"
-     * }
-     * template: "http://spysatellite.com/show{?lat,long,address}"
-     * requiredKeys: { "lat", "long" }
-     * This is a valid template if the values of required keys are available, i.e
-     * "lat" and "long" cannot be null.
-     * </pre>
-     *
-     * <code>repeated string required_keys = 3;</code>
-     * @param index The index of the element to return.
-     * @return The requiredKeys at the given index.
-     */
-    java.lang.String getRequiredKeys(int index);
-    /**
-     * <pre>
-     * List of all the keys from the parameter_map that are required to be present
-     * for this URL template to be valid.
-     * Example:
-     * parameterMap: {
-     *   "lat" : "location.coordinates.latitude",
-     *   "long" : "location.coordinates.longitude",
-     *   "address" : "location.formattedAddress"
-     * }
-     * template: "http://spysatellite.com/show{?lat,long,address}"
-     * requiredKeys: { "lat", "long" }
-     * This is a valid template if the values of required keys are available, i.e
-     * "lat" and "long" cannot be null.
-     * </pre>
-     *
-     * <code>repeated string required_keys = 3;</code>
-     * @param index The index of the value to return.
-     * @return The bytes of the requiredKeys at the given index.
-     */
-    com.google.protobuf.ByteString
-        getRequiredKeysBytes(int index);
-
-    /**
-     * <pre>
-     * List of all the keys from the parameter_map that are required to match an
-     * entity from an entity set for this URL template to be valid. Entity sets
-     * can come from inline inventory other other inventory sources.
-     * Example:
-     * parameterMap: {
-     *   "lat" : "location.coordinates.latitude",
-     *   "long" : "location.coordinates.longitude",
-     *   "address" : "location.formattedAddress"
-     * }
-     * template: "http://spysatellite.com/show{?lat,long,address}"
-     * entityMatchRequiredKeys: { "address" }
-     * This is a valid template if the values of entity_match_required_keys match
-     * entities from inventory. Also, this is a valid template if the values are
-     * not provided at all.
-     * </pre>
-     *
-     * <code>repeated string entity_match_required_keys = 4;</code>
-     * @return A list containing the entityMatchRequiredKeys.
-     */
-    java.util.List<java.lang.String>
-        getEntityMatchRequiredKeysList();
-    /**
-     * <pre>
-     * List of all the keys from the parameter_map that are required to match an
-     * entity from an entity set for this URL template to be valid. Entity sets
-     * can come from inline inventory other other inventory sources.
-     * Example:
-     * parameterMap: {
-     *   "lat" : "location.coordinates.latitude",
-     *   "long" : "location.coordinates.longitude",
-     *   "address" : "location.formattedAddress"
-     * }
-     * template: "http://spysatellite.com/show{?lat,long,address}"
-     * entityMatchRequiredKeys: { "address" }
-     * This is a valid template if the values of entity_match_required_keys match
-     * entities from inventory. Also, this is a valid template if the values are
-     * not provided at all.
-     * </pre>
-     *
-     * <code>repeated string entity_match_required_keys = 4;</code>
-     * @return The count of entityMatchRequiredKeys.
-     */
-    int getEntityMatchRequiredKeysCount();
-    /**
-     * <pre>
-     * List of all the keys from the parameter_map that are required to match an
-     * entity from an entity set for this URL template to be valid. Entity sets
-     * can come from inline inventory other other inventory sources.
-     * Example:
-     * parameterMap: {
-     *   "lat" : "location.coordinates.latitude",
-     *   "long" : "location.coordinates.longitude",
-     *   "address" : "location.formattedAddress"
-     * }
-     * template: "http://spysatellite.com/show{?lat,long,address}"
-     * entityMatchRequiredKeys: { "address" }
-     * This is a valid template if the values of entity_match_required_keys match
-     * entities from inventory. Also, this is a valid template if the values are
-     * not provided at all.
-     * </pre>
-     *
-     * <code>repeated string entity_match_required_keys = 4;</code>
-     * @param index The index of the element to return.
-     * @return The entityMatchRequiredKeys at the given index.
-     */
-    java.lang.String getEntityMatchRequiredKeys(int index);
-    /**
-     * <pre>
-     * List of all the keys from the parameter_map that are required to match an
-     * entity from an entity set for this URL template to be valid. Entity sets
-     * can come from inline inventory other other inventory sources.
-     * Example:
-     * parameterMap: {
-     *   "lat" : "location.coordinates.latitude",
-     *   "long" : "location.coordinates.longitude",
-     *   "address" : "location.formattedAddress"
-     * }
-     * template: "http://spysatellite.com/show{?lat,long,address}"
-     * entityMatchRequiredKeys: { "address" }
-     * This is a valid template if the values of entity_match_required_keys match
-     * entities from inventory. Also, this is a valid template if the values are
-     * not provided at all.
-     * </pre>
-     *
-     * <code>repeated string entity_match_required_keys = 4;</code>
-     * @param index The index of the value to return.
-     * @return The bytes of the entityMatchRequiredKeys at the given index.
-     */
-    com.google.protobuf.ByteString
-        getEntityMatchRequiredKeysBytes(int index);
-  }
   /**
    * <pre>
    * Encapsulates the information needed to construct a fulfillment URL: a URL
    * template and the mapping of template variables to intent parameters.
    * </pre>
-   *
+   * <p>
    * Protobuf type {@code com.example.appactionvisualizer.databean.UrlTemplate}
    */
   public static final class UrlTemplate extends
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:com.example.appactionvisualizer.databean.UrlTemplate)
       UrlTemplateOrBuilder {
-  private static final long serialVersionUID = 0L;
+    public static final int TEMPLATE_FIELD_NUMBER = 1;
+    public static final int PARAMETER_MAP_FIELD_NUMBER = 2;
+    public static final int REQUIRED_KEYS_FIELD_NUMBER = 3;
+    public static final int ENTITY_MATCH_REQUIRED_KEYS_FIELD_NUMBER = 4;
+    @java.lang.Deprecated
+    public static final com.google.protobuf.Parser<UrlTemplate>
+        PARSER = new com.google.protobuf.AbstractParser<UrlTemplate>() {
+      @java.lang.Override
+      public UrlTemplate parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new UrlTemplate(input, extensionRegistry);
+      }
+    };
+    private static final long serialVersionUID = 0L;
+    // @@protoc_insertion_point(class_scope:com.example.appactionvisualizer.databean.UrlTemplate)
+    private static final com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate DEFAULT_INSTANCE;
+
+    static {
+      DEFAULT_INSTANCE = new com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate();
+    }
+
+    private int bitField0_;
+    private volatile java.lang.Object template_;
+    private com.google.protobuf.MapField<
+        java.lang.String, java.lang.String> parameterMap_;
+    private com.google.protobuf.LazyStringList requiredKeys_;
+    private com.google.protobuf.LazyStringList entityMatchRequiredKeys_;
+    private byte memoizedIsInitialized = -1;
+
     // Use UrlTemplate.newBuilder() to construct.
     private UrlTemplate(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
+
     private UrlTemplate() {
       template_ = "";
       requiredKeys_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       entityMatchRequiredKeys_ = com.google.protobuf.LazyStringArrayList.EMPTY;
     }
 
-    @java.lang.Override
-    @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
-        UnusedPrivateParameter unused) {
-      return new UrlTemplate();
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
     private UrlTemplate(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -7837,7 +8718,7 @@ public final class AppActionProtos {
                 mutable_bitField0_ |= 0x00000002;
               }
               com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
-              parameterMap__ = input.readMessage(
+                  parameterMap__ = input.readMessage(
                   ParameterMapDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
               parameterMap_.getMutableMap().put(
                   parameterMap__.getKey(), parameterMap__.getValue());
@@ -7886,9 +8767,120 @@ public final class AppActionProtos {
         makeExtensionsImmutable();
       }
     }
+
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
+    getDescriptor() {
       return com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_UrlTemplate_descriptor;
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+
+    public static Builder newBuilder(com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    public static com.google.protobuf.Parser<UrlTemplate> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new UrlTemplate();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
     }
 
     @SuppressWarnings({"rawtypes"})
@@ -7903,35 +8895,36 @@ public final class AppActionProtos {
               "Invalid map field number: " + number);
       }
     }
+
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
+    internalGetFieldAccessorTable() {
       return com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_UrlTemplate_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate.class, com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate.Builder.class);
     }
 
-    private int bitField0_;
-    public static final int TEMPLATE_FIELD_NUMBER = 1;
-    private volatile java.lang.Object template_;
     /**
      * <pre>
      * A template for a URL to be opened on the device.
      * </pre>
      *
      * <code>optional string template = 1;</code>
+     *
      * @return Whether the template field is set.
      */
     @java.lang.Override
     public boolean hasTemplate() {
       return ((bitField0_ & 0x00000001) != 0);
     }
+
     /**
      * <pre>
      * A template for a URL to be opened on the device.
      * </pre>
      *
      * <code>optional string template = 1;</code>
+     *
      * @return The template.
      */
     @java.lang.Override
@@ -7940,7 +8933,7 @@ public final class AppActionProtos {
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
+        com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
@@ -7949,20 +8942,22 @@ public final class AppActionProtos {
         return s;
       }
     }
+
     /**
      * <pre>
      * A template for a URL to be opened on the device.
      * </pre>
      *
      * <code>optional string template = 1;</code>
+     *
      * @return The bytes for template.
      */
     @java.lang.Override
     public com.google.protobuf.ByteString
-        getTemplateBytes() {
+    getTemplateBytes() {
       java.lang.Object ref = template_;
       if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
+        com.google.protobuf.ByteString b =
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
         template_ = b;
@@ -7972,20 +8967,6 @@ public final class AppActionProtos {
       }
     }
 
-    public static final int PARAMETER_MAP_FIELD_NUMBER = 2;
-    private static final class ParameterMapDefaultEntryHolder {
-      static final com.google.protobuf.MapEntry<
-          java.lang.String, java.lang.String> defaultEntry =
-              com.google.protobuf.MapEntry
-              .<java.lang.String, java.lang.String>newDefaultInstance(
-                  com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_UrlTemplate_ParameterMapEntry_descriptor, 
-                  com.google.protobuf.WireFormat.FieldType.STRING,
-                  "",
-                  com.google.protobuf.WireFormat.FieldType.STRING,
-                  "");
-    }
-    private com.google.protobuf.MapField<
-        java.lang.String, java.lang.String> parameterMap_;
     private com.google.protobuf.MapField<java.lang.String, java.lang.String>
     internalGetParameterMap() {
       if (parameterMap_ == null) {
@@ -7998,6 +8979,7 @@ public final class AppActionProtos {
     public int getParameterMapCount() {
       return internalGetParameterMap().getMap().size();
     }
+
     /**
      * <pre>
      * Maps variables in the URL template to intent parameters.
@@ -8039,9 +9021,12 @@ public final class AppActionProtos {
     @java.lang.Override
     public boolean containsParameterMap(
         java.lang.String key) {
-      if (key == null) { throw new java.lang.NullPointerException(); }
+      if (key == null) {
+        throw new java.lang.NullPointerException();
+      }
       return internalGetParameterMap().getMap().containsKey(key);
     }
+
     /**
      * Use {@link #getParameterMapMap()} instead.
      */
@@ -8050,6 +9035,7 @@ public final class AppActionProtos {
     public java.util.Map<java.lang.String, java.lang.String> getParameterMap() {
       return getParameterMapMap();
     }
+
     /**
      * <pre>
      * Maps variables in the URL template to intent parameters.
@@ -8092,6 +9078,7 @@ public final class AppActionProtos {
     public java.util.Map<java.lang.String, java.lang.String> getParameterMapMap() {
       return internalGetParameterMap().getMap();
     }
+
     /**
      * <pre>
      * Maps variables in the URL template to intent parameters.
@@ -8134,11 +9121,14 @@ public final class AppActionProtos {
     public java.lang.String getParameterMapOrDefault(
         java.lang.String key,
         java.lang.String defaultValue) {
-      if (key == null) { throw new java.lang.NullPointerException(); }
+      if (key == null) {
+        throw new java.lang.NullPointerException();
+      }
       java.util.Map<java.lang.String, java.lang.String> map =
           internalGetParameterMap().getMap();
       return map.containsKey(key) ? map.get(key) : defaultValue;
     }
+
     /**
      * <pre>
      * Maps variables in the URL template to intent parameters.
@@ -8180,7 +9170,9 @@ public final class AppActionProtos {
 
     public java.lang.String getParameterMapOrThrow(
         java.lang.String key) {
-      if (key == null) { throw new java.lang.NullPointerException(); }
+      if (key == null) {
+        throw new java.lang.NullPointerException();
+      }
       java.util.Map<java.lang.String, java.lang.String> map =
           internalGetParameterMap().getMap();
       if (!map.containsKey(key)) {
@@ -8189,8 +9181,6 @@ public final class AppActionProtos {
       return map.get(key);
     }
 
-    public static final int REQUIRED_KEYS_FIELD_NUMBER = 3;
-    private com.google.protobuf.LazyStringList requiredKeys_;
     /**
      * <pre>
      * List of all the keys from the parameter_map that are required to be present
@@ -8208,12 +9198,14 @@ public final class AppActionProtos {
      * </pre>
      *
      * <code>repeated string required_keys = 3;</code>
+     *
      * @return A list containing the requiredKeys.
      */
     public com.google.protobuf.ProtocolStringList
-        getRequiredKeysList() {
+    getRequiredKeysList() {
       return requiredKeys_;
     }
+
     /**
      * <pre>
      * List of all the keys from the parameter_map that are required to be present
@@ -8231,11 +9223,13 @@ public final class AppActionProtos {
      * </pre>
      *
      * <code>repeated string required_keys = 3;</code>
+     *
      * @return The count of requiredKeys.
      */
     public int getRequiredKeysCount() {
       return requiredKeys_.size();
     }
+
     /**
      * <pre>
      * List of all the keys from the parameter_map that are required to be present
@@ -8253,12 +9247,14 @@ public final class AppActionProtos {
      * </pre>
      *
      * <code>repeated string required_keys = 3;</code>
+     *
      * @param index The index of the element to return.
      * @return The requiredKeys at the given index.
      */
     public java.lang.String getRequiredKeys(int index) {
       return requiredKeys_.get(index);
     }
+
     /**
      * <pre>
      * List of all the keys from the parameter_map that are required to be present
@@ -8276,16 +9272,15 @@ public final class AppActionProtos {
      * </pre>
      *
      * <code>repeated string required_keys = 3;</code>
+     *
      * @param index The index of the value to return.
      * @return The bytes of the requiredKeys at the given index.
      */
     public com.google.protobuf.ByteString
-        getRequiredKeysBytes(int index) {
+    getRequiredKeysBytes(int index) {
       return requiredKeys_.getByteString(index);
     }
 
-    public static final int ENTITY_MATCH_REQUIRED_KEYS_FIELD_NUMBER = 4;
-    private com.google.protobuf.LazyStringList entityMatchRequiredKeys_;
     /**
      * <pre>
      * List of all the keys from the parameter_map that are required to match an
@@ -8305,12 +9300,14 @@ public final class AppActionProtos {
      * </pre>
      *
      * <code>repeated string entity_match_required_keys = 4;</code>
+     *
      * @return A list containing the entityMatchRequiredKeys.
      */
     public com.google.protobuf.ProtocolStringList
-        getEntityMatchRequiredKeysList() {
+    getEntityMatchRequiredKeysList() {
       return entityMatchRequiredKeys_;
     }
+
     /**
      * <pre>
      * List of all the keys from the parameter_map that are required to match an
@@ -8330,11 +9327,13 @@ public final class AppActionProtos {
      * </pre>
      *
      * <code>repeated string entity_match_required_keys = 4;</code>
+     *
      * @return The count of entityMatchRequiredKeys.
      */
     public int getEntityMatchRequiredKeysCount() {
       return entityMatchRequiredKeys_.size();
     }
+
     /**
      * <pre>
      * List of all the keys from the parameter_map that are required to match an
@@ -8354,12 +9353,14 @@ public final class AppActionProtos {
      * </pre>
      *
      * <code>repeated string entity_match_required_keys = 4;</code>
+     *
      * @param index The index of the element to return.
      * @return The entityMatchRequiredKeys at the given index.
      */
     public java.lang.String getEntityMatchRequiredKeys(int index) {
       return entityMatchRequiredKeys_.get(index);
     }
+
     /**
      * <pre>
      * List of all the keys from the parameter_map that are required to match an
@@ -8379,15 +9380,15 @@ public final class AppActionProtos {
      * </pre>
      *
      * <code>repeated string entity_match_required_keys = 4;</code>
+     *
      * @param index The index of the value to return.
      * @return The bytes of the entityMatchRequiredKeys at the given index.
      */
     public com.google.protobuf.ByteString
-        getEntityMatchRequiredKeysBytes(int index) {
+    getEntityMatchRequiredKeysBytes(int index) {
       return entityMatchRequiredKeys_.getByteString(index);
     }
 
-    private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -8400,16 +9401,16 @@ public final class AppActionProtos {
 
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+        throws java.io.IOException {
       if (((bitField0_ & 0x00000001) != 0)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, template_);
       }
       com.google.protobuf.GeneratedMessageV3
-        .serializeStringMapTo(
-          output,
-          internalGetParameterMap(),
-          ParameterMapDefaultEntryHolder.defaultEntry,
-          2);
+          .serializeStringMapTo(
+              output,
+              internalGetParameterMap(),
+              ParameterMapDefaultEntryHolder.defaultEntry,
+              2);
       for (int i = 0; i < requiredKeys_.size(); i++) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 3, requiredKeys_.getRaw(i));
       }
@@ -8429,9 +9430,9 @@ public final class AppActionProtos {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, template_);
       }
       for (java.util.Map.Entry<java.lang.String, java.lang.String> entry
-           : internalGetParameterMap().getMap().entrySet()) {
+          : internalGetParameterMap().getMap().entrySet()) {
         com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
-        parameterMap__ = ParameterMapDefaultEntryHolder.defaultEntry.newBuilderForType()
+            parameterMap__ = ParameterMapDefaultEntryHolder.defaultEntry.newBuilderForType()
             .setKey(entry.getKey())
             .setValue(entry.getValue())
             .build();
@@ -8462,7 +9463,7 @@ public final class AppActionProtos {
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
-       return true;
+        return true;
       }
       if (!(obj instanceof com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate)) {
         return super.equals(obj);
@@ -8512,84 +9513,11 @@ public final class AppActionProtos {
       return hash;
     }
 
-    public static com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+    @java.lang.Override
+    public Builder newBuilderForType() {
+      return newBuilder();
     }
 
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
     @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
@@ -8602,20 +9530,61 @@ public final class AppActionProtos {
       Builder builder = new Builder(parent);
       return builder;
     }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<UrlTemplate> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final class ParameterMapDefaultEntryHolder {
+      static final com.google.protobuf.MapEntry<
+          java.lang.String, java.lang.String> defaultEntry =
+          com.google.protobuf.MapEntry
+              .<java.lang.String, java.lang.String>newDefaultInstance(
+                  com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_UrlTemplate_ParameterMapEntry_descriptor,
+                  com.google.protobuf.WireFormat.FieldType.STRING,
+                  "",
+                  com.google.protobuf.WireFormat.FieldType.STRING,
+                  "");
+    }
+
     /**
      * <pre>
      * Encapsulates the information needed to construct a fulfillment URL: a URL
      * template and the mapping of template variables to intent parameters.
      * </pre>
-     *
+     * <p>
      * Protobuf type {@code com.example.appactionvisualizer.databean.UrlTemplate}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:com.example.appactionvisualizer.databean.UrlTemplate)
         com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplateOrBuilder {
+      private int bitField0_;
+      private java.lang.Object template_ = "";
+      private com.google.protobuf.MapField<
+          java.lang.String, java.lang.String> parameterMap_;
+      private com.google.protobuf.LazyStringList requiredKeys_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private com.google.protobuf.LazyStringList entityMatchRequiredKeys_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+
+      // Construct using com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
+      getDescriptor() {
         return com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_UrlTemplate_descriptor;
       }
 
@@ -8630,6 +9599,7 @@ public final class AppActionProtos {
                 "Invalid map field number: " + number);
         }
       }
+
       @SuppressWarnings({"rawtypes"})
       protected com.google.protobuf.MapField internalGetMutableMapField(
           int number) {
@@ -8641,29 +9611,21 @@ public final class AppActionProtos {
                 "Invalid map field number: " + number);
         }
       }
+
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
+      internalGetFieldAccessorTable() {
         return com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_UrlTemplate_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate.class, com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate.Builder.class);
       }
 
-      // Construct using com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
+            .alwaysUseFieldBuilders) {
         }
       }
+
       @java.lang.Override
       public Builder clear() {
         super.clear();
@@ -8679,7 +9641,7 @@ public final class AppActionProtos {
 
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
+      getDescriptorForType() {
         return com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_UrlTemplate_descriptor;
       }
 
@@ -8727,38 +9689,44 @@ public final class AppActionProtos {
       public Builder clone() {
         return super.clone();
       }
+
       @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return super.setField(field, value);
       }
+
       @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return super.clearField(field);
       }
+
       @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return super.clearOneof(oneof);
       }
+
       @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
         return super.setRepeatedField(field, index, value);
       }
+
       @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return super.addRepeatedField(field, value);
       }
+
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate) {
-          return mergeFrom((com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate)other);
+          return mergeFrom((com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate) other);
         } else {
           super.mergeFrom(other);
           return this;
@@ -8766,7 +9734,8 @@ public final class AppActionProtos {
       }
 
       public Builder mergeFrom(com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate other) {
-        if (other == com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate.getDefaultInstance()) return this;
+        if (other == com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate.getDefaultInstance())
+          return this;
         if (other.hasTemplate()) {
           bitField0_ |= 0x00000001;
           template_ = other.template_;
@@ -8822,26 +9791,27 @@ public final class AppActionProtos {
         }
         return this;
       }
-      private int bitField0_;
 
-      private java.lang.Object template_ = "";
       /**
        * <pre>
        * A template for a URL to be opened on the device.
        * </pre>
        *
        * <code>optional string template = 1;</code>
+       *
        * @return Whether the template field is set.
        */
       public boolean hasTemplate() {
         return ((bitField0_ & 0x00000001) != 0);
       }
+
       /**
        * <pre>
        * A template for a URL to be opened on the device.
        * </pre>
        *
        * <code>optional string template = 1;</code>
+       *
        * @return The template.
        */
       public java.lang.String getTemplate() {
@@ -8858,19 +9828,42 @@ public final class AppActionProtos {
           return (java.lang.String) ref;
         }
       }
+
       /**
        * <pre>
        * A template for a URL to be opened on the device.
        * </pre>
        *
        * <code>optional string template = 1;</code>
+       *
+       * @param value The template to set.
+       * @return This builder for chaining.
+       */
+      public Builder setTemplate(
+          java.lang.String value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000001;
+        template_ = value;
+        onChanged();
+        return this;
+      }
+
+      /**
+       * <pre>
+       * A template for a URL to be opened on the device.
+       * </pre>
+       *
+       * <code>optional string template = 1;</code>
+       *
        * @return The bytes for template.
        */
       public com.google.protobuf.ByteString
-          getTemplateBytes() {
+      getTemplateBytes() {
         java.lang.Object ref = template_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString b =
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
           template_ = b;
@@ -8879,31 +9872,35 @@ public final class AppActionProtos {
           return (com.google.protobuf.ByteString) ref;
         }
       }
+
       /**
        * <pre>
        * A template for a URL to be opened on the device.
        * </pre>
        *
        * <code>optional string template = 1;</code>
-       * @param value The template to set.
+       *
+       * @param value The bytes for template to set.
        * @return This builder for chaining.
        */
-      public Builder setTemplate(
-          java.lang.String value) {
+      public Builder setTemplateBytes(
+          com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000001;
         template_ = value;
         onChanged();
         return this;
       }
+
       /**
        * <pre>
        * A template for a URL to be opened on the device.
        * </pre>
        *
        * <code>optional string template = 1;</code>
+       *
        * @return This builder for chaining.
        */
       public Builder clearTemplate() {
@@ -8912,28 +9909,7 @@ public final class AppActionProtos {
         onChanged();
         return this;
       }
-      /**
-       * <pre>
-       * A template for a URL to be opened on the device.
-       * </pre>
-       *
-       * <code>optional string template = 1;</code>
-       * @param value The bytes for template to set.
-       * @return This builder for chaining.
-       */
-      public Builder setTemplateBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-        template_ = value;
-        onChanged();
-        return this;
-      }
 
-      private com.google.protobuf.MapField<
-          java.lang.String, java.lang.String> parameterMap_;
       private com.google.protobuf.MapField<java.lang.String, java.lang.String>
       internalGetParameterMap() {
         if (parameterMap_ == null) {
@@ -8942,9 +9918,11 @@ public final class AppActionProtos {
         }
         return parameterMap_;
       }
+
       private com.google.protobuf.MapField<java.lang.String, java.lang.String>
       internalGetMutableParameterMap() {
-        onChanged();;
+        onChanged();
+        ;
         if (parameterMap_ == null) {
           parameterMap_ = com.google.protobuf.MapField.newMapField(
               ParameterMapDefaultEntryHolder.defaultEntry);
@@ -8958,6 +9936,7 @@ public final class AppActionProtos {
       public int getParameterMapCount() {
         return internalGetParameterMap().getMap().size();
       }
+
       /**
        * <pre>
        * Maps variables in the URL template to intent parameters.
@@ -8999,9 +9978,12 @@ public final class AppActionProtos {
       @java.lang.Override
       public boolean containsParameterMap(
           java.lang.String key) {
-        if (key == null) { throw new java.lang.NullPointerException(); }
+        if (key == null) {
+          throw new java.lang.NullPointerException();
+        }
         return internalGetParameterMap().getMap().containsKey(key);
       }
+
       /**
        * Use {@link #getParameterMapMap()} instead.
        */
@@ -9010,6 +9992,7 @@ public final class AppActionProtos {
       public java.util.Map<java.lang.String, java.lang.String> getParameterMap() {
         return getParameterMapMap();
       }
+
       /**
        * <pre>
        * Maps variables in the URL template to intent parameters.
@@ -9052,6 +10035,7 @@ public final class AppActionProtos {
       public java.util.Map<java.lang.String, java.lang.String> getParameterMapMap() {
         return internalGetParameterMap().getMap();
       }
+
       /**
        * <pre>
        * Maps variables in the URL template to intent parameters.
@@ -9094,11 +10078,14 @@ public final class AppActionProtos {
       public java.lang.String getParameterMapOrDefault(
           java.lang.String key,
           java.lang.String defaultValue) {
-        if (key == null) { throw new java.lang.NullPointerException(); }
+        if (key == null) {
+          throw new java.lang.NullPointerException();
+        }
         java.util.Map<java.lang.String, java.lang.String> map =
             internalGetParameterMap().getMap();
         return map.containsKey(key) ? map.get(key) : defaultValue;
       }
+
       /**
        * <pre>
        * Maps variables in the URL template to intent parameters.
@@ -9140,7 +10127,9 @@ public final class AppActionProtos {
 
       public java.lang.String getParameterMapOrThrow(
           java.lang.String key) {
-        if (key == null) { throw new java.lang.NullPointerException(); }
+        if (key == null) {
+          throw new java.lang.NullPointerException();
+        }
         java.util.Map<java.lang.String, java.lang.String> map =
             internalGetParameterMap().getMap();
         if (!map.containsKey(key)) {
@@ -9154,6 +10143,7 @@ public final class AppActionProtos {
             .clear();
         return this;
       }
+
       /**
        * <pre>
        * Maps variables in the URL template to intent parameters.
@@ -9194,11 +10184,14 @@ public final class AppActionProtos {
 
       public Builder removeParameterMap(
           java.lang.String key) {
-        if (key == null) { throw new java.lang.NullPointerException(); }
+        if (key == null) {
+          throw new java.lang.NullPointerException();
+        }
         internalGetMutableParameterMap().getMutableMap()
             .remove(key);
         return this;
       }
+
       /**
        * Use alternate mutation accessors instead.
        */
@@ -9207,6 +10200,7 @@ public final class AppActionProtos {
       getMutableParameterMap() {
         return internalGetMutableParameterMap().getMutableMap();
       }
+
       /**
        * <pre>
        * Maps variables in the URL template to intent parameters.
@@ -9247,12 +10241,17 @@ public final class AppActionProtos {
       public Builder putParameterMap(
           java.lang.String key,
           java.lang.String value) {
-        if (key == null) { throw new java.lang.NullPointerException(); }
-        if (value == null) { throw new java.lang.NullPointerException(); }
+        if (key == null) {
+          throw new java.lang.NullPointerException();
+        }
+        if (value == null) {
+          throw new java.lang.NullPointerException();
+        }
         internalGetMutableParameterMap().getMutableMap()
             .put(key, value);
         return this;
       }
+
       /**
        * <pre>
        * Maps variables in the URL template to intent parameters.
@@ -9298,13 +10297,13 @@ public final class AppActionProtos {
         return this;
       }
 
-      private com.google.protobuf.LazyStringList requiredKeys_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureRequiredKeysIsMutable() {
         if (!((bitField0_ & 0x00000004) != 0)) {
           requiredKeys_ = new com.google.protobuf.LazyStringArrayList(requiredKeys_);
           bitField0_ |= 0x00000004;
-         }
+        }
       }
+
       /**
        * <pre>
        * List of all the keys from the parameter_map that are required to be present
@@ -9322,12 +10321,14 @@ public final class AppActionProtos {
        * </pre>
        *
        * <code>repeated string required_keys = 3;</code>
+       *
        * @return A list containing the requiredKeys.
        */
       public com.google.protobuf.ProtocolStringList
-          getRequiredKeysList() {
+      getRequiredKeysList() {
         return requiredKeys_.getUnmodifiableView();
       }
+
       /**
        * <pre>
        * List of all the keys from the parameter_map that are required to be present
@@ -9345,11 +10346,13 @@ public final class AppActionProtos {
        * </pre>
        *
        * <code>repeated string required_keys = 3;</code>
+       *
        * @return The count of requiredKeys.
        */
       public int getRequiredKeysCount() {
         return requiredKeys_.size();
       }
+
       /**
        * <pre>
        * List of all the keys from the parameter_map that are required to be present
@@ -9367,12 +10370,14 @@ public final class AppActionProtos {
        * </pre>
        *
        * <code>repeated string required_keys = 3;</code>
+       *
        * @param index The index of the element to return.
        * @return The requiredKeys at the given index.
        */
       public java.lang.String getRequiredKeys(int index) {
         return requiredKeys_.get(index);
       }
+
       /**
        * <pre>
        * List of all the keys from the parameter_map that are required to be present
@@ -9390,13 +10395,15 @@ public final class AppActionProtos {
        * </pre>
        *
        * <code>repeated string required_keys = 3;</code>
+       *
        * @param index The index of the value to return.
        * @return The bytes of the requiredKeys at the given index.
        */
       public com.google.protobuf.ByteString
-          getRequiredKeysBytes(int index) {
+      getRequiredKeysBytes(int index) {
         return requiredKeys_.getByteString(index);
       }
+
       /**
        * <pre>
        * List of all the keys from the parameter_map that are required to be present
@@ -9414,6 +10421,7 @@ public final class AppActionProtos {
        * </pre>
        *
        * <code>repeated string required_keys = 3;</code>
+       *
        * @param index The index to set the value at.
        * @param value The requiredKeys to set.
        * @return This builder for chaining.
@@ -9421,13 +10429,14 @@ public final class AppActionProtos {
       public Builder setRequiredKeys(
           int index, java.lang.String value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureRequiredKeysIsMutable();
+          throw new NullPointerException();
+        }
+        ensureRequiredKeysIsMutable();
         requiredKeys_.set(index, value);
         onChanged();
         return this;
       }
+
       /**
        * <pre>
        * List of all the keys from the parameter_map that are required to be present
@@ -9445,19 +10454,21 @@ public final class AppActionProtos {
        * </pre>
        *
        * <code>repeated string required_keys = 3;</code>
+       *
        * @param value The requiredKeys to add.
        * @return This builder for chaining.
        */
       public Builder addRequiredKeys(
           java.lang.String value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureRequiredKeysIsMutable();
+          throw new NullPointerException();
+        }
+        ensureRequiredKeysIsMutable();
         requiredKeys_.add(value);
         onChanged();
         return this;
       }
+
       /**
        * <pre>
        * List of all the keys from the parameter_map that are required to be present
@@ -9475,6 +10486,7 @@ public final class AppActionProtos {
        * </pre>
        *
        * <code>repeated string required_keys = 3;</code>
+       *
        * @param values The requiredKeys to add.
        * @return This builder for chaining.
        */
@@ -9486,6 +10498,7 @@ public final class AppActionProtos {
         onChanged();
         return this;
       }
+
       /**
        * <pre>
        * List of all the keys from the parameter_map that are required to be present
@@ -9503,6 +10516,7 @@ public final class AppActionProtos {
        * </pre>
        *
        * <code>repeated string required_keys = 3;</code>
+       *
        * @return This builder for chaining.
        */
       public Builder clearRequiredKeys() {
@@ -9511,6 +10525,7 @@ public final class AppActionProtos {
         onChanged();
         return this;
       }
+
       /**
        * <pre>
        * List of all the keys from the parameter_map that are required to be present
@@ -9528,27 +10543,28 @@ public final class AppActionProtos {
        * </pre>
        *
        * <code>repeated string required_keys = 3;</code>
+       *
        * @param value The bytes of the requiredKeys to add.
        * @return This builder for chaining.
        */
       public Builder addRequiredKeysBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureRequiredKeysIsMutable();
+          throw new NullPointerException();
+        }
+        ensureRequiredKeysIsMutable();
         requiredKeys_.add(value);
         onChanged();
         return this;
       }
 
-      private com.google.protobuf.LazyStringList entityMatchRequiredKeys_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureEntityMatchRequiredKeysIsMutable() {
         if (!((bitField0_ & 0x00000008) != 0)) {
           entityMatchRequiredKeys_ = new com.google.protobuf.LazyStringArrayList(entityMatchRequiredKeys_);
           bitField0_ |= 0x00000008;
-         }
+        }
       }
+
       /**
        * <pre>
        * List of all the keys from the parameter_map that are required to match an
@@ -9568,12 +10584,14 @@ public final class AppActionProtos {
        * </pre>
        *
        * <code>repeated string entity_match_required_keys = 4;</code>
+       *
        * @return A list containing the entityMatchRequiredKeys.
        */
       public com.google.protobuf.ProtocolStringList
-          getEntityMatchRequiredKeysList() {
+      getEntityMatchRequiredKeysList() {
         return entityMatchRequiredKeys_.getUnmodifiableView();
       }
+
       /**
        * <pre>
        * List of all the keys from the parameter_map that are required to match an
@@ -9593,11 +10611,13 @@ public final class AppActionProtos {
        * </pre>
        *
        * <code>repeated string entity_match_required_keys = 4;</code>
+       *
        * @return The count of entityMatchRequiredKeys.
        */
       public int getEntityMatchRequiredKeysCount() {
         return entityMatchRequiredKeys_.size();
       }
+
       /**
        * <pre>
        * List of all the keys from the parameter_map that are required to match an
@@ -9617,12 +10637,14 @@ public final class AppActionProtos {
        * </pre>
        *
        * <code>repeated string entity_match_required_keys = 4;</code>
+       *
        * @param index The index of the element to return.
        * @return The entityMatchRequiredKeys at the given index.
        */
       public java.lang.String getEntityMatchRequiredKeys(int index) {
         return entityMatchRequiredKeys_.get(index);
       }
+
       /**
        * <pre>
        * List of all the keys from the parameter_map that are required to match an
@@ -9642,13 +10664,15 @@ public final class AppActionProtos {
        * </pre>
        *
        * <code>repeated string entity_match_required_keys = 4;</code>
+       *
        * @param index The index of the value to return.
        * @return The bytes of the entityMatchRequiredKeys at the given index.
        */
       public com.google.protobuf.ByteString
-          getEntityMatchRequiredKeysBytes(int index) {
+      getEntityMatchRequiredKeysBytes(int index) {
         return entityMatchRequiredKeys_.getByteString(index);
       }
+
       /**
        * <pre>
        * List of all the keys from the parameter_map that are required to match an
@@ -9668,6 +10692,7 @@ public final class AppActionProtos {
        * </pre>
        *
        * <code>repeated string entity_match_required_keys = 4;</code>
+       *
        * @param index The index to set the value at.
        * @param value The entityMatchRequiredKeys to set.
        * @return This builder for chaining.
@@ -9675,13 +10700,14 @@ public final class AppActionProtos {
       public Builder setEntityMatchRequiredKeys(
           int index, java.lang.String value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureEntityMatchRequiredKeysIsMutable();
+          throw new NullPointerException();
+        }
+        ensureEntityMatchRequiredKeysIsMutable();
         entityMatchRequiredKeys_.set(index, value);
         onChanged();
         return this;
       }
+
       /**
        * <pre>
        * List of all the keys from the parameter_map that are required to match an
@@ -9701,19 +10727,21 @@ public final class AppActionProtos {
        * </pre>
        *
        * <code>repeated string entity_match_required_keys = 4;</code>
+       *
        * @param value The entityMatchRequiredKeys to add.
        * @return This builder for chaining.
        */
       public Builder addEntityMatchRequiredKeys(
           java.lang.String value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureEntityMatchRequiredKeysIsMutable();
+          throw new NullPointerException();
+        }
+        ensureEntityMatchRequiredKeysIsMutable();
         entityMatchRequiredKeys_.add(value);
         onChanged();
         return this;
       }
+
       /**
        * <pre>
        * List of all the keys from the parameter_map that are required to match an
@@ -9733,6 +10761,7 @@ public final class AppActionProtos {
        * </pre>
        *
        * <code>repeated string entity_match_required_keys = 4;</code>
+       *
        * @param values The entityMatchRequiredKeys to add.
        * @return This builder for chaining.
        */
@@ -9744,6 +10773,7 @@ public final class AppActionProtos {
         onChanged();
         return this;
       }
+
       /**
        * <pre>
        * List of all the keys from the parameter_map that are required to match an
@@ -9763,6 +10793,7 @@ public final class AppActionProtos {
        * </pre>
        *
        * <code>repeated string entity_match_required_keys = 4;</code>
+       *
        * @return This builder for chaining.
        */
       public Builder clearEntityMatchRequiredKeys() {
@@ -9771,6 +10802,7 @@ public final class AppActionProtos {
         onChanged();
         return this;
       }
+
       /**
        * <pre>
        * List of all the keys from the parameter_map that are required to match an
@@ -9790,19 +10822,21 @@ public final class AppActionProtos {
        * </pre>
        *
        * <code>repeated string entity_match_required_keys = 4;</code>
+       *
        * @param value The bytes of the entityMatchRequiredKeys to add.
        * @return This builder for chaining.
        */
       public Builder addEntityMatchRequiredKeysBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureEntityMatchRequiredKeysIsMutable();
+          throw new NullPointerException();
+        }
+        ensureEntityMatchRequiredKeysIsMutable();
         entityMatchRequiredKeys_.add(value);
         onChanged();
         return this;
       }
+
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -9819,218 +10853,8 @@ public final class AppActionProtos {
       // @@protoc_insertion_point(builder_scope:com.example.appactionvisualizer.databean.UrlTemplate)
     }
 
-    // @@protoc_insertion_point(class_scope:com.example.appactionvisualizer.databean.UrlTemplate)
-    private static final com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate();
-    }
-
-    public static com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<UrlTemplate>
-        PARSER = new com.google.protobuf.AbstractParser<UrlTemplate>() {
-      @java.lang.Override
-      public UrlTemplate parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new UrlTemplate(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<UrlTemplate> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<UrlTemplate> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
   }
 
-  public interface EntitySetOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.example.appactionvisualizer.databean.EntitySet)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <pre>
-     * JSON-LD structure of type `schema.org/ItemList`. Each `itemListElement`
-     * represents a single catalog entity. Simple enumerations can be specified
-     * using string elements (`schema.org/Text`) or `schema.org/ListItem` entities
-     * with the `&#64;id`, `name` and (optionally) `alternateName` properties
-     * populated. All entities in the list should be of the same schema.org type.
-     * If multiple inline `ItemLists` contain the same entity type (e.g.
-     * `schema.org/Text`), they can be disambiguated using the `&#64;id` property of
-     * the `ItemList`.
-     * Example 1:
-     * ```json
-     * {
-     *   "&#64;context": "http://schema.org/",
-     *   "&#64;type": "ItemList",
-     *   "&#64;id": "http://example.com/Colors",
-     *   "itemListElement": [
-     *     "Crimson",
-     *     "Emerald",
-     *     "Azure"
-     *   ]
-     * }
-     * ```
-     * Example 2:
-     * ```json
-     * {
-     *   "&#64;context": "http://schema.org/",
-     *   "&#64;type": "ItemList",
-     *   "&#64;id": "http://example.com/Colors",
-     *   "itemListElement": [
-     *     {
-     *       "&#64;type": "ListItem",
-     *       "&#64;id": "http://example.com/Red",
-     *       "name": "Red" ,
-     *       "alternateName": [ "Crimson", "Scarlet", "Ruby" ],
-     *     },
-     *     {
-     *       "&#64;type": "ListItem",
-     *       "&#64;id": "http://example.com/Green",
-     *       "name": "Green",
-     *       "alternateName": ["Emerald", "Olive", "Jade" ]
-     *     },
-     *     {
-     *       "&#64;type": "ListItem",
-     *       "&#64;id": "http://example.com/Blue",
-     *       "name": "Blue",
-     *       "alternateName": [ "Azure", "Cobalt", "Sapphire" ]
-     *     }
-     *   ]
-     * }
-     * ```
-     * </pre>
-     *
-     * <code>optional .google.protobuf.Struct item_list = 1;</code>
-     * @return Whether the itemList field is set.
-     */
-    boolean hasItemList();
-    /**
-     * <pre>
-     * JSON-LD structure of type `schema.org/ItemList`. Each `itemListElement`
-     * represents a single catalog entity. Simple enumerations can be specified
-     * using string elements (`schema.org/Text`) or `schema.org/ListItem` entities
-     * with the `&#64;id`, `name` and (optionally) `alternateName` properties
-     * populated. All entities in the list should be of the same schema.org type.
-     * If multiple inline `ItemLists` contain the same entity type (e.g.
-     * `schema.org/Text`), they can be disambiguated using the `&#64;id` property of
-     * the `ItemList`.
-     * Example 1:
-     * ```json
-     * {
-     *   "&#64;context": "http://schema.org/",
-     *   "&#64;type": "ItemList",
-     *   "&#64;id": "http://example.com/Colors",
-     *   "itemListElement": [
-     *     "Crimson",
-     *     "Emerald",
-     *     "Azure"
-     *   ]
-     * }
-     * ```
-     * Example 2:
-     * ```json
-     * {
-     *   "&#64;context": "http://schema.org/",
-     *   "&#64;type": "ItemList",
-     *   "&#64;id": "http://example.com/Colors",
-     *   "itemListElement": [
-     *     {
-     *       "&#64;type": "ListItem",
-     *       "&#64;id": "http://example.com/Red",
-     *       "name": "Red" ,
-     *       "alternateName": [ "Crimson", "Scarlet", "Ruby" ],
-     *     },
-     *     {
-     *       "&#64;type": "ListItem",
-     *       "&#64;id": "http://example.com/Green",
-     *       "name": "Green",
-     *       "alternateName": ["Emerald", "Olive", "Jade" ]
-     *     },
-     *     {
-     *       "&#64;type": "ListItem",
-     *       "&#64;id": "http://example.com/Blue",
-     *       "name": "Blue",
-     *       "alternateName": [ "Azure", "Cobalt", "Sapphire" ]
-     *     }
-     *   ]
-     * }
-     * ```
-     * </pre>
-     *
-     * <code>optional .google.protobuf.Struct item_list = 1;</code>
-     * @return The itemList.
-     */
-    com.google.protobuf.Struct getItemList();
-    /**
-     * <pre>
-     * JSON-LD structure of type `schema.org/ItemList`. Each `itemListElement`
-     * represents a single catalog entity. Simple enumerations can be specified
-     * using string elements (`schema.org/Text`) or `schema.org/ListItem` entities
-     * with the `&#64;id`, `name` and (optionally) `alternateName` properties
-     * populated. All entities in the list should be of the same schema.org type.
-     * If multiple inline `ItemLists` contain the same entity type (e.g.
-     * `schema.org/Text`), they can be disambiguated using the `&#64;id` property of
-     * the `ItemList`.
-     * Example 1:
-     * ```json
-     * {
-     *   "&#64;context": "http://schema.org/",
-     *   "&#64;type": "ItemList",
-     *   "&#64;id": "http://example.com/Colors",
-     *   "itemListElement": [
-     *     "Crimson",
-     *     "Emerald",
-     *     "Azure"
-     *   ]
-     * }
-     * ```
-     * Example 2:
-     * ```json
-     * {
-     *   "&#64;context": "http://schema.org/",
-     *   "&#64;type": "ItemList",
-     *   "&#64;id": "http://example.com/Colors",
-     *   "itemListElement": [
-     *     {
-     *       "&#64;type": "ListItem",
-     *       "&#64;id": "http://example.com/Red",
-     *       "name": "Red" ,
-     *       "alternateName": [ "Crimson", "Scarlet", "Ruby" ],
-     *     },
-     *     {
-     *       "&#64;type": "ListItem",
-     *       "&#64;id": "http://example.com/Green",
-     *       "name": "Green",
-     *       "alternateName": ["Emerald", "Olive", "Jade" ]
-     *     },
-     *     {
-     *       "&#64;type": "ListItem",
-     *       "&#64;id": "http://example.com/Blue",
-     *       "name": "Blue",
-     *       "alternateName": [ "Azure", "Cobalt", "Sapphire" ]
-     *     }
-     *   ]
-     * }
-     * ```
-     * </pre>
-     *
-     * <code>optional .google.protobuf.Struct item_list = 1;</code>
-     */
-    com.google.protobuf.StructOrBuilder getItemListOrBuilder();
-  }
   /**
    * Protobuf type {@code com.example.appactionvisualizer.databean.EntitySet}
    */
@@ -10038,26 +10862,38 @@ public final class AppActionProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:com.example.appactionvisualizer.databean.EntitySet)
       EntitySetOrBuilder {
-  private static final long serialVersionUID = 0L;
+    public static final int ITEM_LIST_FIELD_NUMBER = 1;
+    @java.lang.Deprecated
+    public static final com.google.protobuf.Parser<EntitySet>
+        PARSER = new com.google.protobuf.AbstractParser<EntitySet>() {
+      @java.lang.Override
+      public EntitySet parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new EntitySet(input, extensionRegistry);
+      }
+    };
+    private static final long serialVersionUID = 0L;
+    // @@protoc_insertion_point(class_scope:com.example.appactionvisualizer.databean.EntitySet)
+    private static final com.example.appactionvisualizer.databean.AppActionProtos.EntitySet DEFAULT_INSTANCE;
+
+    static {
+      DEFAULT_INSTANCE = new com.example.appactionvisualizer.databean.AppActionProtos.EntitySet();
+    }
+
+    private int bitField0_;
+    private com.google.protobuf.Struct itemList_;
+    private byte memoizedIsInitialized = -1;
+
     // Use EntitySet.newBuilder() to construct.
     private EntitySet(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
+
     private EntitySet() {
     }
 
-    @java.lang.Override
-    @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
-        UnusedPrivateParameter unused) {
-      return new EntitySet();
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
     private EntitySet(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -10109,22 +10945,130 @@ public final class AppActionProtos {
         makeExtensionsImmutable();
       }
     }
+
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
+    getDescriptor() {
       return com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_EntitySet_descriptor;
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.EntitySet parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.EntitySet parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.EntitySet parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.EntitySet parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.EntitySet parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.EntitySet parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.EntitySet parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.EntitySet parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.EntitySet parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.EntitySet parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.EntitySet parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.EntitySet parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+
+    public static Builder newBuilder(com.example.appactionvisualizer.databean.AppActionProtos.EntitySet prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+
+    public static com.example.appactionvisualizer.databean.AppActionProtos.EntitySet getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    public static com.google.protobuf.Parser<EntitySet> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new EntitySet();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
+    internalGetFieldAccessorTable() {
       return com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_EntitySet_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.example.appactionvisualizer.databean.AppActionProtos.EntitySet.class, com.example.appactionvisualizer.databean.AppActionProtos.EntitySet.Builder.class);
     }
 
-    private int bitField0_;
-    public static final int ITEM_LIST_FIELD_NUMBER = 1;
-    private com.google.protobuf.Struct itemList_;
     /**
      * <pre>
      * JSON-LD structure of type `schema.org/ItemList`. Each `itemListElement`
@@ -10179,12 +11123,14 @@ public final class AppActionProtos {
      * </pre>
      *
      * <code>optional .google.protobuf.Struct item_list = 1;</code>
+     *
      * @return Whether the itemList field is set.
      */
     @java.lang.Override
     public boolean hasItemList() {
       return ((bitField0_ & 0x00000001) != 0);
     }
+
     /**
      * <pre>
      * JSON-LD structure of type `schema.org/ItemList`. Each `itemListElement`
@@ -10239,12 +11185,14 @@ public final class AppActionProtos {
      * </pre>
      *
      * <code>optional .google.protobuf.Struct item_list = 1;</code>
+     *
      * @return The itemList.
      */
     @java.lang.Override
     public com.google.protobuf.Struct getItemList() {
       return itemList_ == null ? com.google.protobuf.Struct.getDefaultInstance() : itemList_;
     }
+
     /**
      * <pre>
      * JSON-LD structure of type `schema.org/ItemList`. Each `itemListElement`
@@ -10305,7 +11253,6 @@ public final class AppActionProtos {
       return itemList_ == null ? com.google.protobuf.Struct.getDefaultInstance() : itemList_;
     }
 
-    private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -10318,7 +11265,7 @@ public final class AppActionProtos {
 
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+        throws java.io.IOException {
       if (((bitField0_ & 0x00000001) != 0)) {
         output.writeMessage(1, getItemList());
       }
@@ -10333,7 +11280,7 @@ public final class AppActionProtos {
       size = 0;
       if (((bitField0_ & 0x00000001) != 0)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, getItemList());
+            .computeMessageSize(1, getItemList());
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -10343,7 +11290,7 @@ public final class AppActionProtos {
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
-       return true;
+        return true;
       }
       if (!(obj instanceof com.example.appactionvisualizer.databean.AppActionProtos.EntitySet)) {
         return super.equals(obj);
@@ -10375,84 +11322,11 @@ public final class AppActionProtos {
       return hash;
     }
 
-    public static com.example.appactionvisualizer.databean.AppActionProtos.EntitySet parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.EntitySet parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.EntitySet parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.EntitySet parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.EntitySet parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.EntitySet parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.EntitySet parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.EntitySet parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.EntitySet parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.EntitySet parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.EntitySet parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static com.example.appactionvisualizer.databean.AppActionProtos.EntitySet parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+    @java.lang.Override
+    public Builder newBuilderForType() {
+      return newBuilder();
     }
 
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(com.example.appactionvisualizer.databean.AppActionProtos.EntitySet prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
     @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
@@ -10465,6 +11339,17 @@ public final class AppActionProtos {
       Builder builder = new Builder(parent);
       return builder;
     }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<EntitySet> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.example.appactionvisualizer.databean.AppActionProtos.EntitySet getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
     /**
      * Protobuf type {@code com.example.appactionvisualizer.databean.EntitySet}
      */
@@ -10472,18 +11357,10 @@ public final class AppActionProtos {
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:com.example.appactionvisualizer.databean.EntitySet)
         com.example.appactionvisualizer.databean.AppActionProtos.EntitySetOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_EntitySet_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_EntitySet_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.example.appactionvisualizer.databean.AppActionProtos.EntitySet.class, com.example.appactionvisualizer.databean.AppActionProtos.EntitySet.Builder.class);
-      }
+      private int bitField0_;
+      private com.google.protobuf.Struct itemList_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.google.protobuf.Struct, com.google.protobuf.Struct.Builder, com.google.protobuf.StructOrBuilder> itemListBuilder_;
 
       // Construct using com.example.appactionvisualizer.databean.AppActionProtos.EntitySet.newBuilder()
       private Builder() {
@@ -10495,12 +11372,27 @@ public final class AppActionProtos {
         super(parent);
         maybeForceBuilderInitialization();
       }
+
+      public static final com.google.protobuf.Descriptors.Descriptor
+      getDescriptor() {
+        return com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_EntitySet_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internalGetFieldAccessorTable() {
+        return com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_EntitySet_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.example.appactionvisualizer.databean.AppActionProtos.EntitySet.class, com.example.appactionvisualizer.databean.AppActionProtos.EntitySet.Builder.class);
+      }
+
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
+            .alwaysUseFieldBuilders) {
           getItemListFieldBuilder();
         }
       }
+
       @java.lang.Override
       public Builder clear() {
         super.clear();
@@ -10515,7 +11407,7 @@ public final class AppActionProtos {
 
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
+      getDescriptorForType() {
         return com.example.appactionvisualizer.databean.AppActionProtos.internal_static_com_example_appactionvisualizer_databean_EntitySet_descriptor;
       }
 
@@ -10555,38 +11447,44 @@ public final class AppActionProtos {
       public Builder clone() {
         return super.clone();
       }
+
       @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return super.setField(field, value);
       }
+
       @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return super.clearField(field);
       }
+
       @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return super.clearOneof(oneof);
       }
+
       @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
         return super.setRepeatedField(field, index, value);
       }
+
       @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return super.addRepeatedField(field, value);
       }
+
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.example.appactionvisualizer.databean.AppActionProtos.EntitySet) {
-          return mergeFrom((com.example.appactionvisualizer.databean.AppActionProtos.EntitySet)other);
+          return mergeFrom((com.example.appactionvisualizer.databean.AppActionProtos.EntitySet) other);
         } else {
           super.mergeFrom(other);
           return this;
@@ -10594,7 +11492,8 @@ public final class AppActionProtos {
       }
 
       public Builder mergeFrom(com.example.appactionvisualizer.databean.AppActionProtos.EntitySet other) {
-        if (other == com.example.appactionvisualizer.databean.AppActionProtos.EntitySet.getDefaultInstance()) return this;
+        if (other == com.example.appactionvisualizer.databean.AppActionProtos.EntitySet.getDefaultInstance())
+          return this;
         if (other.hasItemList()) {
           mergeItemList(other.getItemList());
         }
@@ -10626,11 +11525,7 @@ public final class AppActionProtos {
         }
         return this;
       }
-      private int bitField0_;
 
-      private com.google.protobuf.Struct itemList_;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          com.google.protobuf.Struct, com.google.protobuf.Struct.Builder, com.google.protobuf.StructOrBuilder> itemListBuilder_;
       /**
        * <pre>
        * JSON-LD structure of type `schema.org/ItemList`. Each `itemListElement`
@@ -10685,11 +11580,13 @@ public final class AppActionProtos {
        * </pre>
        *
        * <code>optional .google.protobuf.Struct item_list = 1;</code>
+       *
        * @return Whether the itemList field is set.
        */
       public boolean hasItemList() {
         return ((bitField0_ & 0x00000001) != 0);
       }
+
       /**
        * <pre>
        * JSON-LD structure of type `schema.org/ItemList`. Each `itemListElement`
@@ -10744,6 +11641,7 @@ public final class AppActionProtos {
        * </pre>
        *
        * <code>optional .google.protobuf.Struct item_list = 1;</code>
+       *
        * @return The itemList.
        */
       public com.google.protobuf.Struct getItemList() {
@@ -10753,6 +11651,7 @@ public final class AppActionProtos {
           return itemListBuilder_.getMessage();
         }
       }
+
       /**
        * <pre>
        * JSON-LD structure of type `schema.org/ItemList`. Each `itemListElement`
@@ -10821,6 +11720,7 @@ public final class AppActionProtos {
         bitField0_ |= 0x00000001;
         return this;
       }
+
       /**
        * <pre>
        * JSON-LD structure of type `schema.org/ItemList`. Each `itemListElement`
@@ -10887,6 +11787,7 @@ public final class AppActionProtos {
         bitField0_ |= 0x00000001;
         return this;
       }
+
       /**
        * <pre>
        * JSON-LD structure of type `schema.org/ItemList`. Each `itemListElement`
@@ -10948,7 +11849,7 @@ public final class AppActionProtos {
               itemList_ != null &&
               itemList_ != com.google.protobuf.Struct.getDefaultInstance()) {
             itemList_ =
-              com.google.protobuf.Struct.newBuilder(itemList_).mergeFrom(value).buildPartial();
+                com.google.protobuf.Struct.newBuilder(itemList_).mergeFrom(value).buildPartial();
           } else {
             itemList_ = value;
           }
@@ -10959,6 +11860,7 @@ public final class AppActionProtos {
         bitField0_ |= 0x00000001;
         return this;
       }
+
       /**
        * <pre>
        * JSON-LD structure of type `schema.org/ItemList`. Each `itemListElement`
@@ -11024,6 +11926,7 @@ public final class AppActionProtos {
         bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
+
       /**
        * <pre>
        * JSON-LD structure of type `schema.org/ItemList`. Each `itemListElement`
@@ -11084,6 +11987,7 @@ public final class AppActionProtos {
         onChanged();
         return getItemListFieldBuilder().getBuilder();
       }
+
       /**
        * <pre>
        * JSON-LD structure of type `schema.org/ItemList`. Each `itemListElement`
@@ -11147,6 +12051,7 @@ public final class AppActionProtos {
               com.google.protobuf.Struct.getDefaultInstance() : itemList_;
         }
       }
+
       /**
        * <pre>
        * JSON-LD structure of type `schema.org/ItemList`. Each `itemListElement`
@@ -11203,18 +12108,19 @@ public final class AppActionProtos {
        * <code>optional .google.protobuf.Struct item_list = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          com.google.protobuf.Struct, com.google.protobuf.Struct.Builder, com.google.protobuf.StructOrBuilder> 
-          getItemListFieldBuilder() {
+          com.google.protobuf.Struct, com.google.protobuf.Struct.Builder, com.google.protobuf.StructOrBuilder>
+      getItemListFieldBuilder() {
         if (itemListBuilder_ == null) {
           itemListBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
               com.google.protobuf.Struct, com.google.protobuf.Struct.Builder, com.google.protobuf.StructOrBuilder>(
-                  getItemList(),
-                  getParentForChildren(),
-                  isClean());
+              getItemList(),
+              getParentForChildren(),
+              isClean());
           itemList_ = null;
         }
         return itemListBuilder_;
       }
+
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -11231,192 +12137,6 @@ public final class AppActionProtos {
       // @@protoc_insertion_point(builder_scope:com.example.appactionvisualizer.databean.EntitySet)
     }
 
-    // @@protoc_insertion_point(class_scope:com.example.appactionvisualizer.databean.EntitySet)
-    private static final com.example.appactionvisualizer.databean.AppActionProtos.EntitySet DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new com.example.appactionvisualizer.databean.AppActionProtos.EntitySet();
-    }
-
-    public static com.example.appactionvisualizer.databean.AppActionProtos.EntitySet getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<EntitySet>
-        PARSER = new com.google.protobuf.AbstractParser<EntitySet>() {
-      @java.lang.Override
-      public EntitySet parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new EntitySet(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<EntitySet> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<EntitySet> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.example.appactionvisualizer.databean.AppActionProtos.EntitySet getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_example_appactionvisualizer_databean_AppActions_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_example_appactionvisualizer_databean_AppActions_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_example_appactionvisualizer_databean_AppAction_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_example_appactionvisualizer_databean_AppAction_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_example_appactionvisualizer_databean_Action_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_example_appactionvisualizer_databean_Action_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_example_appactionvisualizer_databean_Action_Parameter_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_example_appactionvisualizer_databean_Action_Parameter_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_example_appactionvisualizer_databean_EntitySetReference_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_example_appactionvisualizer_databean_EntitySetReference_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_example_appactionvisualizer_databean_FulfillmentOption_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_example_appactionvisualizer_databean_FulfillmentOption_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_example_appactionvisualizer_databean_UrlTemplate_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_example_appactionvisualizer_databean_UrlTemplate_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_example_appactionvisualizer_databean_UrlTemplate_ParameterMapEntry_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_example_appactionvisualizer_databean_UrlTemplate_ParameterMapEntry_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_example_appactionvisualizer_databean_EntitySet_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_example_appactionvisualizer_databean_EntitySet_fieldAccessorTable;
-
-  public static com.google.protobuf.Descriptors.FileDescriptor
-      getDescriptor() {
-    return descriptor;
-  }
-  private static  com.google.protobuf.Descriptors.FileDescriptor
-      descriptor;
-  static {
-    java.lang.String[] descriptorData = {
-      "\n\013protobuftxt\022(com.example.appactionvisu" +
-      "alizer.databean\032\034google/protobuf/struct." +
-      "proto\"V\n\nAppActions\022H\n\013app_actions\030\001 \003(\013" +
-      "23.com.example.appactionvisualizer.datab" +
-      "ean.AppAction\"\256\001\n\tAppAction\022\024\n\014package_n" +
-      "ame\030\001 \001(\t\022A\n\007actions\030\002 \003(\01320.com.example" +
-      ".appactionvisualizer.databean.Action\022H\n\013" +
-      "entity_sets\030\003 \003(\01323.com.example.appactio" +
-      "nvisualizer.databean.EntitySet\"\275\002\n\006Actio" +
-      "n\022\023\n\013intent_name\030\001 \001(\t\022N\n\nparameters\030\002 \003" +
-      "(\0132:.com.example.appactionvisualizer.dat" +
-      "abean.Action.Parameter\022W\n\022fulfillment_op" +
-      "tion\030\003 \003(\0132;.com.example.appactionvisual" +
-      "izer.databean.FulfillmentOption\032u\n\tParam" +
-      "eter\022\014\n\004name\030\001 \001(\t\022Z\n\024entity_set_referen" +
-      "ce\030\002 \003(\0132<.com.example.appactionvisualiz" +
-      "er.databean.EntitySetReference\"?\n\022Entity" +
-      "SetReference\022\025\n\rentity_set_id\030\001 \001(\t\022\022\n\nu" +
-      "rl_filter\030\002 \001(\t\"\204\002\n\021FulfillmentOption\022e\n" +
-      "\020fulfillment_mode\030\001 \001(\0162K.com.example.ap" +
-      "pactionvisualizer.databean.FulfillmentOp" +
-      "tion.FulfillmentMode\022K\n\014url_template\030\002 \001" +
-      "(\01325.com.example.appactionvisualizer.dat" +
-      "abean.UrlTemplate\";\n\017FulfillmentMode\022\017\n\013" +
-      "UNSPECIFIED\020\000\022\014\n\010DEEPLINK\020\001\022\t\n\005SLICE\020\002\"\357" +
-      "\001\n\013UrlTemplate\022\020\n\010template\030\001 \001(\t\022^\n\rpara" +
-      "meter_map\030\002 \003(\0132G.com.example.appactionv" +
-      "isualizer.databean.UrlTemplate.Parameter" +
-      "MapEntry\022\025\n\rrequired_keys\030\003 \003(\t\022\"\n\032entit" +
-      "y_match_required_keys\030\004 \003(\t\0323\n\021Parameter" +
-      "MapEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001" +
-      "\"7\n\tEntitySet\022*\n\titem_list\030\001 \001(\0132\027.googl" +
-      "e.protobuf.StructB;\n(com.example.appacti" +
-      "onvisualizer.databeanB\017AppActionProtos"
-    };
-    descriptor = com.google.protobuf.Descriptors.FileDescriptor
-      .internalBuildGeneratedFileFrom(descriptorData,
-        new com.google.protobuf.Descriptors.FileDescriptor[] {
-          com.google.protobuf.StructProto.getDescriptor(),
-        });
-    internal_static_com_example_appactionvisualizer_databean_AppActions_descriptor =
-      getDescriptor().getMessageTypes().get(0);
-    internal_static_com_example_appactionvisualizer_databean_AppActions_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_example_appactionvisualizer_databean_AppActions_descriptor,
-        new java.lang.String[] { "AppActions", });
-    internal_static_com_example_appactionvisualizer_databean_AppAction_descriptor =
-      getDescriptor().getMessageTypes().get(1);
-    internal_static_com_example_appactionvisualizer_databean_AppAction_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_example_appactionvisualizer_databean_AppAction_descriptor,
-        new java.lang.String[] { "PackageName", "Actions", "EntitySets", });
-    internal_static_com_example_appactionvisualizer_databean_Action_descriptor =
-      getDescriptor().getMessageTypes().get(2);
-    internal_static_com_example_appactionvisualizer_databean_Action_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_example_appactionvisualizer_databean_Action_descriptor,
-        new java.lang.String[] { "IntentName", "Parameters", "FulfillmentOption", });
-    internal_static_com_example_appactionvisualizer_databean_Action_Parameter_descriptor =
-      internal_static_com_example_appactionvisualizer_databean_Action_descriptor.getNestedTypes().get(0);
-    internal_static_com_example_appactionvisualizer_databean_Action_Parameter_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_example_appactionvisualizer_databean_Action_Parameter_descriptor,
-        new java.lang.String[] { "Name", "EntitySetReference", });
-    internal_static_com_example_appactionvisualizer_databean_EntitySetReference_descriptor =
-      getDescriptor().getMessageTypes().get(3);
-    internal_static_com_example_appactionvisualizer_databean_EntitySetReference_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_example_appactionvisualizer_databean_EntitySetReference_descriptor,
-        new java.lang.String[] { "EntitySetId", "UrlFilter", });
-    internal_static_com_example_appactionvisualizer_databean_FulfillmentOption_descriptor =
-      getDescriptor().getMessageTypes().get(4);
-    internal_static_com_example_appactionvisualizer_databean_FulfillmentOption_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_example_appactionvisualizer_databean_FulfillmentOption_descriptor,
-        new java.lang.String[] { "FulfillmentMode", "UrlTemplate", });
-    internal_static_com_example_appactionvisualizer_databean_UrlTemplate_descriptor =
-      getDescriptor().getMessageTypes().get(5);
-    internal_static_com_example_appactionvisualizer_databean_UrlTemplate_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_example_appactionvisualizer_databean_UrlTemplate_descriptor,
-        new java.lang.String[] { "Template", "ParameterMap", "RequiredKeys", "EntityMatchRequiredKeys", });
-    internal_static_com_example_appactionvisualizer_databean_UrlTemplate_ParameterMapEntry_descriptor =
-      internal_static_com_example_appactionvisualizer_databean_UrlTemplate_descriptor.getNestedTypes().get(0);
-    internal_static_com_example_appactionvisualizer_databean_UrlTemplate_ParameterMapEntry_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_example_appactionvisualizer_databean_UrlTemplate_ParameterMapEntry_descriptor,
-        new java.lang.String[] { "Key", "Value", });
-    internal_static_com_example_appactionvisualizer_databean_EntitySet_descriptor =
-      getDescriptor().getMessageTypes().get(6);
-    internal_static_com_example_appactionvisualizer_databean_EntitySet_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_example_appactionvisualizer_databean_EntitySet_descriptor,
-        new java.lang.String[] { "ItemList", });
-    com.google.protobuf.StructProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

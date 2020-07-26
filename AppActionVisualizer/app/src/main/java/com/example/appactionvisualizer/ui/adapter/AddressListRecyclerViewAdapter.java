@@ -37,19 +37,19 @@ public class AddressListRecyclerViewAdapter extends RecyclerView.Adapter<Address
   @Override
   public void onBindViewHolder(final ViewHolder holder, final int position) {
     final Address address = addressList.get(position);
-    if(address.getFeatureName().isEmpty()) {
-      holder.addressName.setText(((LocationActivity)context).getInput());
-    }else{
+    if (address.getFeatureName().isEmpty()) {
+      holder.addressName.setText(((LocationActivity) context).getInput());
+    } else {
       holder.addressName.setText(address.getFeatureName());
     }
     String subAdminArea = address.getSubAdminArea();
     String adminArea = address.getAdminArea();
     holder.Location.setText(context.getString(R.string.location, subAdminArea.isEmpty() ? "" : subAdminArea, adminArea.isEmpty() ? "" : adminArea));
-    holder.pickUp.setText(context.getString(R.string.coordinates_pick_up, String.format("%.5g",address.getLatitude()), String.format("%.5g",address.getLongitude())));
+    holder.pickUp.setText(context.getString(R.string.coordinates_pick_up, String.format("%.5g", address.getLatitude()), String.format("%.5g", address.getLongitude())));
     holder.mView.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        ((LocationActivity)context).setAddress(address);
+        ((LocationActivity) context).setAddress(address);
       }
     });
   }

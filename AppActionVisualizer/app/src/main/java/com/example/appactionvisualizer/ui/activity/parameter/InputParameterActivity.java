@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.speech.tts.UtteranceProgressListener;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,10 +15,10 @@ import androidx.annotation.NonNull;
 
 import com.example.appactionvisualizer.R;
 import com.example.appactionvisualizer.constants.Constant;
-import com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption;
 import com.example.appactionvisualizer.databean.AppActionProtos.Action;
 import com.example.appactionvisualizer.databean.AppActionProtos.AppAction;
 import com.example.appactionvisualizer.databean.AppActionProtos.EntitySet;
+import com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption;
 import com.example.appactionvisualizer.ui.activity.CustomActivity;
 import com.example.appactionvisualizer.utils.Utils;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -37,14 +35,13 @@ import java.util.Map;
 import java.util.Objects;
 
 public class InputParameterActivity extends CustomActivity {
-  private static final String TAG = "InputParameterActivity" ;
-  private FulfillmentOption fulfillmentOption;
-  private Action action;
-  private AppAction appAction;
-
+  private static final String TAG = "InputParameterActivity";
   List<String> keys = new ArrayList<>();
   Map<String, String> map = new HashMap<>();
   Map<String, TextInputEditText> key2textInputEditTexts = new HashMap<>();
+  private FulfillmentOption fulfillmentOption;
+  private Action action;
+  private AppAction appAction;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -89,18 +86,18 @@ public class InputParameterActivity extends CustomActivity {
 
   private void checkInputAndReturn() {
     Intent intent = new Intent();
-    for(Map.Entry<String, TextInputEditText> entry: key2textInputEditTexts.entrySet()) {
+    for (Map.Entry<String, TextInputEditText> entry : key2textInputEditTexts.entrySet()) {
       String key = entry.getKey();
-      if(entry.getValue() == null) {
+      if (entry.getValue() == null) {
         continue;
       }
       String value = Objects.requireNonNull(entry.getValue().getText()).toString();
-      if(value.isEmpty()) {
+      if (value.isEmpty()) {
         Utils.showMsg(getString(R.string.input_hint, key), this);
         return;
       }
       //convert to identifier
-      if(value.contains("(")) {
+      if (value.contains("(")) {
         value = value.substring(value.lastIndexOf("(") + 1, value.length() - 1);
       }
       intent.putExtra(key, value);
@@ -110,36 +107,34 @@ public class InputParameterActivity extends CustomActivity {
   }
 
   private void addParameterViews() {
-    for(String key : keys) {
+    for (String key : keys) {
       addInputKeyLayout(key);
     }
   }
 
   /**
-   * @param key
-   * create a TextInputLayout with TextInputEditText with specific key dynamically
+   * @param key create a TextInputLayout with TextInputEditText with specific key dynamically
    */
   private void addInputKeyLayout(final String key) {
     final LinearLayout linearLayout = findViewById(R.id.parameter_list);
     TextInputLayout textInputLayout = (TextInputLayout) LayoutInflater.from(InputParameterActivity.this).inflate(R.layout.text_input, null);
-    //todo: use string value
     textInputLayout.setHint(key);
     textInputLayout.setHelperText(map.get(key));
     final TextInputEditText textInput = textInputLayout.findViewById(R.id.text_input);
     key2textInputEditTexts.put(key, textInput);
-    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,  ViewGroup.LayoutParams.WRAP_CONTENT);
-    params.setMargins(10, 10,10, 0);
+    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+    params.setMargins(10, 10, 10, 0);
     textInputLayout.setLayoutParams(params);
     final EntitySet entitySet = checkEntitySet(key);
-    if(entitySet != null) {
+    if (entitySet != null) {
       textInput.setFocusable(false);
       textInput.setClickable(true);
       textInput.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View view) {
-            popUpDialog(textInput, entitySet);
-          }
-        });
+        @Override
+        public void onClick(View view) {
+          popUpDialog(textInput, entitySet);
+        }
+      });
     }
 
     linearLayout.addView(textInputLayout);
@@ -151,7 +146,7 @@ public class InputParameterActivity extends CustomActivity {
       MaterialAlertDialogBuilder materialAlertDialogBuilder = new MaterialAlertDialogBuilder(this);
       materialAlertDialogBuilder.setTitle(entitySet.getItemList().getFieldsOrThrow(Constant.ENTITY_FIELD_IDENTIFIER).getStringValue());
       List<CharSequence> list = new ArrayList<>();
-      for(Value entity : listValue.getValuesList()) {
+      for (Value entity : listValue.getValuesList()) {
         list.add(entity.getStructValue().getFieldsOrThrow(Constant.ENTITY_FIELD_NAME).getStringValue());
       }
       CharSequence[] keys = new CharSequence[list.size()];
@@ -162,7 +157,7 @@ public class InputParameterActivity extends CustomActivity {
           textInput.setText(getString(R.string.addition_text, item.getFieldsOrThrow(Constant.ENTITY_FIELD_NAME).getStringValue(), item.getFieldsOrThrow(Constant.ENTITY_FIELD_IDENTIFIER).getStringValue()));
         }
       }).show();
-    }catch (Exception e) {
+    } catch (Exception e) {
       e.printStackTrace();
     }
   }
@@ -173,7 +168,7 @@ public class InputParameterActivity extends CustomActivity {
     String parameterValue = fulfillmentOption.getUrlTemplate().getParameterMapMap().get(key);
     for (Action.Parameter parameter : action.getParametersList()) {
       if (parameter.getName().equals(parameterValue)) {
-        if(parameter.getEntitySetReferenceCount() == 0)
+        if (parameter.getEntitySetReferenceCount() == 0)
           continue;
         String reference = parameter.getEntitySetReference(0).getEntitySetId();
         for (EntitySet set : appAction.getEntitySetsList()) {

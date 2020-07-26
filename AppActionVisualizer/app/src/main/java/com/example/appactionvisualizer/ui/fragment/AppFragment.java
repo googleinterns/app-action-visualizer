@@ -37,7 +37,7 @@ public class AppFragment extends Fragment {
    */
   public static AppFragment newInstance(int pos) {
     ActionType actionType = null;
-    if(pos != 0) {
+    if (pos != 0) {
       actionType = ActionType.getActionTypeValue(pos - 1);
     }
     AppFragment fragment = new AppFragment(actionType);

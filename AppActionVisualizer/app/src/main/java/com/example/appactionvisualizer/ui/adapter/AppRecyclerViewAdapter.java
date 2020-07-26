@@ -30,19 +30,18 @@ import java.util.List;
  */
 public class AppRecyclerViewAdapter extends RecyclerView.Adapter<AppRecyclerViewAdapter.ViewHolder> {
 
-  private static final String TAG = "AppRecyclerView" ;
+  private static final String TAG = "AppRecyclerView";
   private List<AppAction> appActionArrayList;
   private Context context;
 
   public AppRecyclerViewAdapter(ActionType type, Context context) {
     this.context = context;
-    if(type != null) {
+    if (type != null) {
       appActionArrayList = TestGenerator.type2appActionList.get(type);
-    }
-    else {
+    } else {
       appActionArrayList = TestGenerator.appActionsUnique;
     }
-    Log.d(TAG,(type == null? "null" :type.getName()) + " "+ appActionArrayList.size());
+    Log.d(TAG, (type == null ? "null" : type.getName()) + " " + appActionArrayList.size());
   }
 
   @Override
@@ -65,7 +64,7 @@ public class AppRecyclerViewAdapter extends RecyclerView.Adapter<AppRecyclerView
     } catch (PackageManager.NameNotFoundException e) {
       Log.d(TAG, appAction.getPackageName() + " not install");
     }
-    holder.appName.setText(applicationInfo != null? packageManager.getApplicationLabel(applicationInfo) : "unknown");
+    holder.appName.setText(applicationInfo != null ? packageManager.getApplicationLabel(applicationInfo) : "unknown");
     //Use hash set to avoid duplicate tags
     final HashSet<ActionType> uniqueSet = new HashSet<>(5);
     for (int i = 0; i < appAction.getActionsCount(); i++) {
@@ -73,11 +72,11 @@ public class AppRecyclerViewAdapter extends RecyclerView.Adapter<AppRecyclerView
       uniqueSet.add(ActionType.getActionTypeByName(appAction.getActions(i).getIntentName()));
     }
     int idx = 0;
-    for (ActionType actionType: uniqueSet) {
+    for (ActionType actionType : uniqueSet) {
       holder.appTags[idx].setVisibility(View.VISIBLE);
       holder.appTags[idx++].setText(actionType.getName());
     }
-    for(; idx < 5; ++idx) {
+    for (; idx < 5; ++idx) {
       holder.appTags[idx].setVisibility(View.INVISIBLE);
     }
     holder.app.setOnClickListener(new View.OnClickListener() {
@@ -105,10 +104,10 @@ public class AppRecyclerViewAdapter extends RecyclerView.Adapter<AppRecyclerView
     public ViewHolder(View view) {
       super(view);
       mView = view;
-      app =  view.findViewById(R.id.app);
-      appIcon =  view.findViewById(R.id.app_icon);
+      app = view.findViewById(R.id.app);
+      appIcon = view.findViewById(R.id.app_icon);
       appName = view.findViewById(R.id.app_name);
-      int[] ids= {R.id.tag_1, R.id.tag_2, R.id.tag_3, R.id.tag_4, R.id.tag_5};
+      int[] ids = {R.id.tag_1, R.id.tag_2, R.id.tag_3, R.id.tag_4, R.id.tag_5};
       for (int i = 0; i < ids.length; i++) {
         appTags[i] = view.findViewById(ids[i]);
       }

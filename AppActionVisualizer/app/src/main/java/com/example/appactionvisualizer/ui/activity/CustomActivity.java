@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public abstract class CustomActivity extends AppCompatActivity {
 
   @Override
-  public boolean onSupportNavigateUp(){
+  public boolean onSupportNavigateUp() {
     finish();
     return true;
   }
@@ -15,8 +15,10 @@ public abstract class CustomActivity extends AppCompatActivity {
 
   protected void initView() {
     ActionBar actionBar = getSupportActionBar();
-    if(actionBar != null)
+    if (actionBar != null)
       actionBar.setDisplayHomeAsUpEnabled(true);
-  };
+  }
+
+  ;
 
 }

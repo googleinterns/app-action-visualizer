@@ -10,9 +10,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
+        android:layout_marginStart="@dimen/appbar_padding_top"
         android:theme="@style/TagTextStyle"
-        android:visibility="visible"
-        android:layout_marginStart="@dimen/appbar_padding_top"/>
+        android:visibility="visible" />
 
     <TextView
         android:id="@+id/action_name"
