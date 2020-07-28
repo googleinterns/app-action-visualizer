@@ -2,6 +2,7 @@ package com.example.appactionvisualizer.ui.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -176,7 +177,7 @@ public class ParameterActivity extends CustomActivity {
           intent = Intent.parseUri(curUrl, 0);
           startActivity(intent);
         } catch (Exception e) {
-          Utils.showMsg(getString(R.string.error_parsing), ParameterActivity.this);
+          Utils.goToStore(ParameterActivity.this, appAction.getPackageName());
         }
       }
     });

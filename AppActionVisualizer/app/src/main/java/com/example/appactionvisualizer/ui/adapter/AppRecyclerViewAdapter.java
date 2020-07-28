@@ -21,9 +21,12 @@ import com.example.appactionvisualizer.databean.ActionType;
 import com.example.appactionvisualizer.databean.AppActionProtos.AppAction;
 import com.example.appactionvisualizer.databean.TestGenerator;
 import com.example.appactionvisualizer.ui.activity.ActionActivity;
+import com.example.appactionvisualizer.utils.Utils;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Adapter of AppFragment Recyclerview
@@ -34,6 +37,7 @@ public class AppRecyclerViewAdapter extends RecyclerView.Adapter<AppRecyclerView
   private List<AppAction> appActionArrayList;
   private Context context;
 
+
   public AppRecyclerViewAdapter(ActionType type, Context context) {
     this.context = context;
     if (type != null) {
@@ -41,7 +45,6 @@ public class AppRecyclerViewAdapter extends RecyclerView.Adapter<AppRecyclerView
     } else {
       appActionArrayList = TestGenerator.appActionsUnique;
     }
-    Log.d(TAG, (type == null ? "null" : type.getName()) + " " + appActionArrayList.size());
   }
 
   @Override
@@ -54,17 +57,26 @@ public class AppRecyclerViewAdapter extends RecyclerView.Adapter<AppRecyclerView
   @Override
   public void onBindViewHolder(final ViewHolder holder, final int position) {
     final AppAction appAction = appActionArrayList.get(position);
-    Drawable icon;
-    ApplicationInfo applicationInfo = null;
-    PackageManager packageManager = context.getPackageManager();
     try {
-      icon = packageManager.getApplicationIcon(appAction.getPackageName());
+      PackageManager packageManager = context.getPackageManager();
+      Drawable icon = packageManager.getApplicationIcon(appAction.getPackageName());
+      ApplicationInfo applicationInfo = packageManager.getApplicationInfo(appAction.getPackageName(), 0);
       holder.appIcon.setImageDrawable(icon);
-      applicationInfo = packageManager.getApplicationInfo(appAction.getPackageName(), 0);
+      holder.appName.setText(packageManager.getApplicationLabel(applicationInfo));
     } catch (PackageManager.NameNotFoundException e) {
       Log.d(TAG, appAction.getPackageName() + " not install");
+      String pkgName = appAction.getPackageName().toLowerCase().replace('.', '_');
+      int imgId = Utils.getResId(pkgName, R.drawable.class);
+      if(imgId != -1) {
+        holder.appIcon.setImageResource(imgId);
+      }
+      int strId = Utils.getResId(pkgName, R.string.class);
+      if(strId != -1) {
+        holder.appName.setText(strId);
+      }else {
+        holder.appName.setText("unknown");
+      }
     }
-    holder.appName.setText(applicationInfo != null ? packageManager.getApplicationLabel(applicationInfo) : "unknown");
     //Use hash set to avoid duplicate tags
     final HashSet<ActionType> uniqueSet = new HashSet<>(5);
     for (int i = 0; i < appAction.getActionsCount(); i++) {
@@ -99,7 +111,7 @@ public class AppRecyclerViewAdapter extends RecyclerView.Adapter<AppRecyclerView
     public final RelativeLayout app;
     public final ImageView appIcon;
     public final TextView appName;
-    public final TextView appTags[] = new TextView[5];
+    public final TextView[] appTags = new TextView[5];
 
     public ViewHolder(View view) {
       super(view);

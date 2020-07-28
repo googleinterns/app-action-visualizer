@@ -2,6 +2,7 @@ package com.example.appactionvisualizer.ui.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -143,7 +144,8 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
         Intent intent = Intent.parseUri(fulfillmentOption.getUrlTemplate().getTemplate(), 0);
         context.startActivity(intent);
       } catch (Exception e) {
-        Utils.showMsg(context.getString(R.string.error_parsing), context);
+        //go to play store
+        Utils.goToStore(context, appAction.getPackageName());
       }
     }
   }

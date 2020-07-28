@@ -19,6 +19,4 @@ public abstract class CustomActivity extends AppCompatActivity {
       actionBar.setDisplayHomeAsUpEnabled(true);
   }
 
-  ;
-
 }

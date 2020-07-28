@@ -44,7 +44,7 @@ public class AddressListRecyclerViewAdapter extends RecyclerView.Adapter<Address
     }
     String subAdminArea = address.getSubAdminArea();
     String adminArea = address.getAdminArea();
-    holder.Location.setText(context.getString(R.string.location, subAdminArea.isEmpty() ? "" : subAdminArea, adminArea.isEmpty() ? "" : adminArea));
+    holder.location.setText(context.getString(R.string.location, subAdminArea.isEmpty() ? "" : subAdminArea, adminArea.isEmpty() ? "" : adminArea));
     holder.pickUp.setText(context.getString(R.string.coordinates_pick_up, String.format("%.5g", address.getLatitude()), String.format("%.5g", address.getLongitude())));
     holder.mView.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -62,14 +62,14 @@ public class AddressListRecyclerViewAdapter extends RecyclerView.Adapter<Address
   public static class ViewHolder extends RecyclerView.ViewHolder {
     public final View mView;
     public final TextView addressName;
-    public final TextView Location;
+    public final TextView location;
     public final TextView pickUp;
 
     public ViewHolder(View view) {
       super(view);
       mView = view;
       addressName = view.findViewById(R.id.name);
-      Location = view.findViewById(R.id.location);
+      location = view.findViewById(R.id.location);
       pickUp = view.findViewById(R.id.coordinates_pick_up);
     }
 
