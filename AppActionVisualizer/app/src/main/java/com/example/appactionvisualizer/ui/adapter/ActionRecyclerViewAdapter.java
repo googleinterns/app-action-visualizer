@@ -126,13 +126,13 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
         fulfillHolder.item.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {
-            jumpToApp(action, fulfillment);
+            jump(action, fulfillment);
           }
         });
     }
   }
 
-  void jumpToApp(final Action action, final FulfillmentOption fulfillmentOption) {
+  void jump(final Action action, final FulfillmentOption fulfillmentOption) {
     if (fulfillmentOption.getUrlTemplate().getTemplate().contains("@url")) {
       Utils.showMsg(context.getString(R.string.error_parsing), context);
       return;
@@ -144,13 +144,7 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
       intent.putExtra(Constant.APP_ACTION, appAction);
       context.startActivity(intent);
     } else {
-      try {
-        Intent intent = Intent.parseUri(fulfillmentOption.getUrlTemplate().getTemplate(), 0);
-        context.startActivity(intent);
-      } catch (Exception e) {
-        //go to play store
-        Utils.goToStore(context, appAction.getPackageName());
-      }
+      Utils.jumpToApp(context, fulfillmentOption.getUrlTemplate().getTemplate(), appAction.getPackageName());
     }
   }
 

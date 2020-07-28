@@ -172,13 +172,7 @@ public class ParameterActivity extends CustomActivity {
     tvUrl.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        Intent intent = new Intent();
-        try {
-          intent = Intent.parseUri(curUrl, 0);
-          startActivity(intent);
-        } catch (Exception e) {
-          Utils.goToStore(ParameterActivity.this, appAction.getPackageName());
-        }
+        Utils.jumpToApp(ParameterActivity.this, curUrl, appAction.getPackageName());
       }
     });
   }

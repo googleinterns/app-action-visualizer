@@ -1,9 +1,13 @@
 package com.example.appactionvisualizer.utils;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.widget.Toast;
+
+import com.example.appactionvisualizer.R;
 
 import java.lang.reflect.Field;
 
@@ -39,8 +43,23 @@ public class Utils {
     return Toast.makeText(context, message, length);
   }
 
-  public static void goToStore(Context context,final String packageName) {
-    //go to play store
+  //go to play store
+  public static void jumpToStore(Context context, final String packageName) {
     context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + packageName)));
+  }
+
+  //first check if the url can jump to activity, if not, check if package exists
+  public static void jumpToApp(Context context, final String url, final String packageName) {
+    try {
+      Intent intent = Intent.parseUri(url, 0);
+      context.startActivity(intent);
+    } catch (Exception e) {
+      try {
+        context.getPackageManager().getApplicationInfo(packageName, 0);
+        Utils.showMsg(context.getString(R.string.error_parsing),context);
+      } catch (PackageManager.NameNotFoundException ex) {
+        Utils.jumpToStore(context, packageName);
+      }
+    }
   }
 }
