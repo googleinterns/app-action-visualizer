@@ -23,10 +23,8 @@ import com.example.appactionvisualizer.databean.TestGenerator;
 import com.example.appactionvisualizer.ui.activity.ActionActivity;
 import com.example.appactionvisualizer.utils.Utils;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Adapter of AppFragment Recyclerview

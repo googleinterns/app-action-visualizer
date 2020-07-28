@@ -2,7 +2,6 @@ package com.example.appactionvisualizer.ui.activity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -94,9 +93,9 @@ public class ParameterActivity extends CustomActivity {
   //set a reference to corresponding official page
   private void setReferenceLink() {
     String intentName = action.getIntentName();
-    intentName = intentName.substring(intentName.lastIndexOf('.') + 1);
-    getSupportActionBar().setTitle(intentName);
-    String intentUrl = intentName.toLowerCase().replaceAll("_", "-");
+    String title = intentName.substring(intentName.lastIndexOf('.') + 1);
+    getSupportActionBar().setTitle(title);
+    String intentUrl = title.toLowerCase().replaceAll("_", "-");
     String linkString = getString(R.string.url_action_prefix, ActionType.getActionTypeByName(intentName).getUrl(), intentUrl);
     setClickableText(link, linkString);
   }
