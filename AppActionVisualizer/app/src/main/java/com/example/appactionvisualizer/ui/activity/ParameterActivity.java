@@ -164,11 +164,12 @@ public class ParameterActivity extends CustomActivity {
 
   /**
    * @param curUrl the constructed url
-   *               set the constructed url which can be used to open corresponding application
+   * set the constructed deeplink
    */
   private void setClickableText(final TextView tvUrl, final String curUrl) {
     tvUrl.setText(curUrl);
     tvUrl.setTextColor(getResources().getColor(R.color.colorAccent));
+    tvUrl.setCompoundDrawablesWithIntrinsicBounds(android.R.drawable.ic_menu_set_as, 0, 0, 0);
     tvUrl.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {

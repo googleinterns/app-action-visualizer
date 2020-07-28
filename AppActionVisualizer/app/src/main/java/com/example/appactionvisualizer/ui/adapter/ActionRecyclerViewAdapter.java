@@ -118,7 +118,12 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
         final FulfillmentOption fulfillment = action.getFulfillmentOption(fulfillIdx);
         final String url = fulfillment.getUrlTemplate().getTemplate();
         fulfillHolder.textContent.setText(url);
-        fulfillHolder.textContent.setTextColor(context.getResources().getColor(url.contains("{") ? R.color.design_default_color_error : R.color.colorAccent));
+        if(url.contains("{")) {
+          fulfillHolder.textContent.setTextColor(context.getResources().getColor(R.color.design_default_color_error));
+        }else {
+          fulfillHolder.textContent.setTextColor(context.getResources().getColor(R.color.colorAccent));
+          fulfillHolder.textContent.setCompoundDrawablesWithIntrinsicBounds(android.R.drawable.ic_menu_set_as, 0, 0, 0);
+        }
         fulfillHolder.item.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {

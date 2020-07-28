@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -140,6 +141,11 @@ public class InputParameterActivity extends CustomActivity {
     linearLayout.addView(textInputLayout);
   }
 
+  /**
+   * @param textInput textInput to trigger the dialog
+   * @param entitySet the entity set of certain key
+   * dialog for user to choose among given list values
+   */
   private void popUpDialog(final TextInputEditText textInput, final EntitySet entitySet) {
     try {
       final ListValue listValue = entitySet.getItemList().getFieldsOrThrow(Constant.ENTITY_ITEM_LIST).getListValue();
@@ -147,14 +153,16 @@ public class InputParameterActivity extends CustomActivity {
       materialAlertDialogBuilder.setTitle(entitySet.getItemList().getFieldsOrThrow(Constant.ENTITY_FIELD_IDENTIFIER).getStringValue());
       List<CharSequence> list = new ArrayList<>();
       for (Value entity : listValue.getValuesList()) {
-        list.add(entity.getStructValue().getFieldsOrThrow(Constant.ENTITY_FIELD_NAME).getStringValue());
+        Value identifier = entity.getStructValue().getFieldsOrThrow(Constant.ENTITY_FIELD_IDENTIFIER);
+        list.add(entity.getStructValue().getFieldsOrDefault(Constant.ENTITY_FIELD_NAME, identifier).getStringValue());
       }
       CharSequence[] keys = new CharSequence[list.size()];
       materialAlertDialogBuilder.setItems(list.toArray(keys), new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialogInterface, int i) {
           Struct item = listValue.getValues(i).getStructValue();
-          textInput.setText(getString(R.string.addition_text, item.getFieldsOrThrow(Constant.ENTITY_FIELD_NAME).getStringValue(), item.getFieldsOrThrow(Constant.ENTITY_FIELD_IDENTIFIER).getStringValue()));
+          Value identifier = item.getFieldsOrThrow(Constant.ENTITY_FIELD_IDENTIFIER);
+          textInput.setText(getString(R.string.addition_text, item.getFieldsOrDefault(Constant.ENTITY_FIELD_NAME, identifier).getStringValue(), identifier.getStringValue()));
         }
       }).show();
     } catch (Exception e) {
@@ -165,6 +173,7 @@ public class InputParameterActivity extends CustomActivity {
 
   //check if entity set has provided corresponding list items
   private EntitySet checkEntitySet(String key) {
+    Log.d(TAG, "checkEntitySet: " + key);
     String parameterValue = fulfillmentOption.getUrlTemplate().getParameterMapMap().get(key);
     for (Action.Parameter parameter : action.getParametersList()) {
       if (parameter.getName().equals(parameterValue)) {
