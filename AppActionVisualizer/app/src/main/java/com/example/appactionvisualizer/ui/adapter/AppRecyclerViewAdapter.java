@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +18,7 @@ import com.example.appactionvisualizer.R;
 import com.example.appactionvisualizer.constants.Constant;
 import com.example.appactionvisualizer.databean.ActionType;
 import com.example.appactionvisualizer.databean.AppActionProtos.AppAction;
-import com.example.appactionvisualizer.databean.TestGenerator;
+import com.example.appactionvisualizer.databean.AppActionsGenerator;
 import com.example.appactionvisualizer.ui.activity.ActionActivity;
 import com.example.appactionvisualizer.utils.Utils;
 
@@ -39,9 +38,9 @@ public class AppRecyclerViewAdapter extends RecyclerView.Adapter<AppRecyclerView
   public AppRecyclerViewAdapter(ActionType type, Context context) {
     this.context = context;
     if (type != null) {
-      appActionArrayList = TestGenerator.type2appActionList.get(type);
+      appActionArrayList = AppActionsGenerator.type2appActionList.get(type);
     } else {
-      appActionArrayList = TestGenerator.appActionsUnique;
+      appActionArrayList = AppActionsGenerator.appActions;
     }
   }
 
@@ -62,13 +61,11 @@ public class AppRecyclerViewAdapter extends RecyclerView.Adapter<AppRecyclerView
       holder.appIcon.setImageDrawable(icon);
       holder.appName.setText(packageManager.getApplicationLabel(applicationInfo));
     } catch (PackageManager.NameNotFoundException e) {
-      Log.d(TAG, appAction.getPackageName() + " not install");
-      String pkgName = appAction.getPackageName().toLowerCase().replace('.', '_');
-      int imgId = Utils.getResId(pkgName, R.drawable.class);
+      int imgId = Utils.getResIdByPackageName(appAction.getPackageName(), R.drawable.class);
       if(imgId != -1) {
         holder.appIcon.setImageResource(imgId);
       }
-      int strId = Utils.getResId(pkgName, R.string.class);
+      int strId = Utils.getResIdByPackageName(appAction.getPackageName(), R.string.class);
       if(strId != -1) {
         holder.appName.setText(strId);
       }else {

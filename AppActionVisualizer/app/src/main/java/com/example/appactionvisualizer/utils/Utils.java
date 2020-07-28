@@ -31,6 +31,17 @@ public class Utils {
     }
   }
 
+  //Android resources could only save 0-9, a-z and underscore. So the package name need to be converted
+  public static int getResIdByPackageName(String pkgName, Class<?> className) {
+    try {
+      Field idField = className.getDeclaredField(pkgName.toLowerCase().replace('.', '_'));
+      return idField.getInt(idField);
+    } catch (Exception e) {
+      e.printStackTrace();
+      return -1;
+    }
+  }
+
   public static void showMsg(String message, Context context) {
     getToast(message, context, Toast.LENGTH_SHORT).show();
   }
