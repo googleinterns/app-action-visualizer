@@ -32,6 +32,8 @@ public class AppActionsGenerator {
   }
 
   public void readFromFile(Context context) {
+    if(!appActions.isEmpty())
+      return;
     InputStream is = context.getResources().openRawResource(R.raw.protobufbinary);
     try {
       List<AppAction> appActions = new ArrayList<>();
