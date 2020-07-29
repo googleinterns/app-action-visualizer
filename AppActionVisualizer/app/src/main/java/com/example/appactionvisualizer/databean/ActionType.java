@@ -1,6 +1,8 @@
 package com.example.appactionvisualizer.databean;
 
 
+import com.example.appactionvisualizer.constants.Constant;
+
 import java.io.Serializable;
 
 public enum ActionType implements Serializable {
@@ -22,17 +24,18 @@ public enum ActionType implements Serializable {
     return ActionType.values()[idx % 5];
   }
 
+
   public static ActionType getActionTypeByName(String intentName) {
-    if (intentName.equals("actions.intent.OPEN_APP_FEATURE") || intentName.equals("actions.intent.GET_ACCOUNT") || intentName.equals("actions.intent.GET_ORDER") || intentName.equals("actions.intent.GET_THING")) {
+    if (Constant.COMMON_SET.contains(intentName)) {
       return COMMON;
     }
-    if (intentName.contains("INVOICE") || intentName.equals("actions.intent.CREATE_MONEY_TRANSFER") || intentName.equals("actions.intent.CREATE_TRADE_ORDER") || intentName.equals("actions.intent.GET_FINANCIAL_POSITION") || intentName.equals("actions.intent.GET_STOCK_QUOTE")) {
+    if (Constant.FINANCE_SET.contains(intentName)) {
       return FINANCE;
     }
-    if (intentName.equals("actions.intent.ORDER_MENU_ITEM")) {
+    if (Constant.FOOD_SET.contains(intentName)) {
       return FOOD_AND_DRINK;
     }
-    if (intentName.contains("RESERVATION")) {
+    if (Constant.TRANSPORTATION_SET.contains(intentName)) {
       return TRANSPORTATION;
     }
     return HEALTH_AND_FITNESS;

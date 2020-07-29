@@ -32,60 +32,13 @@ public class TestGenerator {
   }
 
   public void readFromFile(Context context) {
+    if(!appActionsUnique.isEmpty())
+      return;
     InputStream is = context.getResources().openRawResource(R.raw.protobufbinary);
     try {
       List<AppAction> appActions = new ArrayList<>();
       appActions.addAll(AppActionProtos.AppActions.parseFrom(is).getAppActionsList());
-      int sz = appActions.size();
-      int duplicate = 0;
-      for (int i = 0; i < sz; ++i) {
-        boolean isUnique = true;
-        for (int j = i + 1; j < sz; ++j) {
-          if (appActions.get(j).getPackageName().equals(appActions.get(i).getPackageName())) {
-            isUnique = false;
-            duplicate++;
-          }
-        }
-        if (isUnique) {
-          appActionsUnique.add(appActions.get(i));
-        }
-      }
-      int allFulfillmentSize = 0;
-      int zeroParameter = 0, singleParameter = 0, multiParameter = 0;
-      int isCoordinates = 0;
-      Iterator<AppActionProtos.AppAction> it = appActionsUnique.iterator();
-      while (it.hasNext()) {
-        AppActionProtos.AppAction appAction = it.next();
-        if (appAction.getPackageName().equals("com.gojuno.rider") || appAction.getPackageName().equals("com.kimfrank.android.fitactions") ||
-            appAction.getPackageName().equals("com.deeplocal.smores") || appAction.getPackageName().equals("com.runtastic.android.pro2")
-        ) {
-          it.remove();
-          continue;
-        }
-        for (AppActionProtos.Action action : appAction.getActionsList()) {
-          allFulfillmentSize += action.getFulfillmentOptionCount();
-          for (AppActionProtos.FulfillmentOption fulfillmentOption : action.getFulfillmentOptionList()) {
-            AppActionProtos.UrlTemplate urlTemplate = fulfillmentOption.getUrlTemplate();
-            if (urlTemplate.getParameterMapCount() > 0) {
-              if (urlTemplate.getParameterMapCount() > 1) {
-                if (urlTemplate.getTemplate().contains("lat")) {
-                  isCoordinates++;
-                }
-                multiParameter++;
-              } else {
-                singleParameter++;
-              }
-            } else {
-              zeroParameter++;
-            }
-          }
-        }
-      }
-
-      Log.d(TAG, "duplicate: " + duplicate);
-      Log.d(TAG, "allsize = " + allFulfillmentSize);
-      Log.d(TAG, "multiParameter = " + multiParameter + "...singleParameter = " + singleParameter + "...zeroParameter =" + zeroParameter);
-      Log.d(TAG, "isCoordinates = " + isCoordinates);
+      appActionsUnique = deduplication(appActions);
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -96,6 +49,22 @@ public class TestGenerator {
       }
     });
     parseDataToEachType(appActionsUnique);
+  }
+
+  private List<AppAction> deduplication(List<AppAction> appActions) {
+    int sz = appActions.size();
+    //these 4 apps cannot be downloaded from app store
+    Set<String> seen = new HashSet<>(Arrays.asList("com.gojuno.rider", "com.kimfrank.android.fitactions", "com.deeplocal.smores", "com.runtastic.android.pro2"));
+    List<AppAction> unique = new ArrayList<>();
+    for (int i = sz - 1; i >= 0; --i) {
+      String name = appActions.get(i).getPackageName();
+      if(seen.contains(name)) {
+        continue;
+      }
+      seen.add(name);
+      unique.add(appActions.get(i));
+    }
+    return unique;
   }
 
 
