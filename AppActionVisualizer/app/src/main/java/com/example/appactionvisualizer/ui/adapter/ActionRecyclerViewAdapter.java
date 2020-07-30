@@ -111,6 +111,10 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
       case VIEW_TYPE_FULFILLMENT:
         FulfillViewHolder fulfillHolder = (FulfillViewHolder) holder;
         //search the corresponding action item index and fulfill item index
+        //since the returned index of binarySearch is (-(insertion point) - 1).
+        //The insertion point is defined as the point at which the key would be inserted into the array:
+        //the index of the first element greater than the key, or a.length if all elements in the array are less than the specified key.
+        //So actionIdx is (insertion point - 1) = -(return idx) - 2
         int actionIdx = (-Arrays.binarySearch(actionPos.toArray(), position)) - 2;
         int fulfillIdx = position - actionPos.get(actionIdx) - 1;
         action = actionList.get(actionIdx);
@@ -137,7 +141,7 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
       Intent intent = new Intent(context, ParameterActivity.class);
       intent.putExtra(Constant.FULFILLMENT_OPTION, fulfillmentOption);
       intent.putExtra(Constant.ACTION, action);
-      intent.putExtra(Constant.APP_ACTION, appAction);
+      intent.putExtra(Constant.APP_NAME, appAction);
       context.startActivity(intent);
     } else {
       Utils.jumpToApp(context, fulfillmentOption.getUrlTemplate().getTemplate(), appAction.getPackageName());

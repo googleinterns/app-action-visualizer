@@ -22,7 +22,7 @@ public class ActionActivity extends CustomActivity {
   @Override
   protected void initData() {
     Intent intent = getIntent();
-    appAction = (AppAction) intent.getSerializableExtra(Constant.APP_ACTION);
+    appAction = (AppAction) intent.getSerializableExtra(Constant.APP_NAME);
   }
 
   @Override

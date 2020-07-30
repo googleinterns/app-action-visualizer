@@ -83,14 +83,14 @@ public class AppRecyclerViewAdapter extends RecyclerView.Adapter<AppRecyclerView
       holder.appTags[idx].setVisibility(View.VISIBLE);
       holder.appTags[idx++].setText(actionType.getName());
     }
-    for (; idx < 5; ++idx) {
+    for (; idx < ActionType.values().length; ++idx) {
       holder.appTags[idx].setVisibility(View.INVISIBLE);
     }
     holder.app.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
         Intent intent = new Intent(context, ActionActivity.class);
-        intent.putExtra(Constant.APP_ACTION, appAction);
+        intent.putExtra(Constant.APP_NAME, appAction);
         context.startActivity(intent);
       }
     });
@@ -106,7 +106,7 @@ public class AppRecyclerViewAdapter extends RecyclerView.Adapter<AppRecyclerView
     public final RelativeLayout app;
     public final ImageView appIcon;
     public final TextView appName;
-    public final TextView[] appTags = new TextView[5];
+    public final TextView[] appTags = new TextView[ActionType.values().length];
 
     public ViewHolder(View view) {
       super(view);

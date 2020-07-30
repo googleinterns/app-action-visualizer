@@ -1,9 +1,7 @@
 package com.example.appactionvisualizer.ui.activity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Entity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -13,7 +11,6 @@ import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,15 +18,13 @@ import androidx.annotation.Nullable;
 import com.example.appactionvisualizer.R;
 import com.example.appactionvisualizer.constants.Constant;
 import com.example.appactionvisualizer.databean.ActionType;
-import com.example.appactionvisualizer.databean.AppActionProtos;
 import com.example.appactionvisualizer.databean.AppActionProtos.Action;
 import com.example.appactionvisualizer.databean.AppActionProtos.AppAction;
-import com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption;
 import com.example.appactionvisualizer.databean.AppActionProtos.EntitySet;
+import com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption;
 import com.example.appactionvisualizer.ui.activity.parameter.InputParameterActivity;
 import com.example.appactionvisualizer.ui.activity.parameter.LocationActivity;
 import com.example.appactionvisualizer.utils.Utils;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.protobuf.ListValue;
 import com.google.protobuf.Struct;
 import com.google.protobuf.Value;
@@ -61,7 +56,7 @@ public class ParameterActivity extends CustomActivity {
     Intent intent = getIntent();
     fulfillmentOption = (FulfillmentOption) intent.getSerializableExtra(Constant.FULFILLMENT_OPTION);
     action = (Action) intent.getSerializableExtra(Constant.ACTION);
-    appAction = (AppAction) intent.getSerializableExtra(Constant.APP_ACTION);
+    appAction = (AppAction) intent.getSerializableExtra(Constant.APP_NAME);
     urlTemplate = fulfillmentOption.getUrlTemplate().getTemplate();
   }
 
@@ -219,7 +214,7 @@ public class ParameterActivity extends CustomActivity {
           Intent intent = new Intent(ParameterActivity.this, InputParameterActivity.class);
           intent.putExtra(Constant.FULFILLMENT_OPTION, fulfillmentOption);
           intent.putExtra(Constant.ACTION, action);
-          intent.putExtra(Constant.APP_ACTION, appAction);
+          intent.putExtra(Constant.APP_NAME, appAction);
           startActivityForResult(intent, Constant.INPUT_PARAMETER);
         }
       };

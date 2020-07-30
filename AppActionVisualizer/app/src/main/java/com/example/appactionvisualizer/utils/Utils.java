@@ -1,24 +1,16 @@
 package com.example.appactionvisualizer.utils;
 
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.appactionvisualizer.R;
-import com.example.appactionvisualizer.constants.Constant;
-import com.example.appactionvisualizer.databean.AppActionProtos;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.protobuf.ListValue;
-import com.google.protobuf.Struct;
-import com.google.protobuf.Value;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Utils {

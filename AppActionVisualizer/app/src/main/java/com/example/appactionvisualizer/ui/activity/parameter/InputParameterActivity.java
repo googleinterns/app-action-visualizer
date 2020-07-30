@@ -1,31 +1,26 @@
 package com.example.appactionvisualizer.ui.activity.parameter;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
 import com.example.appactionvisualizer.R;
 import com.example.appactionvisualizer.constants.Constant;
-import com.example.appactionvisualizer.databean.AppActionProtos;
 import com.example.appactionvisualizer.databean.AppActionProtos.Action;
 import com.example.appactionvisualizer.databean.AppActionProtos.AppAction;
 import com.example.appactionvisualizer.databean.AppActionProtos.EntitySet;
 import com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption;
 import com.example.appactionvisualizer.ui.activity.CustomActivity;
 import com.example.appactionvisualizer.utils.Utils;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.protobuf.ListValue;
@@ -64,7 +59,7 @@ public class InputParameterActivity extends CustomActivity {
       map = fulfillmentOption.getUrlTemplate().getParameterMapMap();
     }
     action = (Action) getIntent().getSerializableExtra(Constant.ACTION);
-    appAction = (AppAction) getIntent().getSerializableExtra(Constant.APP_ACTION);
+    appAction = (AppAction) getIntent().getSerializableExtra(Constant.APP_NAME);
   }
 
   @Override

@@ -1,7 +1,6 @@
 package com.example.appactionvisualizer.databean;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.example.appactionvisualizer.R;
 import com.example.appactionvisualizer.databean.AppActionProtos.AppAction;
@@ -10,11 +9,11 @@ import com.example.appactionvisualizer.utils.Utils;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -36,58 +35,8 @@ public class AppActionsGenerator {
       return;
     InputStream is = context.getResources().openRawResource(R.raw.protobufbinary);
     try {
-      List<AppAction> appActions = new ArrayList<>();
       appActions.addAll(AppActionProtos.AppActions.parseFrom(is).getAppActionsList());
-      int sz = appActions.size();
-      int duplicate = 0;
-      for (int i = 0; i < sz; ++i) {
-        boolean isUnique = true;
-        for (int j = i + 1; j < sz; ++j) {
-          if (appActions.get(j).getPackageName().equals(appActions.get(i).getPackageName())) {
-            isUnique = false;
-            duplicate++;
-          }
-        }
-        if (isUnique) {
-          AppActionsGenerator.appActions.add(appActions.get(i));
-        }
-      }
-      int allFulfillmentSize = 0;
-      int zeroParameter = 0, singleParameter = 0, multiParameter = 0;
-      int isCoordinates = 0;
-      Iterator<AppActionProtos.AppAction> it = AppActionsGenerator.appActions.iterator();
-      while (it.hasNext()) {
-        AppActionProtos.AppAction appAction = it.next();
-        if (appAction.getPackageName().equals("com.gojuno.rider") || appAction.getPackageName().equals("com.kimfrank.android.fitactions") ||
-            appAction.getPackageName().equals("com.deeplocal.smores") || appAction.getPackageName().equals("com.runtastic.android.pro2")
-        ) {
-          it.remove();
-          continue;
-        }
-        for (AppActionProtos.Action action : appAction.getActionsList()) {
-          allFulfillmentSize += action.getFulfillmentOptionCount();
-          for (AppActionProtos.FulfillmentOption fulfillmentOption : action.getFulfillmentOptionList()) {
-            AppActionProtos.UrlTemplate urlTemplate = fulfillmentOption.getUrlTemplate();
-            if (urlTemplate.getParameterMapCount() > 0) {
-              if (urlTemplate.getParameterMapCount() > 1) {
-                if (urlTemplate.getTemplate().contains("lat")) {
-                  isCoordinates++;
-                }
-                multiParameter++;
-              } else {
-                singleParameter++;
-              }
-            } else {
-              zeroParameter++;
-            }
-          }
-        }
-      }
-
-      Log.d(TAG, "duplicate: " + duplicate);
-      Log.d(TAG, "allsize = " + allFulfillmentSize);
-      Log.d(TAG, "multiParameter = " + multiParameter + "...singleParameter = " + singleParameter + "...zeroParameter =" + zeroParameter);
-      Log.d(TAG, "isCoordinates = " + isCoordinates);
+      appActions = deduplication(appActions);
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -106,6 +55,22 @@ public class AppActionsGenerator {
         return context.getString(strId1).toLowerCase().compareTo(context.getString(strId2).toLowerCase());
       }
     });
+  }
+
+  private List<AppAction> deduplication(List<AppAction> appActions) {
+    int sz = appActions.size();
+    //these 4 apps cannot be downloaded from app store
+    Set<String> seen = new HashSet<>(Arrays.asList("com.gojuno.rider", "com.kimfrank.android.fitactions", "com.deeplocal.smores", "com.runtastic.android.pro2"));
+    List<AppAction> unique = new ArrayList<>();
+    for (int i = sz - 1; i >= 0; --i) {
+      String name = appActions.get(i).getPackageName();
+      if(seen.contains(name)) {
+        continue;
+      }
+      seen.add(name);
+      unique.add(appActions.get(i));
+    }
+    return unique;
   }
 
 

@@ -1,9 +1,13 @@
 package com.example.appactionvisualizer.constants;
 
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 public class Constant {
   public final static String ACTION_TYPE = "ACTION_TYPE";
-  public final static String APP_ACTION = "APP_NAME";
+  public final static String APP_NAME = "APP_NAME";
   public final static String ACTION = "ACTION";
   public final static String FULFILLMENT_OPTION = "FULFILLMENT";
   public final static String ENTITY_SET = "PARAMETER_MAPPING";
@@ -32,5 +36,10 @@ public class Constant {
   public final static int INPUT_PARAMETER = 0x10;
   public final static int INPUT_URL = 0x100;
 
+  //Some Actions type Constant String values
+  public final static Set<String> COMMON_SET = new HashSet<>(Arrays.asList("actions.intent.OPEN_APP_FEATURE", "actions.intent.GET_ACCOUNT", "actions.intent.GET_ORDER", "actions.intent.GET_THING"));
+  public final static Set<String> FINANCE_SET = new HashSet<>(Arrays.asList("actions.intent.CREATE_MONEY_TRANSFER", "actions.intent.CREATE_TRADE_ORDER", "actions.intent.GET_FINANCIAL_POSITION", "actions.intent.GET_STOCK_QUOTE", "actions.intent.GET_INVOICE", "actions.intent.PAY_INVOICE"));
+  public final static Set<String> FOOD_SET = new HashSet<>(Arrays.asList("actions.intent.ORDER_MENU_ITEM"));
+  public final static Set<String> TRANSPORTATION_SET = new HashSet<>(Arrays.asList("actions.intent.CANCEL_TAXI_RESERVATION", "actions.intent.CREATE_TAXI_RESERVATION", "actions.intent.GET_TAXI_RESERVATION"));
 
 }

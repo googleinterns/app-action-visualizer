@@ -132,10 +132,10 @@ public class LocationActivity extends CustomActivity {
       return;
     }
     Intent intent = new Intent();
-    intent.putExtra(Constant.PICK_UP_LATITUDE, pickUpAddress.getLatitude() + "");
-    intent.putExtra(Constant.PICK_UP_LONGITUDE, pickUpAddress.getLongitude() + "");
-    intent.putExtra(Constant.DROP_OFF_LATITUDE, dropOffAddress.getLatitude() + "");
-    intent.putExtra(Constant.DROP_OFF_LONGITUDE, dropOffAddress.getLongitude() + "");
+    intent.putExtra(Constant.PICK_UP_LATITUDE, Double.toString(pickUpAddress.getLatitude()));
+    intent.putExtra(Constant.PICK_UP_LONGITUDE, Double.toString(pickUpAddress.getLongitude()));
+    intent.putExtra(Constant.DROP_OFF_LATITUDE, Double.toString(dropOffAddress.getLatitude()));
+    intent.putExtra(Constant.DROP_OFF_LONGITUDE, Double.toString(dropOffAddress.getLongitude()));
     setResult(Activity.RESULT_OK, intent);
     finish();
   }
@@ -156,6 +156,7 @@ public class LocationActivity extends CustomActivity {
   }
 
 
+  //use thread to avoid stuck on ui thread
   private void getAddressList(final String address) {
     addressListView.setVisibility(View.VISIBLE);
     final Geocoder geocoder = new Geocoder(LocationActivity.this, Locale.US);
