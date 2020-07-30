@@ -1,6 +1,7 @@
 package com.example.appactionvisualizer.ui.activity.parameter;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,11 +12,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
 import com.example.appactionvisualizer.R;
 import com.example.appactionvisualizer.constants.Constant;
+import com.example.appactionvisualizer.databean.AppActionProtos;
 import com.example.appactionvisualizer.databean.AppActionProtos.Action;
 import com.example.appactionvisualizer.databean.AppActionProtos.AppAction;
 import com.example.appactionvisualizer.databean.AppActionProtos.EntitySet;
@@ -133,47 +136,33 @@ public class InputParameterActivity extends CustomActivity {
       textInput.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-          popUpDialog(textInput, entitySet);
+          final ListValue listValue = entitySet.getItemList().getFieldsOrThrow(Constant.ENTITY_ITEM_LIST).getListValue();
+          DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+              Struct item = listValue.getValues(i).getStructValue();
+              Value identifier = item.getFieldsOrThrow(Constant.ENTITY_FIELD_IDENTIFIER);
+              textInput.setText(getString(R.string.addition_text, item.getFieldsOrDefault(Constant.ENTITY_FIELD_NAME, identifier).getStringValue(), identifier.getStringValue()));
+            }
+          };
+          List<CharSequence> list = new ArrayList<>();
+          //set the list contents
+          for (Value entity : listValue.getValuesList()) {
+            Value identifier = entity.getStructValue().getFieldsOrThrow(Constant.ENTITY_FIELD_IDENTIFIER);
+            list.add(entity.getStructValue().getFieldsOrDefault(Constant.ENTITY_FIELD_NAME, identifier).getStringValue());
+          }
+          String title = entitySet.getItemList().getFieldsOrThrow(Constant.ENTITY_FIELD_IDENTIFIER).getStringValue();
+          Utils.popUpDialog(InputParameterActivity.this, title, list, listener);
         }
       });
     }
-
     linearLayout.addView(textInputLayout);
   }
 
-  /**
-   * @param textInput textInput to trigger the dialog
-   * @param entitySet the entity set of certain key
-   * dialog for user to choose among given list values
-   */
-  private void popUpDialog(final TextInputEditText textInput, final EntitySet entitySet) {
-    try {
-      final ListValue listValue = entitySet.getItemList().getFieldsOrThrow(Constant.ENTITY_ITEM_LIST).getListValue();
-      MaterialAlertDialogBuilder materialAlertDialogBuilder = new MaterialAlertDialogBuilder(this);
-      materialAlertDialogBuilder.setTitle(entitySet.getItemList().getFieldsOrThrow(Constant.ENTITY_FIELD_IDENTIFIER).getStringValue());
-      List<CharSequence> list = new ArrayList<>();
-      for (Value entity : listValue.getValuesList()) {
-        Value identifier = entity.getStructValue().getFieldsOrThrow(Constant.ENTITY_FIELD_IDENTIFIER);
-        list.add(entity.getStructValue().getFieldsOrDefault(Constant.ENTITY_FIELD_NAME, identifier).getStringValue());
-      }
-      CharSequence[] keys = new CharSequence[list.size()];
-      materialAlertDialogBuilder.setItems(list.toArray(keys), new DialogInterface.OnClickListener() {
-        @Override
-        public void onClick(DialogInterface dialogInterface, int i) {
-          Struct item = listValue.getValues(i).getStructValue();
-          Value identifier = item.getFieldsOrThrow(Constant.ENTITY_FIELD_IDENTIFIER);
-          textInput.setText(getString(R.string.addition_text, item.getFieldsOrDefault(Constant.ENTITY_FIELD_NAME, identifier).getStringValue(), identifier.getStringValue()));
-        }
-      }).show();
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-  }
 
 
   //check if entity set has provided corresponding list items
   private EntitySet checkEntitySet(String key) {
-    Log.d(TAG, "checkEntitySet: " + key);
     String parameterValue = fulfillmentOption.getUrlTemplate().getParameterMapMap().get(key);
     for (Action.Parameter parameter : action.getParametersList()) {
       if (parameter.getName().equals(parameterValue)) {

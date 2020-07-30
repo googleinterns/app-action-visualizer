@@ -23,12 +23,14 @@ public class Constant {
   public final static String ENTITY_FIELD_IDENTIFIER = "identifier";
   public final static String ENTITY_FIELD_NAME = "name";
   public final static String ENTITY_ITEM_LIST = "itemListElement";
+  public final static String ENTITY_URL = "url";
 
   public final static int MAX_RESULTS = 5;
 
   //Activity result code
   public final static int SELECT_ADDRESS = 0x1;
   public final static int INPUT_PARAMETER = 0x10;
+  public final static int INPUT_URL = 0x100;
 
 
 }

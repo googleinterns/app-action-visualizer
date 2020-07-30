@@ -133,11 +133,7 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
   }
 
   void jump(final Action action, final FulfillmentOption fulfillmentOption) {
-    if (fulfillmentOption.getUrlTemplate().getTemplate().contains("@url")) {
-      Utils.showMsg(context.getString(R.string.error_parsing), context);
-      return;
-    }
-    if (fulfillmentOption.getUrlTemplate().getParameterMapCount() > 0) {
+    if (fulfillmentOption.getUrlTemplate().getTemplate().equals("{@url}") || fulfillmentOption.getUrlTemplate().getParameterMapCount() > 0) {
       Intent intent = new Intent(context, ParameterActivity.class);
       intent.putExtra(Constant.FULFILLMENT_OPTION, fulfillmentOption);
       intent.putExtra(Constant.ACTION, action);

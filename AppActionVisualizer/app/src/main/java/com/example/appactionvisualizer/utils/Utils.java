@@ -2,14 +2,24 @@ package com.example.appactionvisualizer.utils;
 
 import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.appactionvisualizer.R;
+import com.example.appactionvisualizer.constants.Constant;
+import com.example.appactionvisualizer.databean.AppActionProtos;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.protobuf.ListValue;
+import com.google.protobuf.Struct;
+import com.google.protobuf.Value;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Utils {
   private Utils() {
@@ -33,13 +43,7 @@ public class Utils {
 
   //Android resources could only save 0-9, a-z and underscore. So the package name need to be converted
   public static int getResIdByPackageName(String pkgName, Class<?> className) {
-    try {
-      Field idField = className.getDeclaredField(pkgName.toLowerCase().replace('.', '_'));
-      return idField.getInt(idField);
-    } catch (Exception e) {
-      e.printStackTrace();
-      return -1;
-    }
+    return getResId(pkgName.toLowerCase().replace('.', '_'), className);
   }
 
   public static void showMsg(String message, Context context) {
@@ -71,6 +75,22 @@ public class Utils {
       } catch (PackageManager.NameNotFoundException ex) {
         Utils.jumpToStore(context, packageName);
       }
+    }
+  }
+
+
+  /**
+   * dialog for user to choose among given list values
+   */
+  public static void popUpDialog(final Context context, final String title, List<CharSequence> list, DialogInterface.OnClickListener listener) {
+    try {
+      MaterialAlertDialogBuilder materialAlertDialogBuilder = new MaterialAlertDialogBuilder(context);
+      materialAlertDialogBuilder.setTitle(title);
+      CharSequence[] keys = new CharSequence[list.size()];
+      materialAlertDialogBuilder.setItems(list.toArray(keys), listener).show();
+    } catch (Exception e) {
+      Utils.showMsg(context.getString(R.string.error), context);
+      e.printStackTrace();
     }
   }
 }

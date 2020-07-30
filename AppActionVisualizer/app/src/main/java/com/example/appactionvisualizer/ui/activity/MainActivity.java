@@ -9,6 +9,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.appactionvisualizer.R;
 import com.example.appactionvisualizer.databean.AppActionsGenerator;
 import com.example.appactionvisualizer.ui.adapter.SectionsPagerAdapter;
+import com.example.appactionvisualizer.utils.Utils;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 

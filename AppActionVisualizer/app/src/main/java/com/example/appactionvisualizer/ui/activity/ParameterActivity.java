@@ -1,6 +1,9 @@
 package com.example.appactionvisualizer.ui.activity;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Entity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -10,6 +13,7 @@ import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,12 +21,18 @@ import androidx.annotation.Nullable;
 import com.example.appactionvisualizer.R;
 import com.example.appactionvisualizer.constants.Constant;
 import com.example.appactionvisualizer.databean.ActionType;
+import com.example.appactionvisualizer.databean.AppActionProtos;
 import com.example.appactionvisualizer.databean.AppActionProtos.Action;
 import com.example.appactionvisualizer.databean.AppActionProtos.AppAction;
 import com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption;
+import com.example.appactionvisualizer.databean.AppActionProtos.EntitySet;
 import com.example.appactionvisualizer.ui.activity.parameter.InputParameterActivity;
 import com.example.appactionvisualizer.ui.activity.parameter.LocationActivity;
 import com.example.appactionvisualizer.utils.Utils;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.protobuf.ListValue;
+import com.google.protobuf.Struct;
+import com.google.protobuf.Value;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,6 +97,8 @@ public class ParameterActivity extends CustomActivity {
       case Constant.SELECT_ADDRESS:
         replaceAddressParameter(data);
         break;
+      case Constant.INPUT_URL:
+        break;
     }
   }
 
@@ -118,13 +130,69 @@ public class ParameterActivity extends CustomActivity {
     SpannableString ss = new SpannableString(urlTemplate);
     if (action.getIntentName().equals(getString(R.string.create_taxi))) {
       setLocationParameter(ss);
-    } else {
+    } else if(urlTemplate.contains("@url")){
+      setUrlParameter(ss);
+    }else{
       setMappingParameter(ss);
     }
     tvUrlTemplate.setText(ss);
     tvUrlTemplate.setMovementMethod(LinkMovementMethod.getInstance());
   }
 
+  //for the @url case, just pop up a window for user to choose
+  private void setUrlParameter(SpannableString ss) {
+    if(fulfillmentOption.getUrlTemplate().getParameterMapCount() > 0 || !action.getParameters(0).getEntitySetReference(0).getUrlFilter().isEmpty()) {
+      Utils.showMsg("Do not support url-filter now", this);
+      return;
+    }
+    final EntitySet entitySet = checkUrlEntitySet();
+    if(entitySet == null) {
+      Utils.showMsg(getString(R.string.error_parsing), this);
+      return;
+    }
+    ClickableSpan clickable = new ClickableSpan() {
+      @Override
+      public void onClick(@NonNull View view) {
+        final ListValue listValue = entitySet.getItemList().getFieldsOrThrow(Constant.ENTITY_ITEM_LIST).getListValue();
+        DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
+          @Override
+          public void onClick(DialogInterface dialogInterface, int i) {
+            Struct item = listValue.getValues(i).getStructValue();
+            String url = item.getFieldsOrThrow(Constant.ENTITY_URL).getStringValue();
+            setClickableText(tvUrl, url);
+          }
+        };
+        List<CharSequence> list = new ArrayList<>();
+        //set the list contents
+        for (Value entity : listValue.getValuesList()) {
+          list.add(entity.getStructValue().getFieldsOrThrow(Constant.ENTITY_FIELD_NAME).getStringValue());
+        }
+        String title = entitySet.getItemList().getFieldsOrThrow(Constant.ENTITY_FIELD_IDENTIFIER).getStringValue();
+        Utils.popUpDialog(ParameterActivity.this, title, list, listener);
+      }
+    };
+    ss.setSpan(clickable, 0, urlTemplate.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+  }
+
+
+  private EntitySet checkUrlEntitySet() {
+    String parameterValue = "feature";
+    for (Action.Parameter parameter : action.getParametersList()) {
+      if (parameter.getName().equals(parameterValue)) {
+        if (parameter.getEntitySetReferenceCount() == 0)
+          continue;
+        String reference = parameter.getEntitySetReference(0).getEntitySetId();
+        for (EntitySet set : appAction.getEntitySetsList()) {
+          if (set.getItemList().getFieldsOrThrow(Constant.ENTITY_FIELD_IDENTIFIER).getStringValue().equals(reference)) {
+            return set;
+          }
+        }
+      }
+    }
+    return null;
+  }
+
+  //set the create_taxi intent
   private void setLocationParameter(SpannableString ss) {
     ClickableSpan clickable = new ClickableSpan() {
       @Override
@@ -140,6 +208,7 @@ public class ParameterActivity extends CustomActivity {
     ss.setSpan(clickable, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
   }
 
+  //set parameters for the fulfillment option
   private void setMappingParameter(SpannableString ss) {
     final Map<String, String> parameterMapMap = fulfillmentOption.getUrlTemplate().getParameterMapMap();
     for (final Map.Entry<String, String> entry : parameterMapMap.entrySet()) {
@@ -193,6 +262,7 @@ public class ParameterActivity extends CustomActivity {
     setClickableText(tvUrl, curUrl);
   }
 
+  //add latitude and longitude parameters to the url
   private void addLocationParameters(Intent data, Map.Entry<String, String> entry, List<String> parameters) {
     if (entry.getValue().equals(PICK_UP_LATITUDE_FIELD)) {
       parameters.add(getString(R.string.url_parameter, entry.getKey(), data.getStringExtra(Constant.PICK_UP_LATITUDE)));
@@ -228,6 +298,7 @@ public class ParameterActivity extends CustomActivity {
     setClickableText(tvUrl, curUrl);
   }
 
+  //replace multiple parameters for url
   private void replaceParameter(Intent data) {
     if (fulfillmentOption.getUrlTemplate().getParameterMapCount() == 1) {
       replaceSingleParameter(fulfillmentOption.getUrlTemplate().getParameterMapMap().keySet().iterator().next(), data);
@@ -245,4 +316,5 @@ public class ParameterActivity extends CustomActivity {
     curUrl += urlTemplate.substring(secondPartIdx + 1);
     setClickableText(tvUrl, curUrl);
   }
+
 }
