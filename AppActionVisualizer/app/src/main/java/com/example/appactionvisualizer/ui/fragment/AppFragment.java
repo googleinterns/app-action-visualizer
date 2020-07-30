@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appactionvisualizer.R;
-import com.example.appactionvisualizer.constants.Constant;
 import com.example.appactionvisualizer.databean.ActionType;
 import com.example.appactionvisualizer.ui.adapter.AppRecyclerViewAdapter;
 
@@ -38,7 +37,7 @@ public class AppFragment extends Fragment {
    */
   public static AppFragment newInstance(int pos) {
     ActionType actionType = null;
-    if(pos != 0) {
+    if (pos != 0) {
       actionType = ActionType.getActionTypeValue(pos - 1);
     }
     AppFragment fragment = new AppFragment(actionType);

@@ -8,19 +8,19 @@
         android:id="@+id/app_icon"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_margin="@dimen/text_margin"/>
+        android:layout_margin="@dimen/text_margin" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/app_icon"
-        android:layout_centerVertical="true">
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/app_icon">
 
         <TextView
             android:id="@+id/app_name"
-            android:layout_marginTop="@dimen/appbar_padding_top"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/appbar_padding_top"
             android:textAppearance="?attr/textAppearanceListItem" />
 
         <LinearLayout
@@ -30,43 +30,47 @@
             android:layout_below="@id/app_name"
             android:layout_marginTop="@dimen/appbar_padding_top"
             android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/tag_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:theme="@style/TagTextStyle"/>
+                android:theme="@style/TagTextStyle" />
+
             <TextView
                 android:id="@+id/tag_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:theme="@style/TagTextStyle"
-                android:layout_marginStart="16dp"/>
+                android:layout_marginStart="16dp"
+                android:theme="@style/TagTextStyle" />
+
             <TextView
                 android:id="@+id/tag_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:theme="@style/TagTextStyle"
-                android:layout_marginStart="16dp"/>
+                android:layout_marginStart="16dp"
+                android:theme="@style/TagTextStyle" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/tag_layer_bottom"
-            android:layout_below="@+id/tag_layer_top"
-            android:layout_marginTop="@dimen/appbar_padding_top"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tag_layer_top"
+            android:layout_marginTop="@dimen/appbar_padding_top">
+
             <TextView
                 android:id="@+id/tag_4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:theme="@style/TagTextStyle"/>
+                android:theme="@style/TagTextStyle" />
 
             <TextView
                 android:id="@+id/tag_5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:theme="@style/TagTextStyle"
-                android:layout_marginStart="16dp"/>
+                android:layout_marginStart="16dp"
+                android:theme="@style/TagTextStyle" />
         </LinearLayout>
     </RelativeLayout>
 </RelativeLayout>
