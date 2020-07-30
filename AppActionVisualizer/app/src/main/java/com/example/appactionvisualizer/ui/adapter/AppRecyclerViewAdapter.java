@@ -83,7 +83,7 @@ public class AppRecyclerViewAdapter extends RecyclerView.Adapter<AppRecyclerView
       @Override
       public void onClick(View view) {
         Intent intent = new Intent(context, ActionActivity.class);
-        intent.putExtra(Constant.APP_ACTION, appAction);
+        intent.putExtra(Constant.APP_NAME, appAction);
         context.startActivity(intent);
       }
     });

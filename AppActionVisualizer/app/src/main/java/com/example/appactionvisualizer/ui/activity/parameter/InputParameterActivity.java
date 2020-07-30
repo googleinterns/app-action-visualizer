@@ -60,7 +60,7 @@ public class InputParameterActivity extends CustomActivity {
       map = fulfillmentOption.getUrlTemplate().getParameterMapMap();
     }
     action = (Action) getIntent().getSerializableExtra(Constant.ACTION);
-    appAction = (AppAction) getIntent().getSerializableExtra(Constant.APP_ACTION);
+    appAction = (AppAction) getIntent().getSerializableExtra(Constant.APP_NAME);
   }
 
   @Override

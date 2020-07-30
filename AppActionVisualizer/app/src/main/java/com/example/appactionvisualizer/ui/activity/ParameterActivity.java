@@ -51,7 +51,7 @@ public class ParameterActivity extends CustomActivity {
     Intent intent = getIntent();
     fulfillmentOption = (FulfillmentOption) intent.getSerializableExtra(Constant.FULFILLMENT_OPTION);
     action = (Action) intent.getSerializableExtra(Constant.ACTION);
-    appAction = (AppAction) intent.getSerializableExtra(Constant.APP_ACTION);
+    appAction = (AppAction) intent.getSerializableExtra(Constant.APP_NAME);
     urlTemplate = fulfillmentOption.getUrlTemplate().getTemplate();
   }
 
@@ -150,7 +150,7 @@ public class ParameterActivity extends CustomActivity {
           Intent intent = new Intent(ParameterActivity.this, InputParameterActivity.class);
           intent.putExtra(Constant.FULFILLMENT_OPTION, fulfillmentOption);
           intent.putExtra(Constant.ACTION, action);
-          intent.putExtra(Constant.APP_ACTION, appAction);
+          intent.putExtra(Constant.APP_NAME, appAction);
           startActivityForResult(intent, Constant.INPUT_PARAMETER);
         }
       };

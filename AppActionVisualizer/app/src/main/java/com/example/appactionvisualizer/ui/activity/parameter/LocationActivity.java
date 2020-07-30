@@ -156,6 +156,7 @@ public class LocationActivity extends CustomActivity {
   }
 
 
+  //use thread to avoid stuck on ui thread
   private void getAddressList(final String address) {
     addressListView.setVisibility(View.VISIBLE);
     final Geocoder geocoder = new Geocoder(LocationActivity.this, Locale.US);

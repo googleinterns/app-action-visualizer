@@ -140,7 +140,7 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
       Intent intent = new Intent(context, ParameterActivity.class);
       intent.putExtra(Constant.FULFILLMENT_OPTION, fulfillmentOption);
       intent.putExtra(Constant.ACTION, action);
-      intent.putExtra(Constant.APP_ACTION, appAction);
+      intent.putExtra(Constant.APP_NAME, appAction);
       context.startActivity(intent);
     } else {
       try {
