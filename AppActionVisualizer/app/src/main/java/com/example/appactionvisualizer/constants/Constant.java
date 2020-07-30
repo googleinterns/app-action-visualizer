@@ -7,7 +7,7 @@ import java.util.Set;
 
 public class Constant {
   public final static String ACTION_TYPE = "ACTION_TYPE";
-  public final static String APP_ACTION = "APP_NAME";
+  public final static String APP_NAME = "APP_NAME";
   public final static String ACTION = "ACTION";
   public final static String FULFILLMENT_OPTION = "FULFILLMENT";
   public final static String ENTITY_SET = "PARAMETER_MAPPING";
