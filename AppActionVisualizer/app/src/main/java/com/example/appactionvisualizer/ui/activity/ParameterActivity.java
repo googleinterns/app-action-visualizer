@@ -50,6 +50,8 @@ public class ParameterActivity extends CustomActivity {
   private AppAction appAction;
   private String urlTemplate;
   private TextView tvUrlTemplate, tvUrl, link;
+  private static final String INDICATOR = "{";
+  private static final String URL_KEY = "feature";
 
   @Override
   protected void initData() {
@@ -92,8 +94,6 @@ public class ParameterActivity extends CustomActivity {
       case Constant.SELECT_ADDRESS:
         replaceAddressParameter(data);
         break;
-      case Constant.INPUT_URL:
-        break;
     }
   }
 
@@ -118,7 +118,7 @@ public class ParameterActivity extends CustomActivity {
     if (urlTemplate.isEmpty())
       return;
     if (fulfillmentOption.getFulfillmentMode() != DEEPLINK) {
-      Utils.showMsg("non-Deeplink detected", this);
+      Utils.showMsg(getString(R.string.error_not_deeplink), this);
       tvUrlTemplate.setText(urlTemplate);
       return;
     }
@@ -134,10 +134,10 @@ public class ParameterActivity extends CustomActivity {
     tvUrlTemplate.setMovementMethod(LinkMovementMethod.getInstance());
   }
 
-  //for the @url case, just pop up a window for user to choose
+  //for the @url case, just pop up a window for user to choose. No need to jump to next page
   private void setUrlParameter(SpannableString ss) {
     if(fulfillmentOption.getUrlTemplate().getParameterMapCount() > 0 || !action.getParameters(0).getEntitySetReference(0).getUrlFilter().isEmpty()) {
-      Utils.showMsg("Do not support url-filter now", this);
+      Utils.showMsg(getString(R.string.error_filter), this);
       return;
     }
     final EntitySet entitySet = checkUrlEntitySet();
@@ -158,7 +158,7 @@ public class ParameterActivity extends CustomActivity {
           }
         };
         List<CharSequence> list = new ArrayList<>();
-        //set the list contents
+        //set the list contents from listvalue's names
         for (Value entity : listValue.getValuesList()) {
           list.add(entity.getStructValue().getFieldsOrThrow(Constant.ENTITY_FIELD_NAME).getStringValue());
         }
@@ -169,11 +169,10 @@ public class ParameterActivity extends CustomActivity {
     ss.setSpan(clickable, 0, urlTemplate.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
   }
 
-
+  //all fulfillment options with @url require "feature" key in parameter list of actions(expect url_filter)
   private EntitySet checkUrlEntitySet() {
-    String parameterValue = "feature";
     for (Action.Parameter parameter : action.getParametersList()) {
-      if (parameter.getName().equals(parameterValue)) {
+      if (parameter.getName().equals(URL_KEY)) {
         if (parameter.getEntitySetReferenceCount() == 0)
           continue;
         String reference = parameter.getEntitySetReference(0).getEntitySetId();
@@ -187,7 +186,7 @@ public class ParameterActivity extends CustomActivity {
     return null;
   }
 
-  //set the create_taxi intent
+  //the create_taxi intent needs latitude and longitude values for parameters
   private void setLocationParameter(SpannableString ss) {
     ClickableSpan clickable = new ClickableSpan() {
       @Override
@@ -196,7 +195,7 @@ public class ParameterActivity extends CustomActivity {
         startActivityForResult(intent, Constant.SELECT_ADDRESS);
       }
     };
-    int start = urlTemplate.indexOf("{");
+    int start = urlTemplate.indexOf(INDICATOR);
     int end = urlTemplate.length();
     if (start == -1)
       return;
@@ -218,22 +217,22 @@ public class ParameterActivity extends CustomActivity {
           startActivityForResult(intent, Constant.INPUT_PARAMETER);
         }
       };
-      int start = urlTemplate.indexOf(key, urlTemplate.indexOf("{"));
+      int start = urlTemplate.indexOf(key, urlTemplate.indexOf(INDICATOR));
       int end = start + key.length();
       ss.setSpan(clickable, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
     }
   }
 
-
   /**
+   * @param display the text view to display the url
    * @param curUrl the constructed url
-   * set the constructed deeplink
+   * set the constructed deeplink to a specific text view and set on-click jump logic
    */
-  private void setClickableText(final TextView tvUrl, final String curUrl) {
-    tvUrl.setText(curUrl);
-    tvUrl.setTextColor(getResources().getColor(R.color.colorAccent));
-    tvUrl.setCompoundDrawablesWithIntrinsicBounds(android.R.drawable.ic_menu_set_as, 0, 0, 0);
-    tvUrl.setOnClickListener(new View.OnClickListener() {
+  private void setClickableText(final TextView display, final String curUrl) {
+    display.setText(curUrl);
+    display.setTextColor(getResources().getColor(R.color.colorAccent));
+    display.setCompoundDrawablesWithIntrinsicBounds(android.R.drawable.ic_menu_set_as, 0, 0, 0);
+    display.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
         Utils.jumpToApp(ParameterActivity.this, curUrl, appAction.getPackageName());
@@ -247,7 +246,7 @@ public class ParameterActivity extends CustomActivity {
    *             construct the url
    */
   void replaceAddressParameter(Intent data) {
-    int idx = urlTemplate.indexOf("{");
+    int idx = urlTemplate.indexOf(INDICATOR);
     String curUrl = urlTemplate.substring(0, idx) + urlTemplate.charAt(idx + 1);
     List<String> parameters = new ArrayList<>();
     for (Map.Entry<String, String> entry : fulfillmentOption.getUrlTemplate().getParameterMapMap().entrySet()) {
@@ -273,17 +272,19 @@ public class ParameterActivity extends CustomActivity {
 
   /**
    * @param data intent data received from selectActivity
-   *             construct the url
+   *
+   * replace parameter with input from user to construct the url
+   * e.g.:
+   * https://example.com/test?utm_campaign=appactions{#foo}	==>	https://example.com/test?utm_campaign=appactions#foo=123
+   * myapp://example/{foo}	==>	myapp://example/123
    */
   void replaceSingleParameter(String key, Intent data) {
     String identifier = data.getStringExtra(key);
     if (key == null)
       return;
-    int firstPartIdx = urlTemplate.indexOf("{");
+    int firstPartIdx = urlTemplate.indexOf(INDICATOR);
     int secondPartIdx = urlTemplate.indexOf("}");
     String curUrl = urlTemplate.substring(0, firstPartIdx);
-    //https://example.com/test?utm_campaign=appactions{#foo}	"foo": "123"	https://example.com/test?utm_campaign=appactions#foo=123
-    //myapp://example/{foo}	"foo": "123"	myapp://example/123
     if (Character.isAlphabetic(urlTemplate.charAt(firstPartIdx + 1))) {
       curUrl += identifier;
     } else {
@@ -293,13 +294,21 @@ public class ParameterActivity extends CustomActivity {
     setClickableText(tvUrl, curUrl);
   }
 
+  /**
+   * @param data intent data received from selectActivity
+   *
+   * replace each parameter with input from user to construct the url
+   * e.g.:
+   * https://example.com/test{?foo,bar}	==> https://example.com/test?foo=123&bar=456
+   * https://example.com/test?utm_campaign=appactions{&foo,bar}	==> https://example.com/test?utm_campaign=appactions&foo=123&bar=456
+   */
   //replace multiple parameters for url
   private void replaceParameter(Intent data) {
     if (fulfillmentOption.getUrlTemplate().getParameterMapCount() == 1) {
       replaceSingleParameter(fulfillmentOption.getUrlTemplate().getParameterMapMap().keySet().iterator().next(), data);
       return;
     }
-    int firstPartIdx = urlTemplate.indexOf("{");
+    int firstPartIdx = urlTemplate.indexOf(INDICATOR);
     int secondPartIdx = urlTemplate.indexOf("}");
     String curUrl = urlTemplate.substring(0, firstPartIdx) + urlTemplate.charAt(firstPartIdx + 1);
     List<String> parameters = new ArrayList<>();

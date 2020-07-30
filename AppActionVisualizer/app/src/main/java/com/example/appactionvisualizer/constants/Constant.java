@@ -34,7 +34,6 @@ public class Constant {
   //Activity result code
   public final static int SELECT_ADDRESS = 0x1;
   public final static int INPUT_PARAMETER = 0x10;
-  public final static int INPUT_URL = 0x100;
 
   //Some Actions type Constant String values
   public final static Set<String> COMMON_SET = new HashSet<>(Arrays.asList("actions.intent.OPEN_APP_FEATURE", "actions.intent.GET_ACCOUNT", "actions.intent.GET_ORDER", "actions.intent.GET_THING"));
