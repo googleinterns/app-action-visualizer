@@ -70,7 +70,7 @@ public class ParameterActivity extends CustomActivity {
     tvUrl = findViewById(R.id.url);
     link = findViewById(R.id.link);
     setReferenceLink();
-    setClickableText();
+    initClickableText();
   }
 
   @Override
@@ -104,7 +104,7 @@ public class ParameterActivity extends CustomActivity {
     getSupportActionBar().setTitle(title);
     String intentUrl = title.toLowerCase().replaceAll("_", "-");
     String linkString = getString(R.string.url_action_prefix, ActionType.getActionTypeByName(intentName).getUrl(), intentUrl);
-    setClickableText(link, linkString);
+    setClickableTextToWeb(link, linkString);
   }
 
 
@@ -114,7 +114,7 @@ public class ParameterActivity extends CustomActivity {
    * 1. user inputs arbitrary text/select from list
    * 2. select two addresses(for transportation action intent)
    */
-  private void setClickableText() {
+  private void initClickableText() {
     if (urlTemplate.isEmpty())
       return;
     if (fulfillmentOption.getFulfillmentMode() != DEEPLINK) {
@@ -236,6 +236,22 @@ public class ParameterActivity extends CustomActivity {
       @Override
       public void onClick(View view) {
         Utils.jumpToApp(ParameterActivity.this, curUrl, appAction.getPackageName());
+      }
+    });
+  }
+
+  /**
+   * @param display the text view to display the url
+   * @param curUrl the web page url
+   * set the web page url to a specific text view and set on-click jump logic
+   */
+  private void setClickableTextToWeb(final TextView display, final String curUrl) {
+    display.setText(curUrl);
+    display.setTextColor(getResources().getColor(R.color.colorAccent));
+    display.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        Utils.jumpToWebPage(ParameterActivity.this, curUrl);
       }
     });
   }

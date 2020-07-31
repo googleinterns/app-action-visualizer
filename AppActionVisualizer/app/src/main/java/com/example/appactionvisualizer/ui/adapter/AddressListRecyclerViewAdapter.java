@@ -34,6 +34,16 @@ public class AddressListRecyclerViewAdapter extends RecyclerView.Adapter<Address
     return new ViewHolder(view);
   }
 
+  /**
+   * display information:
+   * addressName
+   * locationName
+   * latitude & longitude
+   * e.g.:
+   * San Francisco International Airport
+   * San Mateo Country, California
+   * 37.621,-122.38
+   */
   @Override
   public void onBindViewHolder(final ViewHolder holder, final int position) {
     final Address address = addressList.get(position);

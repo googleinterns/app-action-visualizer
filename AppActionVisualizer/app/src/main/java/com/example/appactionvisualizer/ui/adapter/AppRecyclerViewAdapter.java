@@ -69,7 +69,7 @@ public class AppRecyclerViewAdapter extends RecyclerView.Adapter<AppRecyclerView
       if(strId != -1) {
         holder.appName.setText(strId);
       }else {
-        holder.appName.setText("unknown");
+        holder.appName.setText(context.getString(R.string.unknown));
       }
     }
     //Use hash set to avoid duplicate tags

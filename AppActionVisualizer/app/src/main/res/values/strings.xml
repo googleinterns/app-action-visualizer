@@ -15,13 +15,16 @@
     <string name="input_hint">%1$s not input yet</string>
     <string name="url_parameter">%1$s=%2$s</string>
     <string name="url_action_prefix">https://developers.google.com/assistant/app/reference/built-in-intents/%1$s/%2$s</string>
+    <string name="url_reference_prefix">https://play.google.com/store/apps/details?id=%1$s</string>
     <string name="reference_link">reference link:</string>
     <string name="addition_text">%1$s(%2$s)</string>
     <!-- error hints!-->
     <string name="error_parsing">An error occurred when parsing the intent url!</string>
+    <string name="error_activity">No corresponding activity!</string>
     <string name="error_not_deeplink">unknown link type!</string>
-    <string name="error">error!</string>
+    <string name="error_unknown">unknown error!</string>
     <string name="error_filter">Do not support url-filter now</string>
+    <string name="unknown">unknown</string>
 
 
     <string name="create_taxi">actions.intent.CREATE_TAXI_RESERVATION</string>

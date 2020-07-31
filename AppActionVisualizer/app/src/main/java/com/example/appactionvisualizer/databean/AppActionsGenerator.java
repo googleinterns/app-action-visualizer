@@ -46,10 +46,16 @@ public class AppActionsGenerator {
 
   private void sortAppActionByName(final Context context, final List<AppAction> appActions) {
     Collections.sort(appActions, new Comparator<AppAction>() {
+      /**
+       * @param appAction1
+       * @param appAction2
+       * if any app action didn't find corresponding app name resource, it would have a lower priority
+       * otherwise sort by the app name
+       */
       @Override
-      public int compare(AppAction t1, AppAction t2) {
-        int strId1 = Utils.getResIdByPackageName(t1.getPackageName(), R.string.class);
-        int strId2 = Utils.getResIdByPackageName(t2.getPackageName(), R.string.class);
+      public int compare(AppAction appAction1, AppAction appAction2) {
+        int strId1 = Utils.getResIdByPackageName(appAction1.getPackageName(), R.string.class);
+        int strId2 = Utils.getResIdByPackageName(appAction2.getPackageName(), R.string.class);
         if(strId1 == -1) return 1;
         if(strId2 == -1) return -1;
         return context.getString(strId1).toLowerCase().compareTo(context.getString(strId2).toLowerCase());

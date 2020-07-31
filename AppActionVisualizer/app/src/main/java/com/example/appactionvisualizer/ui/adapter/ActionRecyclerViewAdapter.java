@@ -136,6 +136,7 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
     }
   }
 
+  //jump to a deep link which has no parameter or jump into parameterActivity to select parameters for the deeplink
   void jump(final Action action, final FulfillmentOption fulfillmentOption) {
     if (fulfillmentOption.getUrlTemplate().getTemplate().equals("{@url}") || fulfillmentOption.getUrlTemplate().getParameterMapCount() > 0) {
       Intent intent = new Intent(context, ParameterActivity.class);

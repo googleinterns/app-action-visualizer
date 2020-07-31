@@ -1,5 +1,6 @@
 package com.example.appactionvisualizer.utils;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,6 +12,7 @@ import com.example.appactionvisualizer.R;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.lang.reflect.Field;
+import java.net.URISyntaxException;
 import java.util.List;
 
 public class Utils {
@@ -50,23 +52,33 @@ public class Utils {
     return Toast.makeText(context, message, length);
   }
 
-  //go to play store
-  public static void jumpToStore(Context context, final String packageName) {
-    context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + packageName)));
+  //go to a web page with url
+  public static void jumpToWebPage(Context context, final String url) {
+    context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
   }
 
-  //first check if the url can jump to activity, if not, check if package exists
+  //first check if package exists since user may haven't installed the app
+  //then check if the url can jump to activity
   public static void jumpToApp(Context context, final String url, final String packageName) {
     try {
+      context.getPackageManager().getApplicationInfo(packageName, 0);
+    } catch (PackageManager.NameNotFoundException e) {
+      Utils.jumpToWebPage(context, context.getString(R.string.url_reference_prefix, packageName));
+    }
+    try {
       Intent intent = Intent.parseUri(url, 0);
+      intent.setPackage(packageName);
       context.startActivity(intent);
     } catch (Exception e) {
-      try {
-        context.getPackageManager().getApplicationInfo(packageName, 0);
-        Utils.showMsg(context.getString(R.string.error_parsing),context);
-      } catch (PackageManager.NameNotFoundException ex) {
-        Utils.jumpToStore(context, packageName);
+      String errorMsg;
+      if(e instanceof URISyntaxException) {
+        errorMsg = context.getString(R.string.error_parsing);
+      }else if(e instanceof ActivityNotFoundException) {
+        errorMsg = context.getString(R.string.error_activity);
+      }else{
+        errorMsg = context.getString(R.string.error_unknown);
       }
+      Utils.showMsg(errorMsg, context);
     }
   }
 
@@ -75,14 +87,9 @@ public class Utils {
    * dialog for user to choose among given list values
    */
   public static void popUpDialog(final Context context, final String title, List<CharSequence> list, DialogInterface.OnClickListener listener) {
-    try {
-      MaterialAlertDialogBuilder materialAlertDialogBuilder = new MaterialAlertDialogBuilder(context);
-      materialAlertDialogBuilder.setTitle(title);
-      CharSequence[] keys = new CharSequence[list.size()];
-      materialAlertDialogBuilder.setItems(list.toArray(keys), listener).show();
-    } catch (Exception e) {
-      Utils.showMsg(context.getString(R.string.error), context);
-      e.printStackTrace();
-    }
+    MaterialAlertDialogBuilder materialAlertDialogBuilder = new MaterialAlertDialogBuilder(context);
+    materialAlertDialogBuilder.setTitle(title);
+    CharSequence[] keys = new CharSequence[list.size()];
+    materialAlertDialogBuilder.setItems(list.toArray(keys), listener).show();
   }
 }
