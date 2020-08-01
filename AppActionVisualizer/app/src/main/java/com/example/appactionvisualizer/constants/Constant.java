@@ -24,6 +24,12 @@ public class Constant {
   public final static String DROP_OFF_LONGITUDE_FIELD = "taxiReservation.dropoffLocation.geo.longitude";
 
 
+  //"{" indicates that this deeplink needs additional parameter(s)
+  public static final String URL_PARAMETER_INDICATOR = "{";
+  //a fulfillment uses {@url} in the URL template,
+  //the fulfillment attempts to derive {@url} from sources such as web and inline inventory
+  public static final String URL_NO_LINK = "{@url}";
+
   public final static String ENTITY_FIELD_IDENTIFIER = "identifier";
   public final static String ENTITY_FIELD_NAME = "name";
   public final static String ENTITY_ITEM_LIST = "itemListElement";

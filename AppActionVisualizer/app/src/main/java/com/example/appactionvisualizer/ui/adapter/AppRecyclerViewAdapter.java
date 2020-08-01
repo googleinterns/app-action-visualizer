@@ -59,17 +59,11 @@ public class AppRecyclerViewAdapter extends RecyclerView.Adapter<AppRecyclerView
       Drawable icon = packageManager.getApplicationIcon(appAction.getPackageName());
       ApplicationInfo applicationInfo = packageManager.getApplicationInfo(appAction.getPackageName(), 0);
       holder.appIcon.setImageDrawable(icon);
-      holder.appName.setText(packageManager.getApplicationLabel(applicationInfo));
+      holder.appName.setText(Utils.getAppNameByPackageName(context, appAction.getPackageName()));
     } catch (PackageManager.NameNotFoundException e) {
       int imgId = Utils.getResIdByPackageName(appAction.getPackageName(), R.drawable.class);
       if(imgId != -1) {
         holder.appIcon.setImageResource(imgId);
-      }
-      int strId = Utils.getResIdByPackageName(appAction.getPackageName(), R.string.class);
-      if(strId != -1) {
-        holder.appName.setText(strId);
-      }else {
-        holder.appName.setText(context.getString(R.string.unknown));
       }
     }
     //Use hash set to avoid duplicate tags

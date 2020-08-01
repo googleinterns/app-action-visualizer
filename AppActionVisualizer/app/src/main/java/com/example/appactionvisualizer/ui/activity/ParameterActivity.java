@@ -37,6 +37,7 @@ import static com.example.appactionvisualizer.constants.Constant.DROP_OFF_LATITU
 import static com.example.appactionvisualizer.constants.Constant.DROP_OFF_LONGITUDE_FIELD;
 import static com.example.appactionvisualizer.constants.Constant.PICK_UP_LATITUDE_FIELD;
 import static com.example.appactionvisualizer.constants.Constant.PICK_UP_LONGITUDE_FIELD;
+import static com.example.appactionvisualizer.constants.Constant.URL_PARAMETER_INDICATOR;
 import static com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption.FulfillmentMode.DEEPLINK;
 
 /**
@@ -50,7 +51,6 @@ public class ParameterActivity extends CustomActivity {
   private AppAction appAction;
   private String urlTemplate;
   private TextView tvUrlTemplate, tvUrl, link;
-  private static final String INDICATOR = "{";
   private static final String URL_KEY = "feature";
 
   @Override
@@ -125,7 +125,7 @@ public class ParameterActivity extends CustomActivity {
     SpannableString ss = new SpannableString(urlTemplate);
     if (action.getIntentName().equals(getString(R.string.create_taxi))) {
       setLocationParameter(ss);
-    } else if(urlTemplate.contains("@url")){
+    }else if(urlTemplate.contains(Constant.URL_NO_LINK)){
       setUrlParameter(ss);
     }else{
       setMappingParameter(ss);
@@ -157,13 +157,13 @@ public class ParameterActivity extends CustomActivity {
             setClickableText(tvUrl, url);
           }
         };
-        List<CharSequence> list = new ArrayList<>();
+        List<CharSequence> names = new ArrayList<>();
         //set the list contents from listvalue's names
         for (Value entity : listValue.getValuesList()) {
-          list.add(entity.getStructValue().getFieldsOrThrow(Constant.ENTITY_FIELD_NAME).getStringValue());
+          names.add(entity.getStructValue().getFieldsOrThrow(Constant.ENTITY_FIELD_NAME).getStringValue());
         }
         String title = entitySet.getItemList().getFieldsOrThrow(Constant.ENTITY_FIELD_IDENTIFIER).getStringValue();
-        Utils.popUpDialog(ParameterActivity.this, title, list, listener);
+        Utils.popUpDialog(ParameterActivity.this, title, names, listener);
       }
     };
     ss.setSpan(clickable, 0, urlTemplate.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -195,7 +195,7 @@ public class ParameterActivity extends CustomActivity {
         startActivityForResult(intent, Constant.SELECT_ADDRESS);
       }
     };
-    int start = urlTemplate.indexOf(INDICATOR);
+    int start = urlTemplate.indexOf(URL_PARAMETER_INDICATOR);
     int end = urlTemplate.length();
     if (start == -1)
       return;
@@ -217,7 +217,7 @@ public class ParameterActivity extends CustomActivity {
           startActivityForResult(intent, Constant.INPUT_PARAMETER);
         }
       };
-      int start = urlTemplate.indexOf(key, urlTemplate.indexOf(INDICATOR));
+      int start = urlTemplate.indexOf(key, urlTemplate.indexOf(URL_PARAMETER_INDICATOR));
       int end = start + key.length();
       ss.setSpan(clickable, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
     }
@@ -262,7 +262,7 @@ public class ParameterActivity extends CustomActivity {
    *             construct the url
    */
   void replaceAddressParameter(Intent data) {
-    int idx = urlTemplate.indexOf(INDICATOR);
+    int idx = urlTemplate.indexOf(URL_PARAMETER_INDICATOR);
     String curUrl = urlTemplate.substring(0, idx) + urlTemplate.charAt(idx + 1);
     List<String> parameters = new ArrayList<>();
     for (Map.Entry<String, String> entry : fulfillmentOption.getUrlTemplate().getParameterMapMap().entrySet()) {
@@ -298,7 +298,7 @@ public class ParameterActivity extends CustomActivity {
     String identifier = data.getStringExtra(key);
     if (key == null)
       return;
-    int firstPartIdx = urlTemplate.indexOf(INDICATOR);
+    int firstPartIdx = urlTemplate.indexOf(URL_PARAMETER_INDICATOR);
     int secondPartIdx = urlTemplate.indexOf("}");
     String curUrl = urlTemplate.substring(0, firstPartIdx);
     if (Character.isAlphabetic(urlTemplate.charAt(firstPartIdx + 1))) {
@@ -324,7 +324,7 @@ public class ParameterActivity extends CustomActivity {
       replaceSingleParameter(fulfillmentOption.getUrlTemplate().getParameterMapMap().keySet().iterator().next(), data);
       return;
     }
-    int firstPartIdx = urlTemplate.indexOf(INDICATOR);
+    int firstPartIdx = urlTemplate.indexOf(URL_PARAMETER_INDICATOR);
     int secondPartIdx = urlTemplate.indexOf("}");
     String curUrl = urlTemplate.substring(0, firstPartIdx) + urlTemplate.charAt(firstPartIdx + 1);
     List<String> parameters = new ArrayList<>();

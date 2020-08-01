@@ -140,14 +140,14 @@ public class InputParameterActivity extends CustomActivity {
               textInput.setText(getString(R.string.addition_text, item.getFieldsOrDefault(Constant.ENTITY_FIELD_NAME, identifier).getStringValue(), identifier.getStringValue()));
             }
           };
-          List<CharSequence> list = new ArrayList<>();
+          List<CharSequence> names = new ArrayList<>();
           //set the list contents
           for (Value entity : listValue.getValuesList()) {
             Value identifier = entity.getStructValue().getFieldsOrThrow(Constant.ENTITY_FIELD_IDENTIFIER);
-            list.add(entity.getStructValue().getFieldsOrDefault(Constant.ENTITY_FIELD_NAME, identifier).getStringValue());
+            names.add(entity.getStructValue().getFieldsOrDefault(Constant.ENTITY_FIELD_NAME, identifier).getStringValue());
           }
           String title = entitySet.getItemList().getFieldsOrThrow(Constant.ENTITY_FIELD_IDENTIFIER).getStringValue();
-          Utils.popUpDialog(InputParameterActivity.this, title, list, listener);
+          Utils.popUpDialog(InputParameterActivity.this, title, names, listener);
         }
       });
     }

@@ -35,7 +35,6 @@ import static com.example.appactionvisualizer.constants.Constant.ERROR_NO_PLACE;
 public class LocationActivity extends CustomActivity implements View.OnClickListener {
   private static final String TAG = "SelectLocation";
   private final static int SELECT_PICK_UP = 0, SELECT_DROP_OFF = 1, UPDATE = 2, ERROR = 3;
-  Handler mHandlerThread;
   private RecyclerView addressListView;
   private TextInputEditText pickUpInput, dropOffInput;
   private List<Address> addressList = new ArrayList<>();
@@ -43,6 +42,7 @@ public class LocationActivity extends CustomActivity implements View.OnClickList
   private int inputSelect = 0;
   private String input;
   private Address pickUpAddress = null, dropOffAddress = null;
+  private Handler addressHandler;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +73,8 @@ public class LocationActivity extends CustomActivity implements View.OnClickList
     Button searchDropOff = findViewById(R.id.search_drop_off);
     searchPickUp.setOnClickListener(this);
     searchDropOff.setOnClickListener(this);
-    mHandlerThread = new Handler(Looper.getMainLooper()) {
+    //this handler is used to update the address list
+    addressHandler = new Handler(Looper.getMainLooper()) {
       @Override
       public void handleMessage(@NonNull Message msg) {
         if (msg.what == UPDATE) {
@@ -139,7 +140,7 @@ public class LocationActivity extends CustomActivity implements View.OnClickList
   }
 
 
-  //use thread to avoid stuck on ui thread
+  //use background thread to avoid stuck on ui thread
   private void getAddressList(final String address) {
     addressListView.setVisibility(View.VISIBLE);
     final Geocoder geocoder = new Geocoder(LocationActivity.this, Locale.US);
@@ -149,9 +150,9 @@ public class LocationActivity extends CustomActivity implements View.OnClickList
         try {
           addressList.clear();
           addressList.addAll(geocoder.getFromLocationName(address, Constant.MAX_RESULTS));
-          mHandlerThread.sendEmptyMessage(UPDATE);
+          addressHandler.sendEmptyMessage(UPDATE);
         } catch (Exception e) {
-          mHandlerThread.sendEmptyMessage(ERROR);
+          addressHandler.sendEmptyMessage(ERROR);
           e.printStackTrace();
         }
       }

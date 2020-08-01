@@ -40,6 +40,33 @@ public class Utils {
     return getResId(pkgName.toLowerCase().replace('.', '_'), className);
   }
 
+
+
+  /**
+   * @param context
+   * @param pkgName packageName of app
+   * @return app's Name
+   * get app's Name by packageName
+   * 1. Use packageManager
+   * 2. use built-in resources(currently support 56 apps).
+   * 3. if 1 and 2 cannot find, return "*unknown" (* is to make user it will be placed at the end of list after sorted)
+   */
+  public static String getAppNameByPackageName(final Context context, final String pkgName) {
+    String appName = "";
+    try {
+      PackageManager packageManager = context.getPackageManager();
+      appName = packageManager.getApplicationLabel(packageManager.getApplicationInfo(pkgName, 0)).toString();
+    } catch (PackageManager.NameNotFoundException e) {
+      int strId = Utils.getResIdByPackageName(pkgName, R.string.class);
+      if(strId != -1) {
+        appName = context.getString(strId);
+      }else {
+        appName = context.getString(R.string.unknown);
+      }
+    }
+    return appName;
+  }
+
   public static void showMsg(String message, Context context) {
     getToast(message, context, Toast.LENGTH_SHORT).show();
   }
@@ -66,8 +93,10 @@ public class Utils {
       Utils.jumpToWebPage(context, context.getString(R.string.url_reference_prefix, packageName));
     }
     try {
+      //parseUri() might throw URISyntaxException error
       Intent intent = Intent.parseUri(url, 0);
       intent.setPackage(packageName);
+      //startActivity() might throw ActivityNotFoundException error
       context.startActivity(intent);
     } catch (Exception e) {
       String errorMsg;

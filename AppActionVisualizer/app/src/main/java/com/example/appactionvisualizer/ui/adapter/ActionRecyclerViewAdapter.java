@@ -121,7 +121,7 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
         final FulfillmentOption fulfillment = action.getFulfillmentOption(fulfillIdx);
         final String url = fulfillment.getUrlTemplate().getTemplate();
         fulfillHolder.textContent.setText(url);
-        if(url.contains("{")) {
+        if(url.contains(Constant.URL_PARAMETER_INDICATOR)) {
           fulfillHolder.textContent.setTextColor(context.getResources().getColor(R.color.design_default_color_error));
         }else {
           fulfillHolder.textContent.setTextColor(context.getResources().getColor(R.color.colorAccent));
@@ -130,15 +130,15 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
         fulfillHolder.item.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {
-            jump(action, fulfillment);
+            jumpByType(action, fulfillment);
           }
         });
     }
   }
 
   //jump to a deep link which has no parameter or jump into parameterActivity to select parameters for the deeplink
-  void jump(final Action action, final FulfillmentOption fulfillmentOption) {
-    if (fulfillmentOption.getUrlTemplate().getTemplate().equals("{@url}") || fulfillmentOption.getUrlTemplate().getParameterMapCount() > 0) {
+  void jumpByType(final Action action, final FulfillmentOption fulfillmentOption) {
+    if (fulfillmentOption.getUrlTemplate().getTemplate().equals(Constant.URL_NO_LINK) || fulfillmentOption.getUrlTemplate().getParameterMapCount() > 0) {
       Intent intent = new Intent(context, ParameterActivity.class);
       intent.putExtra(Constant.FULFILLMENT_OPTION, fulfillmentOption);
       intent.putExtra(Constant.ACTION, action);
