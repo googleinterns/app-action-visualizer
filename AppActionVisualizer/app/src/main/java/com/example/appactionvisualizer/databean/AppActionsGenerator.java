@@ -1,10 +1,12 @@
 package com.example.appactionvisualizer.databean;
 
 import android.content.Context;
-import android.util.Log;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 
 import com.example.appactionvisualizer.R;
 import com.example.appactionvisualizer.databean.AppActionProtos.AppAction;
+import com.example.appactionvisualizer.utils.Utils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,41 +16,50 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class TestGenerator {
-  private static final String TAG = "TestGenerator";
-  public static List<AppAction> appActionsUnique = new ArrayList<>();
+public class AppActionsGenerator {
+  private static final String TAG = "AppActionsGenerator";
+  public static List<AppAction> appActions = new ArrayList<>();
   public static Map<ActionType, List<AppAction>> type2appActionList = new HashMap<>();
-  private static TestGenerator single_instance = null;
+  private static AppActionsGenerator single_instance = null;
 
-  public static TestGenerator getInstance() {
+  public static AppActionsGenerator getInstance() {
     if (single_instance == null)
-      single_instance = new TestGenerator();
+      single_instance = new AppActionsGenerator();
     return single_instance;
   }
 
   public void readFromFile(Context context) {
-    if(!appActionsUnique.isEmpty())
+    if(!appActions.isEmpty())
       return;
     InputStream is = context.getResources().openRawResource(R.raw.protobufbinary);
     try {
-      List<AppAction> appActions = new ArrayList<>();
       appActions.addAll(AppActionProtos.AppActions.parseFrom(is).getAppActionsList());
-      appActionsUnique = deduplication(appActions);
+      appActions = deduplication(appActions);
     } catch (IOException e) {
       e.printStackTrace();
     }
-    Collections.sort(appActionsUnique, new Comparator<AppAction>() {
+    sortAppActionByName(context, appActions);
+    parseDataToEachType(context, appActions);
+  }
+
+  private void sortAppActionByName(final Context context, final List<AppAction> appActions) {
+    final PackageManager packageManager = context.getPackageManager();
+    Collections.sort(appActions, new Comparator<AppAction>() {
+      /**
+       * @param appAction1
+       * @param appAction2
+       * sort by the app name
+       */
       @Override
-      public int compare(AppAction t1, AppAction t2) {
-        return t2.getActionsCount() - t1.getActionsCount();
+      public int compare(AppAction appAction1, AppAction appAction2) {
+        return Utils.getAppNameByPackageName(context, appAction1.getPackageName()).toLowerCase().compareTo
+            (Utils.getAppNameByPackageName(context, appAction2.getPackageName()).toLowerCase());
       }
     });
-    parseDataToEachType(appActionsUnique);
   }
 
   private List<AppAction> deduplication(List<AppAction> appActions) {
@@ -68,7 +79,7 @@ public class TestGenerator {
   }
 
 
-  private void parseDataToEachType(List<AppActionProtos.AppAction> appActions) {
+  private void parseDataToEachType(final Context context, final List<AppAction> appActions) {
 
     //set up each fragments' data list, make sure there's no duplicate data in one action type
     Map<ActionType, Set<AppAction>> appActionUnique = new HashMap<>();
@@ -88,6 +99,7 @@ public class TestGenerator {
     }
     for (Map.Entry<ActionType, Set<AppAction>> entry : appActionUnique.entrySet()) {
       type2appActionList.get(entry.getKey()).addAll(entry.getValue());
+      sortAppActionByName(context, type2appActionList.get(entry.getKey()));
     }
   }
 }

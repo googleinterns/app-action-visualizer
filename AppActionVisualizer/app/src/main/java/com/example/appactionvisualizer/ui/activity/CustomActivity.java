@@ -3,6 +3,8 @@ package com.example.appactionvisualizer.ui.activity;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+//custom activity interface
+//the activity has a back button on the action bar
 public abstract class CustomActivity extends AppCompatActivity {
 
   @Override
@@ -18,7 +20,5 @@ public abstract class CustomActivity extends AppCompatActivity {
     if (actionBar != null)
       actionBar.setDisplayHomeAsUpEnabled(true);
   }
-
-  ;
 
 }

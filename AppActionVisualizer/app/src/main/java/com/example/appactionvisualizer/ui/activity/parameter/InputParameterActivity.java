@@ -21,7 +21,6 @@ import com.example.appactionvisualizer.databean.AppActionProtos.EntitySet;
 import com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption;
 import com.example.appactionvisualizer.ui.activity.CustomActivity;
 import com.example.appactionvisualizer.utils.Utils;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.protobuf.ListValue;
@@ -60,7 +59,7 @@ public class InputParameterActivity extends CustomActivity {
       map = fulfillmentOption.getUrlTemplate().getParameterMapMap();
     }
     action = (Action) getIntent().getSerializableExtra(Constant.ACTION);
-    appAction = (AppAction) getIntent().getSerializableExtra(Constant.APP_ACTION);
+    appAction = (AppAction) getIntent().getSerializableExtra(Constant.APP_NAME);
   }
 
   @Override
@@ -132,35 +131,29 @@ public class InputParameterActivity extends CustomActivity {
       textInput.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-          popUpDialog(textInput, entitySet);
+          final ListValue listValue = entitySet.getItemList().getFieldsOrThrow(Constant.ENTITY_ITEM_LIST).getListValue();
+          DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+              Struct item = listValue.getValues(i).getStructValue();
+              Value identifier = item.getFieldsOrThrow(Constant.ENTITY_FIELD_IDENTIFIER);
+              textInput.setText(getString(R.string.addition_text, item.getFieldsOrDefault(Constant.ENTITY_FIELD_NAME, identifier).getStringValue(), identifier.getStringValue()));
+            }
+          };
+          List<CharSequence> names = new ArrayList<>();
+          //set the list contents
+          for (Value entity : listValue.getValuesList()) {
+            Value identifier = entity.getStructValue().getFieldsOrThrow(Constant.ENTITY_FIELD_IDENTIFIER);
+            names.add(entity.getStructValue().getFieldsOrDefault(Constant.ENTITY_FIELD_NAME, identifier).getStringValue());
+          }
+          String title = entitySet.getItemList().getFieldsOrThrow(Constant.ENTITY_FIELD_IDENTIFIER).getStringValue();
+          Utils.popUpDialog(InputParameterActivity.this, title, names, listener);
         }
       });
     }
-
     linearLayout.addView(textInputLayout);
   }
 
-  private void popUpDialog(final TextInputEditText textInput, final EntitySet entitySet) {
-    try {
-      final ListValue listValue = entitySet.getItemList().getFieldsOrThrow(Constant.ENTITY_ITEM_LIST).getListValue();
-      MaterialAlertDialogBuilder materialAlertDialogBuilder = new MaterialAlertDialogBuilder(this);
-      materialAlertDialogBuilder.setTitle(entitySet.getItemList().getFieldsOrThrow(Constant.ENTITY_FIELD_IDENTIFIER).getStringValue());
-      List<CharSequence> list = new ArrayList<>();
-      for (Value entity : listValue.getValuesList()) {
-        list.add(entity.getStructValue().getFieldsOrThrow(Constant.ENTITY_FIELD_NAME).getStringValue());
-      }
-      CharSequence[] keys = new CharSequence[list.size()];
-      materialAlertDialogBuilder.setItems(list.toArray(keys), new DialogInterface.OnClickListener() {
-        @Override
-        public void onClick(DialogInterface dialogInterface, int i) {
-          Struct item = listValue.getValues(i).getStructValue();
-          textInput.setText(getString(R.string.addition_text, item.getFieldsOrThrow(Constant.ENTITY_FIELD_NAME).getStringValue(), item.getFieldsOrThrow(Constant.ENTITY_FIELD_IDENTIFIER).getStringValue()));
-        }
-      }).show();
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-  }
 
 
   //check if entity set has provided corresponding list items
