@@ -32,39 +32,17 @@ import java.util.Objects;
 
 import static com.example.appactionvisualizer.constants.Constant.ERROR_NO_PLACE;
 
-public class LocationActivity extends CustomActivity {
+public class LocationActivity extends CustomActivity implements View.OnClickListener {
   private static final String TAG = "SelectLocation";
   private final static int SELECT_PICK_UP = 0, SELECT_DROP_OFF = 1, UPDATE = 2, ERROR = 3;
-  Handler mHandlerThread;
   private RecyclerView addressListView;
   private TextInputEditText pickUpInput, dropOffInput;
   private List<Address> addressList = new ArrayList<>();
   private AddressListRecyclerViewAdapter adapter = new AddressListRecyclerViewAdapter(addressList, LocationActivity.this);
   private int inputSelect = 0;
   private String input;
-  View.OnClickListener clickListener = new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-      if (view.getId() == R.id.search_pick_up) {
-        inputSelect = SELECT_PICK_UP;
-        if (Objects.requireNonNull(pickUpInput.getText()).toString().isEmpty()) {
-          errorHint();
-        } else {
-          input = pickUpInput.getText().toString();
-          getAddressList(input);
-        }
-      } else {
-        inputSelect = SELECT_DROP_OFF;
-        if (Objects.requireNonNull(dropOffInput.getText()).toString().isEmpty()) {
-          errorHint();
-        } else {
-          input = dropOffInput.getText().toString();
-          getAddressList(input);
-        }
-      }
-    }
-  };
   private Address pickUpAddress = null, dropOffAddress = null;
+  private Handler addressHandler;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -75,9 +53,9 @@ public class LocationActivity extends CustomActivity {
   }
 
   @Override
-  protected void initData() {
+  protected void initData() {}
 
-  }
+
 
   @Override
   protected void initView() {
@@ -93,9 +71,10 @@ public class LocationActivity extends CustomActivity {
     dropOffInput = findViewById(R.id.drop_off_text);
     Button searchPickUp = findViewById(R.id.search_pick_up);
     Button searchDropOff = findViewById(R.id.search_drop_off);
-    searchPickUp.setOnClickListener(clickListener);
-    searchDropOff.setOnClickListener(clickListener);
-    mHandlerThread = new Handler(Looper.getMainLooper()) {
+    searchPickUp.setOnClickListener(this);
+    searchDropOff.setOnClickListener(this);
+    //this handler is used to update the address list
+    addressHandler = new Handler(Looper.getMainLooper()) {
       @Override
       public void handleMessage(@NonNull Message msg) {
         if (msg.what == UPDATE) {
@@ -140,7 +119,12 @@ public class LocationActivity extends CustomActivity {
     finish();
   }
 
-  public void setAddress(Address address) {
+  /**
+   * @param address
+   * set the return data of pick up/drop off from the selection
+   * and set the corresponding inputText's text
+   */
+  public void setAddress(final Address address) {
     if (inputSelect == SELECT_PICK_UP) {
       pickUpAddress = address;
       if (!pickUpAddress.getAddressLine(0).isEmpty()) {
@@ -156,6 +140,7 @@ public class LocationActivity extends CustomActivity {
   }
 
 
+  //use background thread to avoid stuck on ui thread
   private void getAddressList(final String address) {
     addressListView.setVisibility(View.VISIBLE);
     final Geocoder geocoder = new Geocoder(LocationActivity.this, Locale.US);
@@ -165,9 +150,9 @@ public class LocationActivity extends CustomActivity {
         try {
           addressList.clear();
           addressList.addAll(geocoder.getFromLocationName(address, Constant.MAX_RESULTS));
-          mHandlerThread.sendEmptyMessage(UPDATE);
+          addressHandler.sendEmptyMessage(UPDATE);
         } catch (Exception e) {
-          mHandlerThread.sendEmptyMessage(ERROR);
+          addressHandler.sendEmptyMessage(ERROR);
           e.printStackTrace();
         }
       }
@@ -179,4 +164,28 @@ public class LocationActivity extends CustomActivity {
   }
 
 
+  /**
+   * @param view the view that user clicks
+   * set the OnClick listener of two search button
+   */
+  @Override
+  public void onClick(View view) {
+    if (view.getId() == R.id.search_pick_up) {
+      inputSelect = SELECT_PICK_UP;
+      if (Objects.requireNonNull(pickUpInput.getText()).toString().isEmpty()) {
+        errorHint();
+      } else {
+        input = pickUpInput.getText().toString();
+        getAddressList(input);
+      }
+    } else {
+      inputSelect = SELECT_DROP_OFF;
+      if (Objects.requireNonNull(dropOffInput.getText()).toString().isEmpty()) {
+        errorHint();
+      } else {
+        input = dropOffInput.getText().toString();
+        getAddressList(input);
+      }
+    }
+  }
 }

@@ -22,6 +22,7 @@ public class AppFragment extends Fragment {
   private final static String TAG = "AppFragment";
 
   private ActionType actionType;
+  private AppRecyclerViewAdapter adapter;
 
   /**
    * Mandatory empty constructor for the fragment manager to instantiate the
@@ -47,6 +48,7 @@ public class AppFragment extends Fragment {
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    adapter = new AppRecyclerViewAdapter(actionType, getContext());
   }
 
   @Override
@@ -59,8 +61,9 @@ public class AppFragment extends Fragment {
       Context context = view.getContext();
       RecyclerView recyclerView = (RecyclerView) view;
       recyclerView.setLayoutManager(new LinearLayoutManager(context));
-      recyclerView.setAdapter(new AppRecyclerViewAdapter(actionType, getContext()));
+      recyclerView.setAdapter(adapter);
     }
     return view;
   }
+
 }

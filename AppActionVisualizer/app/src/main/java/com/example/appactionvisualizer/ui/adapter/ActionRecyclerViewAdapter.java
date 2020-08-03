@@ -121,34 +121,31 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
         final FulfillmentOption fulfillment = action.getFulfillmentOption(fulfillIdx);
         final String url = fulfillment.getUrlTemplate().getTemplate();
         fulfillHolder.textContent.setText(url);
-        fulfillHolder.textContent.setTextColor(context.getResources().getColor(url.contains("{") ? R.color.design_default_color_error : R.color.colorAccent));
+        if(url.contains(Constant.URL_PARAMETER_INDICATOR)) {
+          fulfillHolder.textContent.setTextColor(context.getResources().getColor(R.color.design_default_color_error));
+        }else {
+          fulfillHolder.textContent.setTextColor(context.getResources().getColor(R.color.colorAccent));
+          fulfillHolder.textContent.setCompoundDrawablesWithIntrinsicBounds(android.R.drawable.ic_menu_set_as, 0, 0, 0);
+        }
         fulfillHolder.item.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {
-            jumpToApp(action, fulfillment);
+            jumpByType(action, fulfillment);
           }
         });
     }
   }
 
-  void jumpToApp(final Action action, final FulfillmentOption fulfillmentOption) {
-    if (fulfillmentOption.getUrlTemplate().getTemplate().contains("@url")) {
-      Utils.showMsg(context.getString(R.string.error_parsing), context);
-      return;
-    }
-    if (fulfillmentOption.getUrlTemplate().getParameterMapCount() > 0) {
+  //jump to a deep link which has no parameter or jump into parameterActivity to select parameters for the deeplink
+  void jumpByType(final Action action, final FulfillmentOption fulfillmentOption) {
+    if (fulfillmentOption.getUrlTemplate().getTemplate().equals(Constant.URL_NO_LINK) || fulfillmentOption.getUrlTemplate().getParameterMapCount() > 0) {
       Intent intent = new Intent(context, ParameterActivity.class);
       intent.putExtra(Constant.FULFILLMENT_OPTION, fulfillmentOption);
       intent.putExtra(Constant.ACTION, action);
-      intent.putExtra(Constant.APP_ACTION, appAction);
+      intent.putExtra(Constant.APP_NAME, appAction);
       context.startActivity(intent);
     } else {
-      try {
-        Intent intent = Intent.parseUri(fulfillmentOption.getUrlTemplate().getTemplate(), 0);
-        context.startActivity(intent);
-      } catch (Exception e) {
-        Utils.showMsg(context.getString(R.string.error_parsing), context);
-      }
+      Utils.jumpToApp(context, fulfillmentOption.getUrlTemplate().getTemplate(), appAction.getPackageName());
     }
   }
 
