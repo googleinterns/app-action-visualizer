@@ -32,6 +32,8 @@ public class AppActionsGenerator {
     return single_instance;
   }
 
+
+  //parse the data using protobuf api
   public void readFromFile(Context context) {
     if(!appActions.isEmpty())
       return;
@@ -46,8 +48,11 @@ public class AppActionsGenerator {
     parseDataToEachType(context, appActions);
   }
 
+  //sort the appName using app name
+  //P.S:  Current built-in app icons and names are extracted manually.
+  // So If new app action data is added, the new apps will have no icons and names if the user didn't install them
+  // and will be placed at the end of list.
   private void sortAppActionByName(final Context context, final List<AppAction> appActions) {
-    final PackageManager packageManager = context.getPackageManager();
     Collections.sort(appActions, new Comparator<AppAction>() {
       /**
        * @param appAction1
@@ -62,6 +67,7 @@ public class AppActionsGenerator {
     });
   }
 
+  //remove app action with duplicate name from the list using hash set
   private List<AppAction> deduplication(List<AppAction> appActions) {
     int sz = appActions.size();
     //these 4 apps cannot be downloaded from app store
@@ -80,7 +86,6 @@ public class AppActionsGenerator {
 
 
   private void parseDataToEachType(final Context context, final List<AppAction> appActions) {
-
     //set up each fragments' data list, make sure there's no duplicate data in one action type
     Map<ActionType, Set<AppAction>> appActionUnique = new HashMap<>();
     for (AppAction app : appActions) {

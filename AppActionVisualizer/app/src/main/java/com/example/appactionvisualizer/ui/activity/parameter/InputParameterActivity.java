@@ -35,9 +35,9 @@ import java.util.Objects;
 
 public class InputParameterActivity extends CustomActivity {
   private static final String TAG = "InputParameterActivity";
-  List<String> keys = new ArrayList<>();
-  Map<String, String> map = new HashMap<>();
-  Map<String, TextInputEditText> key2textInputEditTexts = new HashMap<>();
+  private List<String> keys = new ArrayList<>();
+  private Map<String, String> map = new HashMap<>();
+  private Map<String, TextInputEditText> key2textInputEditTexts = new HashMap<>();
   private FulfillmentOption fulfillmentOption;
   private Action action;
   private AppAction appAction;
