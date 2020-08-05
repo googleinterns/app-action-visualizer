@@ -2,13 +2,19 @@ package com.example.appactionvisualizer.ui.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.slice.widget.SliceLiveData;
+import androidx.slice.widget.SliceView;
 
 import com.example.appactionvisualizer.R;
 import com.example.appactionvisualizer.constants.Constant;
@@ -32,7 +38,7 @@ import java.util.List;
 public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
   private static final String TAG = "ActionRecycler";
-  private static final int VIEW_TYPE_ACTION = 0, VIEW_TYPE_FULFILLMENT = 1;
+  private static final int VIEW_TYPE_ACTION = 0, VIEW_TYPE_FULFILLMENT = 1, VIEW_TYPE_SLICE = 2;
   private AppAction appAction;
   private List<Action> actionList = new ArrayList<>();
   private Context context;
@@ -121,33 +127,61 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
         final FulfillmentOption fulfillment = action.getFulfillmentOption(fulfillIdx);
         final String url = fulfillment.getUrlTemplate().getTemplate();
         fulfillHolder.textContent.setText(url);
-        if(url.contains(Constant.URL_PARAMETER_INDICATOR)) {
-          fulfillHolder.textContent.setTextColor(context.getResources().getColor(R.color.design_default_color_error));
-        }else {
-          fulfillHolder.textContent.setTextColor(context.getResources().getColor(R.color.colorAccent));
-          fulfillHolder.textContent.setCompoundDrawablesWithIntrinsicBounds(android.R.drawable.ic_menu_set_as, 0, 0, 0);
+        if(fulfillment.getFulfillmentMode() == FulfillmentOption.FulfillmentMode.SLICE) {
+          setSlice(fulfillment, fulfillHolder);
+        }else{
+          setDeepLink(fulfillment, action, fulfillHolder);
         }
-        fulfillHolder.item.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View view) {
-            jumpByType(action, fulfillment);
-          }
-        });
     }
   }
+
+  //use large mode to display the slice
+  private void setSlice(FulfillmentOption fulfillment, FulfillViewHolder fulfillHolder) {
+    try {
+      fulfillHolder.slice.setVisibility(View.VISIBLE);
+      fulfillHolder.slice.setMode(SliceView.MODE_LARGE);
+      Uri sliceUri = Uri.parse(fulfillment.getUrlTemplate().getTemplate());
+      LiveData<androidx.slice.Slice> liveData = SliceLiveData.fromUri(context, sliceUri);
+      liveData.observe((LifecycleOwner) context, fulfillHolder.slice);
+    }catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  private void setDeepLink(final FulfillmentOption fulfillment,final Action action, FulfillViewHolder fulfillHolder) {
+    if(fulfillment.getUrlTemplate().getTemplate().contains(Constant.URL_PARAMETER_INDICATOR)) {
+      fulfillHolder.textContent.setTextColor(context.getResources().getColor(R.color.design_default_color_error));
+    }else {
+      fulfillHolder.textContent.setTextColor(context.getResources().getColor(R.color.colorAccent));
+      fulfillHolder.textContent.setCompoundDrawablesWithIntrinsicBounds(android.R.drawable.ic_menu_set_as, 0, 0, 0);
+    }
+    fulfillHolder.item.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        jumpByType(action, fulfillment);
+      }
+    });
+  }
+
 
   //jump to a deep link which has no parameter or jump into parameterActivity to select parameters for the deeplink
   void jumpByType(final Action action, final FulfillmentOption fulfillmentOption) {
     if (fulfillmentOption.getUrlTemplate().getTemplate().equals(Constant.URL_NO_LINK) || fulfillmentOption.getUrlTemplate().getParameterMapCount() > 0) {
-      Intent intent = new Intent(context, ParameterActivity.class);
-      intent.putExtra(Constant.FULFILLMENT_OPTION, fulfillmentOption);
-      intent.putExtra(Constant.ACTION, action);
-      intent.putExtra(Constant.APP_NAME, appAction);
-      context.startActivity(intent);
+      jumpToParameterActivity(fulfillmentOption, action, appAction);
     } else {
       Utils.jumpToApp(context, fulfillmentOption.getUrlTemplate().getTemplate(), appAction.getPackageName());
     }
   }
+
+  private void jumpToParameterActivity(FulfillmentOption fulfillmentOption, Action action, AppAction appAction) {
+    Intent intent = new Intent(context, ParameterActivity.class);
+    intent.putExtra(Constant.FULFILLMENT_OPTION, fulfillmentOption);
+    intent.putExtra(Constant.ACTION, action);
+    intent.putExtra(Constant.APP_NAME, appAction);
+    context.startActivity(intent);
+  }
+
+
 
   @Override
   public int getItemCount() {
@@ -178,12 +212,14 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
     public final View mView;
     public final LinearLayout item;
     public final TextView textContent;
+    public final SliceView slice;
 
     public FulfillViewHolder(View view) {
       super(view);
       mView = view;
       item = view.findViewById(R.id.item);
       textContent = view.findViewById(R.id.text_content);
+      slice = view.findViewById(R.id.slice);
     }
 
     @Override
