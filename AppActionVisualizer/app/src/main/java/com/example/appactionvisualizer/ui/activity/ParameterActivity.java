@@ -32,6 +32,7 @@ import com.google.protobuf.Value;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import static com.example.appactionvisualizer.constants.Constant.DROP_OFF_LATITUDE_FIELD;
 import static com.example.appactionvisualizer.constants.Constant.DROP_OFF_LONGITUDE_FIELD;
@@ -59,7 +60,8 @@ public class ParameterActivity extends CustomActivity {
     fulfillmentOption = (FulfillmentOption) intent.getSerializableExtra(Constant.FULFILLMENT_OPTION);
     action = (Action) intent.getSerializableExtra(Constant.ACTION);
     appAction = (AppAction) intent.getSerializableExtra(Constant.APP_NAME);
-    urlTemplate = fulfillmentOption.getUrlTemplate().getTemplate();
+    if(fulfillmentOption != null)
+      urlTemplate = fulfillmentOption.getUrlTemplate().getTemplate();
   }
 
 
@@ -69,6 +71,10 @@ public class ParameterActivity extends CustomActivity {
     tvUrlTemplate = findViewById(R.id.url_template);
     tvUrl = findViewById(R.id.url);
     link = findViewById(R.id.link);
+    if(fulfillmentOption == null) {
+      Utils.showMsg(getString(R.string.error_unknown), ParameterActivity.this);
+      return;
+    }
     setReferenceLink();
     initClickableText();
   }
@@ -101,7 +107,7 @@ public class ParameterActivity extends CustomActivity {
   private void setReferenceLink() {
     String intentName = action.getIntentName();
     String title = intentName.substring(intentName.lastIndexOf('.') + 1);
-    getSupportActionBar().setTitle(title);
+    Objects.requireNonNull(getSupportActionBar()).setTitle(title);
     String intentUrl = title.toLowerCase().replaceAll("_", "-");
     String linkString = getString(R.string.url_action_prefix, ActionType.getActionTypeByName(intentName).getUrl(), intentUrl);
     setClickableTextToWeb(link, linkString);

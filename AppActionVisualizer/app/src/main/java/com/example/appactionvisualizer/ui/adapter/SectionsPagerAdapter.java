@@ -3,13 +3,13 @@ package com.example.appactionvisualizer.ui.adapter;
 import android.content.Context;
 
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.example.appactionvisualizer.R;
 import com.example.appactionvisualizer.ui.fragment.AppFragment;
+
+import static com.example.appactionvisualizer.constants.Constant.TAB_TITLES;
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
@@ -17,8 +17,6 @@ import com.example.appactionvisualizer.ui.fragment.AppFragment;
  */
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
-  @StringRes
-  private static final int[] TAB_TITLES = new int[]{R.string.tab_text_all, R.string.tab_text_1, R.string.tab_text_2, R.string.tab_text_3, R.string.tab_text_4, R.string.tab_text_5};
   private final Context context;
 
   public SectionsPagerAdapter(Context context, FragmentManager fm) {

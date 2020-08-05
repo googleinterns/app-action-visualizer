@@ -2,7 +2,7 @@ package com.example.appactionvisualizer.databean;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class ActionTypeTest {
 
@@ -10,7 +10,7 @@ public class ActionTypeTest {
    * test if getActionTypeValue works correctly
    */
   @Test
-  public void getActionTypeValue_isCorrect() {
+  public void getActionTypeValueTest() {
     assertEquals(ActionType.COMMON, ActionType.getActionTypeValue(0));
     assertEquals(ActionType.FINANCE, ActionType.getActionTypeValue(1));
     assertEquals(ActionType.FOOD_AND_DRINK, ActionType.getActionTypeValue(2));
@@ -22,7 +22,7 @@ public class ActionTypeTest {
    * test if getActionTypeByName works correctly
    */
   @Test
-  public void getActionTypeByName_isCorrect() {
+  public void getActionTypeByNameTest() {
     assertEquals(ActionType.COMMON, ActionType.getActionTypeByName("actions.intent.OPEN_APP_FEATURE"));
     assertEquals(ActionType.FINANCE, ActionType.getActionTypeByName("actions.intent.CREATE_MONEY_TRANSFER"));
     assertEquals(ActionType.FOOD_AND_DRINK, ActionType.getActionTypeByName("actions.intent.ORDER_MENU_ITEM"));

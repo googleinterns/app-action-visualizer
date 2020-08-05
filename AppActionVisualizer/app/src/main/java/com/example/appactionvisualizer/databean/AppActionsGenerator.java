@@ -1,8 +1,6 @@
 package com.example.appactionvisualizer.databean;
 
 import android.content.Context;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
 
 import com.example.appactionvisualizer.R;
 import com.example.appactionvisualizer.databean.AppActionProtos.AppAction;

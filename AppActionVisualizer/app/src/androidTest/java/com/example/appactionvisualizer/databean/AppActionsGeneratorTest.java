@@ -1,7 +1,6 @@
 package com.example.appactionvisualizer.databean;
 
 import android.content.Context;
-import android.util.Log;
 
 import androidx.test.platform.app.InstrumentationRegistry;
 
@@ -16,20 +15,21 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class AppActionsGeneratorTest {
   // Context of the app under test.
   private Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
   @Test
-  public void readFromFile_isCorrect() {
+  public void readFromFileTest() {
     AppActionsGenerator.getInstance().readFromFile(appContext);
     assertNotNull(AppActionsGenerator.appActions);
   }
 
   @Test
-  public void deduplication_isCorrect() {
+  public void deduplicationTest() {
     List<String> list = new ArrayList<>();
     for(AppActionProtos.AppAction appAction : AppActionsGenerator.appActions) {
       list.add(appAction.getPackageName());
@@ -39,7 +39,7 @@ public class AppActionsGeneratorTest {
   }
 
   @Test
-  public void sortAppActionByName_isCorrect() {
+  public void sortAppActionByNameTest() {
     List<AppActionProtos.AppAction> sortedActions = new ArrayList<>(AppActionsGenerator.appActions);
     Collections.sort(sortedActions, new Comparator<AppActionProtos.AppAction>() {
       @Override

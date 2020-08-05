@@ -105,6 +105,7 @@ public class LocationActivity extends CustomActivity implements View.OnClickList
     return super.onOptionsItemSelected(item);
   }
 
+  //convert addresses to intent data which is passed back to Parameter Activity
   private void checkInput() {
     if (pickUpAddress == null || dropOffAddress == null) {
       errorHint();

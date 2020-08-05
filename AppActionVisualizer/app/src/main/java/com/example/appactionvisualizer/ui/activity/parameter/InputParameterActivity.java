@@ -83,6 +83,7 @@ public class InputParameterActivity extends CustomActivity {
     return super.onOptionsItemSelected(item);
   }
 
+  //when user hits save button, check if user has input/selected all parameters. If valid, return to previous activity.
   private void checkInputAndReturn() {
     Intent intent = new Intent();
     for (Map.Entry<String, TextInputEditText> entry : key2textInputEditTexts.entrySet()) {

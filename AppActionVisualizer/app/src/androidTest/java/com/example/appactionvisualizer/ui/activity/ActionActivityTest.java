@@ -2,8 +2,6 @@ package com.example.appactionvisualizer.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
-import android.view.View;
 
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.test.platform.app.InstrumentationRegistry;
@@ -19,17 +17,19 @@ import com.example.appactionvisualizer.ui.adapter.ActionRecyclerViewAdapter;
 import org.junit.Rule;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class ActionActivityTest {
 
   @Rule
   public ActivityTestRule<ActionActivity> rule = new ActivityTestRule<>(ActionActivity.class, false, false);
+  // Context of the app under test.
   private Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
   private ActionActivity activity;
 
   @Test
-  public void initData_isCorrect() {
+  public void initDataTest() {
     setData();
     assertNotNull(activity.appAction);
   }
@@ -38,7 +38,7 @@ public class ActionActivityTest {
    * list items count should be equal to the sum of all actions and fulfillment options
    */
   @Test
-  public void list_isCorrect() {
+  public void listViewIsCorrect() {
     setData();
     RecyclerView recyclerView = activity.findViewById(R.id.list);
     assertNotNull(recyclerView);
@@ -57,6 +57,7 @@ public class ActionActivityTest {
     return cnt;
   }
 
+  //set some test data for the recyclerview
   private void setData() {
     AppActionsGenerator.getInstance().readFromFile(appContext);
     Intent intent = new Intent();
