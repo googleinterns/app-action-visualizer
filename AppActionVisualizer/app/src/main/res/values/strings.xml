@@ -18,6 +18,14 @@
     <string name="url_reference_prefix">https://play.google.com/store/apps/details?id=%1$s</string>
     <string name="reference_link">reference link:</string>
     <string name="addition_text">%1$s(%2$s)</string>
+    <string name="dashboard">Dashboard</string>
+    <!-- dashboard display texts !-->
+    <!--    "None:  74\n" + "Single:  39\n" + "Multiple:  45\n" + "Coordinates:  22\n"+ "All:  157\n" ;-->
+    <string name="zero_parameter">None:  %1$s\n</string>
+    <string name="single_parameter">Single:  %1$s\n</string>
+    <string name="multiple_parameter">Multiple:  %1$s\n</string>
+    <string name="all_parameter">All:  %1$s\n</string>
+
     <!-- error hints!-->
     <string name="error_parsing">An error occurred when parsing the intent url!</string>
     <string name="error_activity">No corresponding activity!</string>

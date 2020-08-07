@@ -1,5 +1,6 @@
 package com.example.appactionvisualizer.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -25,6 +26,19 @@ public class MainActivity extends AppCompatActivity {
     viewPager.setAdapter(sectionsPagerAdapter);
     TabLayout tabs = findViewById(R.id.tabs);
     tabs.setupWithViewPager(viewPager);
+    addDashBoard();
+  }
+
+  private void addDashBoard() {
+    FloatingActionButton fab = findViewById(R.id.fab);
+
+    fab.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
+        startActivity(intent);
+      }
+    });
   }
 
   @Override
