@@ -48,16 +48,17 @@ public class ActionActivityTest {
     assertEquals(adapter.getItemCount(), getCount(appAction));
   }
 
-  //the number of all actions and fulfillment options
+  // The number of all actions and fulfillment options
   private int getCount(AppAction appAction) {
     int cnt = 0;
     for(AppActionProtos.Action action : appAction.getActionsList()) {
+      // Each action should be counted as 1 item displayed in recyclerview
       cnt += action.getFulfillmentOptionCount() + 1;
     }
     return cnt;
   }
 
-  //set some test data for the recyclerview
+  // Set some test data for the recyclerview
   private void setData() {
     AppActionsGenerator.getInstance().readFromFile(appContext);
     Intent intent = new Intent();

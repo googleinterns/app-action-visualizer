@@ -18,7 +18,7 @@ public class MainActivityTest {
   @Rule
   public ActivityTestRule<MainActivity> rule = new ActivityTestRule<>(MainActivity.class, false, true);
   /**
-   * assert that view pager is correctly initialized
+   * Assert that view pager is correctly initialized.
    */
   @Test
   public void viewPagerIsCorrect() {
@@ -27,7 +27,7 @@ public class MainActivityTest {
     assertNotNull(viewPager);
     SectionsPagerAdapter adapter = (SectionsPagerAdapter) viewPager.getAdapter();
     assertNotNull(adapter);
-    //the viewpager adapter should have same size with tab titles
+    // The viewpager adapter should have same size with tab titles
     assertEquals(adapter.getCount(), Constant.TAB_TITLES.length);
   }
 

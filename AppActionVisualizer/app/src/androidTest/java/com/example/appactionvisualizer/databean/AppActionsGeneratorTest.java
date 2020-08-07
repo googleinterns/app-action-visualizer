@@ -22,12 +22,18 @@ public class AppActionsGeneratorTest {
   // Context of the app under test.
   private Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
+  /**
+   * Test read from file logic
+   */
   @Test
   public void readFromFileTest() {
     AppActionsGenerator.getInstance().readFromFile(appContext);
     assertNotNull(AppActionsGenerator.appActions);
   }
 
+  /**
+   * Test if there are any two apps with same app names
+   */
   @Test
   public void deduplicationTest() {
     List<String> list = new ArrayList<>();
@@ -38,6 +44,9 @@ public class AppActionsGeneratorTest {
     assertEquals(set.size(), list.size());
   }
 
+  /**
+   * Test if apps are sorted by name
+   */
   @Test
   public void sortAppActionByNameTest() {
     List<AppActionProtos.AppAction> sortedActions = new ArrayList<>(AppActionsGenerator.appActions);

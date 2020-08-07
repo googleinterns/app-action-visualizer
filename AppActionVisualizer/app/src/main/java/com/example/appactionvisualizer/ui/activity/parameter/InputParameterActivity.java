@@ -53,7 +53,7 @@ public class InputParameterActivity extends CustomActivity {
   @Override
   protected void initData() {
     fulfillmentOption = (FulfillmentOption) getIntent().getSerializableExtra(Constant.FULFILLMENT_OPTION);
-    //for those who doesn't have a parameter mapping, we require the user input
+    // For those who doesn't have a parameter mapping, the app requires the user input
     if (fulfillmentOption != null) {
       keys.addAll(fulfillmentOption.getUrlTemplate().getParameterMapMap().keySet());
       map = fulfillmentOption.getUrlTemplate().getParameterMapMap();
@@ -83,7 +83,7 @@ public class InputParameterActivity extends CustomActivity {
     return super.onOptionsItemSelected(item);
   }
 
-  //when user hits save button, check if user has input/selected all parameters. If valid, return to previous activity.
+  // When user hits save button, check if user has input/selected all parameters. If valid, return to previous activity.
   private void checkInputAndReturn() {
     Intent intent = new Intent();
     for (Map.Entry<String, TextInputEditText> entry : key2textInputEditTexts.entrySet()) {
@@ -96,7 +96,7 @@ public class InputParameterActivity extends CustomActivity {
         Utils.showMsg(getString(R.string.input_hint, key), this);
         return;
       }
-      //convert to identifier
+      // Convert to identifier
       if (value.contains("(")) {
         value = value.substring(value.lastIndexOf("(") + 1, value.length() - 1);
       }
@@ -142,7 +142,7 @@ public class InputParameterActivity extends CustomActivity {
             }
           };
           List<CharSequence> names = new ArrayList<>();
-          //set the list contents
+          // Set the list contents
           for (Value entity : listValue.getValuesList()) {
             Value identifier = entity.getStructValue().getFieldsOrThrow(Constant.ENTITY_FIELD_IDENTIFIER);
             names.add(entity.getStructValue().getFieldsOrDefault(Constant.ENTITY_FIELD_NAME, identifier).getStringValue());
@@ -157,7 +157,7 @@ public class InputParameterActivity extends CustomActivity {
 
 
 
-  //check if entity set has provided corresponding list items
+  // Check if entity set has provided corresponding list items
   private EntitySet checkEntitySet(String key) {
     String parameterValue = fulfillmentOption.getUrlTemplate().getParameterMapMap().get(key);
     for (Action.Parameter parameter : action.getParametersList()) {

@@ -66,7 +66,7 @@ public class AppRecyclerViewAdapter extends RecyclerView.Adapter<AppRecyclerView
         holder.appIcon.setImageResource(imgId);
       }
     }
-    //Use hash set to avoid duplicate tags
+    // Use hash set to avoid duplicate tags
     final HashSet<ActionType> uniqueSet = new HashSet<>(5);
     for (int i = 0; i < appAction.getActionsCount(); i++) {
       //todo: add field in proto

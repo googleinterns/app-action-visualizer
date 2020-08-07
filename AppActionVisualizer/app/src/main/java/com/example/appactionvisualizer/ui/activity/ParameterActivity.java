@@ -103,7 +103,7 @@ public class ParameterActivity extends CustomActivity {
     }
   }
 
-  //set a reference to corresponding official page
+  // Set a reference to corresponding official page
   private void setReferenceLink() {
     String intentName = action.getIntentName();
     String title = intentName.substring(intentName.lastIndexOf('.') + 1);
@@ -140,7 +140,7 @@ public class ParameterActivity extends CustomActivity {
     tvUrlTemplate.setMovementMethod(LinkMovementMethod.getInstance());
   }
 
-  //for the @url case, just pop up a window for user to choose. No need to jump to next page
+  // For the @url case, just pop up a window for user to choose. No need to jump to next page
   private void setUrlParameter(SpannableString ss) {
     if(fulfillmentOption.getUrlTemplate().getParameterMapCount() > 0 || !action.getParameters(0).getEntitySetReference(0).getUrlFilter().isEmpty()) {
       Utils.showMsg(getString(R.string.error_filter), this);
@@ -175,7 +175,7 @@ public class ParameterActivity extends CustomActivity {
     ss.setSpan(clickable, 0, urlTemplate.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
   }
 
-  //all fulfillment options with @url require "feature" key in parameter list of actions(expect url_filter)
+  // All fulfillment options with "@url" require "feature" key in parameter list of actions(expect url_filter)
   private EntitySet checkUrlEntitySet() {
     for (Action.Parameter parameter : action.getParametersList()) {
       if (parameter.getName().equals(URL_KEY)) {
@@ -192,7 +192,7 @@ public class ParameterActivity extends CustomActivity {
     return null;
   }
 
-  //the create_taxi intent needs latitude and longitude values for parameters
+  // The create_taxi intent needs latitude and longitude values for parameters
   private void setLocationParameter(SpannableString ss) {
     ClickableSpan clickable = new ClickableSpan() {
       @Override
@@ -208,7 +208,7 @@ public class ParameterActivity extends CustomActivity {
     ss.setSpan(clickable, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
   }
 
-  //set parameters for the fulfillment option
+  // Set parameters for the fulfillment option
   private void setMappingParameter(SpannableString ss) {
     final Map<String, String> parameterMapMap = fulfillmentOption.getUrlTemplate().getParameterMapMap();
     for (final Map.Entry<String, String> entry : parameterMapMap.entrySet()) {
@@ -278,7 +278,7 @@ public class ParameterActivity extends CustomActivity {
     setClickableText(tvUrl, curUrl);
   }
 
-  //add latitude and longitude parameters to the url
+  // Add latitude and longitude parameters to the url
   private void addLocationParameters(Intent data, Map.Entry<String, String> entry, List<String> parameters) {
     if (entry.getValue().equals(PICK_UP_LATITUDE_FIELD)) {
       parameters.add(getString(R.string.url_parameter, entry.getKey(), data.getStringExtra(Constant.PICK_UP_LATITUDE)));
@@ -324,7 +324,6 @@ public class ParameterActivity extends CustomActivity {
    * https://example.com/test{?foo,bar}	==> https://example.com/test?foo=123&bar=456
    * https://example.com/test?utm_campaign=appactions{&foo,bar}	==> https://example.com/test?utm_campaign=appactions&foo=123&bar=456
    */
-  //replace multiple parameters for url
   private void replaceParameter(Intent data) {
     if (fulfillmentOption.getUrlTemplate().getParameterMapCount() == 1) {
       replaceSingleParameter(fulfillmentOption.getUrlTemplate().getParameterMapMap().keySet().iterator().next(), data);

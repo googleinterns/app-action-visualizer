@@ -7,7 +7,7 @@ import static org.junit.Assert.assertEquals;
 public class ActionTypeTest {
 
   /**
-   * test if getActionTypeValue works correctly
+   * Test if getActionTypeValue works correctly
    */
   @Test
   public void getActionTypeValueTest() {
@@ -19,7 +19,7 @@ public class ActionTypeTest {
   }
 
   /**
-   * test if getActionTypeByName works correctly
+   * Test if getActionTypeByName works correctly by using some examples provided by https://developers.google.com/assistant/app/reference/built-in-intents
    */
   @Test
   public void getActionTypeByNameTest() {

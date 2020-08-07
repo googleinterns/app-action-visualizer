@@ -31,7 +31,7 @@ public class AppActionsGenerator {
   }
 
 
-  //parse the data using protobuf api
+  // Parse the data using protobuf api
   public void readFromFile(Context context) {
     if(!appActions.isEmpty())
       return;
@@ -46,8 +46,8 @@ public class AppActionsGenerator {
     parseDataToEachType(context, appActions);
   }
 
-  //sort the appName using app name
-  //P.S:  Current built-in app icons and names are extracted manually.
+  // Sort the appName using app name
+  // P.S:  Current built-in app icons and names are extracted manually.
   // So If new app action data is added, the new apps will have no icons and names if the user didn't install them
   // and will be placed at the end of list.
   private void sortAppActionByName(final Context context, final List<AppAction> appActions) {
@@ -65,10 +65,10 @@ public class AppActionsGenerator {
     });
   }
 
-  //remove app action with duplicate name from the list using hash set
+  // Remove app action with duplicate name from the list using hash set
   private List<AppAction> deduplication(List<AppAction> appActions) {
     int sz = appActions.size();
-    //these 4 apps cannot be downloaded from app store
+    // These 4 apps cannot be downloaded from app store
     Set<String> seen = new HashSet<>(Arrays.asList("com.gojuno.rider", "com.kimfrank.android.fitactions", "com.deeplocal.smores", "com.runtastic.android.pro2"));
     List<AppAction> unique = new ArrayList<>();
     for (int i = sz - 1; i >= 0; --i) {
@@ -84,7 +84,7 @@ public class AppActionsGenerator {
 
 
   private void parseDataToEachType(final Context context, final List<AppAction> appActions) {
-    //set up each fragments' data list, make sure there's no duplicate data in one action type
+    // Set up each fragments' data list, make sure there's no duplicate data in one action type
     Map<ActionType, Set<AppAction>> appActionUnique = new HashMap<>();
     for (AppAction app : appActions) {
       for (AppActionProtos.Action action : app.getActionsList()) {
@@ -94,7 +94,7 @@ public class AppActionsGenerator {
         appActionUnique.get(ActionType.getActionTypeByName(action.getIntentName())).add(app);
       }
     }
-    //in case there're some types haven't been initialized
+    // In case there're some types haven't been initialized
     for (ActionType actiontype : ActionType.values()) {
       if (type2appActionList.get(actiontype) == null) {
         type2appActionList.put(actiontype, new ArrayList<AppAction>());
