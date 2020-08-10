@@ -17,7 +17,7 @@ import com.example.appactionvisualizer.ui.adapter.ActionRecyclerViewAdapter;
  * Displays all the actions of an app using recyclerview
  */
 public class ActionActivity extends CustomActivity {
-  private AppAction appAction;
+  public AppAction appAction;
 
   @Override
   protected void initData() {

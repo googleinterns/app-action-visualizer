@@ -50,9 +50,10 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
         return ActionType.getActionTypeByName(t1.getIntentName()).compareTo(ActionType.getActionTypeByName(t2.getIntentName()));
       }
     });
-    //find all the action item position
+    // Find all the action item position
     for (Action action : actionList) {
       actionPos.add(allSize);
+      // Each action should be counted as 1 item displayed in recyclerview
       allSize += action.getFulfillmentOptionCount() + 1;
     }
   }
@@ -102,7 +103,7 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
     switch (holder.getItemViewType()) {
       case VIEW_TYPE_ACTION:
         ActionViewHolder actionHolder = (ActionViewHolder) holder;
-        //search the corresponding action item index
+        // Search the corresponding action item index
         int idx = Arrays.binarySearch(actionPos.toArray(), position);
         action = actionList.get(idx);
         actionHolder.actionName.setText(action.getIntentName());
@@ -110,11 +111,11 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
         break;
       case VIEW_TYPE_FULFILLMENT:
         FulfillViewHolder fulfillHolder = (FulfillViewHolder) holder;
-        //search the corresponding action item index and fulfill item index
-        //since the returned index of binarySearch is (-(insertion point) - 1).
-        //The insertion point is defined as the point at which the key would be inserted into the array:
-        //the index of the first element greater than the key, or a.length if all elements in the array are less than the specified key.
-        //So actionIdx is (insertion point - 1) = -(return idx) - 2
+        // Search the corresponding action item index and fulfill item index
+        // Since the returned index of binarySearch is (-(insertion point) - 1).
+        // The insertion point is defined as the point at which the key would be inserted into the array:
+        // The index of the first element greater than the key, or a.length if all elements in the array are less than the specified key.
+        // So actionIdx is (insertion point - 1) = -(return idx) - 2
         int actionIdx = (-Arrays.binarySearch(actionPos.toArray(), position)) - 2;
         int fulfillIdx = position - actionPos.get(actionIdx) - 1;
         action = actionList.get(actionIdx);
@@ -136,7 +137,7 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
     }
   }
 
-  //jump to a deep link which has no parameter or jump into parameterActivity to select parameters for the deeplink
+  // Jump to a deep link which has no parameter or jump into parameterActivity to select parameters for the deeplink
   void jumpByType(final Action action, final FulfillmentOption fulfillmentOption) {
     if (fulfillmentOption.getUrlTemplate().getTemplate().equals(Constant.URL_NO_LINK) || fulfillmentOption.getUrlTemplate().getParameterMapCount() > 0) {
       Intent intent = new Intent(context, ParameterActivity.class);

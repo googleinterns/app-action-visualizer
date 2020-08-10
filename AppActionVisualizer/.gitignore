@@ -13,5 +13,4 @@
 /captures
 .externalNativeBuild
 .cxx
-/app/src/test
 *.backup
