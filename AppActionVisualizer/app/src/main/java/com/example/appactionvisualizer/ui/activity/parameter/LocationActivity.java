@@ -73,7 +73,7 @@ public class LocationActivity extends CustomActivity implements View.OnClickList
     Button searchDropOff = findViewById(R.id.search_drop_off);
     searchPickUp.setOnClickListener(this);
     searchDropOff.setOnClickListener(this);
-    //this handler is used to update the address list
+    // This handler is used to update the address list
     addressHandler = new Handler(Looper.getMainLooper()) {
       @Override
       public void handleMessage(@NonNull Message msg) {
@@ -105,6 +105,7 @@ public class LocationActivity extends CustomActivity implements View.OnClickList
     return super.onOptionsItemSelected(item);
   }
 
+  // Convert addresses to intent data which is passed back to Parameter Activity
   private void checkInput() {
     if (pickUpAddress == null || dropOffAddress == null) {
       errorHint();
@@ -140,7 +141,7 @@ public class LocationActivity extends CustomActivity implements View.OnClickList
   }
 
 
-  //use background thread to avoid stuck on ui thread
+  // Use background thread to avoid stuck on ui thread
   private void getAddressList(final String address) {
     addressListView.setVisibility(View.VISIBLE);
     final Geocoder geocoder = new Geocoder(LocationActivity.this, Locale.US);

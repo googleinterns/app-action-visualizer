@@ -2,7 +2,6 @@ package com.example.appactionvisualizer.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
@@ -11,7 +10,6 @@ import com.example.appactionvisualizer.R;
 import com.example.appactionvisualizer.databean.AppActionsGenerator;
 import com.example.appactionvisualizer.ui.activity.dashboard.DashboardActivity;
 import com.example.appactionvisualizer.ui.adapter.SectionsPagerAdapter;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
 /**

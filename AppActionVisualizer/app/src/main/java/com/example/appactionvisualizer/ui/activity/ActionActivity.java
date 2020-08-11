@@ -19,7 +19,7 @@ import java.util.Objects;
  * Displays all the actions of an app using recyclerview
  */
 public class ActionActivity extends CustomActivity {
-  private AppAction appAction;
+  public AppAction appAction;
 
   @Override
   protected void initData() {
