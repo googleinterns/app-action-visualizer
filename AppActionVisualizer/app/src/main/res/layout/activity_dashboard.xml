@@ -1,35 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.activity.DashboardActivity">
+    tools:context=".ui.activity.dashboard.DashboardActivity">
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/text_margin"
         android:layout_marginTop="@dimen/text_margin"
-        android:layout_marginLeft="@dimen/text_margin"
-        android:textColor="@color/design_default_color_on_secondary"
-        android:text="apps"/>
+        android:text="@string/app"
+        android:textColor="@color/design_default_color_on_secondary" />
+
     <TextView
         android:id="@+id/apps"
-        android:layout_margin="@dimen/text_margin"
         android:layout_width="match_parent"
-        android:textSize="20sp"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/text_margin"
+        android:textSize="20sp" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/text_margin"
-        android:layout_marginLeft="@dimen/text_margin"
-        android:textColor="@color/design_default_color_on_secondary"
-        android:text="deeplinks"/>
+        android:layout_marginStart="@dimen/text_margin"
+        android:text="@string/fulfillment_option"
+        android:textColor="@color/design_default_color_on_secondary" />
+
     <TextView
-        android:id="@+id/deeplinks"
-        android:layout_margin="@dimen/text_margin"
+        android:id="@+id/fulfillment_option"
         android:layout_width="wrap_content"
-        android:textSize="20sp"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/text_margin"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/detail"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/text_margin"
+        android:text="@string/detail" />
 </LinearLayout>

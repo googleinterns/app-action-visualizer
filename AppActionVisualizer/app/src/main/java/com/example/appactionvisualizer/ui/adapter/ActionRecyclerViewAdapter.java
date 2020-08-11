@@ -130,24 +130,12 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
         fulfillHolder.item.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {
-            jumpByType(action, fulfillment);
+            Utils.jumpByType(context, appAction, action, fulfillment);
           }
         });
     }
   }
 
-  //jump to a deep link which has no parameter or jump into parameterActivity to select parameters for the deeplink
-  void jumpByType(final Action action, final FulfillmentOption fulfillmentOption) {
-    if (fulfillmentOption.getUrlTemplate().getTemplate().equals(Constant.URL_NO_LINK) || fulfillmentOption.getUrlTemplate().getParameterMapCount() > 0) {
-      Intent intent = new Intent(context, ParameterActivity.class);
-      intent.putExtra(Constant.FULFILLMENT_OPTION, fulfillmentOption);
-      intent.putExtra(Constant.ACTION, action);
-      intent.putExtra(Constant.APP_NAME, appAction);
-      context.startActivity(intent);
-    } else {
-      Utils.jumpToApp(context, fulfillmentOption.getUrlTemplate().getTemplate(), appAction.getPackageName());
-    }
-  }
 
   @Override
   public int getItemCount() {
