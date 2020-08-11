@@ -16,7 +16,6 @@ import java.util.Map;
 
 import static com.example.appactionvisualizer.databean.AppActionsGenerator.type2appActionList;
 
-// Display deep links by expandable list view
 public class DashboardActivity extends CustomActivity {
 
   private static final String TAG = "DashboardActivity";
@@ -39,9 +38,10 @@ public class DashboardActivity extends CustomActivity {
   private void countApps() {
     // Text to be displayed
     StringBuilder appText = new StringBuilder();
+    // Category1: number of apps
+    // Category2: number of apps, etc.
     for (Map.Entry<ActionType, List<AppActionProtos.AppAction>> entry :
         type2appActionList.entrySet()) {
-      // Category: number of apps
       appText.append(
           getString(
               R.string.key_value,
@@ -52,17 +52,16 @@ public class DashboardActivity extends CustomActivity {
   }
 
   /**
-   * Count the parameter number of each fulfillment option and get a map with <action name, list of
-   * deep links> pair
+   * Count the parameter number of each fulfillment option
    */
   private void countFulfillmentOptions() {
+    // Use these variables to do a statistics of deep links
     int allFulfillmentSize = 0,
         noneParameter = 0,
         singleParameter = 0,
         multiParameter = 0,
         slice = 0;
-    // Iterate over the whole list to get the numbers, and add fulfillment options to their
-    // corresponding intent name
+    // Iterate over the whole list to get the numbers
     for (AppActionProtos.AppAction appAction : AppActionsGenerator.appActions) {
       for (AppActionProtos.Action action : appAction.getActionsList()) {
         allFulfillmentSize += action.getFulfillmentOptionCount();
@@ -88,7 +87,7 @@ public class DashboardActivity extends CustomActivity {
       }
     }
     StringBuilder text = new StringBuilder();
-    // Build the string:
+    // Build the string as below:
     // All: number of apps
     // None parameter: number
     // Single parameter: number

@@ -23,9 +23,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+// Display deep links using an expandable list view
 public class DeepLinkListActivity extends CustomActivity {
   // For each action name, we need a tuple of <AppAction, Action, FulfillmentOption> data
-  // so that the link can jump into ParameterActivity.
+  // so that the link can jump into ParameterActivity and parse required data to activity.
   Map<String, List<Tuple<AppAction, Action, FulfillmentOption>>> intentMap;
 
   @Override
@@ -40,8 +41,7 @@ public class DeepLinkListActivity extends CustomActivity {
   protected void initData() {
     // Use tree map so that the actions are sorted.
     // The total actions wouldn't be much so it wouldn't lose much time compared to hash map.
-    // Sort the app actions by type. If same type, sort them by name. Make sure actions with same
-    // type stay together.
+    // Make sure actions with same type stay together.
     Comparator<String> comparator =
         new Comparator<String>() {
           @Override
@@ -66,7 +66,7 @@ public class DeepLinkListActivity extends CustomActivity {
   }
 
   /**
-   * Generate a <key: action, value: Tuple<>> tree map from current data, need tree map since we
+   * Generate a <key: action, value: Tuple> tree map from current data, need tree map since we
    * want sorted actions.
    */
   private void extractActions() {
