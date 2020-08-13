@@ -27,7 +27,7 @@ import java.util.TreeMap;
 public class DeepLinkListActivity extends CustomActivity {
   // For each action name, we need a tuple of <AppAction, Action, FulfillmentOption> data
   // so that the link can jump into ParameterActivity and parse required data to activity.
-  Map<String, List<Tuple<AppAction, Action, FulfillmentOption>>> intentMap;
+  private Map<String, List<Tuple<AppAction, Action, FulfillmentOption>>> intentMap;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -66,8 +66,8 @@ public class DeepLinkListActivity extends CustomActivity {
   }
 
   /**
-   * Generate a <key: action, value: Tuple> tree map from current data, need tree map since we
-   * want sorted actions.
+   * Generate a <key: action, value: Tuple> tree map from current data, need tree map since we want
+   * sorted actions.
    */
   private void extractActions() {
     // Iterate over the whole list to get the numbers, and add fulfillment options to their
@@ -117,5 +117,9 @@ public class DeepLinkListActivity extends CustomActivity {
             return false;
           }
         });
+  }
+
+  public Map<String, List<Tuple<AppAction, Action, FulfillmentOption>>> getIntentMap() {
+    return intentMap;
   }
 }

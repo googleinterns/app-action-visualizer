@@ -20,8 +20,8 @@
     <string name="addition_text">%1$s(%2$s)</string>
     <!-- dashboard display texts !-->
     <string name="dashboard">Dashboard</string>
-    <string name="app">Apps</string>
-    <string name="fulfillment_option">Fulfillment options</string>
+    <string name="app">App counts</string>
+    <string name="fulfillment_option">Deep link/Slice numbers</string>
     <string name="key_value">%1$s: %2$s\n</string>
     <string name="slice">Slice:  %1$d\n</string>
     <string name="no_parameter">None parameter:  %1$d\n</string>
