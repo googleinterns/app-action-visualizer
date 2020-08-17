@@ -2,12 +2,14 @@ package com.example.appactionvisualizer.ui.adapter;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.appactionvisualizer.ui.fragment.AppFragment;
+import com.example.appactionvisualizer.ui.fragment.DashboardFragment;
 
 import static com.example.appactionvisualizer.constants.Constant.TAB_TITLES;
 
@@ -24,9 +26,13 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     this.context = context;
   }
 
+  @NonNull
   @Override
   public Fragment getItem(int position) {
-    return AppFragment.newInstance(position);
+    if(position == 0) {
+      return new DashboardFragment();
+    }
+    return AppFragment.newInstance(position - 1);
   }
 
   @Nullable

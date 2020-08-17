@@ -1,9 +1,14 @@
 package com.example.appactionvisualizer.ui.activity.dashboard;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.view.View;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
+
+import androidx.annotation.NonNull;
 
 import com.example.appactionvisualizer.R;
 import com.example.appactionvisualizer.databean.ActionType;
@@ -25,9 +30,12 @@ import java.util.TreeMap;
 
 // Display deep links using an expandable list view
 public class DeepLinkListActivity extends CustomActivity {
+  private static final String TAG = DeepLinkListActivity.class.getSimpleName();
   // For each action name, we need a tuple of <AppAction, Action, FulfillmentOption> data
   // so that the link can jump into ParameterActivity and parse required data to activity.
   private Map<String, List<Tuple<AppAction, Action, FulfillmentOption>>> intentMap;
+  // These bits are used to indicate classify results
+  private static final int UPDATE = 1, ERROR = 2;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
