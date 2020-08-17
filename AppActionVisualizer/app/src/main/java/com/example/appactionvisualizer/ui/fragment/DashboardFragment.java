@@ -1,37 +1,50 @@
-package com.example.appactionvisualizer.ui.activity.dashboard;
+package com.example.appactionvisualizer.ui.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.example.appactionvisualizer.R;
 import com.example.appactionvisualizer.databean.ActionType;
 import com.example.appactionvisualizer.databean.AppActionProtos;
 import com.example.appactionvisualizer.databean.AppActionsGenerator;
-import com.example.appactionvisualizer.ui.activity.CustomActivity;
+import com.example.appactionvisualizer.ui.activity.dashboard.DeepLinkListActivity;
 
 import java.util.List;
 import java.util.Map;
 
 import static com.example.appactionvisualizer.databean.AppActionsGenerator.type2appActionList;
 
-public class DashboardActivity extends CustomActivity {
+public class DashboardFragment extends Fragment {
 
-  private static final String TAG = "DashboardActivity";
+  private static final String TAG = "DashboardFragment";
+  private View view;
+
 
   @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_dashboard);
-    initData();
-    initView();
   }
 
+  @Nullable
   @Override
-  protected void initData() {
+  public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    view = inflater.inflate(R.layout.fragment_dashboard, container, false);
+    initView();
+    return view;
+  }
+
+  protected void initView() {
     countApps();
     countFulfillmentOptions();
+    setDetail();
   }
 
   /** Count the number of apps of each category */
@@ -40,15 +53,18 @@ public class DashboardActivity extends CustomActivity {
     StringBuilder appText = new StringBuilder();
     // Category1: number of apps
     // Category2: number of apps, etc.
-    for (Map.Entry<ActionType, List<AppActionProtos.AppAction>> entry :
-        type2appActionList.entrySet()) {
-      appText.append(
-          getString(
-              R.string.key_value,
-              entry.getKey().getName(),
-              Integer.toString(entry.getValue().size())));
+    int allSize = 0;
+    // Do not use range-based for loop since hash map is unordered
+    for(int pos = 0; pos < 5; ++pos) {
+      ActionType actionType = ActionType.getActionTypeValue(pos);
+      String name = actionType.getName();
+      int count = type2appActionList.get(actionType).size();
+      allSize += count;
+      appText.append(getString(R.string.kv_string_int, name, count));
     }
-    ((TextView) findViewById(R.id.apps)).setText(appText);
+    // The string won't be long so linear insert is acceptable
+    appText.insert(0, getString(R.string.all_parameter, allSize));
+    ((TextView) view.findViewById(R.id.apps)).setText(appText);
   }
 
   /**
@@ -98,19 +114,17 @@ public class DashboardActivity extends CustomActivity {
         .append(getString(R.string.single_parameter, singleParameter))
         .append(getString(R.string.multiple_parameter, multiParameter))
         .append(getString(R.string.slice, slice));
-    ((TextView) findViewById(R.id.fulfillment_option)).setText(text);
+    ((TextView) view.findViewById(R.id.fulfillment_option)).setText(text);
   }
 
-  @Override
-  protected void initView() {
-    super.initView();
-    getSupportActionBar().setTitle(getString(R.string.dashboard));
-    findViewById(R.id.detail)
+  // Set the jump logic of detail button
+  protected void setDetail() {
+    view.findViewById(R.id.detail)
         .setOnClickListener(
             new View.OnClickListener() {
               @Override
               public void onClick(View view) {
-                Intent intent = new Intent(DashboardActivity.this, DeepLinkListActivity.class);
+                Intent intent = new Intent(getActivity(), DeepLinkListActivity.class);
                 startActivity(intent);
               }
             });

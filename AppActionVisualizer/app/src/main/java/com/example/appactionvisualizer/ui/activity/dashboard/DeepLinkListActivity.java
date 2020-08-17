@@ -1,11 +1,27 @@
 package com.example.appactionvisualizer.ui.activity.dashboard;
 
+import android.app.RemoteAction;
+import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.LocaleList;
+import android.os.Looper;
+import android.os.Message;
+import android.util.Log;
 import android.view.View;
+import android.view.textclassifier.TextClassification;
+import android.view.textclassifier.TextClassificationManager;
+import android.view.textclassifier.TextClassifier;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+
 import com.example.appactionvisualizer.R;
+import com.example.appactionvisualizer.constants.Constant;
 import com.example.appactionvisualizer.databean.ActionType;
 import com.example.appactionvisualizer.databean.AppActionProtos;
 import com.example.appactionvisualizer.databean.AppActionProtos.Action;
@@ -14,6 +30,7 @@ import com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOptio
 import com.example.appactionvisualizer.databean.AppActionsGenerator;
 import com.example.appactionvisualizer.databean.Tuple;
 import com.example.appactionvisualizer.ui.activity.CustomActivity;
+import com.example.appactionvisualizer.ui.activity.parameter.LocationActivity;
 import com.example.appactionvisualizer.ui.adapter.ExpandableAdapter;
 import com.example.appactionvisualizer.utils.Utils;
 
@@ -23,11 +40,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import static com.example.appactionvisualizer.constants.Constant.ERROR_NO_PLACE;
+
 // Display deep links using an expandable list view
 public class DeepLinkListActivity extends CustomActivity {
+  private static final String TAG = DeepLinkListActivity.class.getSimpleName();
   // For each action name, we need a tuple of <AppAction, Action, FulfillmentOption> data
   // so that the link can jump into ParameterActivity and parse required data to activity.
   private Map<String, List<Tuple<AppAction, Action, FulfillmentOption>>> intentMap;
+  // These bits are used to indicate classify results
+  private static final int UPDATE = 1, ERROR = 2;
+
+  private Handler classifyHandler;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +59,37 @@ public class DeepLinkListActivity extends CustomActivity {
     setContentView(R.layout.activity_deep_link_list);
     initData();
     initView();
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+      recommendation("open youtube");
+      recommendation("Send money on Paypal");
+    }
+  }
+
+  @RequiresApi(api = Build.VERSION_CODES.P)
+  private void recommendation(final String text) {
+    new Thread(new Runnable() {
+      @Override
+      public void run() {
+        try {
+          TextClassificationManager textClassificationManager = (TextClassificationManager) getSystemService(Context.TEXT_CLASSIFICATION_SERVICE);
+          TextClassifier textClassifier = textClassificationManager.getTextClassifier();
+          TextClassification textClassification = textClassifier.classifyText(text, 0, text.length() - 1, LocaleList.getDefault());
+          Log.d(TAG, "action size: "+ textClassification.getActions().size() );
+          for(RemoteAction action : textClassification.getActions()) {
+            Log.d(TAG, (String) action.getTitle());
+            Log.d(TAG, (String) action.getContentDescription());
+          }
+          Log.d(TAG, "EntityCount:" + textClassification.getEntityCount());
+          Log.d(TAG, "high confidence:" + textClassification.getEntity(0));
+          classifyHandler.sendEmptyMessage(UPDATE);
+        } catch (Exception e) {
+          classifyHandler.sendEmptyMessage(ERROR);
+          e.printStackTrace();
+        }
+      }
+    }).start();
+
+
   }
 
   @Override
@@ -56,6 +111,15 @@ public class DeepLinkListActivity extends CustomActivity {
         };
     intentMap = new TreeMap<>(comparator);
     extractActions();
+    classifyHandler = new Handler(Looper.getMainLooper()) {
+      @Override
+      public void handleMessage(@NonNull Message msg) {
+        if (msg.what == UPDATE) {
+        } else if (msg.what == ERROR) {
+          Utils.showMsg(getString(R.string.unknown_texts), DeepLinkListActivity.this);
+        }
+      }
+    };
   }
 
   @Override
