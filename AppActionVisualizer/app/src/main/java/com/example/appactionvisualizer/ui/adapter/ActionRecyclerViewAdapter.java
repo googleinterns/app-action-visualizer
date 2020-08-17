@@ -1,9 +1,7 @@
 package com.example.appactionvisualizer.ui.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +20,6 @@ import com.example.appactionvisualizer.databean.ActionType;
 import com.example.appactionvisualizer.databean.AppActionProtos.Action;
 import com.example.appactionvisualizer.databean.AppActionProtos.AppAction;
 import com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption;
-import com.example.appactionvisualizer.ui.activity.ParameterActivity;
 import com.example.appactionvisualizer.utils.Utils;
 
 import java.util.ArrayList;
@@ -32,8 +29,8 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * Adapter of ActionActivity Recyclerview
- * consists of two types of view type TYPE_ACTION/TYPE_FULFILLMENT with different view
+ * Adapter of ActionActivity Recyclerview consists of two types of view type
+ * TYPE_ACTION/TYPE_FULFILLMENT with different view
  */
 public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -49,22 +46,27 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
     this.context = context;
     appAction = items;
     actionList.addAll(appAction.getActionsList());
-    //make sure actions with the same type stay together
-    Collections.sort(actionList, new Comparator<Action>() {
-      @Override
-      public int compare(Action t1, Action t2) {
-        return ActionType.getActionTypeByName(t1.getIntentName()).compareTo(ActionType.getActionTypeByName(t2.getIntentName()));
-      }
-    });
-    //find all the action item position
+    // make sure actions with the same type stay together
+    Collections.sort(
+        actionList,
+        new Comparator<Action>() {
+          @Override
+          public int compare(Action t1, Action t2) {
+            return ActionType.getActionTypeByName(t1.getIntentName())
+                .compareTo(ActionType.getActionTypeByName(t2.getIntentName()));
+          }
+        });
+    // Find all the action item position
     for (Action action : actionList) {
       actionPos.add(allSize);
+      // Each action should be counted as 1 item displayed in recyclerview
       allSize += action.getFulfillmentOptionCount() + 1;
     }
   }
 
   /**
-   * @param position search the actionPos integer list to get the corresponding data idx of each item, logic same as @onBindViewHolder
+   * @param position search the actionPos integer list to get the corresponding data idx of each
+   *     item, logic same as @onBindViewHolder
    * @return type of the view: TYPE_ACTION, TYPE_FULFILLMENT
    */
   @Override
@@ -79,28 +81,27 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
   @Override
   public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
     if (viewType == VIEW_TYPE_ACTION) {
-      View view = LayoutInflater.from(context)
-          .inflate(R.layout.action_rv_item, parent, false);
+      View view = LayoutInflater.from(context).inflate(R.layout.action_rv_item, parent, false);
       return new ActionViewHolder(view);
     }
-    View view = LayoutInflater.from(context)
-        .inflate(R.layout.list_item, parent, false);
+    View view = LayoutInflater.from(context).inflate(R.layout.list_item, parent, false);
     return new FulfillViewHolder(view);
   }
 
   /**
-   * @param holder   two types: TYPE_ACTION, TYPE_FULFILLMENT
-   * @param position search the actionPos integer list to get the corresponding data index of each item
-   *                 e.g., three actions action0 (1 fulfillmentUrl: 0-0), action1(2 fulfillmentUrl: 1-0, 1-1), action2(2 fulfillmentUrl: 2-0, 2-1).
-   *                 actionPos is [0, 2, 5]
-   *                 position 0 - action0
-   *                 position 1 - fulfillment 0-0
-   *                 position 2 - action1
-   *                 position 3 - fulfillment 1-0
-   *                 position 4 - fulfillment 1-1
-   *                 position 5 - action2
-   *                 position 6 - fulfillment 2-0
-   *                 position 7 - fulfillment 2-1
+   * @param holder two types: TYPE_ACTION, TYPE_FULFILLMENT
+   * @param position search the actionPos integer list to get the corresponding data index of each
+   *     item e.g., three actions action0 (1 fulfillmentUrl: 0-0), action1(2 fulfillmentUrl: 1-0,
+   *     1-1), action2(2 fulfillmentUrl: 2-0, 2-1).
+   *     actionPos is [0, 2, 5]
+   *     position 0 - action0
+   *     position 1 - fulfillment 0-0
+   *     position 2 - action1
+   *     position 3 - fulfillment 1-0
+   *     position 4 - fulfillment 1-1
+   *     position 5 - action2
+   *     position 6 - fulfillment 2-0
+   *     position 7 - fulfillment 2-1
    */
   @Override
   public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
@@ -108,19 +109,22 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
     switch (holder.getItemViewType()) {
       case VIEW_TYPE_ACTION:
         ActionViewHolder actionHolder = (ActionViewHolder) holder;
-        //search the corresponding action item index
+        // Search the corresponding action item index
         int idx = Arrays.binarySearch(actionPos.toArray(), position);
         action = actionList.get(idx);
         actionHolder.actionName.setText(action.getIntentName());
-        actionHolder.actionType.setText(ActionType.getActionTypeByName(action.getIntentName()).getName());
+        actionHolder.actionType.setText(
+            ActionType.getActionTypeByName(action.getIntentName()).getName());
         break;
       case VIEW_TYPE_FULFILLMENT:
         FulfillViewHolder fulfillHolder = (FulfillViewHolder) holder;
-        //search the corresponding action item index and fulfill item index
-        //since the returned index of binarySearch is (-(insertion point) - 1).
-        //The insertion point is defined as the point at which the key would be inserted into the array:
-        //the index of the first element greater than the key, or a.length if all elements in the array are less than the specified key.
-        //So actionIdx is (insertion point - 1) = -(return idx) - 2
+        // Search the corresponding action item index and fulfill item index
+        // Since the returned index of binarySearch is (-(insertion point) - 1).
+        // The insertion point is defined as the point at which the key would be inserted into the
+        // array:
+        // The index of the first element greater than the key, or a.length if all elements in the
+        // array are less than the specified key.
+        // So actionIdx is (insertion point - 1) = -(return idx) - 2
         int actionIdx = (-Arrays.binarySearch(actionPos.toArray(), position)) - 2;
         int fulfillIdx = position - actionPos.get(actionIdx) - 1;
         action = actionList.get(actionIdx);
@@ -129,13 +133,13 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
         fulfillHolder.textContent.setText(url);
         if(fulfillment.getFulfillmentMode() == FulfillmentOption.FulfillmentMode.SLICE) {
           setSlice(fulfillment, fulfillHolder);
-        }else{
-          setDeepLink(fulfillment, action, fulfillHolder);
+          return;
         }
+        setDeepLink(fulfillment, action, fulfillHolder);
     }
   }
 
-  //use large mode to display the slice
+  // Use large mode to display the slice
   private void setSlice(FulfillmentOption fulfillment, FulfillViewHolder fulfillHolder) {
     try {
       fulfillHolder.slice.setVisibility(View.VISIBLE);
@@ -143,45 +147,30 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
       Uri sliceUri = Uri.parse(fulfillment.getUrlTemplate().getTemplate());
       LiveData<androidx.slice.Slice> liveData = SliceLiveData.fromUri(context, sliceUri);
       liveData.observe((LifecycleOwner) context, fulfillHolder.slice);
-    }catch (Exception e) {
+    } catch (Exception e) {
       e.printStackTrace();
     }
   }
 
-  private void setDeepLink(final FulfillmentOption fulfillment,final Action action, FulfillViewHolder fulfillHolder) {
-    if(fulfillment.getUrlTemplate().getTemplate().contains(Constant.URL_PARAMETER_INDICATOR)) {
-      fulfillHolder.textContent.setTextColor(context.getResources().getColor(R.color.design_default_color_error));
-    }else {
-      fulfillHolder.textContent.setTextColor(context.getResources().getColor(R.color.colorAccent));
-      fulfillHolder.textContent.setCompoundDrawablesWithIntrinsicBounds(android.R.drawable.ic_menu_set_as, 0, 0, 0);
-    }
-    fulfillHolder.item.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        jumpByType(action, fulfillment);
-      }
-    });
-  }
-
-
-  //jump to a deep link which has no parameter or jump into parameterActivity to select parameters for the deeplink
-  void jumpByType(final Action action, final FulfillmentOption fulfillmentOption) {
-    if (fulfillmentOption.getUrlTemplate().getTemplate().equals(Constant.URL_NO_LINK) || fulfillmentOption.getUrlTemplate().getParameterMapCount() > 0) {
-      jumpToParameterActivity(fulfillmentOption, action, appAction);
+  private void setDeepLink(
+      final FulfillmentOption fulfillment, final Action action, FulfillViewHolder fulfillHolder) {
+    final String url = fulfillment.getUrlTemplate().getTemplate();
+    if (url.contains(Constant.URL_PARAMETER_INDICATOR)) {
+      fulfillHolder.textContent.setTextColor(
+          context.getResources().getColor(R.color.design_default_color_error));
     } else {
-      Utils.jumpToApp(context, fulfillmentOption.getUrlTemplate().getTemplate(), appAction.getPackageName());
+      fulfillHolder.textContent.setTextColor(context.getResources().getColor(R.color.colorAccent));
+      fulfillHolder.textContent.setCompoundDrawablesWithIntrinsicBounds(
+          android.R.drawable.ic_menu_set_as, 0, 0, 0);
     }
+    fulfillHolder.item.setOnClickListener(
+        new View.OnClickListener() {
+          @Override
+          public void onClick(View view) {
+            Utils.jumpByType(context, appAction, action, fulfillment);
+          }
+        });
   }
-
-  private void jumpToParameterActivity(FulfillmentOption fulfillmentOption, Action action, AppAction appAction) {
-    Intent intent = new Intent(context, ParameterActivity.class);
-    intent.putExtra(Constant.FULFILLMENT_OPTION, fulfillmentOption);
-    intent.putExtra(Constant.ACTION, action);
-    intent.putExtra(Constant.APP_NAME, appAction);
-    context.startActivity(intent);
-  }
-
-
 
   @Override
   public int getItemCount() {

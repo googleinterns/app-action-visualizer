@@ -2,9 +2,6 @@ package com.example.appactionvisualizer.ui.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,19 +51,10 @@ public class AppRecyclerViewAdapter extends RecyclerView.Adapter<AppRecyclerView
   @Override
   public void onBindViewHolder(final ViewHolder holder, final int position) {
     final AppAction appAction = appActionArrayList.get(position);
-    try {
-      PackageManager packageManager = context.getPackageManager();
-      Drawable icon = packageManager.getApplicationIcon(appAction.getPackageName());
-      ApplicationInfo applicationInfo = packageManager.getApplicationInfo(appAction.getPackageName(), 0);
-      holder.appIcon.setImageDrawable(icon);
-      holder.appName.setText(Utils.getAppNameByPackageName(context, appAction.getPackageName()));
-    } catch (PackageManager.NameNotFoundException e) {
-      int imgId = Utils.getResIdByPackageName(appAction.getPackageName(), R.drawable.class);
-      if(imgId != -1) {
-        holder.appIcon.setImageResource(imgId);
-      }
-    }
-    //Use hash set to avoid duplicate tags
+    holder.appIcon.setImageDrawable(Utils.getIconByPackageName(context, appAction.getPackageName()));
+    holder.appName.setText(Utils.getAppNameByPackageName(context, appAction.getPackageName()));
+    // Use hash set to avoid duplicate tags
+    // Use hash set to avoid duplicate tags
     final HashSet<ActionType> uniqueSet = new HashSet<>(5);
     for (int i = 0; i < appAction.getActionsCount(); i++) {
       //todo: add field in proto

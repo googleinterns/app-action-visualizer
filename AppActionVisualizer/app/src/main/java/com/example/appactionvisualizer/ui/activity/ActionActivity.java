@@ -12,12 +12,14 @@ import com.example.appactionvisualizer.constants.Constant;
 import com.example.appactionvisualizer.databean.AppActionProtos.AppAction;
 import com.example.appactionvisualizer.ui.adapter.ActionRecyclerViewAdapter;
 
+import java.util.Objects;
+
 
 /**
  * Displays all the actions of an app using recyclerview
  */
 public class ActionActivity extends CustomActivity {
-  private AppAction appAction;
+  public AppAction appAction;
 
   @Override
   protected void initData() {
@@ -28,14 +30,13 @@ public class ActionActivity extends CustomActivity {
   @Override
   protected void initView() {
     super.initView();
-    getSupportActionBar().setTitle(appAction.getPackageName());
+    Objects.requireNonNull(getSupportActionBar()).setTitle(appAction.getPackageName());
     RecyclerView view = findViewById(R.id.list);
     // Set the adapter
     if (view != null) {
       Context context = view.getContext();
-      RecyclerView recyclerView = view;
-      recyclerView.setLayoutManager(new LinearLayoutManager(context));
-      recyclerView.setAdapter(new ActionRecyclerViewAdapter(appAction, this));
+      view.setLayoutManager(new LinearLayoutManager(context));
+      view.setAdapter(new ActionRecyclerViewAdapter(appAction, this));
     }
   }
 

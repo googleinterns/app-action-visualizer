@@ -24,7 +24,7 @@ public enum ActionType implements Serializable {
     return ActionType.values()[idx % 5];
   }
 
-
+  // return the corresponding action type provided by official website
   public static ActionType getActionTypeByName(String intentName) {
     if (Constant.COMMON_SET.contains(intentName)) {
       return COMMON;

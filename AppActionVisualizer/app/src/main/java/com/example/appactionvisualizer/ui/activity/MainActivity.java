@@ -1,5 +1,6 @@
 package com.example.appactionvisualizer.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     TabLayout tabs = findViewById(R.id.tabs);
     tabs.setupWithViewPager(viewPager);
   }
+
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {

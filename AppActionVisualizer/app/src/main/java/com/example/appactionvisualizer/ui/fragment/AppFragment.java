@@ -41,8 +41,7 @@ public class AppFragment extends Fragment {
     if (pos != 0) {
       actionType = ActionType.getActionTypeValue(pos - 1);
     }
-    AppFragment fragment = new AppFragment(actionType);
-    return fragment;
+    return new AppFragment(actionType);
   }
 
   @Override
