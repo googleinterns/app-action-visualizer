@@ -9,19 +9,21 @@ import android.os.LocaleList;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.textclassifier.TextClassification;
 import android.view.textclassifier.TextClassificationManager;
 import android.view.textclassifier.TextClassifier;
+import android.widget.EditText;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.appactionvisualizer.R;
-import com.example.appactionvisualizer.constants.Constant;
 import com.example.appactionvisualizer.databean.ActionType;
 import com.example.appactionvisualizer.databean.AppActionProtos;
 import com.example.appactionvisualizer.databean.AppActionProtos.Action;
@@ -29,8 +31,6 @@ import com.example.appactionvisualizer.databean.AppActionProtos.AppAction;
 import com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption;
 import com.example.appactionvisualizer.databean.AppActionsGenerator;
 import com.example.appactionvisualizer.databean.Tuple;
-import com.example.appactionvisualizer.ui.activity.CustomActivity;
-import com.example.appactionvisualizer.ui.activity.parameter.LocationActivity;
 import com.example.appactionvisualizer.ui.adapter.ExpandableAdapter;
 import com.example.appactionvisualizer.utils.Utils;
 
@@ -40,10 +40,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import static com.example.appactionvisualizer.constants.Constant.ERROR_NO_PLACE;
-
 // Display deep links using an expandable list view
-public class DeepLinkListActivity extends CustomActivity {
+public class DeepLinkListActivity extends AppCompatActivity {
   private static final String TAG = DeepLinkListActivity.class.getSimpleName();
   // For each action name, we need a tuple of <AppAction, Action, FulfillmentOption> data
   // so that the link can jump into ParameterActivity and parse required data to activity.
@@ -59,14 +57,43 @@ public class DeepLinkListActivity extends CustomActivity {
     setContentView(R.layout.activity_deep_link_list);
     initData();
     initView();
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-      recommendation("open youtube");
-      recommendation("Send money on Paypal");
+    getUserInput();
+  }
+
+  protected void getUserInput() {
+    final EditText userInput = findViewById(R.id.user_input);
+    userInput.setOnKeyListener(new View.OnKeyListener() {
+      @RequiresApi(api = Build.VERSION_CODES.P)
+      @Override
+      public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {
+        if(keyEvent.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
+          String text = userInput.getText().toString();
+          recommend(text);
+          return true;
+        }
+        return false;
+      }
+    });
+  }
+
+
+  protected void recommend(final String sentence) {
+    // Split the sentence using space---similar to tokenization
+    String[] words = sentence.split(" ");
+    for(String str : words) {
+      String app = checkApp(str);
+      if(!app.isEmpty()) {
+
+      }
     }
   }
 
+  private String checkApp(String str) {
+    return "";
+  }
+
   @RequiresApi(api = Build.VERSION_CODES.P)
-  private void recommendation(final String text) {
+  private void textClassify(final String text) {
     new Thread(new Runnable() {
       @Override
       public void run() {
@@ -92,7 +119,6 @@ public class DeepLinkListActivity extends CustomActivity {
 
   }
 
-  @Override
   protected void initData() {
     // Use tree map so that the actions are sorted.
     // The total actions wouldn't be much so it wouldn't lose much time compared to hash map.
@@ -122,10 +148,9 @@ public class DeepLinkListActivity extends CustomActivity {
     };
   }
 
-  @Override
   protected void initView() {
-    super.initView();
-    getSupportActionBar().setTitle(getString(R.string.fulfillment_option));
+    Toolbar toolbar = findViewById(R.id.toolbar);
+    setSupportActionBar(toolbar);
     displayDeepLinks();
   }
 
