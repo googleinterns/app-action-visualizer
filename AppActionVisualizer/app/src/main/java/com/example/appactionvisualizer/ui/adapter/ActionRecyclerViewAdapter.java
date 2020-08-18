@@ -87,10 +87,16 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
    * @param holder two types: TYPE_ACTION, TYPE_FULFILLMENT
    * @param position search the actionPos integer list to get the corresponding data index of each
    *     item e.g., three actions action0 (1 fulfillmentUrl: 0-0), action1(2 fulfillmentUrl: 1-0,
-   *     1-1), action2(2 fulfillmentUrl: 2-0, 2-1). actionPos is [0, 2, 5] position 0 - action0
-   *     position 1 - fulfillment 0-0 position 2 - action1 position 3 - fulfillment 1-0 position 4 -
-   *     fulfillment 1-1 position 5 - action2 position 6 - fulfillment 2-0 position 7 - fulfillment
-   *     2-1
+   *     1-1), action2(2 fulfillmentUrl: 2-0, 2-1).
+   *     actionPos is [0, 2, 5] 
+   *     position 0 : action0
+   *     position 1 : fulfillment 0-0
+   *     position 2 : action1
+   *     position 3 : fulfillment 1-0
+   *     position 4 : fulfillment 1-1
+   *     position 5 : action2
+   *     position 6 : fulfillment 2-0
+   *     position 7 : fulfillment 2-1
    */
   @Override
   public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {

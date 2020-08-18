@@ -11,7 +11,7 @@ import com.example.appactionvisualizer.databean.AppActionProtos.Action;
 import com.example.appactionvisualizer.databean.AppActionProtos.AppAction;
 import com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption;
 import com.example.appactionvisualizer.databean.AppActionsGenerator;
-import com.example.appactionvisualizer.databean.Tuple;
+import com.example.appactionvisualizer.databean.AppFulfillment;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -37,12 +37,12 @@ public class DeepLinkListActivityTest {
   @Test
   public void testData() {
     setData();
-    Map<String, List<Tuple<AppAction, Action, FulfillmentOption>>> intentMap =
+    Map<String, List<AppFulfillment>> intentMap =
         activity.getIntentMap();
     assertNotNull(intentMap);
     Log.d(TAG, "size: " + intentMap.size());
     assertNotEquals(0, intentMap.size());
-    for (Map.Entry<String, List<Tuple<AppAction, Action, FulfillmentOption>>> tupleList :
+    for (Map.Entry<String, List<AppFulfillment>> tupleList :
         intentMap.entrySet()) {
       assertNotNull(tupleList);
       // Each action group should have some data, can not be empty.

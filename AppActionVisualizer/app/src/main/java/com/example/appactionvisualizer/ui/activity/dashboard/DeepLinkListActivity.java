@@ -1,23 +1,18 @@
 package com.example.appactionvisualizer.ui.activity.dashboard;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 
-import androidx.annotation.NonNull;
-
 import com.example.appactionvisualizer.R;
 import com.example.appactionvisualizer.databean.ActionType;
-import com.example.appactionvisualizer.databean.AppActionProtos;
 import com.example.appactionvisualizer.databean.AppActionProtos.Action;
 import com.example.appactionvisualizer.databean.AppActionProtos.AppAction;
 import com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption;
 import com.example.appactionvisualizer.databean.AppActionsGenerator;
-import com.example.appactionvisualizer.databean.Tuple;
+import com.example.appactionvisualizer.databean.AppFulfillment;
 import com.example.appactionvisualizer.ui.activity.CustomActivity;
 import com.example.appactionvisualizer.ui.adapter.ExpandableAdapter;
 import com.example.appactionvisualizer.utils.Utils;
@@ -31,9 +26,10 @@ import java.util.TreeMap;
 // Display deep links using an expandable list view
 public class DeepLinkListActivity extends CustomActivity {
   private static final String TAG = DeepLinkListActivity.class.getSimpleName();
+
   // For each action name, we need a tuple of <AppAction, Action, FulfillmentOption> data
   // so that the link can jump into ParameterActivity and parse required data to activity.
-  private Map<String, List<Tuple<AppAction, Action, FulfillmentOption>>> intentMap;
+  private Map<String, List<AppFulfillment>> intentMap;
   // These bits are used to indicate classify results
   private static final int UPDATE = 1, ERROR = 2;
 
@@ -80,20 +76,20 @@ public class DeepLinkListActivity extends CustomActivity {
   private void extractActions() {
     // Iterate over the whole list to get the numbers, and add fulfillment options to their
     // corresponding intent name.
-    for (AppActionProtos.AppAction appAction : AppActionsGenerator.appActions) {
-      for (AppActionProtos.Action action : appAction.getActionsList()) {
+    for (AppAction appAction : AppActionsGenerator.appActions) {
+      for (Action action : appAction.getActionsList()) {
         String intentName = action.getIntentName();
-        for (AppActionProtos.FulfillmentOption fulfillmentOption :
+        for (FulfillmentOption fulfillmentOption :
             action.getFulfillmentOptionList()) {
           // The Slice options could not be counted as deep links.
           if (fulfillmentOption.getFulfillmentMode()
-              == AppActionProtos.FulfillmentOption.FulfillmentMode.SLICE) {
+              == FulfillmentOption.FulfillmentMode.SLICE) {
             continue;
           }
           if (intentMap.get(intentName) == null) {
-            intentMap.put(intentName, new ArrayList<Tuple<AppAction, Action, FulfillmentOption>>());
+            intentMap.put(intentName, new ArrayList<AppFulfillment>());
           }
-          intentMap.get(intentName).add(new Tuple<>(appAction, action, fulfillmentOption));
+          intentMap.get(intentName).add(new AppFulfillment(appAction, action, fulfillmentOption));
         }
       }
     }
@@ -117,17 +113,17 @@ public class DeepLinkListActivity extends CustomActivity {
               long id) {
             // The jump logic is the same as the click of deep links at ActionsActivity page:
             // If the deep link needs parameters, jump into ParameterActivity.
-            // Otherwise, jump to corresponding apps
-            Tuple<AppAction, Action, FulfillmentOption> listData =
+            // Otherwise, jump to corresponding app.
+            AppFulfillment appFulfillment =
                 intentMap.get(actionNames.get(groupPosition)).get(childPosition);
             Utils.jumpByType(
-                DeepLinkListActivity.this, listData.left, listData.mid, listData.right);
+                DeepLinkListActivity.this, appFulfillment.appAction, appFulfillment.action, appFulfillment.fulfillmentOption);
             return false;
           }
         });
   }
 
-  public Map<String, List<Tuple<AppAction, Action, FulfillmentOption>>> getIntentMap() {
+  public Map<String, List<AppFulfillment>> getIntentMap() {
     return intentMap;
   }
 }

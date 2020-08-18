@@ -15,10 +15,9 @@ import com.example.appactionvisualizer.R;
 import com.example.appactionvisualizer.databean.ActionType;
 import com.example.appactionvisualizer.databean.AppActionProtos;
 import com.example.appactionvisualizer.databean.AppActionsGenerator;
+import com.example.appactionvisualizer.databean.AppActionProtos.AppAction;
+import com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption.FulfillmentMode;
 import com.example.appactionvisualizer.ui.activity.dashboard.DeepLinkListActivity;
-
-import java.util.List;
-import java.util.Map;
 
 import static com.example.appactionvisualizer.databean.AppActionsGenerator.type2appActionList;
 
@@ -55,14 +54,14 @@ public class DashboardFragment extends Fragment {
     // Category2: number of apps, etc.
     int allSize = 0;
     // Do not use range-based for loop since hash map is unordered
-    for(int pos = 0; pos < 5; ++pos) {
+    for(int pos = 0; pos < ActionType.values().length; ++pos) {
       ActionType actionType = ActionType.getActionTypeValue(pos);
       String name = actionType.getName();
       int count = type2appActionList.get(actionType).size();
       allSize += count;
       appText.append(getString(R.string.kv_string_int, name, count));
     }
-    // The string won't be long so linear insert is acceptable
+    // The string won't be long so linear insertion is acceptable
     appText.insert(0, getString(R.string.all_parameter, allSize));
     ((TextView) view.findViewById(R.id.apps)).setText(appText);
   }
@@ -78,14 +77,14 @@ public class DashboardFragment extends Fragment {
         multiParameter = 0,
         slice = 0;
     // Iterate over the whole list to get the numbers
-    for (AppActionProtos.AppAction appAction : AppActionsGenerator.appActions) {
+    for (AppAction appAction : AppActionsGenerator.appActions) {
       for (AppActionProtos.Action action : appAction.getActionsList()) {
         allFulfillmentSize += action.getFulfillmentOptionCount();
         for (AppActionProtos.FulfillmentOption fulfillmentOption :
             action.getFulfillmentOptionList()) {
           // The Slice options could not be counted as deep links
           if (fulfillmentOption.getFulfillmentMode()
-              == AppActionProtos.FulfillmentOption.FulfillmentMode.SLICE) {
+              == FulfillmentMode.SLICE) {
             slice++;
             continue;
           }
