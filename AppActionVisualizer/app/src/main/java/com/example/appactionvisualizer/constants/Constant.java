@@ -53,6 +53,6 @@ public class Constant {
 
 
   @StringRes
-  public static final int[] TAB_TITLES = new int[]{R.string.tab_text_all, R.string.tab_text_1, R.string.tab_text_2, R.string.tab_text_3, R.string.tab_text_4, R.string.tab_text_5};
+  public static final int[] TAB_TITLES = new int[]{R.string.tab_text_statistics, R.string.tab_text_all, R.string.tab_text_1, R.string.tab_text_2, R.string.tab_text_3, R.string.tab_text_4, R.string.tab_text_5};
 
 }

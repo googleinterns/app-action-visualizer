@@ -5,10 +5,16 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.widget.Toast;
 
+import androidx.core.content.res.ResourcesCompat;
+
 import com.example.appactionvisualizer.R;
+import com.example.appactionvisualizer.constants.Constant;
+import com.example.appactionvisualizer.databean.AppActionProtos;
+import com.example.appactionvisualizer.ui.activity.ParameterActivity;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.lang.reflect.Field;
@@ -67,6 +73,19 @@ public class Utils {
     return appName;
   }
 
+  public static Drawable getIconByPackageName(final Context context, final String pkgName) {
+    try {
+      PackageManager packageManager = context.getPackageManager();
+      return(packageManager.getApplicationIcon(pkgName));
+    } catch (PackageManager.NameNotFoundException e) {
+      int imgId = Utils.getResIdByPackageName(pkgName, R.drawable.class);
+      if (imgId == -1) {
+        imgId = R.drawable.rounded_corner;
+      }
+      return ResourcesCompat.getDrawable(context.getResources(), imgId,null);
+    }
+  }
+
   public static void showMsg(String message, Context context) {
     getToast(message, context, Toast.LENGTH_SHORT).show();
   }
@@ -113,12 +132,25 @@ public class Utils {
 
 
   /**
-   * dialog for user to choose among given list values
+   * Dialog for user to choose among given list values.
    */
   public static void popUpDialog(final Context context, final String title, List<CharSequence> list, DialogInterface.OnClickListener listener) {
     MaterialAlertDialogBuilder materialAlertDialogBuilder = new MaterialAlertDialogBuilder(context);
     materialAlertDialogBuilder.setTitle(title);
     CharSequence[] keys = new CharSequence[list.size()];
     materialAlertDialogBuilder.setItems(list.toArray(keys), listener).show();
+  }
+
+  // Jump to a deep link which has no parameter or jump into parameterActivity to select parameters for the deeplink.
+  public static void jumpByType(final Context context, final AppActionProtos.AppAction appAction, final AppActionProtos.Action action, final AppActionProtos.FulfillmentOption fulfillmentOption) {
+    if (fulfillmentOption.getUrlTemplate().getTemplate().equals(Constant.URL_NO_LINK) || fulfillmentOption.getUrlTemplate().getParameterMapCount() > 0) {
+      Intent intent = new Intent(context, ParameterActivity.class);
+      intent.putExtra(Constant.FULFILLMENT_OPTION, fulfillmentOption);
+      intent.putExtra(Constant.ACTION, action);
+      intent.putExtra(Constant.APP_NAME, appAction);
+      context.startActivity(intent);
+    } else {
+      Utils.jumpToApp(context, fulfillmentOption.getUrlTemplate().getTemplate(), appAction.getPackageName());
+    }
   }
 }

@@ -71,13 +71,13 @@ public class AppActionsGenerator {
     // These 4 apps cannot be downloaded from app store
     Set<String> seen = new HashSet<>(Arrays.asList("com.gojuno.rider", "com.kimfrank.android.fitactions", "com.deeplocal.smores", "com.runtastic.android.pro2"));
     List<AppAction> unique = new ArrayList<>();
-    for (int i = sz - 1; i >= 0; --i) {
-      String name = appActions.get(i).getPackageName();
+    for (int idx = sz - 1; idx >= 0; --idx) {
+      String name = appActions.get(idx).getPackageName();
       if(seen.contains(name)) {
         continue;
       }
       seen.add(name);
-      unique.add(appActions.get(i));
+      unique.add(appActions.get(idx));
     }
     return unique;
   }
