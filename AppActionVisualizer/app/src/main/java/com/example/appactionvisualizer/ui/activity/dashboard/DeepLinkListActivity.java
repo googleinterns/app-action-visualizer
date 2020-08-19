@@ -1,7 +1,6 @@
 package com.example.appactionvisualizer.ui.activity.dashboard;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
@@ -26,12 +25,11 @@ import java.util.TreeMap;
 // Display deep links using an expandable list view
 public class DeepLinkListActivity extends CustomActivity {
   private static final String TAG = DeepLinkListActivity.class.getSimpleName();
-
-  // For each action name, we need a tuple of <AppAction, Action, FulfillmentOption> data
-  // so that the link can jump into ParameterActivity and parse required data to activity.
-  private Map<String, List<AppFulfillment>> intentMap;
   // These bits are used to indicate classify results
   private static final int UPDATE = 1, ERROR = 2;
+  // For each action name, we need an appFulfillment data
+  // so that the link can jump into ParameterActivity and parse required data to activity.
+  private Map<String, List<AppFulfillment>> intentMap;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -70,8 +68,8 @@ public class DeepLinkListActivity extends CustomActivity {
   }
 
   /**
-   * Generate a <key: action, value: Tuple> tree map from current data, need tree map since we want
-   * sorted actions.
+   * Generate a <key: action name, value: list of AppFulfillment> tree map from current data, need
+   * tree map since we want sorted actions.
    */
   private void extractActions() {
     // Iterate over the whole list to get the numbers, and add fulfillment options to their
@@ -79,11 +77,9 @@ public class DeepLinkListActivity extends CustomActivity {
     for (AppAction appAction : AppActionsGenerator.appActions) {
       for (Action action : appAction.getActionsList()) {
         String intentName = action.getIntentName();
-        for (FulfillmentOption fulfillmentOption :
-            action.getFulfillmentOptionList()) {
+        for (FulfillmentOption fulfillmentOption : action.getFulfillmentOptionList()) {
           // The Slice options could not be counted as deep links.
-          if (fulfillmentOption.getFulfillmentMode()
-              == FulfillmentOption.FulfillmentMode.SLICE) {
+          if (fulfillmentOption.getFulfillmentMode() == FulfillmentOption.FulfillmentMode.SLICE) {
             continue;
           }
           if (intentMap.get(intentName) == null) {
@@ -117,7 +113,10 @@ public class DeepLinkListActivity extends CustomActivity {
             AppFulfillment appFulfillment =
                 intentMap.get(actionNames.get(groupPosition)).get(childPosition);
             Utils.jumpByType(
-                DeepLinkListActivity.this, appFulfillment.appAction, appFulfillment.action, appFulfillment.fulfillmentOption);
+                DeepLinkListActivity.this,
+                appFulfillment.appAction,
+                appFulfillment.action,
+                appFulfillment.fulfillmentOption);
             return false;
           }
         });

@@ -33,7 +33,7 @@ public class DeepLinkListActivityTest {
   // Context of the app under test.
   private Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-  /** check if each group is correctly initialized */
+  /** Check if each group is correctly initialized. */
   @Test
   public void testData() {
     setData();
@@ -52,7 +52,7 @@ public class DeepLinkListActivityTest {
     }
   }
 
-  // Set some test data for the expandable list view
+  // Set some test data for the expandable list view.
   private void setData() {
     AppActionsGenerator.getInstance().readFromFile(appContext);
     activity = rule.launchActivity(new Intent());
