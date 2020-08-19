@@ -33,21 +33,25 @@ public class DeepLinkListActivityTest {
   // Context of the app under test.
   private Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-  /** Check if each group is correctly initialized. */
+
   @Test
-  public void testData() {
+  public void testMapSize() {
     setData();
     Map<String, List<AppFulfillment>> intentMap =
         activity.getIntentMap();
     assertNotNull(intentMap);
-    Log.d(TAG, "size: " + intentMap.size());
     assertNotEquals(0, intentMap.size());
+  }
+
+  /** Check if each group is correctly initialized. */
+  @Test
+  public void testGroupSize() {
+    setData();
     for (Map.Entry<String, List<AppFulfillment>> tupleList :
-        intentMap.entrySet()) {
+        activity.getIntentMap().entrySet()) {
       assertNotNull(tupleList);
       // Each action group should have some data, can not be empty.
       int size = tupleList.getValue().size();
-      Log.d(TAG, tupleList.getKey() + " size: " + size);
       assertNotEquals(0, size);
     }
   }
