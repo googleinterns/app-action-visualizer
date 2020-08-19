@@ -16,18 +16,25 @@ public class ParameterActivityTest {
   @Rule
   public ActivityTestRule<ParameterActivity> rule = new ActivityTestRule<>(ParameterActivity.class, false, true);
 
+
   /**
    * check if views are correctly initialized
    */
   @Test
-  public void initViewTest() {
-    ParameterActivity activity = rule.getActivity();
-    TextView urlTemplate = activity.findViewById(R.id.url_template);
+  public void checkTemplate() {
+    TextView urlTemplate = rule.getActivity().findViewById(R.id.url_template);
     assertNotNull(urlTemplate.getText());
-    TextView url = activity.findViewById(R.id.url);
-    assertNotNull(url.getText());
-    TextView link = activity.findViewById(R.id.link);
-    assertNotNull(link.getText());
+  }
 
+  @Test
+  public void checkUrl() {
+    TextView url = rule.getActivity().findViewById(R.id.url);
+    assertNotNull(url.getText());
+  }
+
+  @Test
+  public void checkLink() {
+    TextView link = rule.getActivity().findViewById(R.id.link);
+    assertNotNull(link.getText());
   }
 }
