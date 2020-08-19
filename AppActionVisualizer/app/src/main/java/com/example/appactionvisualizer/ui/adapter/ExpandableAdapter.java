@@ -11,10 +11,7 @@ import android.widget.TextView;
 
 import com.example.appactionvisualizer.R;
 import com.example.appactionvisualizer.constants.Constant;
-import com.example.appactionvisualizer.databean.AppActionProtos.Action;
-import com.example.appactionvisualizer.databean.AppActionProtos.AppAction;
-import com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption;
-import com.example.appactionvisualizer.databean.Tuple;
+import com.example.appactionvisualizer.databean.AppFulfillment;
 import com.example.appactionvisualizer.utils.Utils;
 
 import java.util.List;
@@ -22,14 +19,13 @@ import java.util.Map;
 
 public class ExpandableAdapter extends BaseExpandableListAdapter {
   private Context context;
-  private Map<String, List<Tuple<AppAction, Action, FulfillmentOption>>> intentMap;
+  // Key is the action name, value is a list of fulfillment options.
+  private Map<String, List<AppFulfillment>> intentMap;
   // The title of each single group is the action name.
   private List<String> actionNames;
 
   public ExpandableAdapter(
-      Context context,
-      Map<String, List<Tuple<AppAction, Action, FulfillmentOption>>> intentMap,
-      List<String> actionNames) {
+      Context context, Map<String, List<AppFulfillment>> intentMap, List<String> actionNames) {
     this.context = context;
     this.intentMap = intentMap;
     this.actionNames = actionNames;
@@ -53,8 +49,7 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
   }
 
   @Override
-  public Tuple<AppAction, Action, FulfillmentOption> getChild(
-      int groupPosition, int childPosition) {
+  public AppFulfillment getChild(int groupPosition, int childPosition) {
     return intentMap.get(actionNames.get(groupPosition)).get(childPosition);
   }
 
@@ -88,8 +83,8 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
   @Override
   public View getChildView(
       int groupPosition, int childPosition, boolean isLastChild, View view, ViewGroup parent) {
-    final Tuple<AppAction, Action, FulfillmentOption> data = getChild(groupPosition, childPosition);
-    final String url = data.right.getUrlTemplate().getTemplate();
+    final AppFulfillment data = getChild(groupPosition, childPosition);
+    final String url = data.fulfillmentOption.getUrlTemplate().getTemplate();
     if (view == null) {
       view = LayoutInflater.from(context).inflate(R.layout.deep_link_item, parent, false);
     }
@@ -102,12 +97,12 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
       contents.setTextColor(context.getResources().getColor(R.color.colorAccent));
     }
     ((ImageView) view.findViewById(R.id.app_icon))
-        .setImageDrawable(Utils.getIconByPackageName(context, data.left.getPackageName()));
+        .setImageDrawable(Utils.getIconByPackageName(context, data.appAction.getPackageName()));
     return view;
   }
 
   @Override
-  public boolean isChildSelectable(int i, int i1) {
+  public boolean isChildSelectable(int groupPosition, int childPosition) {
     return true;
   }
 }

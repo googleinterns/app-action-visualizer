@@ -150,7 +150,11 @@ public class Utils {
       intent.putExtra(Constant.APP_NAME, appAction);
       context.startActivity(intent);
     } else {
-      Utils.jumpToApp(context, fulfillmentOption.getUrlTemplate().getTemplate(), appAction.getPackageName());
+      String url = fulfillmentOption.getUrlTemplate().getTemplate();
+      if(appAction.getPackageName().equals("com.dunkinbrands.otgo")) {
+        url = url.substring(0, url.indexOf("?"));
+      }
+      Utils.jumpToApp(context, url, appAction.getPackageName());
     }
   }
 }
