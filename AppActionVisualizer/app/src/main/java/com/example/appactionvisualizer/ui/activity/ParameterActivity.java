@@ -1,6 +1,7 @@
 package com.example.appactionvisualizer.ui.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -145,7 +146,7 @@ public class ParameterActivity extends CustomActivity {
       Utils.showMsg(getString(R.string.error_filter), this);
       return;
     }
-    final EntitySet entitySet = checkUrlEntitySet();
+    final EntitySet entitySet = checkUrlEntitySet(appAction, action);
     if (entitySet == null) {
       Utils.showMsg(getString(R.string.error_parsing), this);
       return;
@@ -185,9 +186,14 @@ public class ParameterActivity extends CustomActivity {
     ss.setSpan(clickable, 0, urlTemplate.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
   }
 
+  /**
+   * @param appAction
+   * @param action
+   * @return
+   */
   // All fulfillment options with "@url" require "feature" key in parameter list of actions(expect
   // url_filter)
-  private EntitySet checkUrlEntitySet() {
+  public static EntitySet checkUrlEntitySet(AppAction appAction, Action action) {
     for (Action.Parameter parameter : action.getParametersList()) {
       if (parameter.getName().equals(Constant.URL_KEY)) {
         if (parameter.getEntitySetReferenceCount() == 0) continue;
@@ -323,15 +329,14 @@ public class ParameterActivity extends CustomActivity {
   }
 
   /**
-   * @param data intent data received from selectActivity
-   *     <p>replace parameter with input from user to construct the url e.g.:
-   *     https://example.com/test?utm_campaign=appactions{#foo} ==>
-   *     https://example.com/test?utm_campaign=appactions#foo=123 myapp://example/{foo} ==>
-   *     myapp://example/123
+   * @param identifier
+   * replace parameter with input from user to construct the url e.g.:
+   * https://example.com/test?utm_campaign=appactions{#foo} ==>
+   * https://example.com/test?utm_campaign=appactions#foo=123
+   * myapp://example/{foo} ==> myapp://example/123
    */
-  void replaceSingleParameter(String key, Intent data) {
-    String identifier = data.getStringExtra(key);
-    if (key == null) return;
+  public static String replaceSingleParameter(Context context, String urlTemplate, String key, String identifier) {
+    if (key == null) return "";
     int firstPartIdx = urlTemplate.indexOf(URL_PARAMETER_INDICATOR);
     int secondPartIdx = urlTemplate.indexOf("}");
     String curUrl = urlTemplate.substring(0, firstPartIdx);
@@ -339,10 +344,10 @@ public class ParameterActivity extends CustomActivity {
       curUrl += identifier;
     } else {
       curUrl +=
-          urlTemplate.charAt(firstPartIdx + 1) + getString(R.string.url_parameter, key, identifier);
+          urlTemplate.charAt(firstPartIdx + 1) + context.getString(R.string.url_parameter, key, identifier);
     }
     curUrl += urlTemplate.substring(secondPartIdx + 1);
-    setClickableText(tvUrl, curUrl);
+    return curUrl;
   }
 
   /**
@@ -354,8 +359,10 @@ public class ParameterActivity extends CustomActivity {
    */
   private void replaceParameter(Intent data) {
     if (fulfillmentOption.getUrlTemplate().getParameterMapCount() == 1) {
-      replaceSingleParameter(
-          fulfillmentOption.getUrlTemplate().getParameterMapMap().keySet().iterator().next(), data);
+      String key = fulfillmentOption.getUrlTemplate().getParameterMapMap().keySet().iterator().next();
+      String curUrl = replaceSingleParameter(this, urlTemplate, key
+          , data.getStringExtra(key));
+      setClickableText(tvUrl, curUrl);
       return;
     }
     int firstPartIdx = urlTemplate.indexOf(URL_PARAMETER_INDICATOR);

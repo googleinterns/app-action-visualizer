@@ -125,7 +125,7 @@ public class InputParameterActivity extends CustomActivity {
     LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
     params.setMargins(10, 10, 10, 0);
     textInputLayout.setLayoutParams(params);
-    final EntitySet entitySet = checkEntitySet(key);
+    final EntitySet entitySet = checkEntitySet(key, appAction, action, fulfillmentOption);
     if (entitySet != null) {
       textInput.setFocusable(false);
       textInput.setClickable(true);
@@ -158,7 +158,7 @@ public class InputParameterActivity extends CustomActivity {
 
 
   // Check if entity set has provided corresponding list items
-  private EntitySet checkEntitySet(String key) {
+  public static EntitySet checkEntitySet(String key, AppAction appAction, Action action, FulfillmentOption fulfillmentOption) {
     String parameterValue = fulfillmentOption.getUrlTemplate().getParameterMapMap().get(key);
     for (Action.Parameter parameter : action.getParametersList()) {
       if (parameter.getName().equals(parameterValue)) {
