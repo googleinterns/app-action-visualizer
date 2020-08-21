@@ -406,7 +406,10 @@ public class DeepLinkListActivity extends CustomActivity {
     displayDeepLinks();
   }
 
-  /** Generate a tree map from current built-in data, tree map is used since we want sorted actions. */
+  /**
+   * Generate a <key: action name, value: list of AppFulfillment> tree map from current data, need
+   * tree map since we want sorted actions.
+   */
   private void extractActions() {
     // Iterate over the whole list to get the numbers and construct two maps we need.
     for (AppAction appAction : AppActionsGenerator.appActions) {
