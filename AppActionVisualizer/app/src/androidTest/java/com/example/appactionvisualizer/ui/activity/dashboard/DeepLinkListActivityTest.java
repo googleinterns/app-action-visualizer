@@ -3,6 +3,7 @@ package com.example.appactionvisualizer.ui.activity.dashboard;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.util.Pair;
 
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
@@ -19,8 +20,10 @@ import org.junit.Test;
 import java.util.List;
 import java.util.Map;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertSame;
 
 public class DeepLinkListActivityTest {
   private static final String TAG = DeepLinkListActivityTest.class.getSimpleName();
@@ -56,9 +59,35 @@ public class DeepLinkListActivityTest {
     }
   }
 
+  @Test
+  public void testCheckApp_Facebook() {
+    setData();
+    String sentence = "open fabook";
+    String[] words = sentence.split(" ");
+    Pair<Integer, String> pair = activity.checkApp(words);
+    int appIdx = pair.first;
+    String appName = pair.second;
+    assertEquals(appIdx, 1);
+    assertEquals(appName, "facebook");
+  }
+
+  @Test
+  public void testCheckApp_Youtube() {
+    setData();
+    String sentence = "youtub history";
+    String[] words = sentence.split(" ");
+    Pair<Integer, String> pair = activity.checkApp(words);
+    int appIdx = pair.first;
+    String appName = pair.second;
+    assertEquals(appIdx, 0);
+    assertEquals(appName, "youtube");
+  }
+
   // Set some test data for the expandable list view.
   private void setData() {
     AppActionsGenerator.getInstance().readFromFile(appContext);
     activity = rule.launchActivity(new Intent());
   }
+
+
 }
