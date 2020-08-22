@@ -8,6 +8,7 @@ import android.os.LocaleList;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
+import android.util.Pair;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.textclassifier.TextClassification;
@@ -25,13 +26,17 @@ import androidx.appcompat.widget.Toolbar;
 import com.example.appactionvisualizer.R;
 import com.example.appactionvisualizer.constants.Constant;
 import com.example.appactionvisualizer.databean.ActionType;
-import com.example.appactionvisualizer.databean.AppActionProtos.*;
+import com.example.appactionvisualizer.databean.AppActionProtos.Action;
+import com.example.appactionvisualizer.databean.AppActionProtos.AppAction;
+import com.example.appactionvisualizer.databean.AppActionProtos.EntitySet;
+import com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption;
+import com.example.appactionvisualizer.databean.AppActionProtos.UrlTemplate;
 import com.example.appactionvisualizer.databean.AppActionsGenerator;
 import com.example.appactionvisualizer.databean.AppFulfillment;
 import com.example.appactionvisualizer.ui.activity.CustomActivity;
-import com.example.appactionvisualizer.ui.activity.ParameterActivity;
 import com.example.appactionvisualizer.ui.activity.parameter.InputParameterActivity;
 import com.example.appactionvisualizer.ui.adapter.ExpandableAdapter;
+import com.example.appactionvisualizer.utils.StringUtils;
 import com.example.appactionvisualizer.utils.Utils;
 import com.google.protobuf.ListValue;
 import com.google.protobuf.Value;
@@ -39,21 +44,37 @@ import com.google.protobuf.Value;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
 import static com.example.appactionvisualizer.constants.Constant.ENTITY_URL;
+import static com.example.appactionvisualizer.constants.Constant.INTENT_PREFIX;
+import static com.example.appactionvisualizer.constants.Constant.UNDERLINE;
+import static com.example.appactionvisualizer.constants.Constant.WHITESPACE;
 
 // Display deep links using an expandable list view.
 public class DeepLinkListActivity extends CustomActivity {
   private static final String TAG = DeepLinkListActivity.class.getSimpleName();
   // These bits are used to indicate classify results.
   private static final int UPDATE = 1, ERROR = 2;
-  // Action names are group titles.
+  // Group titles are action names.
   final List<String> actionNames = new ArrayList<>();
+  // Comparator used by tree map.
+  Comparator<String> comparator =
+      new Comparator<String>() {
+        @Override
+        public int compare(String s1, String s2) {
+          ActionType type1 = ActionType.getActionTypeByName(s1);
+          ActionType type2 = ActionType.getActionTypeByName(s2);
+          // Make sure actions with same type stay together.
+          if (!type1.equals(type2)) {
+            return type1.compareTo(type2);
+          }
+          return s1.compareTo(s2);
+        }
+      };
   // For each action name, we need a structure of <AppAction, Action, FulfillmentOption> data
   // so that the link can jump into ParameterActivity and parse required data to activity.
   private Map<String, List<AppFulfillment>> intentMap, defaultMap;
@@ -65,20 +86,6 @@ public class DeepLinkListActivity extends CustomActivity {
   private Handler classifyHandler;
   private BaseExpandableListAdapter adapter;
   private ExpandableListView expandableListView;
-
-  // Make sure actions with same type stay together.
-  Comparator<String> comparator =
-      new Comparator<String>() {
-        @Override
-        public int compare(String s1, String s2) {
-          ActionType type1 = ActionType.getActionTypeByName(s1);
-          ActionType type2 = ActionType.getActionTypeByName(s2);
-          if (!type1.equals(type2)) {
-            return type1.compareTo(type2);
-          }
-          return s1.compareTo(s2);
-        }
-      };
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -115,12 +122,8 @@ public class DeepLinkListActivity extends CustomActivity {
         });
   }
 
-  /**
-   * @param input user input sentence
-   * Make a recommendation based on user inputs
-   */
+  /** @param input user input sentence Make a recommendation based on user inputs */
   protected void recommend(final String input) {
-    Log.d(TAG, "RECOMMEND: " + input);
     Map<String, List<AppFulfillment>> displayMap = getDisplayMap(input);
     updateView(displayMap);
   }
@@ -128,37 +131,43 @@ public class DeepLinkListActivity extends CustomActivity {
   /**
    * @param input user input sentence
    * @return data to be displayed
-   *     1. Tokenize user input into a string
-   *     array 2. Try to detect app name 3. Match string array with current action names 4. Get
-   *      recommended data and update the view
    */
-  private Map<String, List<AppFulfillment>> getDisplayMap(final String input) {
+  protected Map<String, List<AppFulfillment>> getDisplayMap(final String input) {
     Map<String, List<AppFulfillment>> displayMap = null;
     // Ignore invalid inputs, only accept a-z A-z 0-9 and whitespace
     String sentence = input.replaceAll("[^a-zA-Z0-9\\s]", "");
     if (sentence.trim().isEmpty()) {
       return null;
     }
-    //todo: try parse using text classifier
+    // todo: try parse using text classifier
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
       classifyText(sentence);
     }
     // Split the sentence using space(similar to tokenization)
-    String[] words = sentence.toLowerCase().split(" ");
-    String appName = checkApp(words);
+    String[] words = sentence.toLowerCase().split(WHITESPACE);
+    // Words index - app name. The word and app name may differ so we need both.
+    Pair<Integer, String> pair = checkApp(words);
+    String appName = pair.second;
     // Detect no app name, try to match all actions
     if (appName.isEmpty()) {
       // If app name is not found, select actions from all actions.
       displayMap = getActionFromWords(defaultMap, words);
       return displayMap;
     }
+    sentence = removeAppName(words, pair.first /* index of the app name in sentence */);
     // There's an app name in this sentence, we can read all the actions of this specific app.
     // Returned appAction wouldn't be null since app name is detected from appNameMap's keySet
     AppAction appAction = appNameMap.get(appName);
     Map<String, List<AppFulfillment>> singleAppMap = parseActionsFromApp(appAction);
+    // If there's only app name return the result
+    if (sentence.isEmpty()) {
+      return singleAppMap;
+    }
+
     // Try to match some inline inventory items using user input
+    // This will generate one or some deep links
     displayMap = getDeepLinkFromInventory(appAction, sentence);
-    if(displayMap != null) {
+    if (displayMap != null) {
       return displayMap;
     }
     // There's no need to parse other words since the app has only one action.
@@ -166,8 +175,22 @@ public class DeepLinkListActivity extends CustomActivity {
       return singleAppMap;
     }
     // Try to match some action name of this app using user input
-    displayMap = getActionFromWords(singleAppMap, words);
+    // This will generate most likely actions, which may include several deep links
+    displayMap = getActionFromWords(singleAppMap, sentence.split(WHITESPACE));
     return displayMap;
+  }
+
+  // Remove app name from sentence in case it interferes with other parse stage
+  private String removeAppName(String[] words, Integer appIdx) {
+    if (words.length == 1) return "";
+    StringBuilder sbSentence = new StringBuilder();
+    for (int idx = 0; idx < words.length; ++idx) {
+      if (idx == appIdx) {
+        continue;
+      }
+      sbSentence.append(words[idx]).append(WHITESPACE);
+    }
+    return sbSentence.substring(0, sbSentence.length() - 1);
   }
 
   /**
@@ -178,22 +201,23 @@ public class DeepLinkListActivity extends CustomActivity {
    */
   private Map<String, List<AppFulfillment>> getDeepLinkFromInventory(
       AppAction appAction, String sentence) {
-    for(Action action : appAction.getActionsList()) {
-      if(action.getParametersCount() == 0)
-        continue;
-      for(FulfillmentOption fulfillmentOption : action.getFulfillmentOptionList()) {
+    for (Action action : appAction.getActionsList()) {
+      if (action.getParametersCount() == 0) continue;
+      for (FulfillmentOption fulfillmentOption : action.getFulfillmentOptionList()) {
         UrlTemplate urlTemplate = fulfillmentOption.getUrlTemplate();
         // Deal with {@url} case
-        if(urlTemplate.getTemplate().contains(Constant.URL_NO_LINK)) {
-          Log.d(TAG, "@url: " + appAction.getPackageName());
+        if (urlTemplate.getTemplate().contains(Constant.URL_NO_LINK)) {
           return checkUrlEntity(appAction, action, fulfillmentOption, sentence);
         }
         // Currently match only single parameter case!
-        if(urlTemplate.getParameterMapCount() == 1) {
+        // todo: For more parameters
+        if (urlTemplate.getParameterMapCount() == 1) {
           // Get the key to be matched
           String key = urlTemplate.getParameterMapMap().keySet().iterator().next();
-          EntitySet entitySet = InputParameterActivity.checkEntitySet(key, appAction, action, fulfillmentOption);
-          return checkParameterEntity(appAction, action, fulfillmentOption, key, entitySet, sentence);
+          EntitySet entitySet =
+              InputParameterActivity.checkEntitySet(key, appAction, action, fulfillmentOption);
+          return checkParameterEntity(
+              appAction, action, fulfillmentOption, key, entitySet, sentence);
         }
       }
     }
@@ -202,65 +226,98 @@ public class DeepLinkListActivity extends CustomActivity {
   }
 
   // Check if sentence matches any inline inventory of a parameter
-  private Map<String, List<AppFulfillment>> checkParameterEntity(AppAction appAction, Action action, FulfillmentOption fulfillmentOption, String key, EntitySet entitySet, String sentence) {
-    if(entitySet == null)
-      return null;
-    final ListValue listValue = entitySet.getItemList().getFieldsOrThrow(Constant.ENTITY_ITEM_LIST).getListValue();
-    // Build a fulfillment containing the found url
-    Map<String, List<AppFulfillment>> matched = new HashMap<>();
-    List<AppFulfillment> list = new ArrayList<>();
-    matched.put(action.getIntentName(), list);
-    // For each entity, if sentence contains field name, add it to recommended deep links
+  private Map<String, List<AppFulfillment>> checkParameterEntity(
+      AppAction appAction,
+      Action action,
+      FulfillmentOption fulfillmentOption,
+      String key,
+      EntitySet entitySet,
+      String sentence) {
+    if (entitySet == null) return null;
+    final ListValue listValue =
+        entitySet.getItemList().getFieldsOrThrow(Constant.ENTITY_ITEM_LIST).getListValue();
+    // Assign a score to each recommended deeplink, return the deeplink with the maximum score
+    TreeMap<Integer, List<AppFulfillment>> scoreMap = new TreeMap<>();
+    // For each entity, compute matched score with our sentence.
     for (Value entity : listValue.getValuesList()) {
       Value identifier = entity.getStructValue().getFieldsOrThrow(Constant.ENTITY_FIELD_IDENTIFIER);
-      String name = entity.getStructValue().getFieldsOrDefault(Constant.ENTITY_FIELD_NAME, identifier).getStringValue().toLowerCase();
-      if(sentence.contains(name)) {
-        String urlTemplate = fulfillmentOption.getUrlTemplate().getTemplate();
-        String curUrl = ParameterActivity.replaceSingleParameter(this, urlTemplate, key, identifier.getStringValue());
-        UrlTemplate builtUrl = UrlTemplate.newBuilder().setTemplate(curUrl).build();
-        FulfillmentOption builtFulfillment = FulfillmentOption.newBuilder().setUrlTemplate(builtUrl).build();
-        list.add(new AppFulfillment(appAction, action, builtFulfillment));
-      }
+      String name =
+          entity
+              .getStructValue()
+              .getFieldsOrDefault(Constant.ENTITY_FIELD_NAME, identifier)
+              .getStringValue()
+              .toLowerCase();
+      int score = StringUtils.matchScore(name.split(WHITESPACE), sentence.split(WHITESPACE));
+      String urlTemplate = fulfillmentOption.getUrlTemplate().getTemplate();
+      String curUrl =
+          StringUtils.replaceSingleParameter(
+              this, urlTemplate, key, identifier.getStringValue());
+      UrlTemplate builtUrl = UrlTemplate.newBuilder().setTemplate(curUrl).build();
+      FulfillmentOption builtFulfillment =
+          FulfillmentOption.newBuilder().setUrlTemplate(builtUrl).build();
+      if (scoreMap.get(score) == null) scoreMap.put(score, new ArrayList<AppFulfillment>());
+      scoreMap.get(score).add(new AppFulfillment(appAction, action, builtFulfillment));
     }
-    if(list.isEmpty())
-      return null;
-    return matched;
+    return getMatchedFromScore(scoreMap, action.getIntentName());
   }
 
   // Check inline inventory's urls and try to find a match
-  private Map<String, List<AppFulfillment>> checkUrlEntity(AppAction appAction, Action action, FulfillmentOption fulfillmentOption, String sentence) {
-    if(fulfillmentOption.getUrlTemplate().getParameterMapCount() > 0 || !action.getParameters(0).getEntitySetReference(0).getUrlFilter().isEmpty()) {
+  private Map<String, List<AppFulfillment>> checkUrlEntity(
+      AppAction appAction, Action action, FulfillmentOption fulfillmentOption, String sentence) {
+    if (fulfillmentOption.getUrlTemplate().getParameterMapCount() > 0
+        || !action.getParameters(0).getEntitySetReference(0).getUrlFilter().isEmpty()) {
       return null;
     }
-    final EntitySet entitySet = ParameterActivity.checkUrlEntitySet(appAction, action);
-    if(entitySet == null) {
+    final EntitySet entitySet = Utils.checkUrlEntitySet(appAction, action);
+    if (entitySet == null) {
       return null;
     }
-    // For all the url values, app action would provide a corresponding name. Find if the sentence contains any of these name and this url is our recommended one.
-    final ListValue listValue = entitySet.getItemList().getFieldsOrThrow(Constant.ENTITY_ITEM_LIST).getListValue();
+    // Assign a score to each recommended deeplink, return the deeplink with the maximum score
+    TreeMap<Integer, List<AppFulfillment>> scoreMap = new TreeMap<>();
+    // For all the url values, app action would provide a corresponding name. Find if the sentence
+    // contains any of these name and this url is our recommended one.
+    final ListValue listValue =
+        entitySet.getItemList().getFieldsOrThrow(Constant.ENTITY_ITEM_LIST).getListValue();
     // Get the list contents and try to match input sentence with one of the struct value's name
     for (Value entity : listValue.getValuesList()) {
-      String name = entity.getStructValue().getFieldsOrThrow(Constant.ENTITY_FIELD_NAME).getStringValue();
-      if(sentence.contains(name)) {
-        // Build a fulfillment containing the found url
-        Map<String, List<AppFulfillment>> matched = new HashMap<>();
-        List<AppFulfillment> list = new ArrayList<>();
-        UrlTemplate builtUrl = UrlTemplate.newBuilder().setTemplate(entity.getStructValue().getFieldsOrThrow(ENTITY_URL).getStringValue()).build();
-        FulfillmentOption builtFulfillment = FulfillmentOption.newBuilder().setUrlTemplate(builtUrl).build();
-        list.add(new AppFulfillment(appAction, action, builtFulfillment));
-        matched.put(action.getIntentName(), list);
-        return matched;
-      }
+      String name =
+          entity.getStructValue().getFieldsOrThrow(Constant.ENTITY_FIELD_NAME).getStringValue();
+      int score = StringUtils.matchScore(name.split(WHITESPACE), sentence.split(WHITESPACE));
+      // Build a fulfillment containing the found url
+      UrlTemplate builtUrl =
+          UrlTemplate.newBuilder()
+              .setTemplate(entity.getStructValue().getFieldsOrThrow(ENTITY_URL).getStringValue())
+              .build();
+      FulfillmentOption builtFulfillment =
+          FulfillmentOption.newBuilder().setUrlTemplate(builtUrl).build();
+      if (scoreMap.get(score) == null) scoreMap.put(score, new ArrayList<AppFulfillment>());
+      scoreMap.get(score).add(new AppFulfillment(appAction, action, builtFulfillment));
     }
-    return null;
+    return getMatchedFromScore(scoreMap, action.getIntentName());
   }
 
-
+  /**
+   * @param scoreMap score map of each deep link
+   * @param actionName action name
+   * @return recommended result map
+   */
+  private Map<String, List<AppFulfillment>> getMatchedFromScore(
+      TreeMap<Integer, List<AppFulfillment>> scoreMap, String actionName) {
+    // We only need the last entry which has the max score
+    Map.Entry<Integer, List<AppFulfillment>> entry = scoreMap.lastEntry();
+    // If score is only 1, we don't need this entry
+    if (entry == null || entry.getKey() <= 1) {
+      return null;
+    }
+    Map<String, List<AppFulfillment>> matched = new HashMap<>();
+    matched.put(actionName, entry.getValue());
+    return matched;
+  }
 
   /**
    * @param allActions The actions pool to be selected, key is the action name.
    * @param inputWords all the words of user input.
-   * @return the most likely action(s). We need to find which actions are suited among all actions
+   * @return the most likely action(s) among all actions.
    */
   private Map<String, List<AppFulfillment>> getActionFromWords(
       Map<String, List<AppFulfillment>> allActions, String[] inputWords) {
@@ -274,7 +331,7 @@ public class DeepLinkListActivity extends CustomActivity {
         continue;
       }
       // Compute score to get a priority of this action.
-      int score = matchScore(tobeMatched, inputWords);
+      int score = StringUtils.matchScore(tobeMatched, inputWords);
       if (scoresMap.get(score) == null) {
         scoresMap.put(score, new ArrayList<String>());
       }
@@ -282,31 +339,11 @@ public class DeepLinkListActivity extends CustomActivity {
     }
     List<String> matchedActions = scoresMap.lastEntry().getValue();
     // Keep the map order as insertion order
-    Map<String, List<AppFulfillment>> matchedMaps = new LinkedHashMap<>();
-    for (String matched : matchedActions) {
-      matchedMaps.put(matched, allActions.get(matched));
+    Map<String, List<AppFulfillment>> matched = new HashMap<>();
+    for (String actionName : matchedActions) {
+      matched.put(actionName, allActions.get(actionName));
     }
-    return matchedMaps;
-  }
-
-  /**
-   * @param tobeMatched actions array
-   * @param inputWords input words array
-   * @return a matched "score" by computing matched strings between two arrays
-   */
-  private int matchScore(String[] tobeMatched, String[] inputWords) {
-    int number = 0;
-    // Since the word order may be reversed, e.g. "money transfer" and "transfer money",
-    // we have to iterate all the combinations.
-    for (String text : inputWords) {
-      for (String pattern : tobeMatched) {
-        if (text.contains(pattern)) {
-          number++;
-          break;
-        }
-      }
-    }
-    return number;
+    return matched;
   }
 
   /**
@@ -326,34 +363,55 @@ public class DeepLinkListActivity extends CustomActivity {
   }
 
   /**
-   * @param displayMap parse null to indicate default data
-   * Change the content of expandable list view by passing some data.
+   * @param displayMap the content of expandable list view.
+   * Update expandable list view by passing some data.
+   * Parse null to indicate default data.
    */
   private void updateView(Map<String, List<AppFulfillment>> displayMap) {
     // If no recommended data, display the default data.
-    if(displayMap == null)
+    boolean unfold = true;
+    if (displayMap == null)  {
       displayMap = defaultMap;
+      unfold = false;
+    }
     actionNames.clear();
     intentMap.clear();
     actionNames.addAll(displayMap.keySet());
     intentMap.putAll(displayMap);
     adapter.notifyDataSetChanged();
-    expandableListView.expandGroup(0);
+    // Only unfold the first group when having recommended data
+    if(unfold) {
+      expandableListView.expandGroup(0);
+    }else {
+      expandableListView.collapseGroup(0);
+    }
   }
 
   /**
    * @param words input sentence
-   * @return found app name or ""
-   * Check if words contain any known app names.
+   * @return found app name or "" Check if words match any known app names using fuzzy match.
    */
-  private String checkApp(String[] words) {
+  protected Pair<Integer, String> checkApp(String[] words) {
     Set<String> names = appNameMap.keySet();
-    for (String str : words) {
-      if (names.contains(str)) {
-        return str;
+    double maxScore = 0;
+    int appIdx = 0;
+    String maxAppName = "";
+    for (int idx = 0; idx < words.length; ++idx) {
+      String str = words[idx];
+      for (String appName : names) {
+        double currentScore = (double) StringUtils.getScore(str, appName) / appName.length();
+        if (currentScore > maxScore) {
+          maxScore = currentScore;
+          maxAppName = appName;
+          appIdx = idx;
+        }
       }
     }
-    return "";
+    // 0.5 means half of the string is matched
+    if (maxScore < 0.5) {
+      return new Pair<>(-1, "");
+    }
+    return new Pair<>(appIdx, maxAppName);
   }
 
   @RequiresApi(api = Build.VERSION_CODES.P)
@@ -372,7 +430,7 @@ public class DeepLinkListActivity extends CustomActivity {
                       textClassifier.classifyText(
                           text, 0, text.length() - 1, LocaleList.getDefault());
                   String entity = textClassification.getEntity(0);
-                  Log.d("classify", textClassification.getEntity(0));
+                  Log.d("getEntity", textClassification.getEntity(0));
                   classifyHandler.sendEmptyMessage(UPDATE);
                 } catch (Exception e) {
                   classifyHandler.sendEmptyMessage(ERROR);
@@ -436,13 +494,13 @@ public class DeepLinkListActivity extends CustomActivity {
     actionNames.addAll(defaultMap.keySet());
   }
 
-  /** @param actionName split action name into string array*/
+  /** @param actionName split action name into string array */
   private void decompose(String actionName) {
-    if (actionName.isEmpty() || !actionName.startsWith(Constant.INTENT_PREFIX)) return;
+    if (actionName.isEmpty() || !actionName.startsWith(INTENT_PREFIX)) return;
     // eg: actions.intent.OPEN_APP_FEATURE, we only need the last part
-    String realActionName = actionName.substring(Constant.INTENT_PREFIX.length());
+    String realActionName = actionName.substring(INTENT_PREFIX.length());
     // eg: real action name is OPEN_APP_FEATURE
-    actionNameWords.put(actionName, realActionName.toLowerCase().split("_"));
+    actionNameWords.put(actionName, realActionName.toLowerCase().split(UNDERLINE));
   }
 
   /** Parse data and pass it to the expandable list view. */

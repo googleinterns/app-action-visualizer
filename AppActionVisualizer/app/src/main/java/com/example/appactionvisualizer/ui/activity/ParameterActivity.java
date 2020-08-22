@@ -25,6 +25,7 @@ import com.example.appactionvisualizer.databean.AppActionProtos.EntitySet;
 import com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption;
 import com.example.appactionvisualizer.ui.activity.parameter.InputParameterActivity;
 import com.example.appactionvisualizer.ui.activity.parameter.LocationActivity;
+import com.example.appactionvisualizer.utils.StringUtils;
 import com.example.appactionvisualizer.utils.Utils;
 import com.google.protobuf.ListValue;
 import com.google.protobuf.Struct;
@@ -146,7 +147,7 @@ public class ParameterActivity extends CustomActivity {
       Utils.showMsg(getString(R.string.error_filter), this);
       return;
     }
-    final EntitySet entitySet = checkUrlEntitySet(appAction, action);
+    final EntitySet entitySet = Utils.checkUrlEntitySet(appAction, action);
     if (entitySet == null) {
       Utils.showMsg(getString(R.string.error_parsing), this);
       return;
@@ -184,31 +185,6 @@ public class ParameterActivity extends CustomActivity {
           }
         };
     ss.setSpan(clickable, 0, urlTemplate.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-  }
-
-  /**
-   * @param appAction
-   * @param action
-   * @return
-   */
-  // All fulfillment options with "@url" require "feature" key in parameter list of actions(expect
-  // url_filter)
-  public static EntitySet checkUrlEntitySet(AppAction appAction, Action action) {
-    for (Action.Parameter parameter : action.getParametersList()) {
-      if (parameter.getName().equals(Constant.URL_KEY)) {
-        if (parameter.getEntitySetReferenceCount() == 0) continue;
-        String reference = parameter.getEntitySetReference(0).getEntitySetId();
-        for (EntitySet set : appAction.getEntitySetsList()) {
-          if (set.getItemList()
-              .getFieldsOrThrow(Constant.ENTITY_FIELD_IDENTIFIER)
-              .getStringValue()
-              .equals(reference)) {
-            return set;
-          }
-        }
-      }
-    }
-    return null;
   }
 
   // The create_taxi intent needs latitude and longitude values for parameters
@@ -328,27 +304,6 @@ public class ParameterActivity extends CustomActivity {
     }
   }
 
-  /**
-   * @param identifier
-   * replace parameter with input from user to construct the url e.g.:
-   * https://example.com/test?utm_campaign=appactions{#foo} ==>
-   * https://example.com/test?utm_campaign=appactions#foo=123
-   * myapp://example/{foo} ==> myapp://example/123
-   */
-  public static String replaceSingleParameter(Context context, String urlTemplate, String key, String identifier) {
-    if (key == null) return "";
-    int firstPartIdx = urlTemplate.indexOf(URL_PARAMETER_INDICATOR);
-    int secondPartIdx = urlTemplate.indexOf("}");
-    String curUrl = urlTemplate.substring(0, firstPartIdx);
-    if (Character.isAlphabetic(urlTemplate.charAt(firstPartIdx + 1))) {
-      curUrl += identifier;
-    } else {
-      curUrl +=
-          urlTemplate.charAt(firstPartIdx + 1) + context.getString(R.string.url_parameter, key, identifier);
-    }
-    curUrl += urlTemplate.substring(secondPartIdx + 1);
-    return curUrl;
-  }
 
   /**
    * @param data intent data received from selectActivity
@@ -360,7 +315,7 @@ public class ParameterActivity extends CustomActivity {
   private void replaceParameter(Intent data) {
     if (fulfillmentOption.getUrlTemplate().getParameterMapCount() == 1) {
       String key = fulfillmentOption.getUrlTemplate().getParameterMapMap().keySet().iterator().next();
-      String curUrl = replaceSingleParameter(this, urlTemplate, key
+      String curUrl = StringUtils.replaceSingleParameter(this, urlTemplate, key
           , data.getStringExtra(key));
       setClickableText(tvUrl, curUrl);
       return;
