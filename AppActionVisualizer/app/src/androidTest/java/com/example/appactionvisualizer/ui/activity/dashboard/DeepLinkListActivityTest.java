@@ -52,7 +52,6 @@ public class DeepLinkListActivityTest {
     }
   }
 
-
   @Test
   public void testCheckApp() {
     setData();
@@ -87,4 +86,6 @@ public class DeepLinkListActivityTest {
     AppActionsGenerator.getInstance().readFromFile(appContext);
     activity = rule.launchActivity(new Intent());
   }
+
+
 }
