@@ -1,26 +1,14 @@
 package com.example.appactionvisualizer.ui.activity.dashboard;
 
-import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.LocaleList;
-import android.os.Looper;
-import android.os.Message;
-import android.util.Log;
 import android.util.Pair;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.textclassifier.TextClassification;
-import android.view.textclassifier.TextClassificationManager;
-import android.view.textclassifier.TextClassifier;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ImageButton;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.appactionvisualizer.R;
@@ -83,7 +71,6 @@ public class DeepLinkListActivity extends CustomActivity {
   // Map action name to a list of words
   // eg: <"actions.intent.OPEN_APP_FEATURE", ["open", "app", "feature"]>
   private Map<String, String[]> actionNameWords = new HashMap<>();
-  private Handler classifyHandler;
   private BaseExpandableListAdapter adapter;
   private ExpandableListView expandableListView;
 
@@ -138,10 +125,6 @@ public class DeepLinkListActivity extends CustomActivity {
     String sentence = input.replaceAll("[^a-zA-Z0-9\\s]", "");
     if (sentence.trim().isEmpty()) {
       return null;
-    }
-    // todo: try parse using text classifier
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-      classifyText(sentence);
     }
     // Split the sentence using space(similar to tokenization)
     String[] words = sentence.toLowerCase().split(WHITESPACE);
@@ -414,48 +397,12 @@ public class DeepLinkListActivity extends CustomActivity {
     return new Pair<>(appIdx, maxAppName);
   }
 
-  @RequiresApi(api = Build.VERSION_CODES.P)
-  private void classifyText(final String text) {
-    Log.d(TAG, "classify: " + text);
-    new Thread(
-            new Runnable() {
-              @Override
-              public void run() {
-                try {
-                  TextClassificationManager textClassificationManager =
-                      (TextClassificationManager)
-                          getSystemService(Context.TEXT_CLASSIFICATION_SERVICE);
-                  TextClassifier textClassifier = textClassificationManager.getTextClassifier();
-                  TextClassification textClassification =
-                      textClassifier.classifyText(
-                          text, 0, text.length() - 1, LocaleList.getDefault());
-                  String entity = textClassification.getEntity(0);
-                  Log.d("getEntity", textClassification.getEntity(0));
-                  classifyHandler.sendEmptyMessage(UPDATE);
-                } catch (Exception e) {
-                  classifyHandler.sendEmptyMessage(ERROR);
-                }
-              }
-            })
-        .start();
-  }
-
   protected void initData() {
     // Use tree map so that the actions are sorted.
     // The total actions wouldn't be much so it wouldn't lose much time compared to hash map.
     intentMap = new TreeMap<>(comparator);
     defaultMap = new TreeMap<>(comparator);
     extractActions();
-    classifyHandler =
-        new Handler(Looper.getMainLooper()) {
-          @Override
-          public void handleMessage(@NonNull Message msg) {
-            if (msg.what == UPDATE) {
-            } else if (msg.what == ERROR) {
-              Log.d(TAG, getString(R.string.unknown_texts));
-            }
-          }
-        };
   }
 
   protected void initView() {
