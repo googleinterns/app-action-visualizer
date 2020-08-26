@@ -118,9 +118,9 @@ public class DeepLinkListActivity extends CustomActivity {
   /**
    * @param input user input sentence
    * @return data to be displayed
+   * <key: action Name, value: list of deep link data>
    */
   protected Map<String, List<AppFulfillment>> getDisplayMap(final String input) {
-    Map<String, List<AppFulfillment>> displayMap = null;
     // Ignore invalid inputs, only accept a-z A-z 0-9 and whitespace
     String sentence = input.replaceAll("[^a-zA-Z0-9\\s]", "");
     if (sentence.trim().isEmpty()) {
@@ -134,8 +134,7 @@ public class DeepLinkListActivity extends CustomActivity {
     // Detect no app name, try to match all actions
     if (appName.isEmpty()) {
       // If app name is not found, select actions from all actions.
-      displayMap = getActionFromWords(defaultMap, words);
-      return displayMap;
+      return getActionFromWords(defaultMap, words);
     }
     sentence = removeAppName(words, pair.first /* index of the app name in sentence */);
     // There's an app name in this sentence, we can read all the actions of this specific app.
@@ -149,7 +148,7 @@ public class DeepLinkListActivity extends CustomActivity {
 
     // Try to match some inline inventory items using user input
     // This will generate one or some deep links
-    displayMap = getDeepLinkFromInventory(appAction, sentence);
+    Map<String, List<AppFulfillment>> displayMap = getDeepLinkFromInventory(appAction, sentence);
     if (displayMap != null) {
       return displayMap;
     }
@@ -181,6 +180,8 @@ public class DeepLinkListActivity extends CustomActivity {
    * @param sentence user input sentence
    * @return the found data or null if not found
    * try to get specific deep links using inline inventory
+   * either from a parameter's inventory or from url inventory
+   * <key: action Name, value: list of deep link data>
    */
   private Map<String, List<AppFulfillment>> getDeepLinkFromInventory(
       AppAction appAction, String sentence) {
@@ -204,10 +205,19 @@ public class DeepLinkListActivity extends CustomActivity {
         }
       }
     }
-
     return null;
   }
 
+  /**
+   * @param appAction app action of the deep link
+   * @param action action of the deep link
+   * @param fulfillmentOption fulfillmentOption of the deep link
+   * @param key Specific parameter key name
+   * @param entitySet inline inventory of the key
+   * @param sentence user input sentence
+   * @return recommended deep links or null if not found key entity set
+   * try to get specific deep links from a parameter key using inline inventory
+   */
   // Check if sentence matches any inline inventory of a parameter
   private Map<String, List<AppFulfillment>> checkParameterEntity(
       AppAction appAction,
@@ -217,12 +227,12 @@ public class DeepLinkListActivity extends CustomActivity {
       EntitySet entitySet,
       String sentence) {
     if (entitySet == null) return null;
-    final ListValue listValue =
+    final ListValue entityItemValue =
         entitySet.getItemList().getFieldsOrThrow(Constant.ENTITY_ITEM_LIST).getListValue();
     // Assign a score to each recommended deeplink, return the deeplink with the maximum score
     TreeMap<Integer, List<AppFulfillment>> scoreMap = new TreeMap<>();
     // For each entity, compute matched score with our sentence.
-    for (Value entity : listValue.getValuesList()) {
+    for (Value entity : entityItemValue.getValuesList()) {
       Value identifier = entity.getStructValue().getFieldsOrThrow(Constant.ENTITY_FIELD_IDENTIFIER);
       String name =
           entity
@@ -244,6 +254,14 @@ public class DeepLinkListActivity extends CustomActivity {
     return getMatchedFromScore(scoreMap, action.getIntentName());
   }
 
+  /**
+   * @param appAction app action of the deep link
+   * @param action action of the deep link
+   * @param fulfillmentOption fulfillmentOption of the deep link
+   * @param sentence user input sentence
+   * @return recommended deep links or null if not found url entity
+   * try to get specific deep links from url inventory
+   */
   // Check inline inventory's urls and try to find a match
   private Map<String, List<AppFulfillment>> checkUrlEntity(
       AppAction appAction, Action action, FulfillmentOption fulfillmentOption, String sentence) {
@@ -332,6 +350,7 @@ public class DeepLinkListActivity extends CustomActivity {
   /**
    * @param appAction an app action to be parsed
    * @return Construct an data map from single AppAction.
+   * <key: action Name, value: list of deep link data>
    */
   private Map<String, List<AppFulfillment>> parseActionsFromApp(AppAction appAction) {
     Map<String, List<AppFulfillment>> resultMap = new TreeMap<>(comparator);
@@ -363,9 +382,9 @@ public class DeepLinkListActivity extends CustomActivity {
     intentMap.putAll(displayMap);
     adapter.notifyDataSetChanged();
     // Only unfold the first group when having recommended data
-    if(unfold) {
+    if (unfold) {
       expandableListView.expandGroup(0);
-    }else {
+    } else {
       expandableListView.collapseGroup(0);
     }
   }

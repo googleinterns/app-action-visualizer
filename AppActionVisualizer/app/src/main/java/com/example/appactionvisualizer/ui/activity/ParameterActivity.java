@@ -1,7 +1,6 @@
 package com.example.appactionvisualizer.ui.activity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -53,7 +52,7 @@ public class ParameterActivity extends CustomActivity {
   private Action action;
   private AppAction appAction;
   private String urlTemplate;
-  private TextView tvUrlTemplate, tvUrl, link;
+  private TextView tvUrlTemplate, entityItemView, link;
 
   @Override
   protected void initData() {
@@ -69,7 +68,7 @@ public class ParameterActivity extends CustomActivity {
   protected void initView() {
     super.initView();
     tvUrlTemplate = findViewById(R.id.url_template);
-    tvUrl = findViewById(R.id.url);
+    entityItemView = findViewById(R.id.url);
     link = findViewById(R.id.link);
     if (fulfillmentOption == null) {
       Utils.showMsg(getString(R.string.error_unknown), ParameterActivity.this);
@@ -156,20 +155,20 @@ public class ParameterActivity extends CustomActivity {
         new ClickableSpan() {
           @Override
           public void onClick(@NonNull View view) {
-            final ListValue listValue =
+            final ListValue entityItemValue =
                 entitySet.getItemList().getFieldsOrThrow(Constant.ENTITY_ITEM_LIST).getListValue();
             DialogInterface.OnClickListener listener =
                 new DialogInterface.OnClickListener() {
                   @Override
                   public void onClick(DialogInterface dialogInterface, int i) {
-                    Struct item = listValue.getValues(i).getStructValue();
-                    String url = item.getFieldsOrThrow(Constant.ENTITY_URL).getStringValue();
-                    setClickableText(tvUrl, url);
+                    Struct item = entityItemValue.getValues(i).getStructValue();
+                    String entityUrl = item.getFieldsOrThrow(Constant.ENTITY_URL).getStringValue();
+                    setClickableText(entityItemView, entityUrl);
                   }
                 };
             List<CharSequence> names = new ArrayList<>();
             // Set the list contents from listvalue's names
-            for (Value entity : listValue.getValuesList()) {
+            for (Value entity : entityItemValue.getValuesList()) {
               names.add(
                   entity
                       .getStructValue()
@@ -271,7 +270,7 @@ public class ParameterActivity extends CustomActivity {
       addLocationParameters(data, entry, parameters);
     }
     curUrl += TextUtils.join("&", parameters);
-    setClickableText(tvUrl, curUrl);
+    setClickableText(entityItemView, curUrl);
   }
 
   // Add latitude and longitude parameters to the url
@@ -317,7 +316,7 @@ public class ParameterActivity extends CustomActivity {
       String key = fulfillmentOption.getUrlTemplate().getParameterMapMap().keySet().iterator().next();
       String curUrl = StringUtils.replaceSingleParameter(this, urlTemplate, key
           , data.getStringExtra(key));
-      setClickableText(tvUrl, curUrl);
+      setClickableText(entityItemView, curUrl);
       return;
     }
     int firstPartIdx = urlTemplate.indexOf(URL_PARAMETER_INDICATOR);
@@ -330,6 +329,6 @@ public class ParameterActivity extends CustomActivity {
     }
     curUrl += TextUtils.join("&", parameters);
     curUrl += urlTemplate.substring(secondPartIdx + 1);
-    setClickableText(tvUrl, curUrl);
+    setClickableText(entityItemView, curUrl);
   }
 }
