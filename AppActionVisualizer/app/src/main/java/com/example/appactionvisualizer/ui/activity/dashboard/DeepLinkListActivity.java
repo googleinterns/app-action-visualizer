@@ -150,7 +150,7 @@ public class DeepLinkListActivity extends CustomActivity {
     String appName = pair.second;
     // Detect no app name, try to match all actions
     if (appName.isEmpty()) {
-      // If app name is not found, select actions from all actions.
+      // If app name is not found, select actions from all candidates.
       displayMap = getActionFromWords(defaultMap, words);
       return displayMap;
     }
