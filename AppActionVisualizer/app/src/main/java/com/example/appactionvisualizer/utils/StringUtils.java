@@ -9,38 +9,41 @@ import static com.example.appactionvisualizer.constants.Constant.URL_PARAMETER_I
 public class StringUtils {
 
   /**
-   * @param word1
-   * @param word2
+   * @param text text to be matched
+   * @param pattern match pattern
    * @return Levenshtein distance between two string
    */
-  public static int distance(String word1, String word2) {
-    int len1 = word1.length();
-    int len2 = word2.length();
+  public static int distance(String text, String pattern) {
+    int textLength = text.length();
+    int patternLength = pattern.length();
+    if(textLength <= patternLength - 2) {
+      return patternLength;
+    }
     // if one of the strings is empty
-    if (len1 * len2 == 0)
-      return len1 + len2;
-    int [][] dp = new int[len1 + 1][len2 + 1];
+    if (textLength * patternLength == 0)
+      return textLength + patternLength;
+    int [][] dp = new int[textLength + 1][patternLength + 1];
 
     // init boundaries
-    for (int idx = 0; idx < len1 + 1; idx++) {
+    for (int idx = 0; idx < textLength + 1; idx++) {
       dp[idx][0] = idx;
     }
-    for (int idx = 0; idx < len2 + 1; idx++) {
+    for (int idx = 0; idx < patternLength + 1; idx++) {
       dp[0][idx] = idx;
     }
 
     // DP compute
-    for (int idx1 = 1; idx1 < len1 + 1; idx1++) {
-      for (int idx2 = 1; idx2 < len2 + 1; idx2++) {
+    for (int idx1 = 1; idx1 < textLength + 1; idx1++) {
+      for (int idx2 = 1; idx2 < patternLength + 1; idx2++) {
         int left = dp[idx1 - 1][idx2] + 1;
         int down = dp[idx1][idx2 - 1] + 1;
         int left_down = dp[idx1 - 1][idx2 - 1];
-        if (word1.charAt(idx1 - 1) != word2.charAt(idx2 - 1))
+        if (text.charAt(idx1 - 1) != pattern.charAt(idx2 - 1))
           left_down += 1;
         dp[idx1][idx2] = Math.min(left, Math.min(down, left_down));
       }
     }
-    return dp[len1][len2];
+    return dp[textLength][patternLength];
   }
 
   /**
@@ -57,7 +60,7 @@ public class StringUtils {
     for(int startIdx = 0; startIdx <= inputWords.length - len; ++startIdx) {
       int score = 0;
       for(int patternIdx = 0; patternIdx < len; ++patternIdx) {
-        score += getScore(tobeMatched[patternIdx], inputWords[startIdx + patternIdx]);
+        score += getScore(inputWords[startIdx + patternIdx], tobeMatched[patternIdx]);
       }
       maxScore = Math.max(maxScore, score);
     }
@@ -65,10 +68,11 @@ public class StringUtils {
   }
 
   // Score is (length - Levenshtein Distance between two words)
-  public static int getScore(String str1, String str2) {
-    int score = Math.max(str1.length(), str2.length()) - distance(str1, str2);
-    // If score is 1, only single character matches, doesn't make sense.
-    return score > 1 ? score : 0;
+  public static int getScore(String text, String pattern) {
+    int score = Math.max(text.length(), pattern.length()) - distance(text, pattern);
+    int minSize = Math.min(text.length(), pattern.length());
+    // Can only tolerate with two mismatch characters.
+    return score >= (pattern.length() - 1) ? score : 0;
   }
 
   /**

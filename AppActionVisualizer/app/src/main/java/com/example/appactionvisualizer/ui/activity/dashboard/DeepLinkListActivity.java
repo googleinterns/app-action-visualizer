@@ -1,6 +1,7 @@
 package com.example.appactionvisualizer.ui.activity.dashboard;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Pair;
 import android.view.KeyEvent;
 import android.view.View;
@@ -73,6 +74,8 @@ public class DeepLinkListActivity extends CustomActivity {
   private Map<String, String[]> actionNameWords = new HashMap<>();
   private BaseExpandableListAdapter adapter;
   private ExpandableListView expandableListView;
+  // In order to match with an app name, the word must score at least 0.7
+  private static final double MINIMUM_SCORE = 0.7;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -133,7 +136,11 @@ public class DeepLinkListActivity extends CustomActivity {
     String appName = pair.second;
     // Detect no app name, try to match all actions
     if (appName.isEmpty()) {
-      // If app name is not found, select actions from all actions.
+      // Try to match all apps inventory
+      Map<String, List<AppFulfillment>> allInventory = getDeepLinkFromAllInventory(sentence);
+      if(allInventory != null && !allInventory.isEmpty())
+        return allInventory;
+      // If inventory could not be matched, try match actions from all actions.
       return getActionFromWords(defaultMap, words);
     }
     sentence = removeAppName(words, pair.first /* index of the app name in sentence */);
@@ -149,20 +156,24 @@ public class DeepLinkListActivity extends CustomActivity {
     // Try to match some inline inventory items using user input
     // This will generate one or some deep links
     Map<String, List<AppFulfillment>> displayMap = getDeepLinkFromInventory(appAction, sentence);
-    if (displayMap != null) {
+    if (displayMap != null && !displayMap.isEmpty()) {
       return displayMap;
     }
     // There's no need to parse other words since the app has only one action.
     if (appAction.getActionsCount() == 1) {
       return singleAppMap;
     }
-    // Try to match some action name of this app using user input
+    // Match some action name of this app using user input
     // This will generate most likely actions, which may include several deep links
-    displayMap = getActionFromWords(singleAppMap, sentence.split(WHITESPACE));
-    return displayMap;
+    return getActionFromWords(singleAppMap, sentence.split(WHITESPACE));
   }
 
-  // Remove app name from sentence in case it interferes with other parse stage
+  /**
+   * @param words user input words
+   * @param appIdx app name's index
+   * @return user sentence without app name
+   * Remove app name from sentence in case it interferes with other parse stage
+   */
   private String removeAppName(String[] words, Integer appIdx) {
     if (words.length == 1) return "";
     StringBuilder sbSentence = new StringBuilder();
@@ -176,11 +187,36 @@ public class DeepLinkListActivity extends CustomActivity {
   }
 
   /**
+   * @param sentence user input sentence
+   * @return the found data or null if not found
+   * Try to get specific deep links using all apps' inline inventory:
+   * either from a parameter's inventory or from url inventory.
+   * <key: action Name, value: list of deep link data>
+   */
+  protected Map<String, List<AppFulfillment>> getDeepLinkFromAllInventory(String sentence) {
+    Map<String, List<AppFulfillment>> result = new HashMap<>();
+    for(AppAction appAction : AppActionsGenerator.appActions) {
+      Map<String, List<AppFulfillment>> appDeepLinks = getDeepLinkFromInventory(appAction, sentence);
+      if(appDeepLinks != null && !appDeepLinks.isEmpty()) {
+        // Append each list of deep links to corresponding action name
+        for(Map.Entry<String, List<AppFulfillment>> entry : appDeepLinks.entrySet()) {
+          String actionName = entry.getKey();
+          if(result.get(actionName) == null) {
+            result.put(actionName, new ArrayList<AppFulfillment>());
+          }
+          result.get(actionName).addAll(entry.getValue());
+        }
+      }
+    }
+    return result;
+  }
+
+  /**
    * @param appAction matched app
    * @param sentence user input sentence
    * @return the found data or null if not found
-   * try to get specific deep links using inline inventory
-   * either from a parameter's inventory or from url inventory
+   * Try to get specific deep links using a specific app's inline inventory:
+   * either from a parameter's inventory or from url inventory.
    * <key: action Name, value: list of deep link data>
    */
   private Map<String, List<AppFulfillment>> getDeepLinkFromInventory(
@@ -216,7 +252,7 @@ public class DeepLinkListActivity extends CustomActivity {
    * @param entitySet inline inventory of the key
    * @param sentence user input sentence
    * @return recommended deep links or null if not found key entity set
-   * try to get specific deep links from a parameter key using inline inventory
+   * Try to get specific deep links from a parameter key using inline inventory.
    */
   // Check if sentence matches any inline inventory of a parameter
   private Map<String, List<AppFulfillment>> checkParameterEntity(
@@ -260,7 +296,7 @@ public class DeepLinkListActivity extends CustomActivity {
    * @param fulfillmentOption fulfillmentOption of the deep link
    * @param sentence user input sentence
    * @return recommended deep links or null if not found url entity
-   * try to get specific deep links from url inventory
+   * Try to get specific deep links from url inventory.
    */
   // Check inline inventory's urls and try to find a match
   private Map<String, List<AppFulfillment>> checkUrlEntity(
@@ -333,10 +369,15 @@ public class DeepLinkListActivity extends CustomActivity {
       }
       // Compute score to get a priority of this action.
       int score = StringUtils.matchScore(tobeMatched, inputWords);
+      if(score == 0)
+        continue;
       if (scoresMap.get(score) == null) {
         scoresMap.put(score, new ArrayList<String>());
       }
       scoresMap.get(score).add(actionName);
+    }
+    if(scoresMap.isEmpty()) {
+      return null;
     }
     List<String> matchedActions = scoresMap.lastEntry().getValue();
     // Keep the map order as insertion order
@@ -372,7 +413,7 @@ public class DeepLinkListActivity extends CustomActivity {
   private void updateView(Map<String, List<AppFulfillment>> displayMap) {
     // If no recommended data, display the default data.
     boolean unfold = true;
-    if (displayMap == null)  {
+    if (displayMap == null || displayMap.isEmpty())  {
       displayMap = defaultMap;
       unfold = false;
     }
@@ -395,22 +436,21 @@ public class DeepLinkListActivity extends CustomActivity {
    */
   protected Pair<Integer, String> checkApp(String[] words) {
     Set<String> names = appNameMap.keySet();
-    double maxScore = 0;
+    double score = 0;
     int appIdx = 0;
     String maxAppName = "";
     for (int idx = 0; idx < words.length; ++idx) {
       String str = words[idx];
       for (String appName : names) {
         double currentScore = (double) StringUtils.getScore(str, appName) / appName.length();
-        if (currentScore > maxScore) {
-          maxScore = currentScore;
+        if (currentScore > score) {
+          score = currentScore;
           maxAppName = appName;
           appIdx = idx;
         }
       }
     }
-    // 0.5 means half of the string is matched
-    if (maxScore < 0.5) {
+    if(score < MINIMUM_SCORE) {
       return new Pair<>(-1, "");
     }
     return new Pair<>(appIdx, maxAppName);

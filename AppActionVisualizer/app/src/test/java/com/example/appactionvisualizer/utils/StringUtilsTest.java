@@ -43,4 +43,14 @@ public class StringUtilsTest {
     String[] words2 = "iced latte".split(WHITESPACE);
     assertEquals(9, StringUtils.matchScore(words1, words2));
   }
+
+  @Test
+  public void testMatchScore6() {
+    String[] words1 = "GET_ACCOUNT".split(WHITESPACE);
+    String[] words2 = "latte".split(WHITESPACE);
+    int v = 4;
+    int ans = (int) ((double)v * 0.9);
+    System.out.println("double:" + ans);
+    assertEquals(0, StringUtils.matchScore(words1, words2));
+  }
 }
