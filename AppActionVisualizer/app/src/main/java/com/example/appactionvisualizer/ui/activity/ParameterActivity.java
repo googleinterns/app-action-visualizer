@@ -25,7 +25,7 @@ import com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOptio
 import com.example.appactionvisualizer.ui.activity.parameter.InputParameterActivity;
 import com.example.appactionvisualizer.ui.activity.parameter.LocationActivity;
 import com.example.appactionvisualizer.utils.StringUtils;
-import com.example.appactionvisualizer.utils.Utils;
+import com.example.appactionvisualizer.utils.AppUtils;
 import com.google.protobuf.ListValue;
 import com.google.protobuf.Struct;
 import com.google.protobuf.Value;
@@ -71,7 +71,7 @@ public class ParameterActivity extends CustomActivity {
     entityItemView = findViewById(R.id.url);
     link = findViewById(R.id.link);
     if (fulfillmentOption == null) {
-      Utils.showMsg(getString(R.string.error_unknown), ParameterActivity.this);
+      AppUtils.showMsg(getString(R.string.error_unknown), ParameterActivity.this);
       return;
     }
     setReferenceLink();
@@ -123,7 +123,7 @@ public class ParameterActivity extends CustomActivity {
   private void initClickableText() {
     if (urlTemplate.isEmpty()) return;
     if (fulfillmentOption.getFulfillmentMode() != DEEPLINK) {
-      Utils.showMsg(getString(R.string.error_not_deeplink), this);
+      AppUtils.showMsg(getString(R.string.error_not_deeplink), this);
       tvUrlTemplate.setText(urlTemplate);
       return;
     }
@@ -143,12 +143,12 @@ public class ParameterActivity extends CustomActivity {
   private void setUrlParameter(SpannableString ss) {
     if (fulfillmentOption.getUrlTemplate().getParameterMapCount() > 0
         || !action.getParameters(0).getEntitySetReference(0).getUrlFilter().isEmpty()) {
-      Utils.showMsg(getString(R.string.error_filter), this);
+      AppUtils.showMsg(getString(R.string.error_filter), this);
       return;
     }
-    final EntitySet entitySet = Utils.checkUrlEntitySet(appAction, action);
+    final EntitySet entitySet = AppUtils.checkUrlEntitySet(appAction, action);
     if (entitySet == null) {
-      Utils.showMsg(getString(R.string.error_parsing), this);
+      AppUtils.showMsg(getString(R.string.error_parsing), this);
       return;
     }
     ClickableSpan clickable =
@@ -180,7 +180,7 @@ public class ParameterActivity extends CustomActivity {
                     .getItemList()
                     .getFieldsOrThrow(Constant.ENTITY_FIELD_IDENTIFIER)
                     .getStringValue();
-            Utils.popUpDialog(ParameterActivity.this, title, names, listener);
+            AppUtils.popUpDialog(ParameterActivity.this, title, names, listener);
           }
         };
     ss.setSpan(clickable, 0, urlTemplate.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -238,7 +238,7 @@ public class ParameterActivity extends CustomActivity {
         new View.OnClickListener() {
           @Override
           public void onClick(View view) {
-            Utils.jumpToApp(ParameterActivity.this, curUrl, appAction.getPackageName());
+            AppUtils.jumpToApp(ParameterActivity.this, curUrl, appAction.getPackageName());
           }
         });
   }
@@ -255,7 +255,7 @@ public class ParameterActivity extends CustomActivity {
         new View.OnClickListener() {
           @Override
           public void onClick(View view) {
-            Utils.jumpToWebPage(ParameterActivity.this, curUrl);
+            AppUtils.jumpToWebPage(ParameterActivity.this, curUrl);
           }
         });
   }

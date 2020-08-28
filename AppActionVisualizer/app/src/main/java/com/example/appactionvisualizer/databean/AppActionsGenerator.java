@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.example.appactionvisualizer.R;
 import com.example.appactionvisualizer.databean.AppActionProtos.AppAction;
-import com.example.appactionvisualizer.utils.Utils;
+import com.example.appactionvisualizer.utils.AppUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -59,8 +59,8 @@ public class AppActionsGenerator {
        */
       @Override
       public int compare(AppAction appAction1, AppAction appAction2) {
-        return Utils.getAppNameByPackageName(context, appAction1.getPackageName()).toLowerCase().compareTo
-            (Utils.getAppNameByPackageName(context, appAction2.getPackageName()).toLowerCase());
+        return AppUtils.getAppNameByPackageName(context, appAction1.getPackageName()).toLowerCase().compareTo
+            (AppUtils.getAppNameByPackageName(context, appAction2.getPackageName()).toLowerCase());
       }
     });
   }

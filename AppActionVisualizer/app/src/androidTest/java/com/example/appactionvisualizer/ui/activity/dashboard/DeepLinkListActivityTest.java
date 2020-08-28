@@ -20,6 +20,7 @@ import java.util.Map;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 public class DeepLinkListActivityTest {
   private static final String TAG = DeepLinkListActivityTest.class.getSimpleName();
@@ -122,12 +123,34 @@ public class DeepLinkListActivityTest {
   @Test
   public void testGetDisplayMap6() {
     setData();
-    testGetDisplayMap("coup", 1);
+    testGetDisplayMap("coup", -1 /* -1 to indicate null */);
   }
 
-  public void testGetDisplayMap(String sentence, int actionSize) {
+  @Test
+  public void testGetDisplayMap7() {
+    setData();
+    testGetDisplayMap("birthday", 1);
+  }
+
+  @Test
+  public void testGetDisplayMap8() {
+    setData();
+    testGetDisplayMap("later", 1);
+  }
+
+  @Test
+  public void testGetDisplayMap9() {
+    setData();
+    testGetDisplayMap("tea", 1);
+  }
+
+  public void testGetDisplayMap(String sentence, int mapSize) {
     Map<String, List<AppFulfillment>> recommend = activity.getDisplayMap(sentence);
-    assertEquals(recommend.size(), actionSize);
+    if (mapSize == -1) {
+      assertNull(recommend);
+    } else {
+      assertEquals(recommend.size(), mapSize);
+    }
   }
 
   // Set some test data for the expandable list view.
@@ -135,6 +158,4 @@ public class DeepLinkListActivityTest {
     AppActionsGenerator.getInstance().readFromFile(appContext);
     activity = rule.launchActivity(new Intent());
   }
-
-
 }

@@ -24,14 +24,14 @@ import java.lang.reflect.Field;
 import java.net.URISyntaxException;
 import java.util.List;
 
-public class Utils {
-  private Utils() {}
+public class AppUtils {
+  private AppUtils() {}
 
   /**
    * resID = getResId("icon", R.drawable.class);
    *
-   * @param resName
-   * @param className
+   * @param resName resource name
+   * @param className resource path
    * @return resource id if found or -1 not found
    */
   public static int getResId(String resName, Class<?> className) {
@@ -66,7 +66,7 @@ public class Utils {
               .getApplicationLabel(packageManager.getApplicationInfo(pkgName, 0))
               .toString();
     } catch (PackageManager.NameNotFoundException e) {
-      int strId = Utils.getResIdByPackageName(pkgName, R.string.class);
+      int strId = AppUtils.getResIdByPackageName(pkgName, R.string.class);
       if (strId != -1) {
         appName = context.getString(strId);
       } else {
@@ -81,7 +81,7 @@ public class Utils {
       PackageManager packageManager = context.getPackageManager();
       return (packageManager.getApplicationIcon(pkgName));
     } catch (PackageManager.NameNotFoundException e) {
-      int imgId = Utils.getResIdByPackageName(pkgName, R.drawable.class);
+      int imgId = AppUtils.getResIdByPackageName(pkgName, R.drawable.class);
       if (imgId == -1) {
         imgId = R.drawable.rounded_corner;
       }
@@ -112,7 +112,7 @@ public class Utils {
     try {
       context.getPackageManager().getApplicationInfo(packageName, 0);
     } catch (PackageManager.NameNotFoundException e) {
-      Utils.jumpToWebPage(context, context.getString(R.string.url_reference_prefix, packageName));
+      AppUtils.jumpToWebPage(context, context.getString(R.string.url_reference_prefix, packageName));
     }
     try {
       // parseUri() might throw URISyntaxException error
@@ -120,16 +120,12 @@ public class Utils {
       intent.setPackage(packageName);
       // startActivity() might throw ActivityNotFoundException error
       context.startActivity(intent);
+    } catch (URISyntaxException e) {
+      AppUtils.showMsg(context.getString(R.string.error_parsing), context);
+    } catch (ActivityNotFoundException e) {
+      AppUtils.showMsg(context.getString(R.string.error_activity), context);
     } catch (Exception e) {
-      String errorMsg;
-      if (e instanceof URISyntaxException) {
-        errorMsg = context.getString(R.string.error_parsing);
-      } else if (e instanceof ActivityNotFoundException) {
-        errorMsg = context.getString(R.string.error_activity);
-      } else {
-        errorMsg = context.getString(R.string.error_unknown);
-      }
-      Utils.showMsg(errorMsg, context);
+      AppUtils.showMsg(context.getString(R.string.error_unknown), context);
     }
   }
 
@@ -145,8 +141,14 @@ public class Utils {
     materialAlertDialogBuilder.setItems(list.toArray(keys), listener).show();
   }
 
-  // Jump to a deep link which has no parameter or jump into parameterActivity to select parameters
-  // for the deeplink.
+  /**
+   * Jump to a deep link which has no parameter or jump into parameterActivity to select parameters
+   * for the deeplink.
+   * @param context Context object for the application
+   * @param appAction app action data
+   * @param action action data
+   * @param fulfillmentOption fulfillment data
+   */
   public static void jumpByType(
       final Context context,
       final AppAction appAction,
@@ -161,20 +163,22 @@ public class Utils {
       context.startActivity(intent);
     } else {
       String url = fulfillmentOption.getUrlTemplate().getTemplate();
+      // The dunkin url has redundant contents, hardcode in order to jump into correct activity
       if (appAction.getPackageName().equals("com.dunkinbrands.otgo")) {
         url = url.substring(0, url.indexOf("?"));
       }
-      Utils.jumpToApp(context, url, appAction.getPackageName());
+      AppUtils.jumpToApp(context, url, appAction.getPackageName());
     }
   }
 
   /**
-   * @param appAction
-   * @param action
-   * @return
+   * All fulfillment options with "@url" require "feature" key in parameter list of actions(expect
+   * url_filter)
+   *
+   * @param appAction app action data
+   * @param action action data
+   * @return url entity set or null if not found
    */
-  // All fulfillment options with "@url" require "feature" key in parameter list of actions(expect
-  // url_filter)
   public static EntitySet checkUrlEntitySet(AppAction appAction, Action action) {
     for (Action.Parameter parameter : action.getParametersList()) {
       if (parameter.getName().equals(Constant.URL_KEY)) {

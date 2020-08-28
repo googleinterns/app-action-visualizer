@@ -67,7 +67,11 @@ public class StringUtils {
     return maxScore;
   }
 
-  // Score is (length - Levenshtein Distance between two words)
+  /**
+   * @param text word to be matched
+   * @param pattern pattern of the word
+   * @return a final score, which is length - Levenshtein Distance between two words
+   */
   public static int getScore(String text, String pattern) {
     int score = Math.max(text.length(), pattern.length()) - distance(text, pattern);
     int minSize = Math.min(text.length(), pattern.length());
@@ -76,13 +80,15 @@ public class StringUtils {
   }
 
   /**
-   * @param identifier
    * replace parameter with input from user to construct the url e.g.:
    * https://example.com/test?utm_campaign=appactions{#foo} ==>
    * https://example.com/test?utm_campaign=appactions#foo=123
    * myapp://example/{foo} ==> myapp://example/123
+   *
+   * @param identifier
    */
-  public static String replaceSingleParameter(Context context, String urlTemplate, String key, String identifier) {
+  public static String replaceSingleParameter(
+      Context context, String urlTemplate, String key, String identifier) {
     if (key == null) return "";
     int firstPartIdx = urlTemplate.indexOf(URL_PARAMETER_INDICATOR);
     int secondPartIdx = urlTemplate.indexOf("}");
