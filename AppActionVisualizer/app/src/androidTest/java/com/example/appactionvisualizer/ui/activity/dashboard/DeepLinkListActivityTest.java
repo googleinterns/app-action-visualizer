@@ -20,6 +20,7 @@ import java.util.Map;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 public class DeepLinkListActivityTest {
   private static final String TAG = DeepLinkListActivityTest.class.getSimpleName();
@@ -53,12 +54,33 @@ public class DeepLinkListActivityTest {
   }
 
   @Test
-  public void testCheckApp() {
+  public void testCheckApp1() {
+    setData();
+    testAppName("open facebook", "facebook", 1);
+  }
+
+  @Test
+  public void testCheckApp2() {
     setData();
     testAppName("youtube history", "youtube", 0);
-    testAppName("open facebook", "facebook", 1);
+  }
+
+  @Test
+  public void testCheckApp3() {
+    setData();
     testAppName("youtub history", "youtube", 0);
+  }
+
+  @Test
+  public void testCheckApp4() {
+    setData();
     testAppName("open facbook", "facebook", 1);
+  }
+
+  @Test
+  public void testCheckApp5() {
+    setData();
+    testAppName("open facebo", "", -1);
   }
 
   private void testAppName(String sentence, String appName, Integer appIdx) {
@@ -69,16 +91,66 @@ public class DeepLinkListActivityTest {
   }
 
   @Test
-  public void testGetDisplayMap() {
+  public void testGetDisplayMap1() {
     setData();
     testGetDisplayMap("dunkin", 4);
+  }
+
+  @Test
+  public void testGetDisplayMap2() {
+    setData();
     testGetDisplayMap("dunkin latte", 1);
+  }
+
+  @Test
+  public void testGetDisplayMap3() {
+    setData();
     testGetDisplayMap("fit running", 1);
   }
 
-  public void testGetDisplayMap(String sentence, int actionSize) {
+  @Test
+  public void testGetDisplayMap4() {
+    setData();
+    testGetDisplayMap("latte", 1);
+  }
+
+  @Test
+  public void testGetDisplayMap5() {
+    setData();
+    testGetDisplayMap("coupon", 1);
+  }
+
+  @Test
+  public void testGetDisplayMap6() {
+    setData();
+    testGetDisplayMap("coup", -1 /* -1 to indicate null */);
+  }
+
+  @Test
+  public void testGetDisplayMap7() {
+    setData();
+    testGetDisplayMap("birthday", 1);
+  }
+
+  @Test
+  public void testGetDisplayMap8() {
+    setData();
+    testGetDisplayMap("later", 1);
+  }
+
+  @Test
+  public void testGetDisplayMap9() {
+    setData();
+    testGetDisplayMap("tea", 1);
+  }
+
+  public void testGetDisplayMap(String sentence, int mapSize) {
     Map<String, List<AppFulfillment>> recommend = activity.getDisplayMap(sentence);
-    assertEquals(recommend.size(), actionSize);
+    if (mapSize == -1) {
+      assertNull(recommend);
+    } else {
+      assertEquals(recommend.size(), mapSize);
+    }
   }
 
   // Set some test data for the expandable list view.
@@ -86,6 +158,4 @@ public class DeepLinkListActivityTest {
     AppActionsGenerator.getInstance().readFromFile(appContext);
     activity = rule.launchActivity(new Intent());
   }
-
-
 }
