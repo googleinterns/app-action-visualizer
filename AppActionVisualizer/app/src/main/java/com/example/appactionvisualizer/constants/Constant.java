@@ -34,6 +34,7 @@ public class Constant {
   // The fulfillment attempts to derive {@url} from sources such as web and inline inventory
   public static final String URL_NO_LINK = "{@url}";
 
+  public static final String URL_KEY = "feature";
   public final static String ENTITY_FIELD_IDENTIFIER = "identifier";
   public final static String ENTITY_FIELD_NAME = "name";
   public final static String ENTITY_ITEM_LIST = "itemListElement";
@@ -54,5 +55,9 @@ public class Constant {
 
   @StringRes
   public static final int[] TAB_TITLES = new int[]{R.string.tab_text_statistics, R.string.tab_text_all, R.string.tab_text_1, R.string.tab_text_2, R.string.tab_text_3, R.string.tab_text_4, R.string.tab_text_5};
+  // Action name prefix.
+  public static final String INTENT_PREFIX = "actions.intent.";
+  public static final String WHITESPACE = " ";
+  public static final String UNDERLINE = "_";
 
 }

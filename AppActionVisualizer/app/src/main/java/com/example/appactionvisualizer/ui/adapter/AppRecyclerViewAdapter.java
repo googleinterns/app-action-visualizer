@@ -17,7 +17,7 @@ import com.example.appactionvisualizer.databean.ActionType;
 import com.example.appactionvisualizer.databean.AppActionProtos.AppAction;
 import com.example.appactionvisualizer.databean.AppActionsGenerator;
 import com.example.appactionvisualizer.ui.activity.ActionActivity;
-import com.example.appactionvisualizer.utils.Utils;
+import com.example.appactionvisualizer.utils.AppUtils;
 
 import java.util.HashSet;
 import java.util.List;
@@ -51,8 +51,8 @@ public class AppRecyclerViewAdapter extends RecyclerView.Adapter<AppRecyclerView
   @Override
   public void onBindViewHolder(final ViewHolder holder, final int position) {
     final AppAction appAction = appActionArrayList.get(position);
-    holder.appIcon.setImageDrawable(Utils.getIconByPackageName(context, appAction.getPackageName()));
-    holder.appName.setText(Utils.getAppNameByPackageName(context, appAction.getPackageName()));
+    holder.appIcon.setImageDrawable(AppUtils.getIconByPackageName(context, appAction.getPackageName()));
+    holder.appName.setText(AppUtils.getAppNameByPackageName(context, appAction.getPackageName()));
     // Use hash set to avoid duplicate tags
     // Use hash set to avoid duplicate tags
     final HashSet<ActionType> uniqueSet = new HashSet<>(5);

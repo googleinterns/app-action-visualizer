@@ -23,6 +23,7 @@
     <string name="dashboard">Dashboard</string>
     <string name="app">App counts</string>
     <string name="fulfillment_option">Deep link/Slice numbers</string>
+    <string name="input_action">Input your action</string>
     <!-- key-value pair !-->
     <string name="kv_string_int">%1$s: %2$d\n</string>
     <string name="slice">Slice:  %1$d\n</string>
