@@ -15,7 +15,7 @@ import com.example.appactionvisualizer.databean.ActionType;
 import com.example.appactionvisualizer.databean.AppActionProtos.Action;
 import com.example.appactionvisualizer.databean.AppActionProtos.AppAction;
 import com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption;
-import com.example.appactionvisualizer.utils.Utils;
+import com.example.appactionvisualizer.utils.AppUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -139,7 +139,7 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
             new View.OnClickListener() {
               @Override
               public void onClick(View view) {
-                Utils.jumpByType(context, appAction, action, fulfillment);
+                AppUtils.jumpByType(context, appAction, action, fulfillment);
               }
             });
     }

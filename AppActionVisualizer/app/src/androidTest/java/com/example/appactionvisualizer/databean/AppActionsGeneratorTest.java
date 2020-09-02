@@ -4,7 +4,7 @@ import android.content.Context;
 
 import androidx.test.platform.app.InstrumentationRegistry;
 
-import com.example.appactionvisualizer.utils.Utils;
+import com.example.appactionvisualizer.utils.AppUtils;
 
 import org.junit.Test;
 
@@ -53,8 +53,8 @@ public class AppActionsGeneratorTest {
     Collections.sort(sortedActions, new Comparator<AppActionProtos.AppAction>() {
       @Override
       public int compare(AppActionProtos.AppAction appAction1, AppActionProtos.AppAction appAction2) {
-        return Utils.getAppNameByPackageName(appContext, appAction1.getPackageName()).toLowerCase().compareTo
-            (Utils.getAppNameByPackageName(appContext, appAction2.getPackageName()).toLowerCase());
+        return AppUtils.getAppNameByPackageName(appContext, appAction1.getPackageName()).toLowerCase().compareTo
+            (AppUtils.getAppNameByPackageName(appContext, appAction2.getPackageName()).toLowerCase());
       }
     });
     assertEquals(AppActionsGenerator.appActions, sortedActions);

@@ -22,7 +22,7 @@ import com.example.appactionvisualizer.R;
 import com.example.appactionvisualizer.constants.Constant;
 import com.example.appactionvisualizer.ui.activity.CustomActivity;
 import com.example.appactionvisualizer.ui.adapter.AddressListRecyclerViewAdapter;
-import com.example.appactionvisualizer.utils.Utils;
+import com.example.appactionvisualizer.utils.AppUtils;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
@@ -87,7 +87,7 @@ public class LocationActivity extends CustomActivity implements View.OnClickList
   }
 
   private void errorHint() {
-    Utils.showMsg(ERROR_NO_PLACE, LocationActivity.this);
+    AppUtils.showMsg(ERROR_NO_PLACE, LocationActivity.this);
   }
 
   @Override

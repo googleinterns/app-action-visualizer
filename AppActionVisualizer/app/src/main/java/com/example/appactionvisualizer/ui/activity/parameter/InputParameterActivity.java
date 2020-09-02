@@ -20,7 +20,7 @@ import com.example.appactionvisualizer.databean.AppActionProtos.AppAction;
 import com.example.appactionvisualizer.databean.AppActionProtos.EntitySet;
 import com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption;
 import com.example.appactionvisualizer.ui.activity.CustomActivity;
-import com.example.appactionvisualizer.utils.Utils;
+import com.example.appactionvisualizer.utils.AppUtils;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.protobuf.ListValue;
@@ -83,7 +83,8 @@ public class InputParameterActivity extends CustomActivity {
     return super.onOptionsItemSelected(item);
   }
 
-  // When user hits save button, check if user has input/selected all parameters. If valid, return to previous activity.
+  // When user hits save button, check if user has input/selected all parameters. If valid, return
+  // to previous activity.
   private void checkInputAndReturn() {
     Intent intent = new Intent();
     for (Map.Entry<String, TextInputEditText> entry : key2textInputEditTexts.entrySet()) {
@@ -93,7 +94,7 @@ public class InputParameterActivity extends CustomActivity {
       }
       String value = Objects.requireNonNull(entry.getValue().getText()).toString();
       if (value.isEmpty()) {
-        Utils.showMsg(getString(R.string.input_hint, key), this);
+        AppUtils.showMsg(getString(R.string.input_hint, key), this);
         return;
       }
       // Convert to identifier
@@ -113,7 +114,9 @@ public class InputParameterActivity extends CustomActivity {
   }
 
   /**
-   * @param key create a TextInputLayout with TextInputEditText with specific key dynamically
+   * create a TextInputLayout with TextInputEditText with specific key dynamically
+   *
+   * @param key
    */
   private void addInputKeyLayout(final String key) {
     final LinearLayout linearLayout = findViewById(R.id.parameter_list);
@@ -125,7 +128,7 @@ public class InputParameterActivity extends CustomActivity {
     LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
     params.setMargins(10, 10, 10, 0);
     textInputLayout.setLayoutParams(params);
-    final EntitySet entitySet = checkEntitySet(key);
+    final EntitySet entitySet = checkEntitySet(key, appAction, action, fulfillmentOption);
     if (entitySet != null) {
       textInput.setFocusable(false);
       textInput.setClickable(true);
@@ -148,17 +151,24 @@ public class InputParameterActivity extends CustomActivity {
             names.add(entity.getStructValue().getFieldsOrDefault(Constant.ENTITY_FIELD_NAME, identifier).getStringValue());
           }
           String title = entitySet.getItemList().getFieldsOrThrow(Constant.ENTITY_FIELD_IDENTIFIER).getStringValue();
-          Utils.popUpDialog(InputParameterActivity.this, title, names, listener);
+          AppUtils.popUpDialog(InputParameterActivity.this, title, names, listener);
         }
       });
     }
     linearLayout.addView(textInputLayout);
   }
 
-
-
-  // Check if entity set has provided corresponding list items
-  private EntitySet checkEntitySet(String key) {
+  /**
+   * Check if specific key has an entity set
+   *
+   * @param key parameter key name
+   * @param appAction app action data
+   * @param action action data
+   * @param fulfillmentOption fulfillment option data
+   * @return an entityset corresponding to parameter key or null if not found
+   */
+  public static EntitySet checkEntitySet(
+      String key, AppAction appAction, Action action, FulfillmentOption fulfillmentOption) {
     String parameterValue = fulfillmentOption.getUrlTemplate().getParameterMapMap().get(key);
     for (Action.Parameter parameter : action.getParametersList()) {
       if (parameter.getName().equals(parameterValue)) {

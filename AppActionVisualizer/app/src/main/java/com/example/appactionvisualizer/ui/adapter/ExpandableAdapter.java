@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.example.appactionvisualizer.R;
 import com.example.appactionvisualizer.constants.Constant;
 import com.example.appactionvisualizer.databean.AppFulfillment;
-import com.example.appactionvisualizer.utils.Utils;
+import com.example.appactionvisualizer.utils.AppUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -97,7 +97,7 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
       contents.setTextColor(context.getResources().getColor(R.color.colorAccent));
     }
     ((ImageView) view.findViewById(R.id.app_icon))
-        .setImageDrawable(Utils.getIconByPackageName(context, data.appAction.getPackageName()));
+        .setImageDrawable(AppUtils.getIconByPackageName(context, data.appAction.getPackageName()));
     return view;
   }
 
