@@ -24,8 +24,8 @@ import com.example.appactionvisualizer.databean.AppActionProtos.EntitySet;
 import com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption;
 import com.example.appactionvisualizer.ui.activity.parameter.InputParameterActivity;
 import com.example.appactionvisualizer.ui.activity.parameter.LocationActivity;
-import com.example.appactionvisualizer.utils.StringUtils;
 import com.example.appactionvisualizer.utils.AppUtils;
+import com.example.appactionvisualizer.utils.StringUtils;
 import com.google.protobuf.ListValue;
 import com.google.protobuf.Struct;
 import com.google.protobuf.Value;
@@ -35,10 +35,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import static com.example.appactionvisualizer.constants.Constant.DROP_OFF_LATITUDE_FIELD;
-import static com.example.appactionvisualizer.constants.Constant.DROP_OFF_LONGITUDE_FIELD;
-import static com.example.appactionvisualizer.constants.Constant.PICK_UP_LATITUDE_FIELD;
-import static com.example.appactionvisualizer.constants.Constant.PICK_UP_LONGITUDE_FIELD;
 import static com.example.appactionvisualizer.constants.Constant.URL_PARAMETER_INDICATOR;
 import static com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption.FulfillmentMode.DEEPLINK;
 
@@ -118,7 +114,7 @@ public class ParameterActivity extends CustomActivity {
 
   /**
    * set the ways of selecting parameter currently 2 ways: 1. user inputs arbitrary text/select from
-   * list 2. select two addresses(for transportation action intent)
+   * list 2. select two addresses(for taxi reservation action intent)
    */
   private void initClickableText() {
     if (urlTemplate.isEmpty()) return;
@@ -226,9 +222,10 @@ public class ParameterActivity extends CustomActivity {
   }
 
   /**
+   * set the constructed deeplink to a specific text view and set on-click jump logic
+   *
    * @param display the text view to display the url
-   * @param curUrl the constructed url set the constructed deeplink to a specific text view and set
-   *     on-click jump logic
+   * @param curUrl the constructed url
    */
   private void setClickableText(final TextView display, final String curUrl) {
     display.setText(curUrl);
@@ -244,9 +241,10 @@ public class ParameterActivity extends CustomActivity {
   }
 
   /**
+   * set the web page url to a specific text view and set jump logic
+   *
    * @param display the text view to display the url
-   * @param curUrl the web page url set the web page url to a specific text view and set on-click
-   *     jump logic
+   * @param curUrl the web page url
    */
   private void setClickableTextToWeb(final TextView display, final String curUrl) {
     display.setText(curUrl);
@@ -267,55 +265,33 @@ public class ParameterActivity extends CustomActivity {
     List<String> parameters = new ArrayList<>();
     for (Map.Entry<String, String> entry :
         fulfillmentOption.getUrlTemplate().getParameterMapMap().entrySet()) {
-      addLocationParameters(data, entry, parameters);
+      AppUtils.addLocationParameters(
+          this,
+          entry,
+          parameters,
+          data.getStringExtra(Constant.PICK_UP_LATITUDE),
+          data.getStringExtra(Constant.PICK_UP_LONGITUDE),
+          data.getStringExtra(Constant.DROP_OFF_LATITUDE),
+          data.getStringExtra(Constant.DROP_OFF_LONGITUDE));
     }
     curUrl += TextUtils.join("&", parameters);
     setClickableText(entityItemView, curUrl);
   }
 
-  // Add latitude and longitude parameters to the url
-  private void addLocationParameters(
-      Intent data, Map.Entry<String, String> entry, List<String> parameters) {
-    if (entry.getValue().equals(PICK_UP_LATITUDE_FIELD)) {
-      parameters.add(
-          getString(
-              R.string.url_parameter,
-              entry.getKey(),
-              data.getStringExtra(Constant.PICK_UP_LATITUDE)));
-    } else if (entry.getValue().equals(PICK_UP_LONGITUDE_FIELD)) {
-      parameters.add(
-          getString(
-              R.string.url_parameter,
-              entry.getKey(),
-              data.getStringExtra(Constant.PICK_UP_LONGITUDE)));
-    } else if (entry.getValue().equals(DROP_OFF_LATITUDE_FIELD)) {
-      parameters.add(
-          getString(
-              R.string.url_parameter,
-              entry.getKey(),
-              data.getStringExtra(Constant.DROP_OFF_LATITUDE)));
-    } else if (entry.getValue().equals(DROP_OFF_LONGITUDE_FIELD)) {
-      parameters.add(
-          getString(
-              R.string.url_parameter,
-              entry.getKey(),
-              data.getStringExtra(Constant.DROP_OFF_LONGITUDE)));
-    }
-  }
-
-
   /**
+   * replace each parameter with input from user to construct the url e.g.: *
+   * https://example.com/test{?foo,bar} ==> https://example.com/test?foo=123&bar=456 *
+   * https://example.com/test?utm_campaign=appactions{&foo,bar} ==> *
+   * https://example.com/test?utm_campaign=appactions&foo=123&bar=456
+   *
    * @param data intent data received from selectActivity
-   *     <p>replace each parameter with input from user to construct the url e.g.:
-   *     https://example.com/test{?foo,bar} ==> https://example.com/test?foo=123&bar=456
-   *     https://example.com/test?utm_campaign=appactions{&foo,bar} ==>
-   *     https://example.com/test?utm_campaign=appactions&foo=123&bar=456
    */
   private void replaceParameter(Intent data) {
     if (fulfillmentOption.getUrlTemplate().getParameterMapCount() == 1) {
-      String key = fulfillmentOption.getUrlTemplate().getParameterMapMap().keySet().iterator().next();
-      String curUrl = StringUtils.replaceSingleParameter(this, urlTemplate, key
-          , data.getStringExtra(key));
+      String key =
+          fulfillmentOption.getUrlTemplate().getParameterMapMap().keySet().iterator().next();
+      String curUrl =
+          StringUtils.replaceSingleParameter(this, urlTemplate, key, data.getStringExtra(key));
       setClickableText(entityItemView, curUrl);
       return;
     }
