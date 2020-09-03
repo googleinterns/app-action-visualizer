@@ -42,6 +42,35 @@ public class InputParameterActivity extends CustomActivity {
   private Action action;
   private AppAction appAction;
 
+  /**
+   * Check if specific key has an entity set
+   *
+   * @param key parameter key name
+   * @param appAction app action data
+   * @param action action data
+   * @param fulfillmentOption fulfillment option data
+   * @return an entityset corresponding to parameter key or null if not found
+   */
+  public static EntitySet checkEntitySet(
+      String key, AppAction appAction, Action action, FulfillmentOption fulfillmentOption) {
+    String parameterValue = fulfillmentOption.getUrlTemplate().getParameterMapMap().get(key);
+    for (Action.Parameter parameter : action.getParametersList()) {
+      if (parameter.getName().equals(parameterValue)) {
+        if (parameter.getEntitySetReferenceCount() == 0) continue;
+        String reference = parameter.getEntitySetReference(0).getEntitySetId();
+        for (EntitySet set : appAction.getEntitySetsList()) {
+          if (set.getItemList()
+              .getFieldsOrThrow(Constant.ENTITY_FIELD_IDENTIFIER)
+              .getStringValue()
+              .equals(reference)) {
+            return set;
+          }
+        }
+      }
+    }
+    return null;
+  }
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -52,7 +81,8 @@ public class InputParameterActivity extends CustomActivity {
 
   @Override
   protected void initData() {
-    fulfillmentOption = (FulfillmentOption) getIntent().getSerializableExtra(Constant.FULFILLMENT_OPTION);
+    fulfillmentOption =
+        (FulfillmentOption) getIntent().getSerializableExtra(Constant.FULFILLMENT_OPTION);
     // For those who doesn't have a parameter mapping, the app requires the user input
     if (fulfillmentOption != null) {
       keys.addAll(fulfillmentOption.getUrlTemplate().getParameterMapMap().keySet());
@@ -120,68 +150,65 @@ public class InputParameterActivity extends CustomActivity {
    */
   private void addInputKeyLayout(final String key) {
     final LinearLayout linearLayout = findViewById(R.id.parameter_list);
-    TextInputLayout textInputLayout = (TextInputLayout) LayoutInflater.from(InputParameterActivity.this).inflate(R.layout.text_input, null);
+    TextInputLayout textInputLayout =
+        (TextInputLayout)
+            LayoutInflater.from(InputParameterActivity.this).inflate(R.layout.text_input, null);
     textInputLayout.setHint(key);
     textInputLayout.setHelperText(map.get(key));
     final TextInputEditText textInput = textInputLayout.findViewById(R.id.text_input);
     key2textInputEditTexts.put(key, textInput);
-    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+    LinearLayout.LayoutParams params =
+        new LinearLayout.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
     params.setMargins(10, 10, 10, 0);
     textInputLayout.setLayoutParams(params);
     final EntitySet entitySet = checkEntitySet(key, appAction, action, fulfillmentOption);
     if (entitySet != null) {
       textInput.setFocusable(false);
       textInput.setClickable(true);
-      textInput.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-          final ListValue listValue = entitySet.getItemList().getFieldsOrThrow(Constant.ENTITY_ITEM_LIST).getListValue();
-          DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
+      textInput.setOnClickListener(
+          new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-              Struct item = listValue.getValues(i).getStructValue();
-              Value identifier = item.getFieldsOrThrow(Constant.ENTITY_FIELD_IDENTIFIER);
-              textInput.setText(getString(R.string.addition_text, item.getFieldsOrDefault(Constant.ENTITY_FIELD_NAME, identifier).getStringValue(), identifier.getStringValue()));
+            public void onClick(View view) {
+              final ListValue listValue =
+                  entitySet
+                      .getItemList()
+                      .getFieldsOrThrow(Constant.ENTITY_ITEM_LIST)
+                      .getListValue();
+              DialogInterface.OnClickListener listener =
+                  new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                      Struct item = listValue.getValues(i).getStructValue();
+                      Value identifier = item.getFieldsOrThrow(Constant.ENTITY_FIELD_IDENTIFIER);
+                      textInput.setText(
+                          getString(
+                              R.string.addition_text,
+                              item.getFieldsOrDefault(Constant.ENTITY_FIELD_NAME, identifier)
+                                  .getStringValue(),
+                              identifier.getStringValue()));
+                    }
+                  };
+              List<CharSequence> names = new ArrayList<>();
+              // Set the list contents
+              for (Value entity : listValue.getValuesList()) {
+                Value identifier =
+                    entity.getStructValue().getFieldsOrThrow(Constant.ENTITY_FIELD_IDENTIFIER);
+                names.add(
+                    entity
+                        .getStructValue()
+                        .getFieldsOrDefault(Constant.ENTITY_FIELD_NAME, identifier)
+                        .getStringValue());
+              }
+              String title =
+                  entitySet
+                      .getItemList()
+                      .getFieldsOrThrow(Constant.ENTITY_FIELD_IDENTIFIER)
+                      .getStringValue();
+              AppUtils.popUpDialog(InputParameterActivity.this, title, names, listener);
             }
-          };
-          List<CharSequence> names = new ArrayList<>();
-          // Set the list contents
-          for (Value entity : listValue.getValuesList()) {
-            Value identifier = entity.getStructValue().getFieldsOrThrow(Constant.ENTITY_FIELD_IDENTIFIER);
-            names.add(entity.getStructValue().getFieldsOrDefault(Constant.ENTITY_FIELD_NAME, identifier).getStringValue());
-          }
-          String title = entitySet.getItemList().getFieldsOrThrow(Constant.ENTITY_FIELD_IDENTIFIER).getStringValue();
-          AppUtils.popUpDialog(InputParameterActivity.this, title, names, listener);
-        }
-      });
+          });
     }
     linearLayout.addView(textInputLayout);
-  }
-
-  /**
-   * Check if specific key has an entity set
-   *
-   * @param key parameter key name
-   * @param appAction app action data
-   * @param action action data
-   * @param fulfillmentOption fulfillment option data
-   * @return an entityset corresponding to parameter key or null if not found
-   */
-  public static EntitySet checkEntitySet(
-      String key, AppAction appAction, Action action, FulfillmentOption fulfillmentOption) {
-    String parameterValue = fulfillmentOption.getUrlTemplate().getParameterMapMap().get(key);
-    for (Action.Parameter parameter : action.getParametersList()) {
-      if (parameter.getName().equals(parameterValue)) {
-        if (parameter.getEntitySetReferenceCount() == 0)
-          continue;
-        String reference = parameter.getEntitySetReference(0).getEntitySetId();
-        for (EntitySet set : appAction.getEntitySetsList()) {
-          if (set.getItemList().getFieldsOrThrow(Constant.ENTITY_FIELD_IDENTIFIER).getStringValue().equals(reference)) {
-            return set;
-          }
-        }
-      }
-    }
-    return null;
   }
 }

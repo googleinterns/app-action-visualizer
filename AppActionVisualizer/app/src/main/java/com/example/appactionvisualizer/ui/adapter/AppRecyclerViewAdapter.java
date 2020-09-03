@@ -22,15 +22,13 @@ import com.example.appactionvisualizer.utils.AppUtils;
 import java.util.HashSet;
 import java.util.List;
 
-/**
- * Adapter of AppFragment Recyclerview
- */
-public class AppRecyclerViewAdapter extends RecyclerView.Adapter<AppRecyclerViewAdapter.ViewHolder> {
+/** Adapter of AppFragment Recyclerview */
+public class AppRecyclerViewAdapter
+    extends RecyclerView.Adapter<AppRecyclerViewAdapter.ViewHolder> {
 
   private static final String TAG = "AppRecyclerView";
   private List<AppAction> appActionArrayList;
   private Context context;
-
 
   public AppRecyclerViewAdapter(ActionType type, Context context) {
     this.context = context;
@@ -43,21 +41,21 @@ public class AppRecyclerViewAdapter extends RecyclerView.Adapter<AppRecyclerView
 
   @Override
   public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-    View view = LayoutInflater.from(context)
-        .inflate(R.layout.apptype_rv_item, parent, false);
+    View view = LayoutInflater.from(context).inflate(R.layout.apptype_rv_item, parent, false);
     return new ViewHolder(view);
   }
 
   @Override
   public void onBindViewHolder(final ViewHolder holder, final int position) {
     final AppAction appAction = appActionArrayList.get(position);
-    holder.appIcon.setImageDrawable(AppUtils.getIconByPackageName(context, appAction.getPackageName()));
+    holder.appIcon.setImageDrawable(
+        AppUtils.getIconByPackageName(context, appAction.getPackageName()));
     holder.appName.setText(AppUtils.getAppNameByPackageName(context, appAction.getPackageName()));
     // Use hash set to avoid duplicate tags
     // Use hash set to avoid duplicate tags
     final HashSet<ActionType> uniqueSet = new HashSet<>(5);
     for (int i = 0; i < appAction.getActionsCount(); i++) {
-      //todo: add field in proto
+      // todo: add field in proto
       uniqueSet.add(ActionType.getActionTypeByName(appAction.getActions(i).getIntentName()));
     }
     int idx = 0;
@@ -68,14 +66,15 @@ public class AppRecyclerViewAdapter extends RecyclerView.Adapter<AppRecyclerView
     for (; idx < ActionType.values().length; ++idx) {
       holder.appTags[idx].setVisibility(View.INVISIBLE);
     }
-    holder.app.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        Intent intent = new Intent(context, ActionActivity.class);
-        intent.putExtra(Constant.APP_NAME, appAction);
-        context.startActivity(intent);
-      }
-    });
+    holder.app.setOnClickListener(
+        new View.OnClickListener() {
+          @Override
+          public void onClick(View view) {
+            Intent intent = new Intent(context, ActionActivity.class);
+            intent.putExtra(Constant.APP_NAME, appAction);
+            context.startActivity(intent);
+          }
+        });
   }
 
   @Override
@@ -106,6 +105,5 @@ public class AppRecyclerViewAdapter extends RecyclerView.Adapter<AppRecyclerView
     public String toString() {
       return super.toString() + " '" + appName.getText() + "'";
     }
-
   }
 }

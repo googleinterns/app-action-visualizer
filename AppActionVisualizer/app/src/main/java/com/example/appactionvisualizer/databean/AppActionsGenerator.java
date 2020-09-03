@@ -25,16 +25,13 @@ public class AppActionsGenerator {
   private static AppActionsGenerator single_instance = null;
 
   public static AppActionsGenerator getInstance() {
-    if (single_instance == null)
-      single_instance = new AppActionsGenerator();
+    if (single_instance == null) single_instance = new AppActionsGenerator();
     return single_instance;
   }
 
-
   // Parse the data using protobuf api
   public void readFromFile(Context context) {
-    if(!appActions.isEmpty())
-      return;
+    if (!appActions.isEmpty()) return;
     InputStream is = context.getResources().openRawResource(R.raw.protobufbinary);
     try {
       appActions.addAll(AppActionProtos.AppActions.parseFrom(is).getAppActionsList());
@@ -48,32 +45,43 @@ public class AppActionsGenerator {
 
   // Sort the appName using app name
   // P.S:  Current built-in app icons and names are extracted manually.
-  // So If new app action data is added, the new apps will have no icons and names if the user didn't install them
+  // So If new app action data is added, the new apps will have no icons and names if the user
+  // didn't install them
   // and will be placed at the end of list.
   private void sortAppActionByName(final Context context, final List<AppAction> appActions) {
-    Collections.sort(appActions, new Comparator<AppAction>() {
-      /**
-       * @param appAction1
-       * @param appAction2
-       * sort by the app name
-       */
-      @Override
-      public int compare(AppAction appAction1, AppAction appAction2) {
-        return AppUtils.getAppNameByPackageName(context, appAction1.getPackageName()).toLowerCase().compareTo
-            (AppUtils.getAppNameByPackageName(context, appAction2.getPackageName()).toLowerCase());
-      }
-    });
+    Collections.sort(
+        appActions,
+        new Comparator<AppAction>() {
+          /**
+           * @param appAction1
+           * @param appAction2 sort by the app name
+           */
+          @Override
+          public int compare(AppAction appAction1, AppAction appAction2) {
+            return AppUtils.getAppNameByPackageName(context, appAction1.getPackageName())
+                .toLowerCase()
+                .compareTo(
+                    AppUtils.getAppNameByPackageName(context, appAction2.getPackageName())
+                        .toLowerCase());
+          }
+        });
   }
 
   // Remove app action with duplicate name from the list using hash set
   private List<AppAction> deduplication(List<AppAction> appActions) {
     int sz = appActions.size();
     // These 4 apps cannot be downloaded from app store
-    Set<String> seen = new HashSet<>(Arrays.asList("com.gojuno.rider", "com.kimfrank.android.fitactions", "com.deeplocal.smores", "com.runtastic.android.pro2"));
+    Set<String> seen =
+        new HashSet<>(
+            Arrays.asList(
+                "com.gojuno.rider",
+                "com.kimfrank.android.fitactions",
+                "com.deeplocal.smores",
+                "com.runtastic.android.pro2"));
     List<AppAction> unique = new ArrayList<>();
     for (int idx = sz - 1; idx >= 0; --idx) {
       String name = appActions.get(idx).getPackageName();
-      if(seen.contains(name)) {
+      if (seen.contains(name)) {
         continue;
       }
       seen.add(name);
@@ -82,14 +90,14 @@ public class AppActionsGenerator {
     return unique;
   }
 
-
   private void parseDataToEachType(final Context context, final List<AppAction> appActions) {
     // Set up each fragments' data list, make sure there's no duplicate data in one action type
     Map<ActionType, Set<AppAction>> appActionUnique = new HashMap<>();
     for (AppAction app : appActions) {
       for (AppActionProtos.Action action : app.getActionsList()) {
         if (appActionUnique.get(ActionType.getActionTypeByName(action.getIntentName())) == null) {
-          appActionUnique.put(ActionType.getActionTypeByName(action.getIntentName()), new HashSet<AppAction>());
+          appActionUnique.put(
+              ActionType.getActionTypeByName(action.getIntentName()), new HashSet<AppAction>());
         }
         appActionUnique.get(ActionType.getActionTypeByName(action.getIntentName())).add(app);
       }

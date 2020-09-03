@@ -753,7 +753,7 @@ public class DeepLinkListActivity extends CustomActivity {
    * @param text address text
    */
   private void getDropOffLocation(final String text) {
-    final Geocoder geocoder = new Geocoder(DeepLinkListActivity.this, Locale.US);
+    final Geocoder geocoder = new Geocoder(DeepLinkListActivity.this, Locale.getDefault());
     new Thread(new Runnable() {
       @Override
       public void run() {

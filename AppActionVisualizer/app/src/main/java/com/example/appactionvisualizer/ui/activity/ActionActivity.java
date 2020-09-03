@@ -14,10 +14,7 @@ import com.example.appactionvisualizer.ui.adapter.ActionRecyclerViewAdapter;
 
 import java.util.Objects;
 
-
-/**
- * Displays all the actions of an app using recyclerview
- */
+/** Displays all the actions of an app using recyclerview */
 public class ActionActivity extends CustomActivity {
   public AppAction appAction;
 

@@ -34,11 +34,12 @@ import static com.example.appactionvisualizer.constants.Constant.ERROR_NO_PLACE;
 
 public class LocationActivity extends CustomActivity implements View.OnClickListener {
   private static final String TAG = "SelectLocation";
-  private final static int SELECT_PICK_UP = 0, SELECT_DROP_OFF = 1, UPDATE = 2, ERROR = 3;
+  private static final int SELECT_PICK_UP = 0, SELECT_DROP_OFF = 1, UPDATE = 2, ERROR = 3;
   private RecyclerView addressListView;
   private TextInputEditText pickUpInput, dropOffInput;
   private List<Address> addressList = new ArrayList<>();
-  private AddressListRecyclerViewAdapter adapter = new AddressListRecyclerViewAdapter(addressList, LocationActivity.this);
+  private AddressListRecyclerViewAdapter adapter =
+      new AddressListRecyclerViewAdapter(addressList, LocationActivity.this);
   private int inputSelect = 0;
   private String input;
   private Address pickUpAddress = null, dropOffAddress = null;
@@ -55,15 +56,15 @@ public class LocationActivity extends CustomActivity implements View.OnClickList
   @Override
   protected void initData() {}
 
-
-
   @Override
   protected void initView() {
     super.initView();
     getSupportActionBar().setTitle(TAG);
     addressListView = findViewById(R.id.address_list);
-    DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(addressListView.getContext(),
-        new LinearLayoutManager(LocationActivity.this).getOrientation());
+    DividerItemDecoration dividerItemDecoration =
+        new DividerItemDecoration(
+            addressListView.getContext(),
+            new LinearLayoutManager(LocationActivity.this).getOrientation());
     addressListView.addItemDecoration(dividerItemDecoration);
 
     addressListView.setAdapter(adapter);
@@ -74,16 +75,17 @@ public class LocationActivity extends CustomActivity implements View.OnClickList
     searchPickUp.setOnClickListener(this);
     searchDropOff.setOnClickListener(this);
     // This handler is used to update the address list
-    addressHandler = new Handler(Looper.getMainLooper()) {
-      @Override
-      public void handleMessage(@NonNull Message msg) {
-        if (msg.what == UPDATE) {
-          adapter.notifyDataSetChanged();
-        } else if (msg.what == ERROR) {
-          errorHint();
-        }
-      }
-    };
+    addressHandler =
+        new Handler(Looper.getMainLooper()) {
+          @Override
+          public void handleMessage(@NonNull Message msg) {
+            if (msg.what == UPDATE) {
+              adapter.notifyDataSetChanged();
+            } else if (msg.what == ERROR) {
+              errorHint();
+            }
+          }
+        };
   }
 
   private void errorHint() {
@@ -121,9 +123,10 @@ public class LocationActivity extends CustomActivity implements View.OnClickList
   }
 
   /**
+   * set the return data of pick up/drop off from the selection and set the corresponding
+   * inputText's text
+   *
    * @param address
-   * set the return data of pick up/drop off from the selection
-   * and set the corresponding inputText's text
    */
   public void setAddress(final Address address) {
     if (inputSelect == SELECT_PICK_UP) {
@@ -140,34 +143,35 @@ public class LocationActivity extends CustomActivity implements View.OnClickList
     addressListView.setVisibility(View.INVISIBLE);
   }
 
-
   // Use background thread to avoid stuck on ui thread
   private void getAddressList(final String address) {
     addressListView.setVisibility(View.VISIBLE);
-    final Geocoder geocoder = new Geocoder(LocationActivity.this, Locale.US);
-    new Thread(new Runnable() {
-      @Override
-      public void run() {
-        try {
-          addressList.clear();
-          addressList.addAll(geocoder.getFromLocationName(address, Constant.MAX_RESULTS));
-          addressHandler.sendEmptyMessage(UPDATE);
-        } catch (Exception e) {
-          addressHandler.sendEmptyMessage(ERROR);
-          e.printStackTrace();
-        }
-      }
-    }).start();
+    final Geocoder geocoder = new Geocoder(LocationActivity.this, Locale.getDefault());
+    new Thread(
+            new Runnable() {
+              @Override
+              public void run() {
+                try {
+                  addressList.clear();
+                  addressList.addAll(geocoder.getFromLocationName(address, Constant.MAX_RESULTS));
+                  addressHandler.sendEmptyMessage(UPDATE);
+                } catch (Exception e) {
+                  addressHandler.sendEmptyMessage(ERROR);
+                  e.printStackTrace();
+                }
+              }
+            })
+        .start();
   }
 
   public String getInput() {
     return input;
   }
 
-
   /**
-   * @param view the view that user clicks
    * set the OnClick listener of two search button
+   *
+   * @param view the view that user clicks
    */
   @Override
   public void onClick(View view) {

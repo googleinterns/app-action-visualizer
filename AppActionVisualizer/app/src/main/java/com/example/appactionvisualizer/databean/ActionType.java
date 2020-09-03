@@ -1,6 +1,5 @@
 package com.example.appactionvisualizer.databean;
 
-
 import com.example.appactionvisualizer.constants.Constant;
 
 import java.io.Serializable;
