@@ -622,8 +622,8 @@ public class DeepLinkListActivity extends CustomActivity {
             pickupLongitude = pickUp.getDouble(Constant.PICK_UP_LONGITUDE, -1);
             // Update the view if dropOff coordinates have been calculated.
             if (dropOffLatitude != -1) {
-              getTaxiReservation(
-                  pickUpLatitude, pickupLongitude, dropOffLatitude, dropOffLongitude);
+              updateView(getTaxiReservationMap(
+                  pickUpLatitude, pickupLongitude, dropOffLatitude, dropOffLongitude));
             }
           } else if (msg.what == DROP_OFF_ADDRESS) {
             Bundle dropOff = msg.getData();
@@ -631,8 +631,8 @@ public class DeepLinkListActivity extends CustomActivity {
             dropOffLongitude = dropOff.getDouble(Constant.DROP_OFF_LONGITUDE, -1);
             // Update the view if pickUp coordinates have been calculated.
             if (pickUpLatitude != -1) {
-              getTaxiReservation(
-                  pickUpLatitude, pickupLongitude, dropOffLatitude, dropOffLongitude);
+              updateView(getTaxiReservationMap(
+                  pickUpLatitude, pickupLongitude, dropOffLatitude, dropOffLongitude));
             }
           } else if (msg.what == ERROR) {
             Log.d(TAG, getString(R.string.unknown_texts));
@@ -641,7 +641,7 @@ public class DeepLinkListActivity extends CustomActivity {
       };
 
   // Create app fulfillment list according to the coordinates and update the view.
-  private void getTaxiReservation(
+  protected Map<String, List<AppFulfillment>> getTaxiReservationMap(
       double pickUpLatitude,
       double pickupLongitude,
       double dropOffLatitude,
@@ -650,7 +650,7 @@ public class DeepLinkListActivity extends CustomActivity {
     taxiMap.put(getString(R.string.create_taxi), new ArrayList<AppFulfillment>());
     List<AppFulfillment> appFulfillmentList = taxiReservation.get(getString(R.string.create_taxi));
     if (appFulfillmentList == null) {
-      return;
+      return taxiMap;
     }
     for (AppFulfillment appFulfillment : appFulfillmentList) {
       List<String> parameters = new ArrayList<>();
@@ -681,7 +681,7 @@ public class DeepLinkListActivity extends CustomActivity {
               new AppFulfillment(
                   appFulfillment.appAction, appFulfillment.action, builtFulfillment));
     }
-    updateView(taxiMap);
+    return taxiMap;
   }
 
   /**
