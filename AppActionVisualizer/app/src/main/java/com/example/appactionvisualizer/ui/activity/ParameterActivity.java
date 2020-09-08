@@ -279,7 +279,7 @@ public class ParameterActivity extends CustomActivity {
   }
 
   /**
-   * replace each parameter with input from user to construct the url e.g.: *
+   * Replace each parameter with input from user to construct the url e.g.:
    * https://example.com/test{?foo,bar} ==> https://example.com/test?foo=123&bar=456 *
    * https://example.com/test?utm_campaign=appactions{&foo,bar} ==> *
    * https://example.com/test?utm_campaign=appactions&foo=123&bar=456

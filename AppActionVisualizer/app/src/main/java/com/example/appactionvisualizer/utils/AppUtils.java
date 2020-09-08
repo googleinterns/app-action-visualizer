@@ -57,8 +57,8 @@ public class AppUtils {
   }
 
   /**
-   * get app's Name by packageName 1. Use packageManager 2. use built-in * resources(currently
-   * support 56 apps). 3. if 1 and 2 cannot find, return "*unknown" (* is to * make user it will be
+   * Get app's Name by packageName 1. Use packageManager 2. use built-in resources(currently
+   * support 56 apps). 3. if 1 and 2 cannot find, return "*unknown" (* is to make sure it will be
    * placed at the end of list after sorted)
    *
    * @param context App context
@@ -66,7 +66,7 @@ public class AppUtils {
    * @return app's Name
    */
   public static String getAppNameByPackageName(final Context context, final String pkgName) {
-    String appName = "";
+    String appName;
     try {
       PackageManager packageManager = context.getPackageManager();
       appName =
@@ -117,6 +117,7 @@ public class AppUtils {
   // first check if package exists since user may haven't installed the app
   // then check if the url can jump to activity
   public static void jumpToApp(Context context, String url, final String packageName) {
+    // The dunkin url has redundant contents, hardcode in order to jump into correct activity
     if (packageName.equals("com.dunkinbrands.otgo")) {
       url = url.substring(0, url.indexOf("?"));
     }
@@ -176,7 +177,6 @@ public class AppUtils {
       context.startActivity(intent);
     } else {
       String url = fulfillmentOption.getUrlTemplate().getTemplate();
-      // The dunkin url has redundant contents, hardcode in order to jump into correct activity
       AppUtils.jumpToApp(context, url, appAction.getPackageName());
     }
   }

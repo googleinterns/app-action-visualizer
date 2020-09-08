@@ -2,11 +2,11 @@
     <string name="app_name">NASAAppActionVisualizer</string>
     <string name="tab_text_statistics">Statistics</string>
     <string name="tab_text_all">All</string>
-    <string name="tab_text_1">Common</string>
-    <string name="tab_text_2">Finance</string>
-    <string name="tab_text_3">Food and Drink</string>
-    <string name="tab_text_4">Health and fitness</string>
-    <string name="tab_text_5">Transportation</string>
+    <string name="tab_text_common">Common</string>
+    <string name="tab_text_finance">Finance</string>
+    <string name="tab_text_food">Food and Drink</string>
+    <string name="tab_text_health">Health and fitness</string>
+    <string name="tab_text_transportation">Transportation</string>
     <string name="pick_up_location">Enter pick up location</string>
     <string name="drop_off_location">Enter drop off location</string>
     <string name="menu_save">Save</string>
