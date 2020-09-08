@@ -1,15 +1,34 @@
 package com.example.appactionvisualizer.ui.activity.dashboard;
 
+import android.Manifest;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.LocaleList;
+import android.os.Looper;
+import android.os.Message;
+import android.text.TextUtils;
+import android.util.Log;
 import android.util.Pair;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.textclassifier.TextClassification;
+import android.view.textclassifier.TextClassificationManager;
+import android.view.textclassifier.TextClassifier;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ImageButton;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 
 import com.example.appactionvisualizer.R;
 import com.example.appactionvisualizer.constants.Constant;
@@ -26,6 +45,9 @@ import com.example.appactionvisualizer.ui.activity.parameter.InputParameterActiv
 import com.example.appactionvisualizer.ui.adapter.ExpandableAdapter;
 import com.example.appactionvisualizer.utils.StringUtils;
 import com.example.appactionvisualizer.utils.AppUtils;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.protobuf.ListValue;
 import com.google.protobuf.Value;
 
@@ -33,6 +55,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -40,13 +63,14 @@ import java.util.TreeMap;
 import static com.example.appactionvisualizer.constants.Constant.ENTITY_URL;
 import static com.example.appactionvisualizer.constants.Constant.INTENT_PREFIX;
 import static com.example.appactionvisualizer.constants.Constant.UNDERLINE;
+import static com.example.appactionvisualizer.constants.Constant.URL_PARAMETER_INDICATOR;
 import static com.example.appactionvisualizer.constants.Constant.WHITESPACE;
 
 // Display deep links using an expandable list view.
 public class DeepLinkListActivity extends CustomActivity {
   private static final String TAG = DeepLinkListActivity.class.getSimpleName();
   // These bits are used to indicate classify results.
-  private static final int UPDATE = 1, ERROR = 2;
+  private static final int PICK_UP_ADDRESS = 1, DROP_OFF_ADDRESS = 2, REQUEST_LOCATION = 0x100, ERROR = -1;
   // Group titles are action names.
   final List<String> actionNames = new ArrayList<>();
   // Comparator used by tree map.
@@ -75,6 +99,15 @@ public class DeepLinkListActivity extends CustomActivity {
   private ExpandableListView expandableListView;
   // In order to match with an app name, the word must score at least 0.7
   private static final double MINIMUM_SCORE = 0.7;
+  // Used to get current location.
+  protected FusedLocationProviderClient fusedLocationClient;
+  // Taxi Reservation variables
+  // All the app fulfillment of taxi reservation. Cached it in memory so we can get corresponding
+  // item quickly when needed.
+  private Map<String, List<AppFulfillment>> taxiReservation = new HashMap<>();
+  // Coordinates variables
+  private double pickUpLatitude = -1, pickupLongitude = -1;
+  private double dropOffLatitude = -1, dropOffLongitude = -1;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +127,7 @@ public class DeepLinkListActivity extends CustomActivity {
           public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {
             // When user hit enter button on keyboard, do the recommendation for the text.
             if (keyEvent.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
-              String text = userInput.getText().toString();
+              String text = userInput.getText().toString().toLowerCase();
               recommend(text);
               return true;
             }
@@ -118,8 +151,12 @@ public class DeepLinkListActivity extends CustomActivity {
    * @param input user input sentence
    */
   protected void recommend(final String input) {
-    Map<String, List<AppFulfillment>> displayMap = getDisplayMap(input);
-    updateView(displayMap);
+    // Use text classifier to check if it is an address.
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+      classifyText(input);
+    }else {
+      updateView(getDisplayMap(input));
+    }
   }
 
   /**
@@ -139,9 +176,10 @@ public class DeepLinkListActivity extends CustomActivity {
     String appName = pair.second;
     // Detect no app name, try to match all actions
     if (appName.isEmpty()) {
-      // Try to match all apps inventory
+      // Try to match all inventory entity sets' item name.
       TreeMap<Integer, List<AppFulfillment>> allInventoryScore = getDeepLinkFromAllInventory(sentence);
-      if(allInventoryScore != null && !allInventoryScore.isEmpty())
+      // If only one score, that must be zero. And zero score can not be used as reference to an inventory.
+      if (allInventoryScore != null && allInventoryScore.size() > 1)
         return getMatchedFromScore(allInventoryScore);
       // If inventory could not be matched, try match actions from all actions.
       return getActionFromWords(defaultMap, words);
@@ -200,13 +238,13 @@ public class DeepLinkListActivity extends CustomActivity {
    */
   protected TreeMap<Integer, List<AppFulfillment>> getDeepLinkFromAllInventory(String sentence) {
     TreeMap<Integer, List<AppFulfillment>> result = new TreeMap<>();
-    for(AppAction appAction : AppActionsGenerator.appActions) {
+    for (AppAction appAction : AppActionsGenerator.appActions) {
       Map<Integer, List<AppFulfillment>> appDeepLinks = getDeepLinkFromInventory(appAction, sentence);
-      if(appDeepLinks != null && !appDeepLinks.isEmpty()) {
+      if (appDeepLinks != null && !appDeepLinks.isEmpty()) {
         // Append each list of deep links to corresponding action name
-        for(Map.Entry<Integer, List<AppFulfillment>> entry : appDeepLinks.entrySet()) {
+        for (Map.Entry<Integer, List<AppFulfillment>> entry : appDeepLinks.entrySet()) {
           int score = entry.getKey();
-          if(result.get(score) == null) {
+          if (result.get(score) == null) {
             result.put(score, new ArrayList<AppFulfillment>());
           }
           result.get(score).addAll(entry.getValue());
@@ -355,9 +393,9 @@ public class DeepLinkListActivity extends CustomActivity {
       return new HashMap<>();
     }
     Map<String, List<AppFulfillment>> matched = new HashMap<>();
-    for(AppFulfillment appFulfillment : entry.getValue()) {
+    for (AppFulfillment appFulfillment : entry.getValue()) {
       String actionName = appFulfillment.action.getIntentName();
-      if(matched.get(actionName) == null) {
+      if (matched.get(actionName) == null) {
         matched.put(actionName, new ArrayList<AppFulfillment>());
       }
       matched.get(actionName).add(appFulfillment);
@@ -383,14 +421,14 @@ public class DeepLinkListActivity extends CustomActivity {
       }
       // Compute score to get a priority of this action.
       int score = StringUtils.matchScore(tobeMatched, inputWords);
-      if(score == 0)
+      if (score == 0)
         continue;
       if (scoresMap.get(score) == null) {
         scoresMap.put(score, new ArrayList<String>());
       }
       scoresMap.get(score).add(actionName);
     }
-    if(scoresMap.isEmpty()) {
+    if (scoresMap.isEmpty()) {
       return new HashMap<>();
     }
     List<String> matchedActions = scoresMap.lastEntry().getValue();
@@ -427,7 +465,7 @@ public class DeepLinkListActivity extends CustomActivity {
   private void updateView(Map<String, List<AppFulfillment>> displayMap) {
     // If no recommended data, display the default data.
     boolean unfold = true;
-    if (displayMap == null || displayMap.isEmpty())  {
+    if (displayMap == null || displayMap.isEmpty()) {
       displayMap = defaultMap;
       unfold = false;
     }
@@ -466,7 +504,7 @@ public class DeepLinkListActivity extends CustomActivity {
         }
       }
     }
-    if(score < MINIMUM_SCORE) {
+    if (score < MINIMUM_SCORE) {
       return new Pair<>(-1, "");
     }
     return new Pair<>(appIdx, maxAppName);
@@ -494,11 +532,20 @@ public class DeepLinkListActivity extends CustomActivity {
     // Iterate over the whole list to get the numbers and construct two maps we need.
     for (AppAction appAction : AppActionsGenerator.appActions) {
       String appName =
-          AppUtils.getAppNameByPackageName(DeepLinkListActivity.this, appAction.getPackageName());
+          AppUtils.getAppNameByPackageName(DeepLinkListActivity.this, appAction.getPackageName())
+              .replaceAll("[^a-zA-Z0-9]", "")
+              .toLowerCase();
       for (Action action : appAction.getActionsList()) {
         // Ignore the uppercase
-        appNameMap.put(appName.replaceAll("[^a-zA-Z0-9]", "").toLowerCase(), appAction);
+        appNameMap.put(appName, appAction);
         String actionName = action.getIntentName();
+        // taxiReservation map contains all reservation fulfillment and can be used later
+        if(actionName.equals(getString(R.string.create_taxi))) {
+          if (taxiReservation.get(actionName) == null) {
+            taxiReservation.put(actionName, new ArrayList<AppFulfillment>());
+          }
+          taxiReservation.get(actionName).add(new AppFulfillment(appAction, action, action.getFulfillmentOption(0)));
+        }
         for (FulfillmentOption fulfillmentOption : action.getFulfillmentOptionList()) {
           // The Slice options could not be counted as deep links.
           if (fulfillmentOption.getFulfillmentMode() == FulfillmentOption.FulfillmentMode.SLICE) {
@@ -558,7 +605,222 @@ public class DeepLinkListActivity extends CustomActivity {
         });
   }
 
+  // Test Use
   protected Map<String, List<AppFulfillment>> getIntentMap() {
     return intentMap;
   }
+
+  // handler to handle the data from geocoder and fusedLocationClient
+  private Handler addressHandler =
+      new Handler(Looper.getMainLooper()) {
+
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+          if (msg.what == PICK_UP_ADDRESS) {
+            Bundle pickUp = msg.getData();
+            pickUpLatitude = pickUp.getDouble(Constant.PICK_UP_LATITUDE, -1);
+            pickupLongitude = pickUp.getDouble(Constant.PICK_UP_LONGITUDE, -1);
+            // Update the view if dropOff coordinates have been calculated.
+            if (dropOffLatitude != -1) {
+              updateView(getTaxiReservationMap(
+                  pickUpLatitude, pickupLongitude, dropOffLatitude, dropOffLongitude));
+            }
+          } else if (msg.what == DROP_OFF_ADDRESS) {
+            Bundle dropOff = msg.getData();
+            dropOffLatitude = dropOff.getDouble(Constant.DROP_OFF_LATITUDE, -1);
+            dropOffLongitude = dropOff.getDouble(Constant.DROP_OFF_LONGITUDE, -1);
+            // Update the view if pickUp coordinates have been calculated.
+            if (pickUpLatitude != -1) {
+              updateView(getTaxiReservationMap(
+                  pickUpLatitude, pickupLongitude, dropOffLatitude, dropOffLongitude));
+            }
+          } else if (msg.what == ERROR) {
+            Log.d(TAG, getString(R.string.unknown_texts));
+          }
+        }
+      };
+
+  // Create app fulfillment list according to the coordinates and update the view.
+  protected Map<String, List<AppFulfillment>> getTaxiReservationMap(
+      double pickUpLatitude,
+      double pickupLongitude,
+      double dropOffLatitude,
+      double dropOffLongitude) {
+    Map<String, List<AppFulfillment>> taxiMap = new HashMap<>();
+    taxiMap.put(getString(R.string.create_taxi), new ArrayList<AppFulfillment>());
+    List<AppFulfillment> appFulfillmentList = taxiReservation.get(getString(R.string.create_taxi));
+    if (appFulfillmentList == null) {
+      return taxiMap;
+    }
+    for (AppFulfillment appFulfillment : appFulfillmentList) {
+      List<String> parameters = new ArrayList<>();
+      FulfillmentOption fulfillmentOption = appFulfillment.fulfillmentOption;
+      for (Map.Entry<String, String> entry :
+          fulfillmentOption.getUrlTemplate().getParameterMapMap().entrySet()) {
+        AppUtils.addLocationParameters(
+            this,
+            entry,
+            parameters,
+            Double.toString(pickUpLatitude),
+            Double.toString(pickupLongitude),
+            Double.toString(dropOffLatitude),
+            Double.toString(dropOffLongitude));
+      }
+      String urlTemplate = fulfillmentOption.getUrlTemplate().getTemplate();
+      int idx = urlTemplate.indexOf(URL_PARAMETER_INDICATOR);
+      StringBuilder url = new StringBuilder();
+      url.append(urlTemplate.substring(0, idx)).append(urlTemplate.charAt(idx + 1));
+      url.append(TextUtils.join("&", parameters));
+      Log.d(TAG, url.toString());
+      UrlTemplate builtUrl = UrlTemplate.newBuilder().setTemplate(url.toString()).build();
+      FulfillmentOption builtFulfillment =
+          FulfillmentOption.newBuilder().setUrlTemplate(builtUrl).build();
+      taxiMap
+          .get(getString(R.string.create_taxi))
+          .add(
+              new AppFulfillment(
+                  appFulfillment.appAction, appFulfillment.action, builtFulfillment));
+    }
+    return taxiMap;
+  }
+
+  /**
+   * Using textClassifier to identify if the text is an address
+   *
+   * @param text user input sentence
+   */
+  @RequiresApi(api = Build.VERSION_CODES.P)
+  private void classifyText(final String text) {
+    Log.d(TAG, "isAddress: " + text);
+    new Thread(
+        new Runnable() {
+          @Override
+          public void run() {
+            try {
+              TextClassificationManager textClassificationManager =
+                  (TextClassificationManager)
+                      getSystemService(Context.TEXT_CLASSIFICATION_SERVICE);
+              TextClassifier textClassifier = textClassificationManager.getTextClassifier();
+              TextClassification textClassification =
+                  textClassifier.classifyText(
+                      text, 0/* Start index */, text.length() - 1/* End index, beware out of bound */, LocaleList.getDefault());
+              String entity = textClassification.getEntity(0);
+              Log.d(TAG, entity);
+              if (entity.equals(TextClassifier.TYPE_ADDRESS)) {
+                resetCoordinates();
+                getPickUpLocation();
+                getDropOffLocation(text);
+              }else {
+                updateView(getDisplayMap(text));
+              }
+            } catch (Exception e) {
+              addressHandler.sendEmptyMessage(ERROR);
+            }
+          }
+        })
+        .start();
+  }
+
+
+  protected void resetCoordinates() {
+    pickUpLatitude = pickupLongitude = dropOffLongitude = dropOffLatitude = -1;
+  }
+
+  // Get pick up location, which is user's current location , need to request permission first.
+  protected void getPickUpLocation() {
+    fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+            != PackageManager.PERMISSION_GRANTED
+        && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+            != PackageManager.PERMISSION_GRANTED) {
+      // request for permission
+      ActivityCompat.requestPermissions(
+          this,
+          new String[] {
+            Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION
+          },
+          REQUEST_LOCATION);
+    } else {
+      // Permission granted
+      requestLocationByFusedLocationProvideder();
+    }
+  }
+
+  /**
+   * Get drop off location coordinates using geocoder,
+   * pass result to handler to update the view
+   *
+   * @param text address text
+   */
+  private void getDropOffLocation(final String text) {
+    final Geocoder geocoder = new Geocoder(DeepLinkListActivity.this, Locale.US);
+    new Thread(new Runnable() {
+      @Override
+      public void run() {
+        try {
+          Address address = geocoder.getFromLocationName(text, 1).get(0);
+          Message message = new Message();
+          message.what = DROP_OFF_ADDRESS;
+          Bundle bundle = new Bundle();
+          bundle.putDouble(Constant.DROP_OFF_LATITUDE, address.getLatitude());
+          bundle.putDouble(Constant.DROP_OFF_LONGITUDE, address.getLongitude());
+          message.setData(bundle);
+          addressHandler.sendMessage(message);
+        } catch (Exception e) {
+          addressHandler.sendEmptyMessage(ERROR);
+        }
+      }
+    }).start();
+  }
+
+  // Request last location, which is our current location, do not need to worry about permission
+  // issues since already granted.
+  private void requestLocationByFusedLocationProvideder() {
+    fusedLocationClient
+        .getLastLocation()
+        .addOnSuccessListener(
+            this,
+            new OnSuccessListener<Location>() {
+              @Override
+              public void onSuccess(Location location) {
+                if (location != null) {
+                  Message message = new Message();
+                  message.what = PICK_UP_ADDRESS;
+                  Bundle bundle = new Bundle();
+                  bundle.putDouble(Constant.PICK_UP_LATITUDE, location.getLatitude());
+                  bundle.putDouble(Constant.PICK_UP_LONGITUDE, location.getLongitude());
+                  message.setData(bundle);
+                  addressHandler.sendMessage(message);
+                }
+              }
+            });
+  }
+
+  /**
+   * Callback for the result from requesting permissions. This method
+   * is invoked for every call on {@link #requestPermissions(String[], int)}.
+   * <p>
+   * <strong>Note:</strong> It is possible that the permissions request interaction
+   * with the user is interrupted. In this case you will receive empty permissions
+   * and results arrays which should be treated as a cancellation.
+   * </p>
+   *
+   * @param requestCode  The request code passed in {@link #requestPermissions(String[], int)}.
+   * @param permissions  The requested permissions. Never null.
+   * @param grantResults The grant results for the corresponding permissions
+   *                     which is either {@link PackageManager#PERMISSION_GRANTED}
+   *                     or {@link PackageManager#PERMISSION_DENIED}. Never null.
+   * @see #requestPermissions(String[], int)
+   */
+  @Override
+  public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    switch (requestCode) {
+      case REQUEST_LOCATION:
+        if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+          requestLocationByFusedLocationProvideder();
+        }
+    }
+  }
+
 }

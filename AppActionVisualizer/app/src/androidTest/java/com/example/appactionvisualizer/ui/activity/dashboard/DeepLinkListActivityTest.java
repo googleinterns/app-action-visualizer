@@ -74,13 +74,13 @@ public class DeepLinkListActivityTest {
   @Test
   public void testCheckApp4() {
     setData();
-    testAppName("open facbook", "facebook", 1);
+    testAppName("open facbook", "", -1);
   }
 
   @Test
   public void testCheckApp5() {
     setData();
-    testAppName("open facebo", "", -1);
+    testAppName("open facebo", "facebook", 1);
   }
 
   private void testAppName(String sentence, String appName, Integer appIdx) {
@@ -123,7 +123,7 @@ public class DeepLinkListActivityTest {
   @Test
   public void testGetDisplayMap6() {
     setData();
-    testGetDisplayMap("coup", -1 /* -1 to indicate null */);
+    testGetDisplayMap("coup", 1);
   }
 
   @Test
@@ -151,6 +151,12 @@ public class DeepLinkListActivityTest {
     } else {
       assertEquals(recommend.size(), mapSize);
     }
+  }
+
+  @Test
+  public void testTaxiReservation() {
+    setData();
+    assertNotEquals(activity.getTaxiReservationMap(0,0,0,0).size(), 0);
   }
 
   // Set some test data for the expandable list view.
