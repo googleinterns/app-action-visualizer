@@ -23,6 +23,12 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import java.lang.reflect.Field;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Map;
+
+import static com.example.appactionvisualizer.constants.Constant.DROP_OFF_LATITUDE_FIELD;
+import static com.example.appactionvisualizer.constants.Constant.DROP_OFF_LONGITUDE_FIELD;
+import static com.example.appactionvisualizer.constants.Constant.PICK_UP_LATITUDE_FIELD;
+import static com.example.appactionvisualizer.constants.Constant.PICK_UP_LONGITUDE_FIELD;
 
 public class AppUtils {
   private AppUtils() {}
@@ -51,14 +57,16 @@ public class AppUtils {
   }
 
   /**
-   * @param context
+   * Get app's Name by packageName 1. Use packageManager 2. use built-in resources(currently
+   * support 56 apps). 3. if 1 and 2 cannot find, return "*unknown" (* is to make sure it will be
+   * placed at the end of list after sorted)
+   *
+   * @param context App context
    * @param pkgName packageName of app
-   * @return app's Name get app's Name by packageName 1. Use packageManager 2. use built-in
-   *     resources(currently support 56 apps). 3. if 1 and 2 cannot find, return "*unknown" (* is to
-   *     make user it will be placed at the end of list after sorted)
+   * @return app's Name
    */
   public static String getAppNameByPackageName(final Context context, final String pkgName) {
-    String appName = "";
+    String appName;
     try {
       PackageManager packageManager = context.getPackageManager();
       appName =
@@ -108,11 +116,16 @@ public class AppUtils {
 
   // first check if package exists since user may haven't installed the app
   // then check if the url can jump to activity
-  public static void jumpToApp(Context context, final String url, final String packageName) {
+  public static void jumpToApp(Context context, String url, final String packageName) {
+    // The dunkin url has redundant contents, hardcode in order to jump into correct activity
+    if (packageName.equals("com.dunkinbrands.otgo")) {
+      url = url.substring(0, url.indexOf("?"));
+    }
     try {
       context.getPackageManager().getApplicationInfo(packageName, 0);
     } catch (PackageManager.NameNotFoundException e) {
-      AppUtils.jumpToWebPage(context, context.getString(R.string.url_reference_prefix, packageName));
+      AppUtils.jumpToWebPage(
+          context, context.getString(R.string.url_reference_prefix, packageName));
     }
     try {
       // parseUri() might throw URISyntaxException error
@@ -144,6 +157,7 @@ public class AppUtils {
   /**
    * Jump to a deep link which has no parameter or jump into parameterActivity to select parameters
    * for the deeplink.
+   *
    * @param context Context object for the application
    * @param appAction app action data
    * @param action action data
@@ -163,10 +177,6 @@ public class AppUtils {
       context.startActivity(intent);
     } else {
       String url = fulfillmentOption.getUrlTemplate().getTemplate();
-      // The dunkin url has redundant contents, hardcode in order to jump into correct activity
-      if (appAction.getPackageName().equals("com.dunkinbrands.otgo")) {
-        url = url.substring(0, url.indexOf("?"));
-      }
       AppUtils.jumpToApp(context, url, appAction.getPackageName());
     }
   }
@@ -195,5 +205,36 @@ public class AppUtils {
       }
     }
     return null;
+  }
+
+  /**
+   * Add latitude and longitude parameters to the parameters list.
+   *
+   * @param context app context
+   * @param entry parameter map entry
+   * @param parameters parameters list with coordinates, e.g. "pick_up_latitude=42.4"
+   */
+  public static void addLocationParameters(
+      Context context,
+      Map.Entry<String, String> entry,
+      List<String> parameters,
+      String pickUpLatitude,
+      String pickUpLongitude,
+      String dropOffLatitude,
+      String dropOffLongitude) {
+    switch (entry.getValue()) {
+      case PICK_UP_LATITUDE_FIELD:
+        parameters.add(context.getString(R.string.url_parameter, entry.getKey(), pickUpLatitude));
+        break;
+      case PICK_UP_LONGITUDE_FIELD:
+        parameters.add(context.getString(R.string.url_parameter, entry.getKey(), pickUpLongitude));
+        break;
+      case DROP_OFF_LATITUDE_FIELD:
+        parameters.add(context.getString(R.string.url_parameter, entry.getKey(), dropOffLatitude));
+        break;
+      case DROP_OFF_LONGITUDE_FIELD:
+        parameters.add(context.getString(R.string.url_parameter, entry.getKey(), dropOffLongitude));
+        break;
+    }
   }
 }

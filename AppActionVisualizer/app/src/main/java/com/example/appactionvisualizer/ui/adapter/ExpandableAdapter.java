@@ -2,6 +2,7 @@ package com.example.appactionvisualizer.ui.adapter;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ExpandableAdapter extends BaseExpandableListAdapter {
+  private static final String TAG = "ExpandableAdapter";
   private Context context;
   // Key is the action name, value is a list of fulfillment options.
   private Map<String, List<AppFulfillment>> intentMap;
@@ -45,7 +47,9 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
 
   @Override
   public String getGroup(int groupPosition) {
-    return actionNames.get(groupPosition);
+    // Ignore the "actions.Intent" prefix
+    String[] strArray = actionNames.get(groupPosition).split("\\.");
+    return strArray[strArray.length - 1];
   }
 
   @Override
