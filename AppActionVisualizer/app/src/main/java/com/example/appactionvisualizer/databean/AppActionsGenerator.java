@@ -53,8 +53,10 @@ public class AppActionsGenerator {
         appActions,
         new Comparator<AppAction>() {
           /**
+           * sort by the app name
+           * 
            * @param appAction1
-           * @param appAction2 sort by the app name
+           * @param appAction2
            */
           @Override
           public int compare(AppAction appAction1, AppAction appAction2) {
