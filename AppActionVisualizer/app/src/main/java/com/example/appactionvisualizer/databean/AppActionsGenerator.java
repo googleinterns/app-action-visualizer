@@ -1,6 +1,7 @@
 package com.example.appactionvisualizer.databean;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.appactionvisualizer.R;
 import com.example.appactionvisualizer.databean.AppActionProtos.AppAction;
@@ -25,13 +26,18 @@ public class AppActionsGenerator {
   private static AppActionsGenerator single_instance = null;
 
   public static AppActionsGenerator getInstance() {
-    if (single_instance == null) single_instance = new AppActionsGenerator();
+    if (single_instance == null)  {
+      single_instance = new AppActionsGenerator();
+    }
     return single_instance;
   }
 
   // Parse the data using protobuf api
   public void readFromFile(Context context) {
-    if (!appActions.isEmpty()) return;
+    if (!appActions.isEmpty()) {
+      Log.d(TAG,context.getString(R.string.loaded));
+      return;
+    }
     InputStream is = context.getResources().openRawResource(R.raw.protobufbinary);
     try {
       appActions.addAll(AppActionProtos.AppActions.parseFrom(is).getAppActionsList());
@@ -54,7 +60,7 @@ public class AppActionsGenerator {
         new Comparator<AppAction>() {
           /**
            * sort by the app name
-           * 
+           *
            * @param appAction1
            * @param appAction2
            */
