@@ -14,9 +14,9 @@ import androidx.fragment.app.Fragment;
 import com.example.appactionvisualizer.R;
 import com.example.appactionvisualizer.databean.ActionType;
 import com.example.appactionvisualizer.databean.AppActionProtos;
-import com.example.appactionvisualizer.databean.AppActionsGenerator;
 import com.example.appactionvisualizer.databean.AppActionProtos.AppAction;
 import com.example.appactionvisualizer.databean.AppActionProtos.FulfillmentOption.FulfillmentMode;
+import com.example.appactionvisualizer.databean.AppActionsGenerator;
 import com.example.appactionvisualizer.ui.activity.dashboard.DeepLinkListActivity;
 
 import static com.example.appactionvisualizer.databean.AppActionsGenerator.type2appActionList;
@@ -26,7 +26,6 @@ public class DashboardFragment extends Fragment {
   private static final String TAG = "DashboardFragment";
   private View view;
 
-
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -34,7 +33,10 @@ public class DashboardFragment extends Fragment {
 
   @Nullable
   @Override
-  public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+  public View onCreateView(
+      @NonNull LayoutInflater inflater,
+      @Nullable ViewGroup container,
+      @Nullable Bundle savedInstanceState) {
     view = inflater.inflate(R.layout.fragment_dashboard, container, false);
     initView();
     return view;
@@ -54,7 +56,7 @@ public class DashboardFragment extends Fragment {
     // Category2: number of apps, etc.
     int allSize = 0;
     // Do not use range-based for loop since hash map is unordered
-    for(int pos = 0; pos < ActionType.values().length; ++pos) {
+    for (int pos = 0; pos < ActionType.values().length; ++pos) {
       ActionType actionType = ActionType.getActionTypeValue(pos);
       String name = actionType.getName();
       int count = type2appActionList.get(actionType).size();
@@ -66,9 +68,7 @@ public class DashboardFragment extends Fragment {
     ((TextView) view.findViewById(R.id.apps)).setText(appText);
   }
 
-  /**
-   * Count the parameter number of each fulfillment option
-   */
+  /** Count the parameter number of each fulfillment option */
   private void countFulfillmentOptions() {
     // Use these variables to do a statistics of deep links
     int allFulfillmentSize = 0,
@@ -83,8 +83,7 @@ public class DashboardFragment extends Fragment {
         for (AppActionProtos.FulfillmentOption fulfillmentOption :
             action.getFulfillmentOptionList()) {
           // The Slice options could not be counted as deep links
-          if (fulfillmentOption.getFulfillmentMode()
-              == FulfillmentMode.SLICE) {
+          if (fulfillmentOption.getFulfillmentMode() == FulfillmentMode.SLICE) {
             slice++;
             continue;
           }

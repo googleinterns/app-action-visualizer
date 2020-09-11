@@ -13,10 +13,7 @@ import com.example.appactionvisualizer.ui.fragment.DashboardFragment;
 
 import static com.example.appactionvisualizer.constants.Constant.TAB_TITLES;
 
-/**
- * A [FragmentPagerAdapter] that returns a fragment corresponding to
- * one of the tabs.
- */
+/** A [FragmentPagerAdapter] that returns a fragment corresponding to one of the tabs. */
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
   private final Context context;
@@ -29,7 +26,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
   @NonNull
   @Override
   public Fragment getItem(int position) {
-    if(position == 0) {
+    if (position == 0) {
       return new DashboardFragment();
     }
     return AppFragment.newInstance(position - 1);

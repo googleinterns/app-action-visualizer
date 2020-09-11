@@ -1,13 +1,18 @@
 package com.example.appactionvisualizer.ui.adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.slice.widget.SliceLiveData;
+import androidx.slice.widget.SliceView;
 
 import com.example.appactionvisualizer.R;
 import com.example.appactionvisualizer.constants.Constant;
@@ -30,7 +35,7 @@ import java.util.List;
 public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
   private static final String TAG = "ActionRecycler";
-  private static final int VIEW_TYPE_ACTION = 0, VIEW_TYPE_FULFILLMENT = 1;
+  private static final int VIEW_TYPE_ACTION = 0, VIEW_TYPE_FULFILLMENT = 1, VIEW_TYPE_SLICE = 2;
   private AppAction appAction;
   private List<Action> actionList = new ArrayList<>();
   private Context context;
@@ -84,19 +89,20 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
   }
 
   /**
+   * search the actionPos integer list to get the corresponding data index of each item e.g.,
+   * three actions action0 (1 fulfillmentUrl: 0-0), action1(2 fulfillmentUrl: 1-0, * 1-1), action2(2
+   * fulfillmentUrl: 2-0, 2-1).
+   * actionPos is [0, 2, 5]
+   * position 0 : action0
+   * position 1 : fulfillment 0-0
+   * position 2 : action1
+   * position 3 : fulfillment 1-0
+   * position 4 : fulfillment 1-1
+   * position 5 : action2
+   * position 6 : fulfillment 2-0
+   * position 7 : fulfillment 2-1
+   *
    * @param holder two types: TYPE_ACTION, TYPE_FULFILLMENT
-   * @param position search the actionPos integer list to get the corresponding data index of each
-   *     item e.g., three actions action0 (1 fulfillmentUrl: 0-0), action1(2 fulfillmentUrl: 1-0,
-   *     1-1), action2(2 fulfillmentUrl: 2-0, 2-1).
-   *     actionPos is [0, 2, 5] 
-   *     position 0 : action0
-   *     position 1 : fulfillment 0-0
-   *     position 2 : action1
-   *     position 3 : fulfillment 1-0
-   *     position 4 : fulfillment 1-1
-   *     position 5 : action2
-   *     position 6 : fulfillment 2-0
-   *     position 7 : fulfillment 2-1
    */
   @Override
   public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
@@ -126,23 +132,46 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
         final FulfillmentOption fulfillment = action.getFulfillmentOption(fulfillIdx);
         final String url = fulfillment.getUrlTemplate().getTemplate();
         fulfillHolder.textContent.setText(url);
-        if (url.contains(Constant.URL_PARAMETER_INDICATOR)) {
-          fulfillHolder.textContent.setTextColor(
-              context.getResources().getColor(R.color.design_default_color_error));
-        } else {
-          fulfillHolder.textContent.setTextColor(
-              context.getResources().getColor(R.color.colorAccent));
-          fulfillHolder.textContent.setCompoundDrawablesWithIntrinsicBounds(
-              android.R.drawable.ic_menu_set_as, 0, 0, 0);
+        if (fulfillment.getFulfillmentMode() == FulfillmentOption.FulfillmentMode.SLICE) {
+          setSlice(fulfillment, fulfillHolder);
+          return;
         }
-        fulfillHolder.item.setOnClickListener(
-            new View.OnClickListener() {
-              @Override
-              public void onClick(View view) {
-                AppUtils.jumpByType(context, appAction, action, fulfillment);
-              }
-            });
+        setDeepLink(fulfillment, action, fulfillHolder);
     }
+  }
+
+  // Set slice view, use large mode to display.
+  private void setSlice(FulfillmentOption fulfillment, FulfillViewHolder fulfillHolder) {
+    try {
+      fulfillHolder.slice.setVisibility(View.VISIBLE);
+      fulfillHolder.slice.setMode(SliceView.MODE_LARGE);
+      Uri sliceUri = Uri.parse(fulfillment.getUrlTemplate().getTemplate());
+      LiveData<androidx.slice.Slice> liveData = SliceLiveData.fromUri(context, sliceUri);
+      liveData.observe((LifecycleOwner) context, fulfillHolder.slice);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  // Set normal deep link.
+  private void setDeepLink(
+      final FulfillmentOption fulfillment, final Action action, FulfillViewHolder fulfillHolder) {
+    final String url = fulfillment.getUrlTemplate().getTemplate();
+    if (url.contains(Constant.URL_PARAMETER_INDICATOR)) {
+      fulfillHolder.textContent.setTextColor(
+          context.getResources().getColor(R.color.design_default_color_error));
+    } else {
+      fulfillHolder.textContent.setTextColor(context.getResources().getColor(R.color.colorAccent));
+      fulfillHolder.textContent.setCompoundDrawablesWithIntrinsicBounds(
+          android.R.drawable.ic_menu_set_as, 0, 0, 0);
+    }
+    fulfillHolder.item.setOnClickListener(
+        new View.OnClickListener() {
+          @Override
+          public void onClick(View view) {
+            AppUtils.jumpByType(context, appAction, action, fulfillment);
+          }
+        });
   }
 
   @Override
@@ -174,12 +203,14 @@ public class ActionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
     public final View mView;
     public final LinearLayout item;
     public final TextView textContent;
+    public final SliceView slice;
 
     public FulfillViewHolder(View view) {
       super(view);
       mView = view;
       item = view.findViewById(R.id.item);
       textContent = view.findViewById(R.id.text_content);
+      slice = view.findViewById(R.id.slice);
     }
 
     @Override

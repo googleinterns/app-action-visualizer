@@ -14,27 +14,20 @@ import com.example.appactionvisualizer.R;
 import com.example.appactionvisualizer.databean.ActionType;
 import com.example.appactionvisualizer.ui.adapter.AppRecyclerViewAdapter;
 
-/**
- * A fragment of MainActivity
- * Displays apps with the same action type using recyclerview
- */
+/** A fragment of MainActivity Displays apps with the same action type using recyclerview */
 public class AppFragment extends Fragment {
-  private final static String TAG = "AppFragment";
+  private static final String TAG = "AppFragment";
 
   private ActionType actionType;
   private AppRecyclerViewAdapter adapter;
 
-  /**
-   * Mandatory empty constructor for the fragment manager to instantiate the
-   * fragment (e.g. upon screen orientation changes).
-   */
   public AppFragment(ActionType actionType) {
     this.actionType = actionType;
   }
 
   /**
    * @param pos create a specific type fragment instance
-   * @return
+   * @return an app fragment instance
    */
   public static AppFragment newInstance(int pos) {
     ActionType actionType = null;
@@ -51,8 +44,8 @@ public class AppFragment extends Fragment {
   }
 
   @Override
-  public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                           Bundle savedInstanceState) {
+  public View onCreateView(
+      LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_category_app_list, container, false);
 
     // Set the adapter
@@ -64,5 +57,4 @@ public class AppFragment extends Fragment {
     }
     return view;
   }
-
 }
