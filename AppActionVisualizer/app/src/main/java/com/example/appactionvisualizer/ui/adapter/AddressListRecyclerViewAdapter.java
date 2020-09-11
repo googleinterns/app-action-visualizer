@@ -13,11 +13,11 @@ import com.example.appactionvisualizer.R;
 import com.example.appactionvisualizer.ui.activity.parameter.LocationActivity;
 
 import java.util.List;
+import java.util.Locale;
 
-/**
- * Adapter of LocationActivity Recyclerview
- */
-public class AddressListRecyclerViewAdapter extends RecyclerView.Adapter<AddressListRecyclerViewAdapter.ViewHolder> {
+/** Adapter of LocationActivity Recyclerview */
+public class AddressListRecyclerViewAdapter
+    extends RecyclerView.Adapter<AddressListRecyclerViewAdapter.ViewHolder> {
 
   private List<Address> addressList;
   private Context context;
@@ -29,20 +29,13 @@ public class AddressListRecyclerViewAdapter extends RecyclerView.Adapter<Address
 
   @Override
   public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-    View view = LayoutInflater.from(context)
-        .inflate(R.layout.address_list_item, parent, false);
+    View view = LayoutInflater.from(context).inflate(R.layout.address_list_item, parent, false);
     return new ViewHolder(view);
   }
 
   /**
-   * display information:
-   * addressName
-   * locationName
-   * latitude & longitude
-   * e.g.:
-   * San Francisco International Airport
-   * San Mateo Country, California
-   * 37.621,-122.38
+   * display information: addressName locationName latitude & longitude e.g.: San Francisco
+   * International Airport San Mateo Country, California 37.621,-122.38
    */
   @Override
   public void onBindViewHolder(final ViewHolder holder, final int position) {
@@ -54,14 +47,23 @@ public class AddressListRecyclerViewAdapter extends RecyclerView.Adapter<Address
     }
     String subAdminArea = address.getSubAdminArea();
     String adminArea = address.getAdminArea();
-    holder.location.setText(context.getString(R.string.location, subAdminArea.isEmpty() ? "" : subAdminArea, adminArea.isEmpty() ? "" : adminArea));
-    holder.pickUp.setText(context.getString(R.string.coordinates_pick_up, String.format("%.5g", address.getLatitude()), String.format("%.5g", address.getLongitude())));
-    holder.mView.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        ((LocationActivity) context).setAddress(address);
-      }
-    });
+    holder.location.setText(
+        context.getString(
+            R.string.location,
+            subAdminArea.isEmpty() ? "" : subAdminArea,
+            adminArea.isEmpty() ? "" : adminArea));
+    holder.pickUp.setText(
+        context.getString(
+            R.string.coordinates_pick_up,
+            String.format(Locale.getDefault(), "%.5g", address.getLatitude()),
+            String.format(Locale.getDefault(), "%.5g", address.getLongitude())));
+    holder.mView.setOnClickListener(
+        new View.OnClickListener() {
+          @Override
+          public void onClick(View view) {
+            ((LocationActivity) context).setAddress(address);
+          }
+        });
   }
 
   @Override
